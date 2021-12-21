@@ -1,0 +1,20 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# HyperSQL DB 임시 DB디렉토리
+file_db_temp
+
+# Ignore Gradle build output directory
+build
+bin
+
+# eclipse
+.settings
+.classpath
+.project
+
+# IntelliJ
+.idea
+
+
+
