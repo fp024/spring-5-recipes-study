@@ -14,3 +14,5 @@
 
 ## 정오표
 
+* p54
+  * 예제에서 seqgen.setInitial(`"100000"`); => seqgen.setInitial(`100000`);
