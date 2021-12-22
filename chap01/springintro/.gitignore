@@ -16,5 +16,7 @@ bin
 # IntelliJ
 .idea
 
-
+# 루트 프로젝트의 내용을 따르도록 하고, 필요시 잠깐식 복해서 쓸 수 있도록 무시파일에 포함한다.
+gradle.properties
+settings.gradle
 
