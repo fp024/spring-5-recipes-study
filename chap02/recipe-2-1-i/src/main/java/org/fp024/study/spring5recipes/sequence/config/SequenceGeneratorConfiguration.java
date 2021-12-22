@@ -1,6 +1,6 @@
-package org.fp024.spring5recipes.study.sequence.config;
+package org.fp024.study.spring5recipes.sequence.config;
 
-import org.fp024.spring5recipes.study.sequence.SequenceGenerator;
+import org.fp024.study.spring5recipes.sequence.SequenceGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

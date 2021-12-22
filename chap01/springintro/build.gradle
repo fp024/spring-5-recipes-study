@@ -27,7 +27,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'org.fp024.spring5recipes.study.hello.Main'
+    mainClass = 'org.fp024.study.spring5recipes.hello.Main'
 }
 
 tasks.named('test') {

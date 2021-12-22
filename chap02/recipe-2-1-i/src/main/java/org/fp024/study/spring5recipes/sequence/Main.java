@@ -1,7 +1,7 @@
-package org.fp024.spring5recipes.study.sequence;
+package org.fp024.study.spring5recipes.sequence;
 
 import lombok.extern.slf4j.Slf4j;
-import org.fp024.spring5recipes.study.sequence.config.SequenceGeneratorConfiguration;
+import org.fp024.study.spring5recipes.sequence.config.SequenceGeneratorConfiguration;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 @Slf4j

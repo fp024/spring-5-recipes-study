@@ -1,4 +1,4 @@
-package org.fp024.spring5recipes.study.sequence;
+package org.fp024.study.spring5recipes.sequence;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.NoArgsConstructor;

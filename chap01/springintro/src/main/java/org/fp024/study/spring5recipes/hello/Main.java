@@ -1,4 +1,4 @@
-package org.fp024.spring5recipes.study.hello;
+package org.fp024.study.spring5recipes.hello;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
