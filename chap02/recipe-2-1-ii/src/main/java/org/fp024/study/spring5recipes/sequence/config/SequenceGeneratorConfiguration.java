@@ -1,6 +1,5 @@
 package org.fp024.study.spring5recipes.sequence.config;
 
-
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
