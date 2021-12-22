@@ -10,6 +10,7 @@ include 'chap01:springintro'
 
 /* ===== Chapter 2 스프링 코어 ===== */
 include 'chap02:recipe-2-1-i'
+include 'chap02:recipe-2-1-ii'
 
 
 
