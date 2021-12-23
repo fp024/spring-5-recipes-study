@@ -14,6 +14,7 @@ include 'chap02:recipe-2-1-ii'
 include 'chap02:recipe-2-2'
 include 'chap02:recipe-2-3-i'
 include 'chap02:recipe-2-3-ii'
+include 'chap02:recipe-2-3-iii'
 
 
 /* ===== Chapter 3 스프링 MVC ===== */
