@@ -9,7 +9,7 @@
 
     <Loggers>
         <!-- Application Loggers -->    
-        <Logger name="org.fp024.spring5recipes.study" level="debug"/>
+        <Logger name="org.fp024.study.spring5recipes" level="debug"/>
          
         <!-- 3rd party Loggers -->
         <Logger name="org.springframework.core" level="info"/>      

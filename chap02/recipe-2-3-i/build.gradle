@@ -24,6 +24,10 @@ dependencies {
     implementation "org.aspectj:aspectjweaver:${aspectjVersion}"
 
     testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+    testImplementation "org.springframework:spring-test:${springVersion}"
+    testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
+    testImplementation "org.mockito:mockito-inline:${mockitoVersion}"
+    testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
 }
 
 tasks.named('test') {
@@ -51,5 +55,5 @@ run {
 
 application {
     // Define the main class for the application.
-    mainClass = 'org.fp024.study.spring5recipes.shop.Main'
+    mainClass = 'org.fp024.study.spring5recipes.sequence.Main'
 }
