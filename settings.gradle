@@ -1,6 +1,6 @@
-/***********************
+/**************************
  * 스프링 5 레시피 스터디 *
- ***********************/
+ **************************/
 
 rootProject.name = 'spring-5-recipes-study'
 
@@ -17,6 +17,9 @@ include 'chap02:recipe-2-3-ii'
 include 'chap02:recipe-2-3-iii'
 include 'chap02:recipe-2-3-iv'
 include 'chap02:recipe-2-3-v'
+include 'chap02:recipe-2-3-vi'
+
+
 
 /* ===== Chapter 3 스프링 MVC ===== */
 
