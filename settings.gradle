@@ -9,16 +9,16 @@ include 'chap01:springintro'
 
 
 /* ===== Chapter 2 스프링 코어 ===== */
-include 'chap02:recipe-2-1-i'
-include 'chap02:recipe-2-1-ii'
-include 'chap02:recipe-2-2'
-include 'chap02:recipe-2-3-i'
-include 'chap02:recipe-2-3-ii'
-include 'chap02:recipe-2-3-iii'
-include 'chap02:recipe-2-3-iv'
-include 'chap02:recipe-2-3-v'
-include 'chap02:recipe-2-3-vi'
-include 'chap02:recipe-2-3-vii'
+include 'chap02:recipe-2-01-i'
+include 'chap02:recipe-2-01-ii'
+include 'chap02:recipe-2-02'
+include 'chap02:recipe-2-03-i'
+include 'chap02:recipe-2-03-ii'
+include 'chap02:recipe-2-03-iii'
+include 'chap02:recipe-2-03-iv'
+include 'chap02:recipe-2-03-v'
+include 'chap02:recipe-2-03-vi'
+include 'chap02:recipe-2-03-vii'
 
 
 
