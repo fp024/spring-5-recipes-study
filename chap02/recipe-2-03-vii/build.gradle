@@ -5,10 +5,9 @@ plugins {
 }
 
 java {
-    version = JavaLanguageVersion.of("${javaVersion}")
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of("${javaVersion}"))
-    }
+  toolchain {
+    languageVersion = JavaLanguageVersion.of("${javaVersion}")
+  }
 }
 
 [compileJava, compileTestJava]*.options*.encoding = "${projectEncoding}"
