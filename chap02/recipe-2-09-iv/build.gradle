@@ -17,9 +17,6 @@ repositories {
     mavenCentral()
 }
 
-// Spring 5.0.x 까지 동작하는 @Required 어노테이션 동작 확인을 위해 버전을 낮추었다.
-ext.springVersion = "5.0.20.RELEASE"
-
 dependencies {
     implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
     implementation "org.springframework:spring-context:${springVersion}"
