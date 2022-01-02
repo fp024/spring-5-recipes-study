@@ -76,4 +76,4 @@ Gradle 멀티 프로젝트 구성에서 예제를 하나씩 추가해가며 실�
 
 ## 기타
 
-* Visual Studio Code에 google-java-format을 연동해서 사용하는데, `Shift + Alt + f` 할 때, Import 정리까지 같이해주니 일부러  `Shift + Alt + o` 를 따로 눌러줄 필요는 없다. Import 정리는 또 포메팅 형식이 달라서 혼선이 올 수 있음.
+* Visual Studio Code에 google-java-format을 연동해서 사용하는데, `Shift + Alt + f` 할 때, Import 정리까지 같이해주니 일부러  `Shift + Alt + o` 를 따로 눌러줄 필요는 없다. Import 정리는 또 포메팅 형식이 달라서 혼선이 올 수 있음. 
