@@ -6,7 +6,8 @@ plugins {
 
 String getActiveProfiles() {
     def activeProfiles = System.getProperty("spring.active.profiles")
-    if (activeProfiles == null || activeProfiles.isEmpty()) {
+    // if (activeProfiles == null || activeProfiles.isEmpty()) {
+    if (!activeProfiles?.trim()) {  // Groovy의 null or empty 체크
         logger.quiet("activeProfiles is null or empty: ${activeProfiles}")
         return 'global,winter'
     } else {
