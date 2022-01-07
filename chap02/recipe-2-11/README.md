@@ -20,7 +20,8 @@
   // 일반 함수 선언
   String getActiveProfiles() {
       def activeProfiles = System.getProperty("spring.active.profiles")
-      if (activeProfiles == null || activeProfiles.isEmpty()) {
+      // if (activeProfiles == null || activeProfiles.isEmpty()) {
+      if (!activeProfiles?.trim()) {  // Groovy의 null or empty 체크
           logger.quiet("activeProfiles is null or empty: ${activeProfiles}")
           return 'global,winter'
       } else {
@@ -28,6 +29,7 @@
           return "${activeProfiles}"
       }
   }
+  
   // 상수에 프로필 내용 할당
   final ACTIVE_PROFILES = getActiveProfiles();
   
@@ -44,7 +46,7 @@
   }
   
   ```
-
+  
   application 클래스에서 spring.active.profiles 를 시스템 프로퍼티로 받아와서, applicationDefaultJvmArgs 에다 설정하는 식으로 진행했다.
 
 
