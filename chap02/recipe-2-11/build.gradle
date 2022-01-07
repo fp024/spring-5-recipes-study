@@ -8,10 +8,10 @@ String getActiveProfiles() {
     def activeProfiles = System.getProperty("spring.active.profiles")
     // if (activeProfiles == null || activeProfiles.isEmpty()) {
     if (!activeProfiles?.trim()) {  // Groovy의 null or empty 체크
-        logger.quiet("activeProfiles is null or empty: ${activeProfiles}")
+        logger.info("activeProfiles is null or empty: ${activeProfiles}")
         return 'global,winter'
     } else {
-        logger.quiet("activeProfiles: ${activeProfiles}")
+        logger.info("activeProfiles: ${activeProfiles}")
         return "${activeProfiles}"
     }
 }

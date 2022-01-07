@@ -4,20 +4,6 @@ plugins {
     id "io.freefair.lombok" version "${lombokPluginVersion}"
 }
 
-String getActiveProfiles() {
-    def activeProfiles = System.getProperty("spring.active.profiles")
-
-    if (!activeProfiles?.trim()) {
-        logger.info("activeProfiles is null or empty: ${activeProfiles}")
-        return 'global,winter'
-    } else {
-        logger.info("activeProfiles: ${activeProfiles}")
-        return "${activeProfiles}"
-    }
-}
-
-final ACTIVE_PROFILES = getActiveProfiles();
-
 java {
   toolchain {
     languageVersion = JavaLanguageVersion.of("${javaVersion}")
@@ -32,11 +18,17 @@ repositories {
 }
 
 dependencies {
-    implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
 	implementation "org.springframework:spring-context:${springVersion}"
+
+	implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+
 	implementation "org.apache.logging.log4j:log4j-slf4j-impl:${log4j2Version}"
+
 	implementation "org.aspectj:aspectjweaver:${aspectjVersion}"
-	
+    
+    // Spring AOP로 사용하면 AspectJ의 어노테이션만 사용하기 때문에 rt가 aspectjrt가 디펜던시에 없어도 잘 동작함.
+	// implementation "org.aspectj:aspectjrt:${aspectjVersion}"
+
 	implementation "com.google.guava:guava:${guavaVersion}"
 
 	testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
@@ -47,7 +39,6 @@ dependencies {
 }
 
 test {
-    systemProperty "spring.active.profiles", "${ACTIVE_PROFILES}"
     // Test를 다른 JDK 버전으로 실행하고 싶다면 버전 부분 변경.
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of("${javaVersion}")
@@ -76,6 +67,5 @@ run {
 */
 
 application {
-    applicationDefaultJvmArgs = ["-Dspring.active.profiles=${ACTIVE_PROFILES}"]
-    mainClass = 'org.fp024.study.spring5recipes.shop.Main'   
+    mainClass = 'org.fp024.study.spring5recipes.calculator.Main'   
 }
