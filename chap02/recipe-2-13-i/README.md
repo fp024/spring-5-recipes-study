@@ -29,6 +29,6 @@
 
 * **Aspect:** 어디서(**Pointcut**) 무엇을 할 것 인지(**Advice**) 를 합쳐놓은 개념
 
-* **Pointcut:** Advice에 적용할 타입 및 객체를 찾느니 표현식
+* **Pointcut:** Advice에 적용할 타입 및 객체를 찾는 표현식
 * **JoinPoint:** Pointcut으로 매치한 실행지점
 
