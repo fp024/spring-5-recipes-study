@@ -1,0 +1,21 @@
+package org.fp024.study.spring5recipes.calculator;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+
+@Aspect
+public class CalculatorPointcuts {
+
+  @Pointcut("within(ArithmeticCalculator+)")
+  public void arithmeticOperation() {}
+
+  @Pointcut("within(UnitCalculator+)")
+  public void unitOperation() {}
+
+  @Pointcut("arithmeticOperation() || unitOperation()")
+  public void loggingOperation() {}
+
+  // 다른 조건외에도 인자가 2개에만 실행된다.
+  @Pointcut("execution(* *.*(..)) && target(target) && args(a,b)")
+  public void parameterPointcut(Object target, double a, double b) {}
+}
