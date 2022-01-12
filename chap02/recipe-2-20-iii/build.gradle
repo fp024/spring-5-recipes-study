@@ -20,7 +20,7 @@ repositories {
 dependencies {
 	implementation "org.springframework:spring-context:${springVersion}"
 
-    implementation "org.springframework:spring-instrument:${springVersion}"
+    runtimeOnly "org.springframework:spring-instrument:${springVersion}"
 
 	implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
 
@@ -41,7 +41,7 @@ dependencies {
 }
 
 String instrumentLibPath(){
-     return sourceSets.getByName("main").compileClasspath.find {
+     return sourceSets.getByName("main").runtimeClasspath.find {
          cls -> return cls.getName().contains("spring-instrument")
      }
  }
