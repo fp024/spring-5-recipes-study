@@ -1,7 +1,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
-    id "io.freefair.lombok" version "${lombokPluginVersion}"    
+    id "io.freefair.lombok" version "${lombokPluginVersion}"
 }
 
 java {
@@ -19,6 +19,7 @@ repositories {
 
 dependencies {
 	implementation "org.springframework:spring-context:${springVersion}"
+    implementation "org.springframework:spring-aspects:${springVersion}"
 
 	implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
 
@@ -37,6 +38,7 @@ dependencies {
 	testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
 
 }
+
 
 String instrumentLibPath(){
      return sourceSets.getByName("main").compileClasspath.find {
