@@ -63,5 +63,5 @@ run {
 */
 
 application {
-    mainClass = 'org.fp024.study.spring5recipes.executors.ExecutorsDemo'
+    mainClass = 'org.fp024.study.spring5recipes.executors.SpringExecutorsDemo'
 }
