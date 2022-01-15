@@ -8,6 +8,7 @@ public class TransactionalJdbcBookShop extends JdbcDaoSupport implements BookSho
 
   @Setter private TransactionTemplate transactionTemplate;
 
+  @Override
   public void purchase(String isbn, String username) {
     transactionTemplate.executeWithoutResult(
         status -> {
