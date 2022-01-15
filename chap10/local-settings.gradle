@@ -6,5 +6,7 @@ rootProject.name = 'spring-5-recipes-study-chap10'
 
 /* ===== Chapter 10 스프링 트랜잭션 관리 ===== */
 
+include 'recipe-10-01-i'
+
 include 'recipe-10-10-i'
 
