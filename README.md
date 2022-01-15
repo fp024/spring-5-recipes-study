@@ -80,4 +80,5 @@ Gradle 멀티 프로젝트 구성에서 예제를 하나씩 추가해가며 실�
 
 * 모든장의 root를 하나로 하려다보니 시간이 너무걸려서 장 하나마다 settings.gradle을 만들어주는 배치파일을 만들었다.  프로젝트 루트의 gradle.properties를 수정하거나, 최초 프로젝트 클론을 했을 때, 아래 배치 파일을 수행해주도록 하자!
   * [make-gradle-properties.bat](make-gradle-properties.bat)
+  * [clean-gradle-properties.bat](clean-gradle-properties.bat)
 
