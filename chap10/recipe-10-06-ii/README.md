@@ -1,4 +1,4 @@
-## 레시피 10-06-i 트랜잭션 전달 속성 설정하기
+## 레시피 10-06-ii 트랜잭션 전달 속성 설정하기
 
 ### 스프링에서 지원되는 트랜잭션 전달 방식
 
@@ -14,24 +14,8 @@
 
 
 
-* 예제는 그리 특이하진 않은 것 같다.
+* BookShopCashier.checkout() 에 `@Transactional(propagation = Propagation.REQUIRES_NEW)` 선언
+* JdbcBookShop.purchase() 에 `@Transactional` 선언
 
-  * BookShopCashier의 checkout에 @Transactional이 붙어있어서 여기서 트랜젝션이 시작해서 JdbcBookShop의 purchase위에 붙은 @Transactional은 그냥 전파 받은 진행중인 트랜젝션 그대로 사용하는 내용말고는 없는 것 같다.
+바깥쪽 메서드 checkout() 에 REQUIRES_NEW로 선언하여 호출시점에 새로 트랜젝션이 만들어지지만 안에서 호출되는 purchase()는 기본값 REQUIRED이므로, 결국은 한 트랜젝션이 되어 이번에도 전체 트랜젝션 실패로 아무책도 못사게 된다.
 
-    * propagation 의 기본값은 REQUIRED
-
-    * 로그상으로도내용이보임.
-
-      ```
-      ...
-      19:21:47.876 [main] DEBUG org.springframework.jdbc.datasource.DataSourceTransactionManager - Participating in existing transaction
-      ...
-      ... 쿼리 실패이후...
-      19:21:47.983 [main] DEBUG org.springframework.jdbc.datasource.DataSourceTransactionManager - Participating transaction failed - marking existing transaction as rollback-only
-      ```
-
-* 책의 내용이 예제에 업데이트 안된 것 같은데...
-
-  * 2개의 책이 있고, 첫번째 책은 구입할 수 있었지만 두번째 책을 구입할 수 없어 전부 실패하는 것을 보여주려한 것 같다.
-  
-    
