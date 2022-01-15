@@ -1,7 +1,8 @@
---   MyBatis로 초기화를 해주는 기능을 넣을까하다가..
+--  EmbeddedDataSource를 사용할까하다가...
 --  트랜젝션 동작후의 변화를 봐야해서, 
 --  HSQLDB를 띄우고 아래 초기화 스크립트를 한번 실행해주고 변화를 보는게
---  나아서 그 기능은 넣지 않았다.
+--  나아서 그것은 사용하지 않았다.
+--
 --  책은 PostgreSQL 로 되어있긴한데, HSQLDB에서도 잘 동작한다.
 --  server.database.{번호}=file:~/hsqldb-data/spring-5-recipes-study-chap10
 --  server.dbname.{번호}=spring-5-recipes-study-chap10 */
