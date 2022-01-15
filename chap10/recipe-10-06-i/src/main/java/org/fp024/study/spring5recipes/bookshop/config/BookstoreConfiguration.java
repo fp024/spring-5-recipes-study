@@ -46,6 +46,7 @@ public class BookstoreConfiguration {
     try {
       ScriptRunner scriptRunner = new ScriptRunner(dataSource.getConnection());
       Resources.setCharset(StandardCharsets.UTF_8);
+      scriptRunner.setAutoCommit(true);
       scriptRunner.runScript(Resources.getResourceAsReader("sql/init-sql.sql"));
     } catch (Exception e) {
       throw new IllegalStateException(e);

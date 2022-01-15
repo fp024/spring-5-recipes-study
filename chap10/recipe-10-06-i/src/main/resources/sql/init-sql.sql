@@ -1,14 +1,10 @@
-/* 
-  MyBatis로 초기화를 해주는 기능을 넣을까하다가..
-  트랜젝션 동작후의 변화를 봐야해서, 
-  HSQLDB를 띄우고 아래 초기화 스크립트를 한번 실행해주고 변화를 보는게
-  나아서 그 기능은 넣지 않았다.
-
-  책은 PostgreSQL 로 되어있긴한데, HSQLDB에서도 잘 동작한다.
-
-  server.database.{번호}=file:~/hsqldb-data/spring-5-recipes-study-chap10
-  server.dbname.{번호}=spring-5-recipes-study-chap10
-*/
+--   MyBatis로 초기화를 해주는 기능을 넣을까하다가..
+--  트랜젝션 동작후의 변화를 봐야해서, 
+--  HSQLDB를 띄우고 아래 초기화 스크립트를 한번 실행해주고 변화를 보는게
+--  나아서 그 기능은 넣지 않았다.
+--  책은 PostgreSQL 로 되어있긴한데, HSQLDB에서도 잘 동작한다.
+--  server.database.{번호}=file:~/hsqldb-data/spring-5-recipes-study-chap10
+--  server.dbname.{번호}=spring-5-recipes-study-chap10 */
 
 DROP TABLE IF EXISTS ACCOUNT; 
 DROP TABLE IF EXISTS BOOK_STOCK;
@@ -36,5 +32,9 @@ CREATE TABLE IF NOT EXISTS ACCOUNT (
 );
 
 INSERT INTO BOOK(ISBN, BOOK_NAME, PRICE) VALUES( '0001', 'The First Book', 30);
+INSERT INTO BOOK(ISBN, BOOK_NAME, PRICE) VALUES( '0002', 'The Second Book', 50);
+
 INSERT INTO BOOK_STOCK(ISBN, STOCK) VALUES('0001', 10);
-INSERT INTO ACCOUNT(USERNAME, BALANCE) VALUES('user1',20);
+INSERT INTO BOOK_STOCK(ISBN, STOCK) VALUES('0002', 10);
+
+INSERT INTO ACCOUNT(USERNAME, BALANCE) VALUES('user1', 40);

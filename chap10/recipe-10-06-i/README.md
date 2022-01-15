@@ -30,4 +30,10 @@
       19:21:47.983 [main] DEBUG org.springframework.jdbc.datasource.DataSourceTransactionManager - Participating transaction failed - marking existing transaction as rollback-only
       ```
 
-      
+* 책의 내용이 예제에 업데이트 안된 것 같은데...
+
+  * 2개의 책이 있고, 첫번째 책은 구입할 수 있었지만 두번째 책을 구입할 수 없어 전부 실패하는 것을 보여주려한 것 같다.
+  * 
+
+
+
