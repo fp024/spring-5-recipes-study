@@ -1,17 +1,18 @@
 package org.fp024.study.spring5recipes.bookshop;
 
+import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 public class JdbcBookShop extends JdbcDaoSupport implements BookShop {
-  // @Transactional(
-  //     propagation = Propagation.REQUIRED,
-  //     rollbackFor = IOException.class,
-  //     noRollbackFor = ArithmeticException.class)
-  @Transactional
+  @Transactional(
+      propagation = Propagation.REQUIRED,
+      rollbackFor = IOException.class,
+      noRollbackFor = ArithmeticException.class)
   public void purchase(String isbn, String username) {
     LOGGER.info("### purchase ###");
     int price =
@@ -62,5 +63,11 @@ public class JdbcBookShop extends JdbcDaoSupport implements BookShop {
     }
 
     System.out.println(threadName + " - Wake up");
+  }
+
+  public int getStockWithNoSleep(String isbn) {
+    return getJdbcTemplate()
+        .queryForObject(
+            "SELECT STOCK FROM BOOK_STOCK WHERE ISBN = ?", (rs, rowNum) -> rs.getInt(1), isbn);
   }
 }

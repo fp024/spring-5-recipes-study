@@ -1,6 +1,9 @@
 package org.fp024.study.spring5recipes.bookshop.config;
 
+import java.nio.charset.StandardCharsets;
 import javax.sql.DataSource;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.jdbc.ScriptRunner;
 import org.fp024.study.spring5recipes.bookshop.BookShop;
 import org.fp024.study.spring5recipes.bookshop.BookShopCashier;
 import org.fp024.study.spring5recipes.bookshop.JdbcBookShop;
@@ -38,6 +41,16 @@ public class BookstoreConfiguration {
     dataSource.setUrl(jdbcUrl);
     dataSource.setUsername(jdbcUserName);
     dataSource.setPassword(jdbcPassword);
+
+    // 스크립트 초기화에 mybatis의 클래스를 사용했다.
+    try {
+      ScriptRunner scriptRunner = new ScriptRunner(dataSource.getConnection());
+      Resources.setCharset(StandardCharsets.UTF_8);
+      scriptRunner.runScript(Resources.getResourceAsReader("sql/init-sql.sql"));
+    } catch (Exception e) {
+      throw new IllegalStateException(e);
+    }
+
     return dataSource;
   }
 
