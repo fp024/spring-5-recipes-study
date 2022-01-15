@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <!-- Appenders -->    
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- Application Loggers -->    
+        <Logger name="org.fp024.study.spring5recipes" level="debug"/>
+         
+        <!-- 3rd party Loggers -->
+        <Logger name="org.springframework.core" level="debug"/>      
+        <Logger name="org.springframework.beans" level="debug"/>     
+        <Logger name="org.springframework.context" level="debug"/>           
+        <Logger name="org.springframework.web" level="debug"/>
+
+        <!-- Root Logger -->
+        <Root level="debug">
+            <Appender-Ref ref="STDOUT" />
+        </Root>
+    </Loggers>
+</Configuration>

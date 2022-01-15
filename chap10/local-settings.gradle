@@ -14,6 +14,7 @@ include 'recipe-10-04-ii'
 include 'recipe-10-05-i'
 include 'recipe-10-06-i'
 include 'recipe-10-06-ii'
+include 'recipe-10-06-iii'
 
 
 include 'recipe-10-10-i'
