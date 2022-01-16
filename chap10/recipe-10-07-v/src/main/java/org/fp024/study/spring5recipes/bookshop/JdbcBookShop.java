@@ -42,7 +42,7 @@ public class JdbcBookShop extends JdbcDaoSupport implements BookShop {
     throw new RuntimeException("Increased by mistake");
   }
 
-  @Transactional(isolation = Isolation.REPEATABLE_READ)
+  @Transactional(isolation = Isolation.SERIALIZABLE)
   public int checkStock(String isbn) {
     String threadName = Thread.currentThread().getName();
     System.out.println(threadName + " - Prepare to check book stock");
