@@ -1,4 +1,4 @@
-## 레시피 10-07-i 트랜잭션 격리 속성 설정하기 - READ_UNCOMMITED 
+## 레시피 10-07-ii 트랜잭션 격리 속성 설정하기 - READ_COMMITED
 
 ### 동시성 트랜잭션으로 발생할 수 있는 문제
 
@@ -21,30 +21,30 @@
 
 
 
-### READ_UNCOMMITED 격리 수준 테스트 예제
+### READ_COMMITED 격리 수준 테스트 예제
 
-1. Thread 1로 0001 책의 재고를 5 증가 시킨다. (증가 후 10초 sleep후 롤백)
-2. 5초 대기
-3.  Thread 2로 0001 책의 재고를 확인한다 (확인후 10초 sleep : 재고 확인후 슬립은 별로 의미가 없어보이긴함 😓).
-
-결과를 예상해보면 트랜젝션이 READ_UNCOMMITED로 시작된 상태에서  Thread 1은 재고 업데이트 후 아직 Sleep 중이고, 이때 Thread 2가 재고를 조회하므로 원래 재고 10에서 + 5되서 15개의 재고가 있다고 할 것임 그뒤 Sleep이 끝나서 롤백후에는 다시 10이 될 것임.
-
-
-
-그런데... 예외가 발생해서, dataSource를 변경해보았다. HikariDataSource 에서 DriverManagerDataSource 으로 변경해서 에러는 안나는데, 동작을 보았을 대...
+checkStock에 `@Transactional(isolation = Isolation.READ_COMMITTED)`를 붙였는데, 트랜젝션이 롤백이 완료된 뒤에야 재고 조회가 되었다.
 
 ```
-hread 1 - Prepare to increase book stock
+Thread 1 - Prepare to increase book stock
 Thread 1 - Book stock increased by 5
 Thread 1 - Sleeping
-Thread 2 - Prepare to check book stock  // 이미 체크할 수 있는 메서드에 들어온 상태인데...
+Thread 2 - Prepare to check book stock
 Thread 1 - Wake up
-Thread 1 - Book stock rolled back  // Thread 1에서 완전히 롤백이 완료된 후까지
-Thread 2 - Book stock is 10        // 재고 조회 쿼리가 대기하다 읽어서 롤백된 결과를 읽게되어 10을 읽음.
+Thread 1 - Book stock rolled back  // 재고 증가 트랜젝션 롤백이후에야
+Thread 2 - Book stock is 10        // 재고 조회가능
 Thread 2 - Sleeping
 Thread 2 - Wake up
 ```
 
-지금 HSQLDB여서그런 것 같은데...
+HSQLDB에서는 READ_UNCOMMITTED와 READ_COMMITTED의 동작이 
 
-이부분은 다른 DB에서도 확인해봐야할 것 같다.
+READ_COMMITTED 으로 같은 건가?
+
+다른 DB에서도 동작을 보자...
+
+
+
+저자님 예제의 리소스를 보니, 뭔가 다른 DB (더비)에서 테스트를 하셨는지? XML 설정이 몇몇 보인다.
+
+난 그것 까진 포함할 필요는 없을 것 같다.
