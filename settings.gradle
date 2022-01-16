@@ -67,7 +67,6 @@ include 'chap02:recipe-2-24-ii'
 
 
 
-
 /* ===== Chapter 3 스프링 MVC ===== */
 
 
@@ -97,6 +96,23 @@ include 'chap02:recipe-2-24-ii'
 
 
 /* ===== Chapter 10 스프링 트랜젝션 관리 ===== */
+include 'chap10:recipe-10-01-i'
+include 'chap10:recipe-10-01-ii'
+include 'chap10:recipe-10-03-i'
+include 'chap10:recipe-10-04-i'
+include 'chap10:recipe-10-04-ii'
+include 'chap10:recipe-10-05-i'
+include 'chap10:recipe-10-06-i'
+include 'chap10:recipe-10-06-ii'
+include 'chap10:recipe-10-06-iii'
+include 'chap10:recipe-10-07-i'
+include 'chap10:recipe-10-07-ii'
+include 'chap10:recipe-10-07-iii'
+include 'chap10:recipe-10-07-iv'
+include 'chap10:recipe-10-07-v'
+include 'chap10:recipe-10-08-i'
+include 'chap10:recipe-10-09-i'
+include 'chap10:recipe-10-10-i'
 
 
 
