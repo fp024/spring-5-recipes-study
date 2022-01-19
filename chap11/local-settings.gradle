@@ -8,3 +8,5 @@ rootProject.name = 'spring-5-recipes-study-chap11'
 
 include 'recipe-11-01-i'
 include 'recipe-11-01-ii'
+include 'recipe-11-02-i'
+include 'recipe-11-02-ii'
