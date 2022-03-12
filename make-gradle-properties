@@ -1,0 +1,20 @@
+#!/bin/sh
+echo "copy gradle.properties, settings.properties to sub chapers."
+
+for var in {2..9}
+do
+  cp gradle.properties chap0$var
+  if [ -f "chap0$var/local-settings.gradle" ]; then
+    cp chap0$var/local-settings.gradle chap0$var/settings.gradle
+  fi
+done
+
+for var in {10..17}
+do
+  cp gradle.properties chap$var
+  if [ -f "chap$var/local-settings.gradle" ]; then  
+    cp chap$var/local-settings.gradle chap$var/settings.gradle  
+  fi
+done
+echo "copy is complete."
+read -p "Press any keys..."
