@@ -86,4 +86,13 @@ Gradle 멀티 프로젝트 구성에서 예제를 하나씩 추가해가며 실�
     * [make-gradle-properties](make-gradle-properties)
     * [clean-gradle-properties](clean-gradle-properties)
   
+* DB 호스트 명 변경 설정 필요
+
+  * hosts파일에 다음 내용 추가 ( linux:`/etc/hosts` 또는 windows: `%WINDIR%\System32\Drivers\etc\hosts` )
+
+    ```
+    127.0.0.1    hsqldb-host
+    ```
+    
+    타겟 IP주소는 자신의 환경에 맞게 바꾸면 된다.
 
