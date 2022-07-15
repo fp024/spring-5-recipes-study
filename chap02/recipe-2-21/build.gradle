@@ -47,7 +47,7 @@ String instrumentLibPath(){
 final INSTRUMENT_LIB_PATH = instrumentLibPath()
 
 test {
-    jvmArgs "-javaagent:${INSTRUMENT_LIB_PATH}"
+    jvmArgs "--add-opens=java.base/java.lang=ALL-UNNAMED", "-javaagent:${INSTRUMENT_LIB_PATH}"
     // Test를 다른 JDK 버전으로 실행하고 싶다면 버전 부분 변경.
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of("${javaVersion}")
@@ -76,6 +76,6 @@ run {
 */
 
 application {
-    applicationDefaultJvmArgs = ["-javaagent:${INSTRUMENT_LIB_PATH}"]
+    applicationDefaultJvmArgs = ["--add-opens=java.base/java.lang=ALL-UNNAMED", "-javaagent:${INSTRUMENT_LIB_PATH}"]
     mainClass = 'org.fp024.study.spring5recipes.calculator.Main'
 }
