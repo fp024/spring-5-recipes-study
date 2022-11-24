@@ -22,7 +22,8 @@ dependencies {
 
 	implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
 
-	implementation "org.apache.logging.log4j:log4j-slf4j-impl:${log4j2Version}"
+    implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
+	implementation "org.apache.logging.log4j:log4j-slf4j2-impl:${log4jVersion}"
 
 	implementation "org.aspectj:aspectjweaver:${aspectjVersion}"    
     // Spring AOP로 사용하면 AspectJ의 어노테이션만 사용하기 때문에 rt가 aspectjrt가 디펜던시에 없어도 잘 동작함.
