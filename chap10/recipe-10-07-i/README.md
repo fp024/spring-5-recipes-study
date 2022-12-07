@@ -31,7 +31,7 @@
 
 
 
-그런데... 예외가 발생해서, dataSource를 변경해보았다. HikariDataSource 에서 DriverManagerDataSource 으로 변경해서 에러는 안나는데, 동작을 보았을 대...
+그런데... 예외가 발생해서, dataSource를 변경해보았다. HikariDataSource 에서 DriverManagerDataSource 으로 변경해서 에러는 안나는데, 동작을 보았을 때...
 
 ```
 hread 1 - Prepare to increase book stock
@@ -48,3 +48,81 @@ Thread 2 - Wake up
 지금 HSQLDB여서그런 것 같은데...
 
 이부분은 다른 DB에서도 확인해봐야할 것 같다.
+
+
+
+---
+
+## 재확인
+
+MySQL과 Oracle 동작을 추가로 확인해보았다.
+
+
+
+## 10-07-i - `READ_UNCOMMITTED`
+
+* Thread 1에서 0001 책의 재고 5 늘림
+  1. 재고 5 늘리는 업데이트 수행 (10 + 5)
+  2. 10초간 Sleep
+  3. Runtime예외를 발생시켜 롤백
+
+* 5초간 대기
+
+* Thread 2에서 0001 책의 재고 확인 (READ_UNCOMMITTED 격리 조건)
+  1. 0001 책의 재고 조회 
+  2. 재고 출력 (커밋/롤백되지 않은 상태를 읽을 수 있으므로 재고가 15로 떠야함.)
+  3. 10초간 Sleep.
+
+
+
+Gradle로 Main을 실행할 때.. JUnit으로 하지말고.. Main을 바로 실행하는 것이 낫겠다. JUnit에서는 스레드 처리가 의도대로 안된다...😅
+
+### MySQL 8.0.31
+
+```
+$ gradle clean run
+...
+Thread 1 - Prepare to increase book stock
+Thread 1 - Book stock increased by 5
+Thread 1 - Sleeping
+Thread 2 - Prepare to check book stock
+Thread 2 - Book stock is 15    ---🎇스레드 2에서 커밋 되지 않은 데이터를 읽어서 15로 조회한 것이 나타남.
+Thread 2 - Sleeping
+Thread 1 - Wake up
+Thread 1 - Book stock rolled back
+Thread 2 - Wake up
+...
+```
+
+
+
+### OracleXE 18c
+
+OracleXE 18c에서는 Thread 2가 SELECT 하려할 때, 다음과 같은 예외가 남.
+
+```
+Exception in thread "Thread 2" org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is java.sql.SQLException: READ_COMMITTED와 SERIALIZABLE만이 적합한 트랜잭션 레벨입니다
+```
+
+격리 속성을 `READ_COMMITTED`와 `SERIALIZABLE` 밖에 설정 못함.
+
+
+
+### HSQLDB 2.7.1
+
+HSQLDB는 `READ_UNCOMMITTED`가 `READ_COMMITTED`처럼 동작을 한다.😅
+
+```
+Thread 1 - Prepare to increase book stock
+Thread 1 - Book stock increased by 5
+Thread 1 - Sleeping
+Thread 2 - Prepare to check book stock  -- 이 사이에 잠금이 있었던 것 같다.
+Thread 1 - Wake up                      -- 스레드 1이 일어날때까지 스레드 2가 조회를 기다림
+Thread 1 - Book stock rolled back
+Thread 2 - Book stock is 10
+Thread 2 - Sleeping
+Thread 2 - Wake up
+```
+
+예상대로 동작한 것은 MySQL 8.0.31 뿐...
+
