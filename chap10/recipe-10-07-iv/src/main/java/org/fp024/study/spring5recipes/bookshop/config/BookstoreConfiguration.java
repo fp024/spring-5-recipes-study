@@ -1,9 +1,6 @@
 package org.fp024.study.spring5recipes.bookshop.config;
 
-import java.nio.charset.StandardCharsets;
 import javax.sql.DataSource;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.jdbc.ScriptRunner;
 import org.fp024.study.spring5recipes.bookshop.BookShop;
 import org.fp024.study.spring5recipes.bookshop.BookShopCashier;
 import org.fp024.study.spring5recipes.bookshop.Cashier;
@@ -12,13 +9,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource("classpath:database.properties")
+@PropertySource("classpath:database-mysql.properties")
 public class BookstoreConfiguration {
   @Value("${jdbc.driver}")
   private String jdbcDriverName;
@@ -58,13 +57,11 @@ public class BookstoreConfiguration {
     return dataSource;
   }
 
-  // 데이터베이스 초기화에 mybatis의 ScriptRunner 클래스를 사용했다.
+  // 데이터베이스 초기화에 Spring JDBC의 ScriptUtils 클래스를 사용했다.
   private void runInitSqlScript(DataSource dataSource) {
     try {
-      ScriptRunner scriptRunner = new ScriptRunner(dataSource.getConnection());
-      Resources.setCharset(StandardCharsets.UTF_8);
-      scriptRunner.setAutoCommit(true);
-      scriptRunner.runScript(Resources.getResourceAsReader("sql/init-sql.sql"));
+      ScriptUtils.executeSqlScript(
+          dataSource.getConnection(), new ClassPathResource("sql/mysql/init-sql.sql"));
     } catch (Exception e) {
       throw new IllegalStateException(e);
     }

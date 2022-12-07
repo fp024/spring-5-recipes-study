@@ -30,16 +30,14 @@ public class JdbcBookShop extends JdbcDaoSupport implements BookShop {
     String threadName = Thread.currentThread().getName();
     System.out.println(threadName + " - Prepare to increase book stock");
 
-    getJdbcTemplate().update("INSERT INTO BOOK_STOCK(ISBN, STOCK) VALUES(?, ?)", "0003", 10);
-    System.out.println(threadName + " - 0003 stock inserted.");
-
     getJdbcTemplate().update("UPDATE BOOK_STOCK SET STOCK = STOCK + ? WHERE ISBN = ?", stock, isbn);
 
     System.out.println(threadName + " - Book stock increased by " + stock);
-    sleep(threadName);
+    // sleep(threadName);
 
-    System.out.println(threadName + " - Book stock rolled back");
-    throw new RuntimeException("Increased by mistake");
+    System.out.println(threadName + " - No Rollback");
+    // System.out.println(threadName + " - Book stock rolled back");
+    // throw new RuntimeException("Increased by mistake");
   }
 
   @Transactional(isolation = Isolation.REPEATABLE_READ)
@@ -53,6 +51,12 @@ public class JdbcBookShop extends JdbcDaoSupport implements BookShop {
 
     System.out.println(threadName + " - Book stock is " + stock);
     sleep(threadName);
+
+    stock =
+        getJdbcTemplate()
+            .queryForObject("SELECT STOCK FROM BOOK_STOCK WHERE ISBN = ?", Integer.class, isbn);
+
+    System.out.println("after sleep: " + threadName + " - Book stock is " + stock);
 
     return stock;
   }
