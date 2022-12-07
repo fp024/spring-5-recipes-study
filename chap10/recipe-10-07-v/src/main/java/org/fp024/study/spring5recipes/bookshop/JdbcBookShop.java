@@ -30,9 +30,6 @@ public class JdbcBookShop extends JdbcDaoSupport implements BookShop {
     String threadName = Thread.currentThread().getName();
     System.out.println(threadName + " - Prepare to increase book stock");
 
-    getJdbcTemplate().update("INSERT INTO BOOK_STOCK(ISBN, STOCK) VALUES(?, ?)", "0003", 10);
-    System.out.println(threadName + " - 0003 stock inserted.");
-
     getJdbcTemplate().update("UPDATE BOOK_STOCK SET STOCK = STOCK + ? WHERE ISBN = ?", stock, isbn);
 
     System.out.println(threadName + " - Book stock increased by " + stock);

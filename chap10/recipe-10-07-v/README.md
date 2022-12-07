@@ -59,3 +59,63 @@ Thread 2 - Book stock rolled back
 지금까지 HSQLDB에서만 동작을 보아왔는데, 
 
 Oracle 이나 MySQL에서 확인을 해보는 것이 좋을 것 같다.
+
+
+
+
+
+---
+
+## 재확인
+
+### MySQL 8.0.31
+
+```
+Thread 1 - Prepare to check book stock
+Thread 1 - Book stock is 10
+Thread 1 - Sleeping
+Thread 2 - Prepare to increase book stock
+Thread 1 - Wake up
+Thread 2 - Book stock increased by 5  -- Thread 1의 트랜젝션이 끝나고 나서 대기하던 업데이트 수행
+Thread 2 - Sleeping
+Thread 2 - Wake up
+Thread 2 - Book stock rolled back
+```
+
+
+
+### OracleXE 18c
+
+```
+Thread 1 - Prepare to check book stock
+Thread 1 - Book stock is 10
+Thread 1 - Sleeping
+Thread 2 - Prepare to increase book stock
+Thread 2 - Book stock increased by 5  -- 대기 없이 바로 업데이트 수행
+Thread 2 - Sleeping
+Thread 1 - Wake up
+Thread 2 - Wake up
+Thread 2 - Book stock rolled back
+```
+
+Oracle은 SERIALIZABLE 인데도 조회 트랜젝션 중에 업데이트 쿼리가 실행 되었다.
+
+
+
+### HSQLDB 2.7.1
+
+```
+Thread 1 - Prepare to check book stock
+Thread 1 - Book stock is 10
+Thread 1 - Sleeping
+Thread 2 - Prepare to increase book stock
+Thread 1 - Wake up
+Thread 2 - Book stock increased by 5   -- Thread 1의 트랜젝션이 끝나고 나서 대기하던 업데이트 수행
+Thread 2 - Sleeping
+Thread 2 - Wake up
+Thread 2 - Book stock rolled back
+```
+
+
+
+Oracle 18c의 동작이 예상 밖이다. 😅, 나중에 Oracle 상위 버전 또는 11gR2로 해봐야겠다.
