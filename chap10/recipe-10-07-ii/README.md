@@ -48,3 +48,73 @@ READ_COMMITTED 으로 같은 건가?
 저자님 예제의 리소스를 보니, 뭔가 다른 DB (더비)에서 테스트를 하셨는지? XML 설정이 몇몇 보인다.
 
 난 그것 까진 포함할 필요는 없을 것 같다.
+
+
+
+
+
+---
+
+## 재확인
+
+## 10-07-ii - `READ_COMMITTED`
+
+10-07-i와 동일한 소스에서 격리수준만 `READ_COMMITTED` 로 적용
+
+
+
+### MySQL 8.0.31
+
+```
+Thread 1 - Prepare to increase book stock
+Thread 1 - Book stock increased by 5
+Thread 1 - Sleeping
+Thread 2 - Prepare to check book stock -- ✨ 잠금은 따로 없었음. (대기가 없음.)
+Thread 2 - Book stock is 10            -- 바로 조회 했는데, 수정 전의 원래 데이터를 읽음.
+Thread 2 - Sleeping
+Thread 1 - Wake up
+Thread 1 - Book stock rolled back
+Thread 2 - Wake up
+```
+
+책의 PostgreSQL에서는 HSQLDB처럼 잠금이 일어날 것이라고 하지만. MySQL 8.0.31에서는 Undo로그를 활용해서 수정전의 원래 데이터를 잠금 없이 바로 읽을 수 있는 듯 하다.
+
+
+
+### OracleXE 18c
+
+```
+Thread 1 - Prepare to increase book stock
+Thread 1 - Book stock increased by 5
+Thread 1 - Sleeping
+Thread 2 - Prepare to check book stock -- ✨ Oracle도 MySQL과 마찬가지로 대기 없이 바로 수정 전 값을 조회함.
+Thread 2 - Book stock is 10
+Thread 2 - Sleeping
+Thread 1 - Wake up
+Thread 1 - Book stock rolled back
+Thread 2 - Wake up
+```
+
+MySQL과 같이 Undo 로그 같은 것으로 바로 조회하는 것 같은 생각이 든다.
+
+
+
+### HSQLDB 2.7.1
+
+```
+Thread 1 - Prepare to increase book stock
+Thread 1 - Book stock increased by 5
+Thread 1 - Sleeping
+Thread 2 - Prepare to check book stock  -- 대기 발생
+Thread 1 - Wake up
+Thread 1 - Book stock rolled back  -- Theard 1이 롤백이 완료되야 조회할 수 있었음.
+Thread 2 - Book stock is 10
+Thread 2 - Sleeping
+Thread 2 - Wake up
+
+```
+
+HSQLDB만 책의 PostgreSQL 동작과 같음 대기가 발생함.
+
+HSQLDB는 `READ_UNCOMMITTED`과 `READ_COMMITTED`의 동작이 같음.
+
