@@ -27,7 +27,7 @@
 
 그리고 재고 확인 위에 READ_UNCOMMITTED 를 붙였다.
 
-그런데 뭔가 무슨의미가 있는 것 모르겠다...
+그런데 뭔가 무슨의미가 있는 것인지 모르겠다...
 
 ```
 Thread 1 - Prepare to check book stock
@@ -44,4 +44,61 @@ Thread 2 - Book stock rolled back  // 롤백했다.
 만약에 재고 확인 위해 READ_COMMITED라도 결과는 같았다.
 
 
+
+## 재확인
+
+이 예제는 로직이 좀 바뀐다.
+
+* Thread 1에서 0001 책의 재고 조회
+  1. 0001 재고 조회
+  2. 재고 출력 (10일 텐데...)
+  3. 10초간 Sleep
+* 5초간 대기
+* Thread 2에서 0001 책의 재고 5증가
+  1. 재고 5 증가
+  2. 10초간 Sleep.
+
+그런데 이 예제는 여전히 무슨 의미가 있는지 잘 모르겠음... 😅
+
+### MySQL 8.0.31
+
+```
+Thread 1 - Prepare to check book stock
+Thread 1 - Book stock is 10
+Thread 1 - Sleeping
+Thread 2 - Prepare to increase book stock
+Thread 2 - Book stock increased by 5
+Thread 2 - Sleeping
+Thread 1 - Wake up
+Thread 2 - Wake up
+Thread 2 - Book stock rolled back
+```
+
+
+
+### OracleXE 18c
+
+```
+Exception in thread "Thread 1" org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is java.sql.SQLException: READ_COMMITTED와 SERIALIZABLE만이 적합한 트랜잭션 레벨입니다
+```
+
+checkStock()의 SELECT를 실행할 시점에 예외가 발생
+
+
+
+### HSQLDB 2.7.1
+
+```
+Thread 1 - Prepare to check book stock
+Thread 1 - Book stock is 10
+Thread 1 - Sleeping
+Thread 2 - Prepare to increase book stock
+Thread 2 - Book stock increased by 5
+Thread 2 - Sleeping
+Thread 1 - Wake up
+Thread 2 - Wake up
+Thread 2 - Book stock rolled back
+```
+
+MySQL의 동작과 차이가 없었다.
 
