@@ -4,7 +4,7 @@ import org.fp024.study.spring5recipes.bookshop.config.BookstoreConfiguration;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws InterruptedException {
     try (AnnotationConfigApplicationContext context =
         new AnnotationConfigApplicationContext(BookstoreConfiguration.class)) {
 
@@ -28,6 +28,9 @@ public class Main {
       } catch (InterruptedException e) {
       }
       thread2.start();
+
+      thread1.join();
+      thread2.join();
     }
   }
 }
