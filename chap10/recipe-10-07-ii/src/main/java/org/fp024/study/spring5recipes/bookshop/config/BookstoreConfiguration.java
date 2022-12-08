@@ -1,5 +1,6 @@
 package org.fp024.study.spring5recipes.bookshop.config;
 
+import java.sql.Connection;
 import javax.sql.DataSource;
 import org.fp024.study.spring5recipes.bookshop.BookShop;
 import org.fp024.study.spring5recipes.bookshop.BookShopCashier;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.support.EncodedResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
@@ -59,9 +61,16 @@ public class BookstoreConfiguration {
 
   // 데이터베이스 초기화에 Spring JDBC의 ScriptUtils 클래스를 사용했다.
   private void runInitSqlScript(DataSource dataSource) {
-    try {
+    try (Connection connection = dataSource.getConnection()) {
       ScriptUtils.executeSqlScript(
-          dataSource.getConnection(), new ClassPathResource("sql/mysql/init-sql.sql"));
+          connection,
+          new EncodedResource(new ClassPathResource("sql/mysql/init-sql.sql")),
+          false,
+          true,
+          ScriptUtils.DEFAULT_COMMENT_PREFIX,
+          ScriptUtils.DEFAULT_STATEMENT_SEPARATOR,
+          ScriptUtils.DEFAULT_BLOCK_COMMENT_START_DELIMITER,
+          ScriptUtils.DEFAULT_BLOCK_COMMENT_END_DELIMITER);
     } catch (Exception e) {
       throw new IllegalStateException(e);
     }
