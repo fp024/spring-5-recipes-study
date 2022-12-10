@@ -1,5 +1,6 @@
 package org.fp024.study.spring5recipes.bookshop.config;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import javax.sql.DataSource;
 import org.fp024.study.spring5recipes.bookshop.BookShop;
@@ -64,7 +65,8 @@ public class BookstoreConfiguration {
     try (Connection connection = dataSource.getConnection()) {
       ScriptUtils.executeSqlScript(
           connection,
-          new EncodedResource(new ClassPathResource("sql/mysql/init-sql.sql")),
+          new EncodedResource(
+              new ClassPathResource("sql/mysql/init-sql.sql"), StandardCharsets.UTF_8),
           false,
           true,
           ScriptUtils.DEFAULT_COMMENT_PREFIX,
