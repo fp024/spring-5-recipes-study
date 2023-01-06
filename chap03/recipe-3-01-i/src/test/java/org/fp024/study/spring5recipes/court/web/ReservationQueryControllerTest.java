@@ -37,7 +37,7 @@ class ReservationQueryControllerTest {
   }
 
   @Test
-  void testSumbitForm() throws Exception {
+  void testSubmitForm() throws Exception {
     mockMvc
         .perform(
             post("/reservationQuery/") //
