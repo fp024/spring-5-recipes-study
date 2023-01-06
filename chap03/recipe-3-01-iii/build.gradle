@@ -1,0 +1,72 @@
+plugins {
+  id 'war'
+  id "org.gretty" version "${grettyVersion}"
+  id "io.freefair.lombok" version "${lombokPluginVersion}"
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of("${javaVersion}")
+  }
+}
+
+[compileJava, compileTestJava]*.options*.encoding = "${projectEncoding}"
+
+repositories {
+  // Use Maven Central for resolving dependencies.
+  mavenCentral()
+}
+
+dependencies {
+  implementation "org.springframework:spring-context:${springVersion}"
+  implementation "org.springframework:spring-webmvc:${springVersion}"
+  implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
+  implementation "org.apache.logging.log4j:log4j-slf4j2-impl:${log4jVersion}"
+  implementation "net.sargue:java-time-jsptags:${javaTimeJspTagsVersion}"
+    
+  runtimeOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"    
+  runtimeOnly "javax.servlet:jstl:${javaxJstlVersion}"
+
+  testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+  testImplementation "org.springframework:spring-test:${springVersion}"
+  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+}
+
+tasks.named('test') {
+  // Use JUnit Platform for unit tests.
+  useJUnitPlatform()
+  /*
+    터미널에서 테스트 클래스 실행 예시
+    > gradlew test --tests *TestClassName.testMethodName
+  */
+  testLogging {
+    outputs.upToDateWhen { false }
+    showStandardStreams = true
+  }
+}
+
+// 콘솔 애플리케이션으로서 표준입력을 받을 때, 사용하자!
+/*
+run {
+  standardInput = System.in
+}
+*/
+
+// gradle appRun 으로 실행
+gretty {
+  httpPort = 8080
+  contextPath = "/"
+  servletContainer = "tomcat9"
+  jvmArgs = [
+    "-Djava.security.egd=file:/dev/./urandom",
+    "--add-opens=java.base/java.io=ALL-UNNAMED",
+    "--add-opens=java.base/java.lang=ALL-UNNAMED",
+    "--add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED"
+  ]
+
+  // inplaceMode = "hard"
+  // 기본값 soft인데, hard로 해야 src/main/webapp 변경을 바로 판단한다.
+  // soft일 때는 build/inplaceWebapp 경로를 바라봐서 IDE에서의 수정내용을 즉시 확인하기가 어려움.
+  // 테스트 환경은 hard가 나은 것 같음.
+  // https://akhikhl.github.io/gretty-doc/Gretty-configuration.html
+}
