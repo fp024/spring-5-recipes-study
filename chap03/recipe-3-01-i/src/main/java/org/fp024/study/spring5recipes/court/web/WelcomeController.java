@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class WelcomeController {
 
   @RequestMapping(method = RequestMethod.GET)
-  public String welcome(Model model) {
+  public String welcome2(Model model) {
     LocalDateTime today = LocalDateTime.now();
     model.addAttribute("today", today);
 

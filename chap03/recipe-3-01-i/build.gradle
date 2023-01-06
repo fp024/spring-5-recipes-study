@@ -28,6 +28,8 @@ dependencies {
   runtimeOnly "javax.servlet:jstl:${javaxJstlVersion}"
 
   testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+  testImplementation "org.springframework:spring-test:${springVersion}"
+  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
 }
 
 tasks.named('test') {
