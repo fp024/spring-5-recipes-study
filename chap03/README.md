@@ -14,3 +14,6 @@
 
 ## 정오표
 
+* p177
+  * 소스와 본문 글 설명이 다름
+    * 본문은 `@PathVariable("user") String user` 소스는 `@PathVariable("member") String member`
