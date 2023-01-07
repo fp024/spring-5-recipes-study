@@ -18,3 +18,24 @@
 >
 > `http://localhost:8080/welcome/` 도 welcome으로 정상적으로 가는게 올바른 것인가? 그점이 해깔림.
 
+
+
+## 해결
+
+> Spring 6 MVC에서는 URL의 후행 슬레시를 자동처리해주지 않는다고 하고 설정도 Deprecated되었음.
+>
+> * https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide#web-application-changes
+>
+> ```java
+> @Configuration
+> public class WebMvcConfig implements WebMvcConfigurer {
+>   @Override
+>   public void configurePathMatch(PathMatchConfigurer configurer) {
+>     // 메서드가 Spring 6.0 부터 Deprecated 되었으나 추가해주면 후행 슬레시 처리 동작은 됨.
+>     configurer.setUseTrailingSlashMatch(true);
+>   }
+> }
+> ```
+>
+> 이 설정을 쓰기보다는 다른 방법으로 명시적으로 redirects/rewrites 를 구성하라고 한다.
+> RequestMapping에 /가 끝에 붙은 URL을 하나 더 추가하라고 한다. ㅎㅎ
