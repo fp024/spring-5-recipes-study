@@ -32,10 +32,14 @@ dependencies {
 }
 
 test {
-    // Test를 다른 JDK 버전으로 실행하고 싶다면 버전 부분 변경.
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of("${javaVersion}")
-    }
+    // Test를 다른 JDK 버전으로 실행하고 싶다면 버전 부분 변경. 
+    // javaLauncher = javaToolchains.launcherFor {
+    //    languageVersion = JavaLanguageVersion.of("${javaVersion}")
+    // }
+	// Gralde 8.0으로 올리고 나서 오류가 난다. 그런데 어짜피 17환경으로 테스트를 돌리므로 
+	// 필요없는 설정이긴함.
+	// 오류 메시지:
+	// The value for task ':chap02:recipe-2-xx-i:test' property 'javaLauncher' is final and cannot be changed any further.
 
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()

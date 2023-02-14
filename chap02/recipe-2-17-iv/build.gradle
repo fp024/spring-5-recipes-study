@@ -40,11 +40,6 @@ dependencies {
 }
 
 test {
-    // Test를 다른 JDK 버전으로 실행하고 싶다면 버전 부분 변경.
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of("${javaVersion}")
-    }
-
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
     /*
