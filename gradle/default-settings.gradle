@@ -1,0 +1,29 @@
+/* 스터디 프로젝트 기본 설정 */
+
+[compileJava, compileTestJava]*.options*.encoding = "${projectEncoding}"
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation "org.apache.logging.log4j:log4j-slf4j2-impl:${log4jVersion}"
+  testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+  // Use JUnit Platform for unit tests.
+  useJUnitPlatform()
+  /*
+    터미널에서 테스트 클래스 실행 예시
+    > gradlew test --tests *TestClassName.testMethodName
+  */
+  // 터미널에서 테스트 실행시 테스트 실행 로그의 콘솔 출력을 위해 추가
+  // IntelliJ에서는 이 옵션과 관련없이 테스트 실행 로그가 잘 출력된다.
+  // https://stackoverflow.com/questions/40954017/gradle-how-to-get-output-from-test-stderr-stdout-into-console
+  testLogging {
+    outputs.upToDateWhen { false }
+    showStandardStreams = true
+  }
+}

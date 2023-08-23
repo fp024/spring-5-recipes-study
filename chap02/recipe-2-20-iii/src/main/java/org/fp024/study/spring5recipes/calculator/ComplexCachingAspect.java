@@ -3,16 +3,19 @@ package org.fp024.study.spring5recipes.calculator;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
+@Slf4j
 @Aspect
 public class ComplexCachingAspect {
 
-  private Map<String, Complex> cache;
+  private final Map<String, Complex> cache;
 
   public ComplexCachingAspect() {
+    LOGGER.info("### ComplexCachingAspect() ###");
     cache = Collections.synchronizedMap(new HashMap<String, Complex>());
   }
 

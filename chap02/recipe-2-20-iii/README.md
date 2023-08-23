@@ -46,3 +46,23 @@
   Aspect 코드가 실행이 안된다 😥😥😥
 
 TODO: 이 예제는 천천히 봐야겠다. 
+
+---
+
+IoC 컨테이너에 선언한 빈이 호출할 경우에만 스프링 에이전트가 어드바이스를 적용한다고 해서..
+
+```java
+  @RequiredArgsConstructor
+  @Component("testBean")
+  public static class TestBean {
+    private final ComplexCalculator complexCalculator;
+
+    public void test() {
+      complexCalculator.add(new Complex(1, 2), new Complex(2, 3));
+      complexCalculator.sub(new Complex(5, 8), new Complex(2, 3));
+    }
+  }
+```
+
+테스트 빈을 만들어서 확인해봤는데.. 여전히 안된다. 😂😂😂
+

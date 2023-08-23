@@ -16,3 +16,27 @@
 
 
 확실히 특이한 방법이긴한데, 이렇게 사용할 상황이 있을지? 잘 모르겠다.
+
+
+
+---
+
+### aspect 경고
+
+```
+[AppClassLoader@2b193f2d] error can't determine superclass of missing type org.springframework.transaction.interceptor.TransactionAspectSupport
+ [Xlint:cantFindType]
+[AppClassLoader@2b193f2d] error can't determine annotations of missing type org.springframework.transaction.annotation.Transactional
+when weaving type org.fp024.study.spring5recipes.calculator.Main
+when weaving classes
+when weaving
+...
+```
+
+이런 경고가 나와서... 아래 디펜던시 추가
+
+```groovy
+// aspect 컴파일러 경고 때문에 추가. 예제에서 트랜젝션이나 DB를 사용하진 않음.
+implementation "org.springframework:spring-tx:${springVersion}"
+```
+

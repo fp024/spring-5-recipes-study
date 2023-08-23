@@ -1,8 +1,7 @@
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
-    id 'application'
-    id "io.freefair.lombok" version "${lombokPluginVersion}"
-    id "io.freefair.aspectj.post-compile-weaving" version "${postCompileWeavingVersion}"
+  id 'application'
+  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  id "io.freefair.aspectj.post-compile-weaving" version "${postCompileWeavingVersion}"
 }
 
 java {
@@ -11,56 +10,28 @@ java {
   }
 }
 
-[compileJava, compileTestJava]*.options*.encoding = "${projectEncoding}"
-
-repositories {
-    // Use Maven Central for resolving dependencies.
-    mavenCentral()
-}
+apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-	implementation "org.springframework:spring-context:${springVersion}"
+  implementation "org.springframework:spring-context:${springVersion}"
 
-	implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
 
-    implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
-	implementation "org.apache.logging.log4j:log4j-slf4j2-impl:${log4jVersion}"
+  implementation "org.aspectj:aspectjweaver:${aspectjVersion}"    
+  
+  // Gralde 빌드시 경고가 발생하는데, post-compile-weaving 플러그인이 aspectjrt.jar가 클래스 패스에 없기만 하면 저런 오류를 노출하는 것 같음.
+  //   [warning] couldn't find aspectjrt.jar on classpath, checked: ... 
+  //   TODO: 나중에 플러그인 제작자분께 질문을 올려보자!
+  //   https://github.com/freefair/gradle-plugins/discussions/categories/q-a
+  implementation "org.aspectj:aspectjrt:${aspectjVersion}"    
 
-	implementation "org.aspectj:aspectjweaver:${aspectjVersion}"    
-    // Spring AOP로 사용하면 AspectJ의 어노테이션만 사용하기 때문에 rt가 aspectjrt가 디펜던시에 없어도 잘 동작함.
-	implementation "org.aspectj:aspectjrt:${aspectjVersion}"
+  implementation "com.google.guava:guava:${guavaVersion}"
 
-	implementation "com.google.guava:guava:${guavaVersion}"
-
-	testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
-	testImplementation "org.springframework:spring-test:${springVersion}"
-	testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
-	testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+  testImplementation "org.springframework:spring-test:${springVersion}"
+  testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
+  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
 }
-
-test {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
-    /*
-        터미널에서 테스트 클래스 실행 예시
-        > gradlew test --tests *TestClassName.testMethodName
-    */
-    // 터미널에서 테스트 실행시 테스트 실행 로그의 콘솔 출력을 위해 추가
-    // IntelliJ에서는 이 옵션과 관련없이 테스트 실행 로그가 잘 출력된다.
-    // https://stackoverflow.com/questions/40954017/gradle-how-to-get-output-from-test-stderr-stdout-into-console
-    testLogging {
-        outputs.upToDateWhen { false }
-        showStandardStreams = true
-    }
-}
-
-// 콘솔 애플리케이션으로서 표준입력을 받을 때, 사용하자!
-/*
-run {
-    standardInput = System.in
-}
-*/
 
 application {
-    mainClass = 'org.fp024.study.spring5recipes.calculator.Main'
+  mainClass = 'org.fp024.study.spring5recipes.calculator.Main'
 }

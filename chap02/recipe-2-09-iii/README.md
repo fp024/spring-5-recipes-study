@@ -1,5 +1,9 @@
 ## 레시피 2-9-iii 후처리기를 만들어 POJO 검증 / 수정하기
 
+> run으로 Main 클래스 실행시 예외가 발생하는 것이 정상 동작
+>
+> * SequenceGenerator의 suffix 값을 일부러 주지않고 @Required 어노테이션 동작 확인 목적.
+
 * @Required로 프로퍼티 검사하기
 
 * 스프링 5.1 부터 이 어노테이션이 Deprecated되어, 어노테이션 클래스는 남아있지만 동작하지 않음.
