@@ -25,8 +25,6 @@ dependencies {
   //   and also contains the AspectJ runtime classes.
   // implementation "org.aspectj:aspectjrt:${aspectjVersion}"
 
-  implementation "com.google.guava:guava:${guavaVersion}"
-
   testImplementation "org.springframework:spring-test:${springVersion}"
   testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
   testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"

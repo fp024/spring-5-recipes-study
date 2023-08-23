@@ -22,8 +22,6 @@ dependencies {
   // aspectjweaver가 rt의 기능을 모두 포함할 껄... 😅
   // implementation "org.aspectj:aspectjrt:${aspectjVersion}"
 
-  implementation "com.google.guava:guava:${guavaVersion}"
-
   testImplementation "org.springframework:spring-test:${springVersion}"
   testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
   testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"

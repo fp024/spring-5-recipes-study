@@ -14,8 +14,6 @@ apply from: "../../gradle/default-settings.gradle"
 dependencies {
   implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
   implementation "org.springframework:spring-context:${springVersion}"
-	
-  implementation "com.google.guava:guava:${guavaVersion}"
 
   testImplementation "org.springframework:spring-test:${springVersion}"
   testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
