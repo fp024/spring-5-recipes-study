@@ -24,21 +24,9 @@ dependencies {
   testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
 }
 
-// gradle appRun 으로 실행
-gretty {
-  httpPort = 8080
-  contextPath = "/"
-  servletContainer = "tomcat10"
-  jvmArgs = [
-    "-Djava.security.egd=file:/dev/./urandom",
-    "--add-opens=java.base/java.io=ALL-UNNAMED",
-    "--add-opens=java.base/java.lang=ALL-UNNAMED",
-    "--add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED"
-  ]
+apply from: "../../gradle/gretty-settings.gradle"
 
-  // inplaceMode = "hard"
-  // 기본값 soft인데, hard로 해야 src/main/webapp 변경을 바로 판단한다.
-  // soft일 때는 build/inplaceWebapp 경로를 바라봐서 IDE에서의 수정내용을 즉시 확인하기가 어려움.
-  // 테스트 환경은 hard가 나은 것 같음.
-  // https://akhikhl.github.io/gretty-doc/Gretty-configuration.html
+// Spring 6은 Tomcat 10.1 이상 버전을 사용해야한다.
+gretty {  
+  servletContainer = "tomcat10"
 }

@@ -12,19 +12,26 @@ Gradle 멀티 프로젝트 구성에서 예제를 하나씩 추가해가며 실�
 
 ### 역자
 
-이일웅 님
+이일웅
 
 ### 도서 판매처
 
 #### Yes24
 
-* http://www.yes24.com/Product/Goods/63713129
+* https://www.yes24.com/Product/Goods/63713129
 
 #### 교보문고
 
-* http://www.kyobobook.co.kr/product/detailViewKor.laf?barcode=9791162241035
+* https://www.kyobobook.co.kr/product/detailViewKor.laf?barcode=9791162241035
 
 
+
+#### **Github Repo**
+
+* Apress Github
+  * https://github.com/Apress/spring-5-recipes
+* 역자님 Github
+  * https://github.com/nililee/spring-5-recipes
 
 
 
@@ -70,7 +77,7 @@ Gradle 멀티 프로젝트 구성에서 예제를 하나씩 추가해가며 실�
 
 ## 후기
 
-
+* ...
 
 
 
