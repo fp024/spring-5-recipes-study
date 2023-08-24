@@ -15,9 +15,9 @@ public class Main {
       JobLauncher jobLauncher = context.getBean(JobLauncher.class);
       JobRepository jobRepository = context.getBean(JobRepository.class);
 
-      System.out.println("JobRegistry: " + jobRegistry);
-      System.out.println("JobLauncher: " + jobLauncher);
-      System.out.println("JobRepository: " + jobRepository);
+      System.out.println("### JobRegistry: " + jobRegistry);
+      System.out.println("### JobLauncher: " + jobLauncher);
+      System.out.println("### JobRepository: " + jobRepository);
     }
   }
 }
