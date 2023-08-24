@@ -17,8 +17,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class Main {
   public static void main(String[] args)
-      throws JobExecutionAlreadyRunningException, JobRestartException,
-          JobInstanceAlreadyCompleteException, JobParametersInvalidException, InterruptedException {
+      throws JobExecutionAlreadyRunningException,
+          JobRestartException,
+          JobInstanceAlreadyCompleteException,
+          JobParametersInvalidException,
+          InterruptedException {
     try (AnnotationConfigApplicationContext context =
         new AnnotationConfigApplicationContext(BatchConfiguration.class)) {
 
