@@ -33,7 +33,7 @@ public class UserJob {
   private final DataSource dataSource;
 
   @Value("file:./csv/registrations.csv")
-  private Resource input;
+  private final Resource input;
 
   @Bean
   Job insertIntoDbFromCsvJob() {
