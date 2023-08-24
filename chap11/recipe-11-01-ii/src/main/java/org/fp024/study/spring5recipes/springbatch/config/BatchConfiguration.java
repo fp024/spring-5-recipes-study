@@ -33,7 +33,7 @@ public class BatchConfiguration {
   }
 
   @Bean
-  public DataSourceInitializer dataSourceInitializer() {
+  DataSourceInitializer dataSourceInitializer() {
     DataSourceInitializer initializer = new DataSourceInitializer();
     initializer.setDataSource(dataSource());
     // 데이터 베이스 채우기
@@ -45,11 +45,10 @@ public class BatchConfiguration {
     ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
     // 쿼리 실행에 에러가 있더라도 진행할지 여부
     databasePopulator.setContinueOnError(true);
-    // spring-batch-core 모듈안의 쿼리 경로
-    // "org/springframework/batch/core/schema-hsqldb.sql"
-    // "org/springframework/batch/core/schema-drop-hsqldb.sql"
-    databasePopulator.addScript(new ClassPathResource("sql/schema-drop-hsqldb.sql"));
-    databasePopulator.addScript(new ClassPathResource("sql/schema-hsqldb.sql"));
+    databasePopulator.addScript(
+        new ClassPathResource("org/springframework/batch/core/schema-drop-hsqldb.sql"));
+    databasePopulator.addScript(
+        new ClassPathResource("org/springframework/batch/core/schema-hsqldb.sql"));
     databasePopulator.addScript(new ClassPathResource("sql/reset_user_registration.sql"));
     return databasePopulator;
   }
