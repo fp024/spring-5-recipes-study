@@ -2,17 +2,15 @@ package org.fp024.study.spring5recipes.springbatch.config;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import lombok.RequiredArgsConstructor;
 import org.fp024.study.spring5recipes.springbatch.UserRegistration;
 import org.fp024.study.spring5recipes.springbatch.service.UserRegistrationService;
 import org.springframework.batch.item.ItemReader;
 
+@RequiredArgsConstructor
 public class UserRegistrationItemReader implements ItemReader<UserRegistration> {
 
   private final UserRegistrationService userRegistrationService;
-
-  public UserRegistrationItemReader(UserRegistrationService userRegistrationService) {
-    this.userRegistrationService = userRegistrationService;
-  }
 
   /**
    * 입력 데이터를 읽고 다음 데이터로 넘어갑니다. <br>
