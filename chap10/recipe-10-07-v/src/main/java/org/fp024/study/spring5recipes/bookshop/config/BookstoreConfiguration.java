@@ -35,7 +35,7 @@ public class BookstoreConfiguration {
   private String jdbcPassword;
 
   // @Bean(destroyMethod = "close")
-  // public DataSource dataSource() {
+  // DataSource dataSource() {
   //   HikariConfig hikariConfig = new HikariConfig();
   //   hikariConfig.setDriverClassName(jdbcDriverName);
   //   hikariConfig.setJdbcUrl(jdbcUrl);
@@ -49,7 +49,7 @@ public class BookstoreConfiguration {
   // }
 
   @Bean
-  public DriverManagerDataSource dataSource() {
+  DriverManagerDataSource dataSource() {
     DriverManagerDataSource dataSource = new DriverManagerDataSource();
     dataSource.setDriverClassName(jdbcDriverName);
     dataSource.setUrl(jdbcUrl);
@@ -79,21 +79,21 @@ public class BookstoreConfiguration {
   }
 
   @Bean
-  public DataSourceTransactionManager transactionManager(DataSource dataSource) {
+  DataSourceTransactionManager transactionManager(DataSource dataSource) {
     DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
     transactionManager.setDataSource(dataSource);
     return transactionManager;
   }
 
   @Bean
-  public JdbcBookShop bookShop(DataSource dataSource) {
+  JdbcBookShop bookShop(DataSource dataSource) {
     JdbcBookShop bookShop = new JdbcBookShop();
     bookShop.setDataSource(dataSource);
     return bookShop;
   }
 
   @Bean
-  public Cashier cashier(BookShop bookShop) {
+  Cashier cashier(BookShop bookShop) {
     BookShopCashier cashier = new BookShopCashier();
     cashier.setBookShop(bookShop);
     return cashier;

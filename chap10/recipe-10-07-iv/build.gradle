@@ -21,9 +21,6 @@ dependencies {
 
   implementation "com.zaxxer:HikariCP:${hikariCpVersion}"
 
-  // mybatis의 주요 기능은 사용하지 않고 리소스 경로의 sql 파일읽어와서 실행시키는 기능만 사용한다.
-  implementation "org.mybatis:mybatis:${mybatisVersion}"
-
   implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
 
   testImplementation "org.springframework:spring-test:${springVersion}"
