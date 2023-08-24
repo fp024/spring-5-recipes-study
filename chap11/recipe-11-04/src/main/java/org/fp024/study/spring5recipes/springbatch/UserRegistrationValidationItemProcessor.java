@@ -60,7 +60,8 @@ public class UserRegistrationValidationItemProcessor
       return input;
     }
 
-    LOGGER.debug("Returning null");
+    LOGGER.debug(
+        "Returning null, telephone: {} / zipCode: {} / state: {}", telephone, zipCode, state);
     return null;
   }
 }

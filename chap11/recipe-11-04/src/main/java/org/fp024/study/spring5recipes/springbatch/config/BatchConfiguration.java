@@ -3,8 +3,8 @@ package org.fp024.study.spring5recipes.springbatch.config;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +15,7 @@ import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
+@RequiredArgsConstructor
 @Configuration
 // modular = (기본값)false : 구성이 여러 애플리케이션 컨텍스트로 모듈화되는지 여부를 나타냅니다.
 // true인 경우 이 컨텍스트에서 @Bean 작업 정의를 생성해서는 안 되며 오히려
@@ -23,10 +24,10 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 @ComponentScan("org.fp024.study.spring5recipes.springbatch")
 @PropertySource("classpath:database.properties")
 public class BatchConfiguration {
-  @Autowired private Environment env;
+  private final Environment env;
 
   @Bean(destroyMethod = "close")
-  public DataSource dataSource() {
+  DataSource dataSource() {
     HikariConfig hikariConfig = new HikariConfig();
     hikariConfig.setDriverClassName(env.getProperty("jdbc.driver"));
     hikariConfig.setJdbcUrl(env.getProperty("jdbc.url"));
@@ -36,7 +37,7 @@ public class BatchConfiguration {
   }
 
   @Bean
-  public DataSourceInitializer dataSourceInitializer() {
+  DataSourceInitializer dataSourceInitializer() {
     DataSourceInitializer initializer = new DataSourceInitializer();
     initializer.setDataSource(dataSource());
     // 데이터 베이스 채우기
@@ -51,11 +52,10 @@ public class BatchConfiguration {
     // 실패한 SQL DROP 문을 무시할 수 있음을 나타내는 플래그
     databasePopulator.setIgnoreFailedDrops(true);
 
-    // spring-batch-core 모듈안의 쿼리 경로
-    // "org/springframework/batch/core/schema-hsqldb.sql"
-    // "org/springframework/batch/core/schema-drop-hsqldb.sql"
-    databasePopulator.addScript(new ClassPathResource("sql/schema-drop-hsqldb.sql"));
-    databasePopulator.addScript(new ClassPathResource("sql/schema-hsqldb.sql"));
+    databasePopulator.addScript(
+        new ClassPathResource("org/springframework/batch/core/schema-drop-hsqldb.sql"));
+    databasePopulator.addScript(
+        new ClassPathResource("org/springframework/batch/core/schema-hsqldb.sql"));
     // 서비스 테이블도 초기화해주자!
     databasePopulator.addScript(new ClassPathResource("sql/reset_user_registration.sql"));
     return databasePopulator;

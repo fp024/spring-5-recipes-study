@@ -1,6 +1,7 @@
 package org.fp024.study.spring5recipes.springbatch.config;
 
 import javax.sql.DataSource;
+import lombok.RequiredArgsConstructor;
 import org.fp024.study.spring5recipes.springbatch.UserRegistration;
 import org.fp024.study.spring5recipes.springbatch.UserRegistrationValidationItemProcessor;
 import org.springframework.batch.core.Job;
@@ -13,12 +14,12 @@ import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 
+@RequiredArgsConstructor
 @Configuration
 public class UserJob {
   private static final String INSERT_REGISTRATION_QUERY =
@@ -26,22 +27,22 @@ public class UserJob {
           + " ADDRESS,CITY,STATE,ZIP,COUNTY,URL,PHONE_NUMBER,FAX) values "
           + "(:firstName,:lastName,:company,:address,:city,:state,:zip,:county,:url,:phoneNumber,:fax)";
 
-  @Autowired private JobBuilderFactory jobs;
+  private final JobBuilderFactory jobs;
 
-  @Autowired private StepBuilderFactory steps;
+  private final StepBuilderFactory steps;
 
-  @Autowired private DataSource dataSource;
+  private final DataSource dataSource;
 
   @Value("file:csv/registrations.csv")
-  private Resource input;
+  private final Resource input;
 
   @Bean
-  public Job insertIntoDbFromCsvJob() {
+  Job insertIntoDbFromCsvJob() {
     return jobs.get("User Registration Import Job").start(step1()).build();
   }
 
   @Bean
-  public Step step1() {
+  Step step1() {
     return steps
         .get("User Registration CSV To DB Step")
         .<UserRegistration, UserRegistration>chunk(5)
@@ -52,12 +53,12 @@ public class UserJob {
   }
 
   @Bean
-  public UserRegistrationValidationItemProcessor userRegistrationValidationItemProcessor() {
+  UserRegistrationValidationItemProcessor userRegistrationValidationItemProcessor() {
     return new UserRegistrationValidationItemProcessor();
   }
 
   @Bean
-  public FlatFileItemReader<UserRegistration> csvFileReader() {
+  FlatFileItemReader<UserRegistration> csvFileReader() {
     FlatFileItemReader<UserRegistration> itemReader = new FlatFileItemReader<>();
     itemReader.setLineMapper(lineMapper());
     itemReader.setResource(input);
@@ -65,7 +66,7 @@ public class UserJob {
   }
 
   @Bean
-  public JdbcBatchItemWriter<UserRegistration> jdbcItemWriter() {
+  JdbcBatchItemWriter<UserRegistration> jdbcItemWriter() {
     JdbcBatchItemWriter<UserRegistration> itemWriter = new JdbcBatchItemWriter<>();
     itemWriter.setDataSource(dataSource);
     itemWriter.setSql(INSERT_REGISTRATION_QUERY);
@@ -75,7 +76,7 @@ public class UserJob {
   }
 
   @Bean
-  public DefaultLineMapper<UserRegistration> lineMapper() {
+  DefaultLineMapper<UserRegistration> lineMapper() {
     DefaultLineMapper<UserRegistration> lineMapper = new DefaultLineMapper<>();
     lineMapper.setLineTokenizer(tokenizer());
     lineMapper.setFieldSetMapper(fieldSetMapper());
@@ -83,14 +84,14 @@ public class UserJob {
   }
 
   @Bean
-  public BeanWrapperFieldSetMapper<UserRegistration> fieldSetMapper() {
+  BeanWrapperFieldSetMapper<UserRegistration> fieldSetMapper() {
     BeanWrapperFieldSetMapper<UserRegistration> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
     fieldSetMapper.setTargetType(UserRegistration.class);
     return fieldSetMapper;
   }
 
   @Bean
-  public DelimitedLineTokenizer tokenizer() {
+  DelimitedLineTokenizer tokenizer() {
     DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
     tokenizer.setDelimiter(",");
     tokenizer.setNames(
