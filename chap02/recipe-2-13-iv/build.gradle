@@ -20,7 +20,6 @@ dependencies {
 
   testImplementation "org.springframework:spring-test:${springVersion}"
   testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
-  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
 }
 
 application {
