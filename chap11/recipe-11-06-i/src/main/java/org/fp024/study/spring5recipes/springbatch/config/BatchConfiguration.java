@@ -27,7 +27,7 @@ public class BatchConfiguration {
   private final Environment env;
 
   @Bean(destroyMethod = "close")
-  DataSource dataSource() {
+  HikariDataSource dataSource() {
     HikariConfig hikariConfig = new HikariConfig();
     hikariConfig.setDriverClassName(env.getProperty("jdbc.driver"));
     hikariConfig.setJdbcUrl(env.getProperty("jdbc.url"));

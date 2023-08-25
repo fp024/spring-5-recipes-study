@@ -3,7 +3,6 @@ package org.fp024.study.spring5recipes.springbatch.config;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import org.fp024.study.spring5recipes.springbatch.UserRegistration;
-import org.fp024.study.spring5recipes.springbatch.UserRegistrationValidationItemProcessor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -39,25 +38,24 @@ public class UserJob {
 
   @Bean
   Job insertIntoDbFromCsvJob() {
-    return jobs.get("User Registration Import Job").start(step1()).build();
+    return jobs //
+        .get("User Registration Import Job")
+        .start(step1())
+        .build();
   }
 
   @Bean
   Step step1() {
     return steps
         .get("User Registration CSV To DB Step")
-        .<UserRegistration, UserRegistration>chunk(10)
+        .<UserRegistration, UserRegistration>chunk(5)
+        // 첫 스탭의 오류 허용, 그 후 제한 횟수 및 재시도 대상 예외 지정
         .faultTolerant()
         .retryLimit(3)
         .retry(DeadlockLoserDataAccessException.class)
         .reader(csvFileReader())
         .writer(jdbcItemWriter())
         .build();
-  }
-
-  @Bean
-  UserRegistrationValidationItemProcessor userRegistrationValidationItemProcessor() {
-    return new UserRegistrationValidationItemProcessor();
   }
 
   @Bean
