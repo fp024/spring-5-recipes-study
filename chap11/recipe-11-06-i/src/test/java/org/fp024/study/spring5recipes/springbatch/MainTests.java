@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class MainTest {
+class MainTests {
   @DisplayName("테스트 목적 CSV를 만듦")
   @Order(1)
   @Test

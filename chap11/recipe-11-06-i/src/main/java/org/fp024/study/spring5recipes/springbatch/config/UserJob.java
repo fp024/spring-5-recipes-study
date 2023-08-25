@@ -54,6 +54,7 @@ public class UserJob {
         .retryLimit(3)
         .retry(DeadlockLoserDataAccessException.class)
         .reader(csvFileReader())
+        .processor(new DeadlockTestProcessor())
         .writer(jdbcItemWriter())
         .build();
   }
