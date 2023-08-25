@@ -86,12 +86,12 @@ Gradle 멀티 프로젝트 구성에서 예제를 하나씩 추가해가며 실�
 * Visual Studio Code에 google-java-format을 연동해서 사용하는데, `Shift + Alt + f` 할 때, Import 정리까지 같이해주니 일부러  `Shift + Alt + o` 를 따로 눌러줄 필요는 없다. Import 정리는 또 포메팅 형식이 달라서 혼선이 올 수 있음. 
 * 모든 챕터의 root를 하나로 하려다보니 시간이 너무걸려서 장 하나마다 settings.gradle을 만들어주는 배치파일을 만들었다.  프로젝트 루트의 gradle.properties를 수정하거나, 최초 프로젝트 클론을 했을 때, 아래 배치 파일을 수행해주도록 하자!
   * 윈도우 환경
-    * [make-gradle-properties.bat](make-gradle-properties.bat)
-    * [clean-gradle-properties.bat](clean-gradle-properties.bat)
+    * [make-gradle-files.bat](make-gradle-files.bat)
+    * [clean-gradle-files.bat](clean-gradle-files.bat)
   
   * Linux 환경
-    * [make-gradle-properties](make-gradle-properties)
-    * [clean-gradle-properties](clean-gradle-properties)
+    * [make-gradle-files.sh](make-gradle-files.sh)
+    * [clean-gradle-files.sh](clean-gradle-files.sh)
   
 * DB 호스트 명 변경 설정 필요
 

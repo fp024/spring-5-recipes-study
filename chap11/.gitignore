@@ -1,3 +1,28 @@
+# Ignore Gradle project-specific cache directory
 .gradle
-settings.gradle
+
+# 하위 프로젝트에서는 wrapper 파일을 포함하지 않는다.
+gradlew
+gradlew.bat
+gradle/
+
+# 루트 프로젝트의 내용을 따르도록 하고, 필요시 잠깐식 복해서 쓸 수 있도록 무시파일에 포함한다.
 gradle.properties
+
+# HyperSQL DB 임시 DB디렉토리
+file_db_temp
+
+# Ignore Gradle build output directory
+build
+bin
+
+# eclipse
+.settings
+.classpath
+.project
+
+# IntelliJ
+.idea
+
+# vscode
+.vscode

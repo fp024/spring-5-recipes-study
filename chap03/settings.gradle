@@ -1,0 +1,21 @@
+/******************************
+ * 스프링 5 레시피 스터디 3장 *
+ ******************************/
+
+rootProject.name = 'spring-5-recipes-study-chap03'
+
+/* ===== Chapter 3 스프링 MVC ===== */
+include 'recipe-3-01-i'
+include 'recipe-3-01-ii'
+include 'recipe-3-01-iii'
+include 'recipe-3-01-iii-6x'
+include 'recipe-3-02-i'
+include 'recipe-3-03-i'
+// include 'recipe-3-03-ii'는 하지 않음, recipe-3-03-i와 특별한 차이가 없음.
+include 'recipe-3-03-iii'
+include 'recipe-3-04-i'
+include 'recipe-3-05-i'
+include 'recipe-3-06-i'
+include 'recipe-3-06-ii'
+include 'recipe-3-06-iii'
+include 'recipe-3-07-i'
