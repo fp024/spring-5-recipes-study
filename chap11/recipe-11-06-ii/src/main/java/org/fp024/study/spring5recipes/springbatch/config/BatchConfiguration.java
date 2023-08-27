@@ -2,17 +2,24 @@ package org.fp024.study.spring5recipes.springbatch.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
+import org.springframework.batch.core.configuration.annotation.BatchConfigurer;
+import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.retry.backoff.ExponentialBackOffPolicy;
+import org.springframework.retry.support.RetryTemplate;
 
 @RequiredArgsConstructor
 @Configuration
@@ -25,18 +32,25 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 public class BatchConfiguration {
   private final Environment env;
 
-  @Bean(destroyMethod = "close")
+  // https://stackoverflow.com/questions/25540502/use-of-multiple-datasources-in-spring-batch
+  @Bean
+  BatchConfigurer configurer(@Qualifier("batchDataSource") DataSource dataSource) {
+    return new DefaultBatchConfigurer(dataSource);
+  }
+
+  @Primary
+  @Bean(name = "batchDataSource", destroyMethod = "close")
   HikariDataSource dataSource() {
     HikariConfig hikariConfig = new HikariConfig();
-    hikariConfig.setDriverClassName(env.getProperty("jdbc.driver"));
-    hikariConfig.setJdbcUrl(env.getProperty("jdbc.url"));
-    hikariConfig.setUsername(env.getProperty("jdbc.username"));
-    hikariConfig.setPassword(env.getProperty("jdbc.password"));
+    hikariConfig.setDriverClassName(env.getProperty("batch.jdbc.driver"));
+    hikariConfig.setJdbcUrl(env.getProperty("batch.jdbc.url"));
+    hikariConfig.setUsername(env.getProperty("batch.jdbc.username"));
+    hikariConfig.setPassword(env.getProperty("batch.jdbc.password"));
     return new HikariDataSource(hikariConfig);
   }
 
   @Bean
-  DataSourceInitializer dataSourceInitializer() {
+  DataSourceInitializer batchDataSourceInitializer() {
     DataSourceInitializer initializer = new DataSourceInitializer();
     initializer.setDataSource(dataSource());
     // 데이터 베이스 채우기
@@ -50,13 +64,27 @@ public class BatchConfiguration {
     databasePopulator.setContinueOnError(true);
     // 실패한 SQL DROP 문을 무시할 수 있음을 나타내는 플래그
     databasePopulator.setIgnoreFailedDrops(true);
-
     databasePopulator.addScript(
         new ClassPathResource("org/springframework/batch/core/schema-drop-hsqldb.sql"));
     databasePopulator.addScript(
         new ClassPathResource("org/springframework/batch/core/schema-hsqldb.sql"));
-    // 서비스 테이블도 초기화해주자!
-    databasePopulator.addScript(new ClassPathResource("sql/reset_user_registration.sql"));
     return databasePopulator;
+  }
+
+  @Bean
+  RetryTemplate retryTemplate() {
+    RetryTemplate retryTemplate = new RetryTemplate();
+    retryTemplate.setBackOffPolicy(backOffPolicy());
+    return retryTemplate;
+  }
+
+  @Bean
+  ExponentialBackOffPolicy backOffPolicy() {
+    ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
+    backOffPolicy.setInitialInterval(1000); // 첫 번째 시도 지연 값 1초
+    backOffPolicy.setMultiplier(2); // 이후 시도할 때마다 재연이 얼마나 증가되는지 제어
+    backOffPolicy.setMaxInterval(10000); // 지연 간격 10초
+    // 최초는 1초만 기다리고, 두번째에는 10초, 새번째에는 증감값 고려해서 2배해서 20초 지연 감수 같음.
+    return backOffPolicy;
   }
 }

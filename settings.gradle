@@ -117,6 +117,15 @@ include 'chap10:recipe-10-10-i'
 
 
 /* ===== Chapter 11 스프링 배치 ===== */
+include 'chap11:recipe-11-01-i'
+include 'chap11:recipe-11-01-ii'
+include 'chap11:recipe-11-02-i'
+include 'chap11:recipe-11-02-ii'
+include 'chap11:recipe-11-03'
+include 'chap11:recipe-11-04'
+include 'chap11:recipe-11-05'
+include 'chap11:recipe-11-06-i'
+include 'chap11:recipe-11-06-ii'
 
 
 
