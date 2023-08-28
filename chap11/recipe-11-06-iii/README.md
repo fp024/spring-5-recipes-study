@@ -33,3 +33,12 @@
 앞에서 빌더로 코드를 줄일 수 있었던 것 같은데... 이번에 다시 바꿔두자..
 
 * `FlatFileItemReaderBuilder<UserRegistrationDTO>` 로 메서드 하나로 줄였다.
+
+
+
+그리고 이게 AOP를 사용하므로 사용하므로.. 아래 `aspectjweaver`디펜던시가 필요하다.
+
+```groovy
+runtimeOnly "org.aspectj:aspectjweaver:${aspectjVersion}"
+```
+
