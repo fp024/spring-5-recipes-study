@@ -1,5 +1,7 @@
 package org.fp024.study.spring5recipes.springbatch;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.fp024.study.spring5recipes.springbatch.config.BatchConfiguration;
@@ -22,7 +24,8 @@ public class Main {
       Job job = context.getBean(Job.class);
 
       JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
-      jobParametersBuilder.addDate("date", new Date());
+      jobParametersBuilder.addDate(
+          "date", Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()));
       JobParameters jobParameters = jobParametersBuilder.toJobParameters();
 
       JobExecution jobExecution = jobLauncher.run(job, jobParameters);

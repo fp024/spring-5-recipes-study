@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
-import org.springframework.dao.DeadlockLoserDataAccessException;
 
 @RequiredArgsConstructor
 @Configuration
@@ -41,12 +40,7 @@ public class UserJob {
     return steps
         .get("User Registration CSV To DB Step")
         .<UserRegistrationDTO, UserRegistrationDTO>chunk(5)
-        // 첫 스탭의 오류 허용, 그 후 제한 횟수 및 재시도 대상 예외 지정
-        .faultTolerant()
-        .retryLimit(3)
-        .retry(DeadlockLoserDataAccessException.class)
         .reader(csvFileReader())
-        .processor(new DeadlockTestProcessor())
         .writer(retryableItemWriter)
         .build();
   }

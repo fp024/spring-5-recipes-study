@@ -19,6 +19,11 @@
     <Logger name="org.springframework.web" level="info" />
     <Logger name="org.springframework.batch" level="debug" />
 
+    <Logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+    <Logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="TRACE"/>
+
+    <Logger name="org.hibernate.engine.transaction" level="debug"/>
+
     <!-- Root Logger -->
     <Root level="info">
       <Appender-Ref ref="STDOUT" />

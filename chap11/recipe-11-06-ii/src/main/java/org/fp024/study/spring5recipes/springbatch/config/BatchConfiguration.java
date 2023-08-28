@@ -19,6 +19,7 @@ import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.retry.backoff.ExponentialBackOffPolicy;
+import org.springframework.retry.policy.MaxAttemptsRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
 
 @RequiredArgsConstructor
@@ -74,14 +75,22 @@ public class BatchConfiguration {
   @Bean
   RetryTemplate retryTemplate() {
     RetryTemplate retryTemplate = new RetryTemplate();
+    retryTemplate.setRetryPolicy(retryPolicy());
     retryTemplate.setBackOffPolicy(backOffPolicy());
     return retryTemplate;
   }
 
   @Bean
+  MaxAttemptsRetryPolicy retryPolicy() {
+    MaxAttemptsRetryPolicy retryPolicy = new MaxAttemptsRetryPolicy();
+    retryPolicy.setMaxAttempts(3);
+    return retryPolicy;
+  }
+
+  @Bean
   ExponentialBackOffPolicy backOffPolicy() {
     ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
-    backOffPolicy.setInitialInterval(1000); // 첫 번째 시도 지연 값 1초
+    backOffPolicy.setInitialInterval(3000); // 첫 번째 시도 지연 값 1초
     backOffPolicy.setMultiplier(2); // 이후 시도할 때마다 재연이 얼마나 증가되는지 제어
     backOffPolicy.setMaxInterval(10000); // 지연 간격 10초
     // 최초는 1초만 기다리고, 두번째에는 10초, 새번째에는 증감값 고려해서 2배해서 20초 지연 감수 같음.

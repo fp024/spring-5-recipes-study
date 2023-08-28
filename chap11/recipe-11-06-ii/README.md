@@ -19,7 +19,7 @@
 >        BatchConfigurer configurer(@Qualifier("batchDataSource") DataSource dataSource) {
 >          return new DefaultBatchConfigurer(dataSource);
 >        }
->        
+>          
 >        @Primary
 >        @Bean(name = "batchDataSource", destroyMethod = "close")
 >        HikariDataSource dataSource() {
@@ -53,6 +53,46 @@
 >      > ```
 >      >
 >      > 배치용으로는 따로 설정하지 않으면 배치 레파지토리용 데이터 소스 기준으로 DataSourceTransactionManager를 자동으로 만듬.
+
+
+
+### 기타
+
+약간 해깔리게 생각한 부분이 있음..
+
+```java
+  @Bean
+  ExponentialBackOffPolicy backOffPolicy() {
+    ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
+    backOffPolicy.setInitialInterval(1000); // 첫 번째 시도 지연 값 1초
+    backOffPolicy.setMultiplier(2); // 이후 시도할 때마다 재연이 얼마나 증가되는지 제어
+    backOffPolicy.setMaxInterval(10000); // 지연 간격 10초
+    // 최초는 1초만 기다리고, 두번째에는 10초, 새번째에는 증감값 고려해서 2배해서 20초 지연 감수 같음.
+    return backOffPolicy;
+  }
+```
+
+위 처럼 설정한 걸 마치 타임아웃 처럼 잘못생각했다.
+
+예외가 터지고나서 어느정도 지연시간후 재시도를 결정하는 것임. 
+
+어떤 Job 실행의 타임아웃이 아님..
+
+```
+10:54:08.151 [Test worker] INFO  org.fp024.study.spring5recipes.springbatch.config.DeadlockTestHelper - ### item: firstName_7
+10:54:11.157 [Test worker] INFO  org.fp024.study.spring5recipes.springbatch.config.DeadlockTestHelper - ### item: firstName_7
+10:54:17.166 [Test worker] INFO  org.fp024.study.spring5recipes.springbatch.config.DeadlockTestHelper - ### item: firstName_7
+```
+
+시간이 백오프 시간대로 늘어난게 보임.  
+
+첫번째로그가 첫 실패고...
+
+두번째로그가 `setInitialInterval(3000)`에 따라서 3초뒤에 수행됨.
+
+세번째 로그는 `setMultiplier(2)` 에 따라서 6초뒤에 수행됨.
+
+
 
 
 
