@@ -97,3 +97,5 @@ chap11\recipe-11-04
 chap11\recipe-11-05
 chap11\recipe-11-06-i
 chap11\recipe-11-06-ii
+chap11\recipe-11-06-iii
+chap11\recipe-11-07
