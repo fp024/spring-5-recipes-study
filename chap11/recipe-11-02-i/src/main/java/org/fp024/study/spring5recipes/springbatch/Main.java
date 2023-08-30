@@ -17,8 +17,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class Main {
   public static void main(String[] args)
-      throws JobExecutionAlreadyRunningException, JobRestartException,
-          JobInstanceAlreadyCompleteException, JobParametersInvalidException, InterruptedException {
+      throws JobExecutionAlreadyRunningException,
+          JobRestartException,
+          JobInstanceAlreadyCompleteException,
+          JobParametersInvalidException,
+          InterruptedException {
     try (AnnotationConfigApplicationContext context =
         new AnnotationConfigApplicationContext(BatchConfiguration.class)) {
 
@@ -31,11 +34,9 @@ public class Main {
 
       JobExecution jobExecution = jobLauncher.run(job, jobParameters);
 
-      BatchStatus batchStatus = jobExecution.getStatus();
       System.out.println("Before Still running...");
 
-      // 아래 코드가 왜 있는지 모르겠다. 여기까지라면 항상 끝난 상태였다.
-      while (batchStatus.isRunning()) {
+      while (jobExecution.getStatus().isRunning()) {
         System.out.println("Still running...");
         Thread.sleep(1000);
       }

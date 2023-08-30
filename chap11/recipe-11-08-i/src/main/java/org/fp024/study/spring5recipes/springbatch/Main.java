@@ -31,11 +31,14 @@ public class Main {
 
       System.out.println("Before Still running...");
 
+      // 아래 코드가 의미가 있는지 잘 몰랐는데...
+      // Job을 비동기로 실행하면 동작을 확인할 수 있다.
       while (jobExecution.getStatus().isRunning()) {
-        System.out.println("Still running...");
+        LOGGER.info(
+            "### 🤙🤙🤙 Still running...  🤙🤙🤙 {} ###",
+            jobExecution.getStatus().getBatchStatus());
         Thread.sleep(1000);
       }
-
       System.out.println("Exit status: " + jobExecution.getExitStatus().getExitCode());
 
       JobInstance jobInstance = jobExecution.getJobInstance();
