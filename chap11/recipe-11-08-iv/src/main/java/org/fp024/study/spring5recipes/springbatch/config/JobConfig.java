@@ -1,0 +1,55 @@
+package org.fp024.study.spring5recipes.springbatch.config;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Slf4j
+@RequiredArgsConstructor
+@Configuration
+public class JobConfig {
+  private final JobBuilderFactory jobs;
+
+  private final StepBuilderFactory steps;
+
+  @Bean
+  Job job1() {
+    return jobs //
+        .get("job1")
+        .start(step1())
+        .next(step2())
+        .build();
+  }
+
+  @Bean
+  Step step1() {
+    return steps
+        .get("step1") //
+        .tasklet(
+            (contribution, chunkContext) -> {
+              LOGGER.info("### ✨Step 1 ###");
+              Thread.sleep(1000);
+              return RepeatStatus.FINISHED;
+            })
+        .build();
+  }
+
+  @Bean
+  Step step2() {
+    return steps
+        .get("step2") //
+        .tasklet(
+            (contribution, chunkContext) -> {
+              LOGGER.info("### ✨Step 2 ###");
+              Thread.sleep(1000);
+              return RepeatStatus.FINISHED;
+            })
+        .build();
+  }
+}
