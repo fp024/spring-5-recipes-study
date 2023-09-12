@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %> 
-<%@ taglibprefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
   <head>
     <title><spring:message code="welcome.title" text="Welcome"/></title>
