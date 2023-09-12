@@ -1,6 +1,7 @@
 package org.fp024.study.spring5recipes.court.web;
 
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.fp024.study.spring5recipes.court.domain.Player;
 import org.fp024.study.spring5recipes.court.domain.Reservation;
 import org.fp024.study.spring5recipes.court.domain.ReservationValidator;
@@ -18,17 +19,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/reservationForm")
 @SessionAttributes("reservation")
 public class ReservationFormController {
   private final ReservationService reservationService;
   private final ReservationValidator validator;
-
-  public ReservationFormController(
-      ReservationService reservationService, ReservationValidator validator) {
-    this.reservationService = reservationService;
-    this.validator = validator;
-  }
 
   @ModelAttribute("sportTypes")
   public List<SportType> populateSportTypes() {
