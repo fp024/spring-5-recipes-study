@@ -78,7 +78,7 @@
 
 
 
-### 4. 상당히 짜증나는 문제. 😈
+### 4. 상당히 짜증나는 문제. 😈 => `해결됨`  🎉
 
 > 5.3.29의 문제인지는 모르겠으나.. @Bean으로 등록하면 StackOverflow오류가 발생하면서 빈생성이 실패함.
 
@@ -109,3 +109,7 @@ public class ExceptionHandlerConfiguration implements WebMvcConfigurer {
 이래서 부트를 써야하는게 맞는것 같다... ㅠㅠ 그냥 쓰면 뭔가 알 수 없는 문제가 너무 많이생김..😂
 
 정확히 책의 내용을 따랐는데도, 뭔가 알 수 없는 문제로 너무 막히면 오류가 어떻게 난다 정도만 적고 넘어가야겠다.
+
+> 해결되었다.. `@EnableWebMvc`를 붙여주면 `@Bean`으로 선언해도 문제없이 잘 동작하였음. 😅
+>
+> * 💡 `WebMvcConfigurer` 인터페이스를 구현한 설정 클래스에는 `@EnableWebMvc`를 꼭 붙여줘야하나봄.
