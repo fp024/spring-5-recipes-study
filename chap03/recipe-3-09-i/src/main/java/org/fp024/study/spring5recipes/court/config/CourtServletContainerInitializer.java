@@ -1,7 +1,5 @@
-package org.fp024.study.spring5recipes.court.web;
+package org.fp024.study.spring5recipes.court.config;
 
-import org.fp024.study.spring5recipes.court.config.CourtConfiguration;
-import org.fp024.study.spring5recipes.court.config.I18NConfiguration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class CourtServletContainerInitializer

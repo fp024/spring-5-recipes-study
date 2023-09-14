@@ -9,8 +9,10 @@
 </head>
 <body>
 <div class="card">
-  <div class="card-body alert alert-danger">
-    An error has occurred. Please contact our administrator for details.
+  <div class="card-body">
+    <div class="alert alert-danger">
+      An error has occurred. Please contact our administrator for details.
+    </div>
   </div>
 </div>
 </body>

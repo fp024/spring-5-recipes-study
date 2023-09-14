@@ -10,7 +10,10 @@ import org.fp024.study.spring5recipes.court.service.ReservationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,11 +46,9 @@ public class ReservationFormController {
 
   @PostMapping
   public String submitForm(
-      @ModelAttribute("reservation") Reservation reservation,
+      @ModelAttribute("reservation") @Validated Reservation reservation,
       BindingResult result,
       SessionStatus status) {
-
-    validator.validate(reservation, result);
 
     if (result.hasErrors()) {
       return "reservationForm";
@@ -57,5 +58,10 @@ public class ReservationFormController {
 
       return "redirect:reservationSuccess";
     }
+  }
+
+  @InitBinder
+  public void initBinder(WebDataBinder binder) {
+    binder.setValidator(validator);
   }
 }

@@ -31,11 +31,11 @@ public class ReservationValidator implements Validator {
     if (date != null) {
       if (date.getDayOfWeek() == DayOfWeek.SUNDAY) {
         if (hour < 8 || hour > 22) {
-          errors.reject("invalid.holidayHour", "Invalid holiday hour.");
+          errors.rejectValue("hour", "invalid.holidayHour", "Invalid holiday hour.");
         }
       } else {
         if (hour < 9 || hour > 21) {
-          errors.reject("invalid.weekdayHour", "Invalid weekday hour.");
+          errors.rejectValue("hour", "invalid.weekdayHour", "Invalid weekday hour.");
         }
       }
     }
