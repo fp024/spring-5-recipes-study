@@ -1,0 +1,37 @@
+plugins {
+  id 'war'
+  id "org.gretty" version "${grettyVersion}"
+  id "io.freefair.lombok" version "${lombokPluginVersion}"
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of("${javaVersion}")
+  }
+}
+
+apply from: "../../gradle/default-settings.gradle"
+
+dependencies {
+  implementation "org.springframework:spring-context:${springVersion}"
+  implementation "org.springframework:spring-webmvc:${springVersion}"
+  implementation "net.sargue:java-time-jsptags:${javaTimeJspTagsVersion}"
+
+  implementation "org.hibernate.validator:hibernate-validator:${hibernateValidatorVersion}"
+  testRuntimeOnly "org.glassfish:javax.el:${javaxElVersion}"
+
+  implementation "org.apache.poi:poi:${apachePoiVersion}"
+  implementation "org.apache.poi:poi-ooxml:${apachePoiVersion}" // xlsx로 사용하려면 이 라이브러리가 필요하다.
+  implementation "com.itextpdf:itextpdf:${itextPdfVersion}"
+
+  implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
+  implementation "org.webjars:bootstrap:${bootstrapVersion}"
+
+  runtimeOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"    
+  runtimeOnly "javax.servlet:jstl:${javaxJstlVersion}"
+
+  testImplementation "org.springframework:spring-test:${springVersion}"
+  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+}
+
+apply from: "../../gradle/gretty-settings.gradle"
