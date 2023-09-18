@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Reservation Form</title>
-  <link href="webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<c:url value="/webjars/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet">
   <style>
     .error {
       color: #ff0000;
