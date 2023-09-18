@@ -73,6 +73,7 @@ chap03\recipe-3-08-i
 chap03\recipe-3-08-iii
 chap03\recipe-3-09-i
 chap03\recipe-3-10
+chap03\recipe-3-11
 chap10
 chap10\recipe-10-01-i
 chap10\recipe-10-01-ii
