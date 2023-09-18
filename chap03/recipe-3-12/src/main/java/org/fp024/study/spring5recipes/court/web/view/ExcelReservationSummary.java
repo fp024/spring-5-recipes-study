@@ -9,10 +9,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.fp024.study.spring5recipes.court.domain.Reservation;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
-@Component
 public class ExcelReservationSummary extends AbstractXlsxView {
 
   @Override

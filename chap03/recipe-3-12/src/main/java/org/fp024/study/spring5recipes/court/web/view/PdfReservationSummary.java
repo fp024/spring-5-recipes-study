@@ -10,9 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.fp024.study.spring5recipes.court.domain.Reservation;
-import org.springframework.stereotype.Component;
 
-@Component
 public class PdfReservationSummary extends CustomAbstractPdfView {
 
   @Override

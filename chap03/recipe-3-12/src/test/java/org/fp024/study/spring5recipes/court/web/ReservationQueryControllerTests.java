@@ -5,7 +5,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.cookie;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -13,7 +12,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.fp024.study.spring5recipes.court.config.CourtConfiguration;
 import org.fp024.study.spring5recipes.court.service.ReservationService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
@@ -70,24 +68,5 @@ class ReservationQueryControllerTests {
         .andDo(print());
   }
 
-  @Disabled("지운상태임")
-  @Test
-  void testReservationSummary() throws Exception {
-    mockMvc
-        .perform(
-            get("/reservationSummary.html")
-                .servletPath(
-                    "/reservationSummary.html") // servletPath를 접근 URL과 동일하게 설정해줘야 헤더 검증이 제대로 된다.
-                .queryParam("date", "2023-01-01")
-                .header("Accept", "text/html"))
-        .andExpect(status().isOk())
-        .andExpect(model().attribute("reservations", hasSize(2)))
-        .andExpect(view().name("reservationSummaryView"))
-        .andExpect(
-            header()
-                .string(
-                    "Content-Disposition",
-                    "attachment; filename=ReservationSummary_2023_01_01.html"))
-        .andDo(print());
-  }
+
 }

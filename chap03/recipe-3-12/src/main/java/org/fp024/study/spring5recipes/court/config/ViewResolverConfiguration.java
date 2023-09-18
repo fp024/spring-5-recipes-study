@@ -3,19 +3,22 @@ package org.fp024.study.spring5recipes.court.config;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
+import org.fp024.study.spring5recipes.court.web.view.ExcelReservationSummary;
+import org.fp024.study.spring5recipes.court.web.view.PdfReservationSummary;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.http.MediaType;
 import org.springframework.web.accept.ContentNegotiationManager;
-import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 
 @Slf4j
 @EnableWebMvc
@@ -40,6 +43,23 @@ public class ViewResolverConfiguration implements WebMvcConfigurer {
     registry.addRedirectViewController("/", "/index.html");
   }
 
+  @Bean
+  View pdfReservationSummary() {
+    return new PdfReservationSummary();
+  }
+
+  @Bean
+  View excelReservationSummary() {
+    return new ExcelReservationSummary();
+  }
+
+  @Bean
+  BeanNameViewResolver beanNameViewResolver() {
+    BeanNameViewResolver viewResolver = new BeanNameViewResolver();
+    viewResolver.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    return viewResolver;
+  }
+
   @Override
   public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
     Map<String, MediaType> mediaTypes = new HashMap<>();
@@ -59,23 +79,7 @@ public class ViewResolverConfiguration implements WebMvcConfigurer {
     LOGGER.info("### {}", contentNegotiationManager.getMediaTypeMappings());
     ContentNegotiatingViewResolver viewResolver = new ContentNegotiatingViewResolver();
     viewResolver.setContentNegotiationManager(contentNegotiationManager);
-    return viewResolver;
-  }
-
-  @Bean
-  ViewResolver pdfViewResolver() {
-    ResourceBundleViewResolver viewResolver = new ResourceBundleViewResolver();
-    viewResolver.setOrder(1);
-    viewResolver.setBasename("court-view-pdf");
-    return viewResolver;
-  }
-
-  @Bean
-  ViewResolver excelViewResolver() {
-
-    ResourceBundleViewResolver viewResolver = new ResourceBundleViewResolver();
-    viewResolver.setOrder(2);
-    viewResolver.setBasename("court-view-excel");
+    viewResolver.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
     return viewResolver;
   }
 
@@ -84,7 +88,7 @@ public class ViewResolverConfiguration implements WebMvcConfigurer {
     InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
     viewResolver.setPrefix("/WEB-INF/jsp/");
     viewResolver.setSuffix(".jsp");
-    viewResolver.setOrder(3);
+    viewResolver.setOrder(Ordered.HIGHEST_PRECEDENCE + 2);
     return viewResolver;
   }
 }

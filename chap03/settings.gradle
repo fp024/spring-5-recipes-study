@@ -26,3 +26,5 @@ include 'recipe-3-09-i'
 // 'recipe-3-09-ii ~ iv'는 하지 않음, recipe-3-09-i에 모든 내용을 적용했다.
 include 'recipe-3-10'
 include 'recipe-3-11'
+include 'recipe-3-12'
+// 'recipe-3-13'은 역자님 저장소에는 있던데 12하고 별 차이가 없는 것 같음, 진행하지 않음.

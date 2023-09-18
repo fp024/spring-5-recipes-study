@@ -32,7 +32,7 @@ public class ViewResolverConfiguration implements WebMvcConfigurer {
   public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
     Map<String, MediaType> mediaTypes = new HashMap<>();
     mediaTypes.put("html", MediaType.TEXT_HTML);
-    mediaTypes.put("pdf", MediaType.valueOf("application/json"));
+    mediaTypes.put("pdf", MediaType.APPLICATION_PDF);
     mediaTypes.put("xls", MediaType.valueOf("application/vnd.ms-excel"));
     mediaTypes.put("xml", MediaType.APPLICATION_XML);
     mediaTypes.put("json", MediaType.APPLICATION_JSON);

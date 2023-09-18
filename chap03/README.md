@@ -8,7 +8,7 @@
 
 ## 진행간 이슈
 
-
+* 각 하위 프로젝트에 작성
 
 
 
@@ -17,3 +17,5 @@
 * p177
   * 소스와 본문 글 설명이 다름
     * 본문은 `@PathVariable("user") String user` 소스는 `@PathVariable("member") String member`
+
+* 각 하위 프로젝트에 작성...
