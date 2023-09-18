@@ -37,7 +37,7 @@ class ReservationFormControllerTests {
   @BeforeEach
   void setUp() {
     this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
-
+    httpSession.clearAttributes();
     service.resetData();
   }
 

@@ -37,7 +37,8 @@ class ReservationFormControllerTests {
   @BeforeEach
   void setUp() {
     this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
-
+    // 각 테스트마다 독립성을 위해 세션을 클리어해주자!
+    httpSession.clearAttributes();
     service.resetData();
   }
 
@@ -127,8 +128,7 @@ class ReservationFormControllerTests {
         .andExpect(status().isOk())
         .andExpect(cookie().value("language", "ko"))
         .andExpect(view().name("reservationForm"))
-        // `@NotEmpty`가 `@NotNull`를 포함한다. NotEmpty를 기입하면 NotNull은 추가해줄 필요가 없을 듯.
-        .andExpect(model().attributeHasFieldErrorCode("reservation", "courtName", "NotEmpty"))
+        .andExpect(model().attributeHasFieldErrorCode("reservation", "courtName", "NotNull"))
         .andExpect(model().attributeHasFieldErrorCode("reservation", "player.name", "NotEmpty"))
         .andDo(print());
   }
