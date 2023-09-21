@@ -1,30 +1,9 @@
 /******************************
- * 스프링 5 레시피 스터디 3장 *
+ * 스프링 5 레시피 스터디 4장 *
  ******************************/
 
-rootProject.name = 'spring-5-recipes-study-chap03'
+rootProject.name = 'spring-5-recipes-study-chap04'
 
-/* ===== Chapter 3 스프링 MVC ===== */
-include 'recipe-3-01-i'
-include 'recipe-3-01-ii'
-include 'recipe-3-01-iii'
-include 'recipe-3-01-iii-6x'
-include 'recipe-3-02-i'
-include 'recipe-3-03-i'
-// 'recipe-3-03-ii'는 하지 않음, recipe-3-03-i와 특별한 차이가 없음.
-include 'recipe-3-03-iii'
-include 'recipe-3-04-i'
-include 'recipe-3-05-i'
-include 'recipe-3-06-i'
-include 'recipe-3-06-ii'
-include 'recipe-3-06-iii'
-include 'recipe-3-07-i'
-include 'recipe-3-08-i'
-// 'recipe-3-08-ii'는 하지 않음, recipe-3-08-i에 ExceptionHandler 설정을 포함시켜서 할 필요가 없음.
-include 'recipe-3-08-iii'
-include 'recipe-3-09-i'
-// 'recipe-3-09-ii ~ iv'는 하지 않음, recipe-3-09-i에 모든 내용을 적용했다.
-include 'recipe-3-10'
-include 'recipe-3-11'
-include 'recipe-3-12'
-// 'recipe-3-13'은 역자님 저장소에는 있던데 12하고 별 차이가 없는 것 같음, 진행하지 않음.
+/* ===== Chapter 4 스프링 MVC ===== */
+include 'recipe-4-01-i'
+include 'recipe-4-01-ii'

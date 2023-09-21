@@ -3,7 +3,6 @@ package org.fp024.study.spring5recipes.court.web;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
 
@@ -30,12 +29,11 @@ class RestMemberControllerTests {
   }
 
   @Test
-  void testGetRestMembers() throws Exception {
+  void testGetRestMembersXML() throws Exception {
     mockMvc
-        .perform(get("/members")) //
+        .perform(get("/members.xml")) //
         .andExpect(status().isOk())
         .andDo(print())
-        .andExpect(model().attributeExists("members"))
         .andExpect(content().contentType(MediaType.APPLICATION_XML))
         .andExpect(xpath("/members/member[3]/name").string("Jane Doe"));
   }
