@@ -1,4 +1,4 @@
-## 레시피 4-01-ii REST 서비스로 XML 발행하기 (iii ~ iv 포함)
+## 레시피 4-01-ii REST 서비스로 XML 발행하기 (iii ~ v 포함)
 
 > ...
 >
@@ -47,17 +47,19 @@
 
 ## 기타
 
-### 4-01-iii 예제는 따로 안만들어도 되겠다.
+### 4-01-iii 예제 내용 추가 적용
 
 그냥 이 예제에서 `@RestController`로만 바꾼 내용이다.
 
 * 그에 따라 @ResponseBody를 따로 입력하지 않아도 됨.
 
-### 4-01-iv 예제도 따로 안만들어도 되겠다.
+### 4-01-iv 예제 내용 추가 적용
 
 * RestMemberController에 `@PathVariable`을 활용해만든 특정 회원 조회 API 하나만 추가된다.
 
+### 4-01-v 예제 내용 추가 적용
 
+* 컨트롤러 메서드 getMember()  에서 회원을 못찾았을 때, 404 코드로 ResponseEntity를 반환하는 내용이다.
 
 
 

@@ -32,8 +32,8 @@ class RestMemberControllerTests {
   void testGetRestMembers() throws Exception {
     mockMvc
         .perform(get("/members")) //
-        .andExpect(status().isOk())
         .andDo(print())
+        .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_XML))
         .andExpect(xpath("/members/member[3]/name").string("Jane Doe"));
   }
@@ -42,9 +42,17 @@ class RestMemberControllerTests {
   void testGetMember() throws Exception {
     mockMvc
         .perform(get("/member/%s".formatted("1"))) //
-        .andExpect(status().isOk())
         .andDo(print())
+        .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_XML))
         .andExpect(xpath("/member/name").string("Marten Deinum"));
+  }
+
+  @Test
+  void testGetMember_NotFound_Member() throws Exception {
+    mockMvc
+        .perform(get("/member/%s".formatted("5"))) //
+        .andDo(print())
+        .andExpect(status().isNotFound());
   }
 }
