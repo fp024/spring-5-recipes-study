@@ -1,0 +1,35 @@
+plugins {
+  id 'war'
+  id "org.gretty" version "${grettyVersion}"
+  id "io.freefair.lombok" version "${lombokPluginVersion}"
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of("${javaVersion}")
+  }
+}
+
+apply from: "../../gradle/default-settings.gradle"
+
+dependencies {
+  implementation "org.springframework:spring-context:${springVersion}"
+  implementation "org.springframework:spring-webmvc:${springVersion}"
+  implementation "org.springframework:spring-oxm:${springVersion}"
+
+  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+
+  implementation "javax.xml.bind:jaxb-api:${jaxbApiVersion}"
+  implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbRuntimeVersion}"
+
+  implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
+  implementation "org.webjars:bootstrap:${bootstrapVersion}"
+
+  runtimeOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
+  runtimeOnly "javax.servlet:jstl:${javaxJstlVersion}"
+
+  testImplementation "org.springframework:spring-test:${springVersion}"
+  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+}
+
+apply from: "../../gradle/gretty-settings.gradle"
