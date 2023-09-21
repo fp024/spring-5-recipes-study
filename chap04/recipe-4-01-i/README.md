@@ -49,23 +49,23 @@
   *  XML 응답 데이터
 
     ```xml
-    <members>
-        <member>
-            <email>marten@deinum.biz</email>
-            <name>Marten Deinum</name>
-            <phone>00-31-1234567890</phone>
-        </member>
-        <member>
-            <email>john@doe.com</email>
-            <name>John Doe</name>
-            <phone>1-800-800-800</phone>
-        </member>
-        <member>
-            <email>jane@doe.com</email>
-            <name>Jane Doe</name>
-            <phone>1-801-802-803</phone>
-        </member>
-    </members>
+        <members>
+            <member>
+                <email>marten@deinum.biz</email>
+                <name>Marten Deinum</name>
+                <phone>00-31-1234567890</phone>
+            </member>
+            <member>
+                <email>john@doe.com</email>
+                <name>John Doe</name>
+                <phone>1-800-800-800</phone>
+            </member>
+            <member>
+                <email>jane@doe.com</email>
+                <name>Jane Doe</name>
+                <phone>1-801-802-803</phone>
+            </member>
+        </members>
     ```
 
   * 검증

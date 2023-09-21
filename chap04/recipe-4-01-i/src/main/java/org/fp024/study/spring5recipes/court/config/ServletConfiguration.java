@@ -1,6 +1,6 @@
 package org.fp024.study.spring5recipes.court.config;
 
-import java.util.Collections;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.fp024.study.spring5recipes.court.domain.Member;
 import org.fp024.study.spring5recipes.court.domain.Members;
@@ -64,7 +64,7 @@ public class ServletConfiguration implements WebMvcConfigurer {
     Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
     marshaller.setClassesToBeBound(Members.class, Member.class);
     marshaller.setMarshallerProperties(
-        Collections.singletonMap(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE));
+        Map.of(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE));
     return marshaller;
   }
 }
