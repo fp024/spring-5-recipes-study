@@ -43,9 +43,9 @@ implementation "com.jayway.jsonpath:json-path:${jsonPathVersion}"
 
   
 
-* 검증 데이터
+* 테스트
 
-  ```json
+  ```java
     @Test
     void testGetRestMembers() throws Exception {
       mockMvc
