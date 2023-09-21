@@ -29,12 +29,22 @@ class RestMemberControllerTests {
   }
 
   @Test
-  void testGetRestMembersXML() throws Exception {
+  void testGetRestMembers() throws Exception {
     mockMvc
-        .perform(get("/members.xml")) //
+        .perform(get("/members")) //
         .andExpect(status().isOk())
         .andDo(print())
         .andExpect(content().contentType(MediaType.APPLICATION_XML))
         .andExpect(xpath("/members/member[3]/name").string("Jane Doe"));
+  }
+
+  @Test
+  void testGetMember() throws Exception {
+    mockMvc
+        .perform(get("/member/%s".formatted("1"))) //
+        .andExpect(status().isOk())
+        .andDo(print())
+        .andExpect(content().contentType(MediaType.APPLICATION_XML))
+        .andExpect(xpath("/member/name").string("Marten Deinum"));
   }
 }

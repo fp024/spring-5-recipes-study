@@ -1,4 +1,4 @@
-## 레시피 4-01-ii REST 서비스로 XML 발행하기
+## 레시피 4-01-ii REST 서비스로 XML 발행하기 (iii ~ iv 포함)
 
 > ...
 >
@@ -52,6 +52,12 @@
 그냥 이 예제에서 `@RestController`로만 바꾼 내용이다.
 
 * 그에 따라 @ResponseBody를 따로 입력하지 않아도 됨.
+
+### 4-01-iv 예제도 따로 안만들어도 되겠다.
+
+* RestMemberController에 `@PathVariable`을 활용해만든 특정 회원 조회 API 하나만 추가된다.
+
+
 
 
 
