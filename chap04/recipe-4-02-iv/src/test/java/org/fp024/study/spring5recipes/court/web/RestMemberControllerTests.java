@@ -55,4 +55,22 @@ class RestMemberControllerTests {
         .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.members[0].name").value("Marten Deinum"));
   }
+
+  @Test
+  void testGetMember() throws Exception {
+    mockMvc
+        .perform(get("/member/%s".formatted("1"))) //
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.name").value("Marten Deinum"));
+  }
+
+  @Test
+  void testGetMember_NotFound_Member() throws Exception {
+    mockMvc
+        .perform(get("/member/%s".formatted("5"))) //
+        .andDo(print())
+        .andExpect(status().isNotFound());
+  }
 }
