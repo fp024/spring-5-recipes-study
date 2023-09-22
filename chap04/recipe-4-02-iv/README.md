@@ -1,4 +1,4 @@
-## 레시피 4-02-iv REST 서비스로 JSON 발행하기 
+## 레시피 4-02-iv REST 서비스로 JSON 발행하기 (4-03-i ~ iii 내용 포함)
 
 > ...
 >
@@ -177,7 +177,17 @@ compileClasspath - Compile classpath for source set 'main'.
 
 ## 기타
 
-* ...
+### 💡 4-03-i ~ iii 예제 내용 포함
+
+저자님께서는 별도 프로젝트를 만들어서 main 메서드에서 RestTemplate을 호출하는 식으로 예제를 만드셨는데,
+
+나는 MockServer를 실행시켜서 그것에 대고 RestTemplate을 사용해서 호출하는 식으로 진행하였다.
+
+스프링 부트 환경이라면 서버를 랜덤 포트로 실행시켜서 테스트 할 수도 있지만, 이 프로젝트는 일반 Spring 프로젝트이니 이렇게 하였다. 
+
+진행을 해보니 RestTemplate을 사용해서 테스트 하는데 전혀 지장이 없었다.
+
+* [MockServerTests](src/test/java/org/fp024/study/spring5recipes/court/mockserver/MockServerTests.java)
 
 
 
@@ -185,9 +195,11 @@ compileClasspath - Compile classpath for source set 'main'.
 
 * p261의 members.json의 결과
 
+  `model.addAttribute("members", members);` 에다 설정을 해서 JsonView로 반환을 했다면 
+  아래 내용으로 출력이 되야하는게 맞긴하지만...
+  
   ```json
-  // model.addAttribute("members", members); 에다 설정을 해서 JsonView로 반환을 했다면 
-  // 아래 내용으로 출력이 되야하는게 맞긴하지만...
+  
   {
     "members" : {
       "members" : [ {
@@ -206,9 +218,10 @@ compileClasspath - Compile classpath for source set 'main'.
     }
   }
   ```
-
+  
+  261쪽에서는 @ResponseBody로 Members를 바로 반환했기 때문에 members가 한번만 감싸는 형태로 나타나야함.
+  
   ```json
-  // 261쪽에서는 @ResponseBody로 Members를 바로 반환했기 때문에 members가 한번만 감싸는 형태로 나타나야함.
   {
     "members": [
       {
@@ -229,6 +242,6 @@ compileClasspath - Compile classpath for source set 'main'.
     ]
   }
   ```
-
+  
   
 
