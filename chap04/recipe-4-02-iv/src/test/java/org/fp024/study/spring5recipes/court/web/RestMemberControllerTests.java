@@ -41,6 +41,10 @@ class RestMemberControllerTests {
         .andExpect(xpath("/members/member[3]/name").string("Jane Doe"));
   }
 
+  /*
+   Members를 바로 @ResponseBody로 리턴하기 때문에 members를 두번 깜싸는 모양이 나오질 않는다.
+   261쪽의 결과 모양이 잘못된 것 같다. members가 한번만 감싸는 모양이 되야함.
+  */
   @ParameterizedTest
   @ValueSource(strings = {"/members", "/members.json"})
   void testGetRestMembersJson(String url) throws Exception {
