@@ -13,3 +13,4 @@ include 'recipe-4-02-i'
 include 'recipe-4-02-iii'
 include 'recipe-4-02-iv'
 // 'recipe-4-03-i ~ iii' 는 만들지 않음. recipe-4-02-iv에 테스트 코드로서 내용 포함.
+include 'recipe-4-04'
