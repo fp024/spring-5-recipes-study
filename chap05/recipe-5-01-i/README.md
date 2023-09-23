@@ -1,4 +1,4 @@
-## 레시피 5-01-i 트롤러에서 TaskExecutor로 요청을 비동기 처리
+## 레시피 5-01-i 트롤러에서 TaskExecutor로 요청을 비동기 처리 (ii ~ iv 포함)
 
 > ...
 >
@@ -188,7 +188,16 @@ ing, Model)
 
 * ReservationQueryController#submitForm() 의 처리를 `CompletableFuture<T>` 로 전환
 * 커밋 로그
-  * ...
+  * https://github.com/fp024/spring-5-recipes-study/commit/73ec0b29192430ead6bfd3829c47dc1a2d33c7c1
+
+
+
+### 레시피 5-01-iv 내용 포함
+
+* ReservationQueryController#submitForm() 의 처리를 `ListenableFuture<T>` 로 전환
+  * 비동기 설정 클래스의 mvcTaskExecutor()의 반환 타입도 AsyncListenableTaskExecutor로 변경
+* 커밋 로그
+  * 
 
 
 
