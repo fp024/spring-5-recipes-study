@@ -197,7 +197,11 @@ ing, Model)
 * ReservationQueryController#submitForm() 의 처리를 `ListenableFuture<T>` 로 전환
   * 비동기 설정 클래스의 mvcTaskExecutor()의 반환 타입도 AsyncListenableTaskExecutor로 변경
 * 커밋 로그
-  * 
+  * https://github.com/fp024/spring-5-recipes-study/commit/1c71582942a8388c661ace13e47795ae5461b073
+
+
+
+그냥 쓰기에는 `Callable<T>`가 제일 편한 것 같긴한데...😅
 
 
 
