@@ -171,7 +171,9 @@ ing, Model)
 
 ## 기타
 
-* ...
+### 레시피 5-01-ii 내용 포함
+
+* ReservationQueryController#submitForm() 의 처리를 `DeferredResult<T>` 로 전환
 
 
 

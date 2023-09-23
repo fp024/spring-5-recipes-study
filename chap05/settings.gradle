@@ -6,3 +6,4 @@ rootProject.name = 'spring-5-recipes-study-chap05'
 
 /* ===== Chapter 5 스프링 MVC : 비동기 처리 ===== */
 include 'recipe-5-01-i'
+// 'recipe-5-01-ii' 는 i예제에 포함

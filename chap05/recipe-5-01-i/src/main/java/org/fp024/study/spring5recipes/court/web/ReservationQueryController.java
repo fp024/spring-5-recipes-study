@@ -1,17 +1,18 @@
 package org.fp024.study.spring5recipes.court.web;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 import lombok.RequiredArgsConstructor;
 import org.fp024.study.spring5recipes.court.domain.Reservation;
 import org.fp024.study.spring5recipes.court.service.ReservationService;
 import org.fp024.study.spring5recipes.court.util.SleepUtil;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.async.DeferredResult;
 
 @RequiredArgsConstructor
 @Controller
@@ -19,23 +20,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ReservationQueryController {
 
   private final ReservationService reservationService;
+  private final TaskExecutor taskExecutor;
 
   @GetMapping
   public void setupForm() {}
 
   @PostMapping
-  public Callable<String> submitForm(@RequestParam("courtName") String courtName, Model model) {
-    return () -> {
-      List<Reservation> reservations = java.util.Collections.emptyList();
+  public DeferredResult<String> submitForm(
+      @RequestParam("courtName") String courtName, Model model) {
+    final DeferredResult<String> result = new DeferredResult<>();
 
-      if (courtName != null) {
-        SleepUtil.delay(3000);
-        reservations = reservationService.query(courtName);
-      }
+    taskExecutor.execute(
+        () -> {
+          List<Reservation> reservations = java.util.Collections.emptyList();
 
-      model.addAttribute("reservations", reservations);
+          if (courtName != null) {
+            SleepUtil.delay(3000);
+            reservations = reservationService.query(courtName);
+          }
+          model.addAttribute("reservations", reservations);
+          result.setResult("reservationQuery");
+        });
 
-      return "reservationQuery";
-    };
+    return result;
   }
 }
