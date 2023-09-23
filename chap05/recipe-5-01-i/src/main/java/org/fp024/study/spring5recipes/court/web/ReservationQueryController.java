@@ -1,6 +1,7 @@
 package org.fp024.study.spring5recipes.court.web;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import lombok.RequiredArgsConstructor;
 import org.fp024.study.spring5recipes.court.domain.Reservation;
 import org.fp024.study.spring5recipes.court.service.ReservationService;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.async.DeferredResult;
 
 @RequiredArgsConstructor
 @Controller
@@ -26,11 +26,10 @@ public class ReservationQueryController {
   public void setupForm() {}
 
   @PostMapping
-  public DeferredResult<String> submitForm(
+  public CompletableFuture<String> submitForm(
       @RequestParam("courtName") String courtName, Model model) {
-    final DeferredResult<String> result = new DeferredResult<>();
 
-    taskExecutor.execute(
+    return CompletableFuture.supplyAsync(
         () -> {
           List<Reservation> reservations = java.util.Collections.emptyList();
 
@@ -39,9 +38,8 @@ public class ReservationQueryController {
             reservations = reservationService.query(courtName);
           }
           model.addAttribute("reservations", reservations);
-          result.setResult("reservationQuery");
-        });
-
-    return result;
+          return "reservationQuery";
+        },
+        taskExecutor);
   }
 }
