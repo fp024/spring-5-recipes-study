@@ -4,7 +4,7 @@
 
 rootProject.name = 'spring-5-recipes-study-chap04'
 
-/* ===== Chapter 4 스프링 MVC ===== */
+/* ===== Chapter 4 스프링 REST ===== */
 include 'recipe-4-01-i'
 include 'recipe-4-01-ii'
 // 'recipe-4-01-iii ~ v' 는 만들지 않음. ii에 내용 포함.
