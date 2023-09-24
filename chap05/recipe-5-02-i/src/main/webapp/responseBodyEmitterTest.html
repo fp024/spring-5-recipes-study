@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ResponseBodyEmitter 동작 테스트</title>
+  <link href="webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="card">
+  <div class="card-header">
+    <h2>ResponseBodyEmitter 동작 테스트</h2>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">응답 출력기 예제</h5>
+    <div class="btn-group mb-3">
+      <button class="btn btn-primary responseBodyEmitter">
+        <span role="status">ResponseBodyEmitter 사용 메서드 호출</span>
+        <span class="spinner-border spinner-border-sm d-none" aria-hidden="true"></span>
+      </button>
+    </div>
+    <div>
+      <textarea class="form-control responseBodyEmitterResult" style="height: 800px"
+                readonly></textarea>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelector(".responseBodyEmitter").addEventListener("click", function (e) {
+    e.preventDefault();
+    const button = this;
+    const spinner = button.querySelector('.spinner-border');
+    const resultArea = document.querySelector(".responseBodyEmitterResult");
+
+    spinner.classList.remove('d-none');
+    button.disabled = true;
+    resultArea.textContent = '';
+
+    fetch("/reservationQuery?courtName=" + encodeURIComponent("Tennis #1"), {
+      method: 'GET'
+    })
+    .then(response => response.text()) // 💡 response.json()으로 사용불가, 완전한 JSON 단위로 하나씩 전달받지 못함.
+    .then(reservations => {
+      resultArea.textContent += reservations;
+
+      spinner.classList.add('d-none');
+      button.disabled = false;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  })
+</script>
+</body>
+</html>
