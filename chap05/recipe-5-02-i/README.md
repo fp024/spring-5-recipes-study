@@ -45,7 +45,7 @@ Mvc 설정 클래스에서 스프링이 자동으로 설정한 Jackson 메시지
 
 ### 2. curl 호출
 
-`@GetMapping(params = "courtName")` 가 붙어있으므로 curl 호출에 courtName을 붙여서 호출하면 되는데...  윈도우에 기본 내장된 CURL로 하면 잘 안된다.
+`@GetMapping(params = "courtName")` 가 붙어있으므로 curl 호출에 courtName을 붙여서 호출하면 되는데...  윈도우에 기본 내장된 CURL로 하면 잘 안된다. 😅
 
 WSL의 Ubuntu에 포함된 curl로는 잘되는 것을 확인했다. 파라미터 값이 공백과 #이 들어가서 `--data-urlencode`  이 옵션을 붙여줘야함.
 
@@ -101,9 +101,44 @@ curl -G http://win-localhost:8080/reservationQuery --data-urlencode  courtName='
     }
   ```
 
-* 그러면 응답의 JSON 파싱은 하지말고 넘어오는 데이터를 `<textarea>`에 뿌리는 식으로 해보자!
+  - [x] 그러면 응답의 JSON 파싱은 하지말고 넘어오는 데이터를 `<textarea>`에 뿌리는 식으로 해보자!
 
 
+
+### 💡 불가능 할 줄 알았는데, 응답이 읽기 스트림이면 fatch에서 Reader를  얻어서 실시간으로 읽을 수 있음.
+
+* 빙과 https://stackoverflow.com/a/62123585 답변 참고
+
+```javascript
+
+   fetch("/reservationQuery?courtName=" + encodeURIComponent("Tennis #1"), {
+      method: 'GET'
+    })
+    .then(response => readAllChunks(response.body))
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+    // https://stackoverflow.com/a/62123585 답변 참고
+    async function readAllChunks(readableStream) {
+      const reader = readableStream.getReader();
+      const decoder = new TextDecoder();
+
+      let done, value;
+      while (!done) {
+        ({value, done} = await reader.read());
+        if (done) {
+          spinner.classList.add('d-none');
+          button.disabled = false;
+        }
+        resultArea.textContent += decoder.decode(value);
+      }
+    }
+```
+
+![image-20230925021018477](doc-resources/image-20230925021018477.png)
+
+* 호출 버튼 누르면 지연 시간 설정한 대로 Reservation JSON 청크 단위로 받아오는 것을 볼 수 있었다.
 
 
 

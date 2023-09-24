@@ -10,17 +10,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.api.Assertions;
 import org.fp024.study.spring5recipes.court.config.CourtConfiguration;
 import org.fp024.study.spring5recipes.court.service.ReservationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+@Slf4j
 @SpringJUnitWebConfig(classes = {CourtConfiguration.class})
 class ReservationQueryControllerTests {
   private MockMvc mockMvc;
@@ -66,5 +70,31 @@ class ReservationQueryControllerTests {
         .andExpect(model().attribute("reservations", hasSize(1)))
         .andExpect(view().name("reservationQuery"))
         .andDo(print());
+  }
+
+  // ResponseBodyEmitter 사용한 컨트롤러 메서드
+  @Test
+  void testFind() throws Exception {
+    MvcResult mvcResult =
+        mockMvc
+            .perform(
+                get("/reservationQuery/") //
+                    .queryParam("courtName", "Tennis #1")) //
+            .andDo(print())
+            .andExpect(status().is(HttpStatus.I_AM_A_TEAPOT.value()))
+            .andReturn();
+
+    mockMvc
+        .perform(asyncDispatch(mvcResult)) //
+        .andDo(print());
+
+    String responseBody = mvcResult.getResponse().getContentAsString();
+
+    // 첫번째 스트림 응답만 가져옴. 어쩔 수 없음. 😂
+    LOGGER.info("### responseBody: {}", responseBody);
+
+    Assertions.assertThat(responseBody) //
+        .isNotEmpty()
+        .doesNotHaveToString("Tennis #2");
   }
 }
