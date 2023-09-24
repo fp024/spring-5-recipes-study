@@ -150,7 +150,11 @@ curl -G http://win-localhost:8080/reservationQuery --data-urlencode  courtName='
 
 ## 기타
 
-* ...
+### 레시피 5-02-ii 예제 내용 포함
+
+* ResponseBodyEmitter를 ResponseEntity로 감싸서 사용자 정의 헤더, 상태코드 포함해서 반환한 내용
+
+
 
 
 
