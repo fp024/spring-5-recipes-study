@@ -42,17 +42,29 @@
     fetch("/reservationQuery?courtName=" + encodeURIComponent("Tennis #1"), {
       method: 'GET'
     })
-    .then(response => response.text()) // 💡 response.json()으로 사용불가, 완전한 JSON 단위로 하나씩 전달받지 못함.
-    .then(reservations => {
-      resultArea.textContent += reservations;
-
-      spinner.classList.add('d-none');
-      button.disabled = false;
-    })
+    .then(response => readAllChunks(response.body))
     .catch(error => {
       console.error('Error:', error);
     });
+
+    // https://stackoverflow.com/a/62123585 답변 참고
+    async function readAllChunks(readableStream) {
+      const reader = readableStream.getReader();
+      const decoder = new TextDecoder();
+
+      let done, value;
+      while (!done) {
+        ({value, done} = await reader.read());
+        if (done) {
+          spinner.classList.add('d-none');
+          button.disabled = false;
+        }
+        resultArea.textContent += decoder.decode(value);
+      }
+    }
   })
+
+
 </script>
 </body>
 </html>
