@@ -57,7 +57,9 @@ public class ReservationQueryController {
           try {
             for (Reservation reservation : reservations) {
               SleepUtil.delay(125);
-              emitter.send(reservation); // 도메인 단위로 보낸다.
+              // emitter.send(reservation); // 도메인 단위로 보낸다.
+              emitter.send(
+                  SseEmitter.event().id(String.valueOf(reservation.hashCode())).data(reservation));
             }
             emitter.complete();
           } catch (IOException e) {

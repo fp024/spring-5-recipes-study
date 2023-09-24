@@ -78,6 +78,20 @@ curl -v -G http://localhost:8080/reservationQuery --data-urlencode courtName="Te
 
 
 
+### 레시피 5-02-iv 예제 포함
+
+p293쪽에 SseEmitter의 이벤트에 더 많은 정보를 추가하려면.. 아래처럼 해야했다.
+
+```java
+emitter.send(SseEmitter.event().id(String.valueOf(reservation.hashCode())).data(reservation));
+```
+
+![image-20230925065332353](doc-resources/image-20230925065332353.png)
+
+id와 데이터로 나뉜것이 보인다.
+
+
+
 ## 정오표
 
 * ...
