@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SseEmitter 동작 테스트 (서버 콘솔 로그 확인필요!)</title>
+  <link href="webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="card">
+  <div class="card-header">
+    <h2>비동기 인터셉터 동작 테스트 (서버 콘솔 로그 확인필요!)</h2>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">응답 출력기 예제</h5>
+    <div class="btn-group mb-3">
+      <button class="btn btn-primary emitterBtn">
+        <span role="status">SseEmitter 사용 메서드 호출</span>
+        <span class="spinner-border spinner-border-sm d-none" aria-hidden="true"></span>
+      </button>
+    </div>
+    <div>
+      <textarea class="form-control emitterResult" style="height: 800px"
+                readonly></textarea>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelector(".emitterBtn").addEventListener("click", function (e) {
+    e.preventDefault();
+    const button = this;
+    const spinner = button.querySelector('.spinner-border');
+    const resultArea = document.querySelector(".emitterResult");
+
+    spinner.classList.remove('d-none');
+    button.disabled = true;
+    resultArea.textContent = '';
+
+    fetch("/reservationQuery?courtName=" + encodeURIComponent("Tennis #1"), {
+      method: 'GET'
+    })
+    .then(response => readAllChunks(response.body))
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+    // https://stackoverflow.com/a/62123585 답변 참고
+    async function readAllChunks(readableStream) {
+      const reader = readableStream.getReader();
+      const decoder = new TextDecoder();
+
+      let done, value;
+      while (!done) {
+        ({value, done} = await reader.read());
+        if (done) {
+          spinner.classList.add('d-none');
+          button.disabled = false;
+        }
+        resultArea.textContent += decoder.decode(value);
+      }
+    }
+  })
+
+
+</script>
+</body>
+</html>

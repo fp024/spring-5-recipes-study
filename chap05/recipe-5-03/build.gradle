@@ -1,0 +1,38 @@
+plugins {
+  id 'war'
+  id "org.gretty" version "${grettyVersion}"
+  id "io.freefair.lombok" version "${lombokPluginVersion}"
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of("${javaVersion}")
+  }
+}
+
+apply from: "../../gradle/default-settings.gradle"
+
+dependencies {
+  implementation "org.springframework:spring-context:${springVersion}"
+  implementation "org.springframework:spring-webmvc:${springVersion}"
+
+  implementation "org.hibernate.validator:hibernate-validator:${hibernateValidatorVersion}"
+  testRuntimeOnly "org.glassfish:javax.el:${javaxElVersion}"
+
+  implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
+  implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
+
+  implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
+  implementation "org.webjars:bootstrap:${bootstrapVersion}"
+
+  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+  runtimeOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
+  runtimeOnly "javax.servlet:jstl:${javaxJstlVersion}"
+  implementation "net.sargue:java-time-jsptags:${javaTimeJspTagsVersion}"
+
+  testImplementation "org.springframework:spring-webflux:${springVersion}"
+  testImplementation "org.springframework:spring-test:${springVersion}"
+  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+}
+
+apply from: "../../gradle/gretty-settings.gradle"
