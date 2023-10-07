@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.cookie;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -88,7 +88,8 @@ class ReservationFormControllerTests {
     mockMvc
         .perform(asyncDispatch(mvcResult))
         .andExpect(status().isFound())
-        .andExpect(redirectedUrl("reservationSuccess"))
+        // 인터셉터에서 modelAndView에 설정한 속성이 URL에 남는듯.
+        .andExpect(redirectedUrlPattern("reservationSuccess?handlingTime=*"))
         .andDo(print());
     // 이후 Aync 처리가 되면 이때 리다이렉트 함.
 
