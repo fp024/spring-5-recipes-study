@@ -87,6 +87,7 @@ chap05\recipe-5-01-i
 chap05\recipe-5-02-i
 chap05\recipe-5-02-iii
 chap05\recipe-5-03
+chap05\recipe-5-04-i
 chap10
 chap10\recipe-10-01-i
 chap10\recipe-10-01-ii
