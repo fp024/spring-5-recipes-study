@@ -113,7 +113,7 @@ java.lang.IllegalStateException: Message will not be sent because the WebSocket 
 
 ## JavaDocs
 
-```
+```java
   public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
     configurer.enable();
   }
