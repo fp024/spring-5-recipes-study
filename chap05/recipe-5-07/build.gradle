@@ -1,0 +1,45 @@
+plugins {
+  id 'application'
+  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  id 'war'
+  id "org.gretty" version "${grettyVersion}"
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of("${javaVersion}")
+  }
+}
+
+apply from: "../../gradle/default-settings.gradle"
+
+dependencies {
+  implementation "org.springframework:spring-context:${springVersion}"
+  implementation "org.springframework:spring-webmvc:${springVersion}"
+  implementation "org.springframework:spring-webflux:${springVersion}"
+  
+  implementation "io.projectreactor:reactor-core:${reactorCoreVersion}"
+  implementation "io.projectreactor.netty:reactor-netty:${reactorNettyVersion}"
+
+  implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
+  implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
+
+  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+
+  implementation "org.thymeleaf:thymeleaf-spring5:${thymeleafSpring5Version}"
+  implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:${thymeleafExtrasJava8timeVersion}"
+
+  implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
+  implementation "org.webjars:bootstrap:${bootstrapVersion}"
+
+  implementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
+  
+  testImplementation "org.springframework:spring-test:${springVersion}"
+  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+}
+
+application {
+  mainClass = 'org.fp024.study.spring5recipes.reactive.court.ReactorNettyBootstrap'
+}
+
+apply from: "../../gradle/gretty-settings.gradle"
