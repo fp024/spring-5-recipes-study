@@ -19,6 +19,7 @@ dependencies {
   implementation "org.springframework:spring-webflux:${springVersion}"
   
   implementation "io.projectreactor:reactor-core:${reactorCoreVersion}"
+  testImplementation "io.projectreactor:reactor-test:${reactorCoreVersion}"
   implementation "io.projectreactor.netty:reactor-netty:${reactorNettyVersion}"
 
   implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
