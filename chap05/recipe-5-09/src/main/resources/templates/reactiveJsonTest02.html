@@ -44,7 +44,7 @@
       body: JSON.stringify({courtName: 'Tennis #1'}),
       headers: {
         "Content-Type": "application/json",
-        "Accept": "text/event-stream"
+        "Accept": "application/x-ndjson"
       }
     })
     .then(response => readAllChunks(response.body))

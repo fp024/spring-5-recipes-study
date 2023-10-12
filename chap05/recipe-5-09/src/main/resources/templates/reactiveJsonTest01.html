@@ -42,7 +42,7 @@
     fetch("/reservations", {
       method: 'GET',
       headers: {
-        Accept: 'text/event-stream'
+        Accept: 'application/x-ndjson'
       }
     })
     .then(response => readAllChunks(response.body))
