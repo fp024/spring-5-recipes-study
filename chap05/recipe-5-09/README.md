@@ -68,6 +68,29 @@
 
 * 드디어 5장을 다보았다. 👍 그래도 예제를 다 돌려봤다..  후반부에는 테스트 코드를 거의 안만들었는데, 이부분은 좀더 이해가 된 뒤에 만들어야겠다. 😅
 
+  * 그런데 좀 테스트를 만들었다.
+
+    ```java
+    @SpringJUnitWebConfig(classes = {WebFluxConfiguration.class})
+    class ReservationRestControllerTests {
+      @Autowired private WebApplicationContext wac;
+    
+      private WebTestClient client;
+    
+      @Autowired private ObjectMapper objectMapper;
+    
+      @BeforeEach
+      void setUp() {
+        // client = MockMvcWebTestClient.bindToApplicationContext(this.wac).build(); // 😈 잘못됨
+        client = WebTestClient.bindToApplicationContext(wac).build();
+      }
+      ...
+    }
+    ```
+
+    먼저 한게 Mvc테스트 기준으로 설정해서 WebTestClient가 이상하게 동작한 것이였음. ㅠㅠ 위처럼 했을 때 잘됨.
+
+
 
 
 
