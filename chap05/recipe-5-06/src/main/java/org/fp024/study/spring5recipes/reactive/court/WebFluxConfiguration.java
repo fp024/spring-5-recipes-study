@@ -1,9 +1,15 @@
 package org.fp024.study.spring5recipes.reactive.court;
 
 import java.nio.charset.StandardCharsets;
+import lombok.RequiredArgsConstructor;
+import org.fp024.study.spring5recipes.reactive.court.domain.SportTypeConverter;
+import org.fp024.study.spring5recipes.reactive.court.service.ReservationService;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.reactive.config.EnableWebFlux;
 import org.springframework.web.reactive.config.ResourceHandlerRegistry;
 import org.springframework.web.reactive.config.ViewResolverRegistry;
@@ -18,7 +24,10 @@ import org.thymeleaf.templatemode.TemplateMode;
 @EnableWebFlux
 @ComponentScan
 @Configuration
+@RequiredArgsConstructor
 public class WebFluxConfiguration implements WebFluxConfigurer {
+
+  private final ReservationService reservationService;
 
   @Bean
   SpringResourceTemplateResolver thymeleafTemplateResolver() {
@@ -26,8 +35,8 @@ public class WebFluxConfiguration implements WebFluxConfigurer {
     final SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
     resolver.setPrefix("classpath:/templates/");
     resolver.setSuffix(".html");
-    resolver.setTemplateMode(TemplateMode.HTML);
     resolver.setCharacterEncoding(StandardCharsets.UTF_8.name());
+    resolver.setTemplateMode(TemplateMode.HTML);
     return resolver;
   }
 
@@ -73,5 +82,18 @@ public class WebFluxConfiguration implements WebFluxConfigurer {
     registry
         .addResourceHandler("/{filename:\\w+\\.html}", "/{filename:favicon\\.ico}") //
         .addResourceLocations("/statics/");
+  }
+
+  @Override
+  public void addFormatters(FormatterRegistry registry) {
+    registry.addConverter(new SportTypeConverter(reservationService));
+  }
+
+  @Bean
+  MessageSource messageSource() {
+    ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+    messageSource.setBasename("messages");
+    messageSource.setDefaultEncoding(StandardCharsets.UTF_8.name());
+    return messageSource;
   }
 }
