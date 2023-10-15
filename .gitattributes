@@ -6,6 +6,3 @@
 
 # These are Windows script files and should use crlf
 *.bat           text eol=crlf
-
-*-lfs.sql filter=lfs diff=lfs merge=lfs -text
-*-lfs.csv filter=lfs diff=lfs merge=lfs -text
