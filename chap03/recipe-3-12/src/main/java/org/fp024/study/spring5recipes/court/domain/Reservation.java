@@ -21,8 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Reservation {
-  @NotNull
-  @NotEmpty(message = "{required.courtName}")
+  @NotNull(message = "{required.courtName}")
   @Size(min = 4, max = 20)
   private String courtName;
 

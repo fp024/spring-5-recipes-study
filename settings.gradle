@@ -107,6 +107,20 @@ include 'chap04:recipe-4-04'
 
 
 /* ===== Chapter 5 스프링 MVC : 비동기 처리 ===== */
+include 'chap05:recipe-5-01-i'
+// 'recipe-5-01-ii ~ iv' 는 i 예제에 포함 - 커밋 로그 참조
+include 'chap05:recipe-5-02-i'
+// 'recipe-5-02-ii' 는 i 예제에 포함
+include 'chap05:recipe-5-02-iii'
+// 'recipe-5-02-iv'는 iii 예제에 포함
+include 'chap05:recipe-5-03'
+include 'chap05:recipe-5-04-i'
+include 'chap05:recipe-5-04-ii'
+include 'chap05:recipe-5-05'
+include 'chap05:recipe-5-06'
+include 'chap05:recipe-5-07'
+include 'chap05:recipe-5-08'
+include 'chap05:recipe-5-09'
 
 
 

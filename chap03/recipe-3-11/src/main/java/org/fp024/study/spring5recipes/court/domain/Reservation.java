@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -21,8 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Reservation {
-  @NotNull
-  @NotEmpty(message = "{required.courtName}")
+  @NotNull(message = "{required.courtName}")
   @Size(min = 4, max = 20)
   private String courtName;
 
