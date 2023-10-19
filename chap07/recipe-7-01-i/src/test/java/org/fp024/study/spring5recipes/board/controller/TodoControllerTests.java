@@ -57,7 +57,12 @@ class TodoControllerTests {
   @Test
   void newMessage() throws Exception {
     mockMvc
-        .perform(post("/todos").param("description", "7장 예제 빨리하자! 😅").param("completed", "off"))
+        .perform(
+            post("/todos") //
+                .param("description", "7장 예제 빨리하자! 😅")
+            // .param("completed", "off") // 체크가 안되어있으면 파라미터 자체가 전달이 안됨.
+            // 체크가 된 경우는 별도 value 값이 설정되지 않았다면 "on" 전달
+            )
         .andDo(print())
         .andExpect(status().isFound())
         .andExpect(model().attributeExists("todo"))
