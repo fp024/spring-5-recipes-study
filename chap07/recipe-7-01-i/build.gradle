@@ -1,0 +1,47 @@
+plugins {
+  id 'application'
+  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  id 'war'
+  id "org.gretty" version "${grettyVersion}"
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of("${javaVersion}")
+  }
+}
+
+apply from: "../../gradle/default-settings.gradle"
+
+dependencies {
+  implementation "org.springframework:spring-context:${springVersion}"
+  implementation "org.springframework:spring-webmvc:${springVersion}"
+  implementation "org.springframework:spring-jdbc:${springVersion}"
+
+  runtimeOnly "org.hsqldb:hsqldb:${hsqldbVersion}"
+
+  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+
+  implementation "org.hibernate.validator:hibernate-validator:${hibernateValidatorVersion}"
+  testRuntimeOnly "org.glassfish:javax.el:${javaxElVersion}"
+
+  implementation "org.thymeleaf:thymeleaf-spring5:${thymeleafSpring5Version}"
+  implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:${thymeleafExtrasJava8timeVersion}"
+
+  implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
+  implementation "org.webjars:bootstrap:${bootstrapVersion}"
+  implementation "org.webjars:Semantic-UI:${semanticUiVersion}"
+
+  implementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
+
+  testImplementation "org.springframework:spring-test:${springVersion}"
+  // 테스트 환경에서 WebTestClient를 사용하려면 spring-webflux를 추가해줘야함.
+  testImplementation "org.springframework:spring-webflux:${springVersion}"
+  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+}
+
+application {
+  mainClass = 'org.fp024.study.spring5recipes.reactive.court.ReactorNettyBootstrap'
+}
+
+apply from: "../../gradle/gretty-settings.gradle"
