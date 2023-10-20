@@ -48,12 +48,8 @@ public class TodoWebConfig implements WebMvcConfigurer {
         .resourceChain(false);
 
     registry
-        .addResourceHandler("/resources/**") //
-        .addResourceLocations("/statics/resources/");
-
-    registry
-        .addResourceHandler("/{filename:\\w+\\.html}", "/{filename:favicon\\.ico}") //
-        .addResourceLocations("/statics/");
+        .addResourceHandler("/*.html", "/favicon.ico") //
+        .addResourceLocations("classpath:/statics/");
   }
 
   @Bean
