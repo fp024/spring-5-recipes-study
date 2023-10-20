@@ -1,6 +1,8 @@
 ## 레시피 7-01-iii URL 접근 보안하기 - 유저 추가, URL 접근 보안 설정
 
 > 7-01-ii와 비교해서, 로그인 유저를 추가하고 URL 접근 보안을 설정했다.
+>
+> * 레시피 7-01-iv내용도 포함 - CSRF 관련 내용
 
 ### 이번 레시피에서 확인해야할  내용
 
@@ -33,9 +35,24 @@
 
 ## 기타
 
-- ...
+#### 레시피 7-01-iv내용 포함 - CSRF 공격 방어
 
+* 7-01-iii 프로젝트에서 CSRF 설정을 기본 설정으로 활성화 하고 있는 상태였기 때문에 이미 사용중이였다.
 
+* HttpSessionCsrfTokenRepository를 수동 설정하는 예시가 있는데, 기본으로 쓰면 HttpSessionCsrfTokenRepository로 쓰는 것 같다.
+
+  ```java
+  // CsrfConfigurer 클래스 내용
+  private CsrfTokenRepository csrfTokenRepository = new LazyCsrfTokenRepository(new HttpSessionCsrfTokenRepository());
+  ```
+
+* Thymeleaf 환경의 form에서도 _csrf hidden 필드를 자동으로 넣어주는 모습이 보였다.
+
+  ![image-20231021054109968](doc-resources/image-20231021054109968.png)
+
+  
+
+  
 
 ## 정오표
 

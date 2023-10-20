@@ -25,7 +25,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 @SpringJUnitWebConfig(classes = {TodoWebConfig.class, TodoSecurityConfig.class})
-@WithMockUser("user00")
+@WithMockUser(
+    value = "user00",
+    authorities = {"USER"})
 class TodoControllerTests {
 
   private MockMvc mockMvc;
@@ -92,6 +94,9 @@ class TodoControllerTests {
 
   @Transactional
   @Test
+  @WithMockUser(
+      value = "admin00",
+      authorities = {"ADMIN"})
   void delete() throws Exception {
     mockMvc
         .perform(

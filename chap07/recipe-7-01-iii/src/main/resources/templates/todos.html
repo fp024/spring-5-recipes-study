@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="utf-8">
   <title>To-do List</title>
@@ -9,7 +11,12 @@
 
 <body>
 <div class="ui container">
-  <h4 th:text="|To-dos for ${principal_name}|"></h4>
+  <th:block sec:authorize="isAuthenticated()">
+    <h4 th:text="|To-dos for ${#authentication.name}|"></h4>
+  </th:block>
+  <th:block sec:authorize="isAnonymous()">
+    <a class="btn btn-outline-light" th:href="@{/login}">login</a>
+  </th:block>
   <table class="ui celled table">
     <thead>
     <tr>

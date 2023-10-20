@@ -29,11 +29,6 @@ public class TodoController {
   public String list(Model model) {
     List<Todo> todos = todoService.listTodos();
     model.addAttribute("todos", todos);
-    // TODO: 💡 JSP라면 principal.name 일 때.. principal가 null이면 무시해버리는데. thymeleaf에서는 에러로 여긴다.
-    //  인증 관련을 Spring Security로 바꾸면 아래와 같은 임시 코드는 다 지우면 된다.
-    if (!todos.isEmpty()) {
-      model.addAttribute("principal_name", todos.get(0).getOwner());
-    }
     return "todos";
   }
 

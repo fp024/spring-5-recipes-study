@@ -8,3 +8,4 @@ rootProject.name = 'spring-5-recipes-study-chap07'
 include 'recipe-7-01-i'
 include 'recipe-7-01-ii'
 include 'recipe-7-01-iii'
+// 'recipe-7-01-iv'는 recipe-7-01-iii 에 내용 포함.
