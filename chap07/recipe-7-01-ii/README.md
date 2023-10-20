@@ -26,21 +26,29 @@
 
 ## 의견
 
-#### p386 Note에서 `AbstractAnnotationConfigDispatcherServletInitializer`를 상속한 클래스가 있으면 시동중 예외가 발생한다고 하였는데, 예외는 발생하지 않는다.
+#### p386 Note에서 `AbstractAnnotationConfigDispatcherServletInitializer`를 상속한 클래스가 있으면 여기에 보안 설정 클래스를 추가해야 시동중 예외가 발생한다고 하였는데, 다음과 같은 상태에서 실행중 예외는 발생하지 않는다.
 
 ```java
 // AbstractAnnotationConfigDispatcherServletInitializer를 상속한 TodoWebInitializer 가 프로젝트에 있음
 public class TodoWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-  ...
+  //...
+  @Override
+  protected Class<?>[] getServletConfigClasses() {
+    return new Class<?>[]{TodoWebConfig.class};
+  }
+  //...
 }
 
 
 // 아래 클래스를 동시에 구성해도 실행중 오류는 발생하지 않는다.
 public class TodoSecurityInitializer extends AbstractSecurityWebApplicationInitializer {
-  ...
+  public TodoSecurityInitializer() {
+    super(TodoSecurityConfig.class);
+  }
 }
 ```
 
+😅 그런데 저자님 예제 소스도 위처럼 되어있음.
 
 
 #### 시큐리티 설정 클래스에서 이제는 WebSecurityConfigurerAdapter를 상속 받을 필요가 없다.
