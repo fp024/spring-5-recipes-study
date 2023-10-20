@@ -3,19 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>💡 레시피 7-01-i URL 접근 보안하기 (아직 보안이 적용되지 않음)</title>
+  <title>💡 레시피 7-01-ii URL 접근 보안하기 (기본 보안상태)</title>
   <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
 
 <div class="card">
   <div class="card-header">
-    <h2>레시피 7-01-i URL 접근 보안하기 (아직 보안이 적용되지 않음) : 테스트 URL</h2>
+    <h2>레시피 7-01-ii URL 접근 보안하기 (기본 보안상태) : 테스트 URL</h2>
   </div>
   <div class="card-body">
-    <h5 class="card-title">레시피 7-01-i URL 접근 보안하기 동작 테스트</h5>
+    <h5 class="card-title">레시피 7-01-ii URL 접근 보안하기 동작 테스트</h5>
+    <div class="alert alert-primary" role="alert">
+      허용 URL 설정이 없는 상태이기 때문에, 사용자 인증을 위해 모든 경로에 대해 로그인을 요구함.
+      그런데 User 설정이 안되어있어서 이 페이지조차도 볼 수가 없을 것임.. 😅
+    </div>
     <ul>
-      <li><a th:href="@{/todos}">(✨ 예제 주제) 보안이 적용되지 않은 Todo 메인 페이지</a></li>
+      <li><a th:href="@{/todos}">(✨ 예제 주제) 기본 보안 상태의 Todo 메인 페이지</a></li>
     </ul>
   </div>
 </div>

@@ -97,6 +97,7 @@ chap05\recipe-5-09
 chap07
 chap07\recipe-7-01-i
 chap07\recipe-7-01-ii
+chap07\recipe-7-01-iii
 chap10
 chap10\recipe-10-01-i
 chap10\recipe-10-01-ii
