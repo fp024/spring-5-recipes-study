@@ -26,7 +26,7 @@
 
 ## 의견
 
-#### HiddenHttpMethodFilter는 왜쓸까 했더니..?
+### HiddenHttpMethodFilter는 왜쓸까 했더니..?
 
 * Form 제출을 할 때, _method Hidden 폼으로 GET, POST 이외의 요청을 하기 위해서 추가 필터 설정
   * 예제가 Todo 완료 처리 (PUT), Todo 삭제처리 (DELETE) 로 되어있는데, form전송을 하고 있음.

@@ -1,0 +1,21 @@
+/******************************
+ * 스프링 5 레시피 스터디 5장 *
+ ******************************/
+
+rootProject.name = 'spring-5-recipes-study-chap05'
+
+/* ===== Chapter 5 스프링 MVC : 비동기 처리 ===== */
+include 'recipe-5-01-i'
+// 'recipe-5-01-ii ~ iv' 는 i 예제에 포함 - 커밋 로그 참조
+include 'recipe-5-02-i'
+// 'recipe-5-02-ii' 는 i 예제에 포함
+include 'recipe-5-02-iii'
+// 'recipe-5-02-iv'는 iii 예제에 포함
+include 'recipe-5-03'
+include 'recipe-5-04-i'
+include 'recipe-5-04-ii'
+include 'recipe-5-05'
+include 'recipe-5-06'
+include 'recipe-5-07'
+include 'recipe-5-08'
+include 'recipe-5-09'
