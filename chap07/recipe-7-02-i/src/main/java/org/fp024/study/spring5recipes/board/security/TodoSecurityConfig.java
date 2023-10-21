@@ -70,6 +70,7 @@ public class TodoSecurityConfig {
                     .loginProcessingUrl("/login")
                     .defaultSuccessUrl("/todos")
                     .failureUrl("/login?error=true"))
+        .rememberMe(withDefaults())
         .logout(configurer -> configurer.logoutSuccessUrl("/logout-success"))
         .httpBasic(withDefaults())
         .anonymous(
