@@ -13,12 +13,17 @@
 <div class="ui container">
   <div class="ui inverted menu">
     <a class="item" th:href="@{/todos}">To-dos</a>
-    <div class="right menu">
+    <div class="right menu" sec:authorize="isAuthenticated()">
       <div class="item">
         <form th:action="@{/logout}" method="post">
-          <!--/* 스프링이 csrf hidden 필드를 자동으로 붙여줬다. */-->
-          <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
           <button class="ui small red basic compact button">Logout</button>
+        </form>
+      </div>
+    </div>
+    <div class="right menu" sec:authorize="isAnonymous()">
+      <div class="item">
+        <form th:action="@{/login}" method="get">
+          <button class="ui small red basic compact button">Login</button>
         </form>
       </div>
     </div>
@@ -28,7 +33,7 @@
     <h4 th:text="|To-dos for ${#authentication.name}|"></h4>
   </th:block>
   <th:block sec:authorize="isAnonymous()">
-    <a class="btn btn-outline-light" th:href="@{/login}">login</a>
+    <h4>Anonymous User</h4>
   </th:block>
   <table class="ui celled table">
     <thead>

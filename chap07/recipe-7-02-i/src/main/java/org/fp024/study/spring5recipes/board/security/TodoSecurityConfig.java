@@ -46,23 +46,24 @@ public class TodoSecurityConfig {
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests(
-        (authz) ->
-            authz
-                .requestMatchers(
-                    antMatcher("/webjars/**"), //
-                    antMatcher("/resources/**"), //
-                    antMatcher("/login"), //
-                    antMatcher("/logout-success"), //
-                    antMatcher("/"),
-                    antMatcher("/index"),
-                    antMatcher("/favicon.ico"))
-                .permitAll()
-                .requestMatchers(antMatcher(HttpMethod.DELETE, "/todos/*"))
-                .hasAuthority("ADMIN")
-                .anyRequest()
-                .authenticated());
-
-    http.formLogin(
+            (authz) ->
+                authz
+                    .requestMatchers(
+                        antMatcher("/webjars/**"), //
+                        antMatcher("/resources/**"), //
+                        antMatcher("/login"), //
+                        antMatcher("/logout-success"), //
+                        antMatcher("/"),
+                        antMatcher("/index"),
+                        antMatcher("/favicon.ico"))
+                    .permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.GET, "/todos"))
+                    .hasAnyAuthority("ROLE_GUEST", "USER", "ADMIN")
+                    .requestMatchers(antMatcher(HttpMethod.DELETE, "/todos/*"))
+                    .hasAuthority("ADMIN")
+                    .anyRequest()
+                    .authenticated())
+        .formLogin(
             configurer ->
                 configurer
                     .loginPage("/login") //
@@ -70,7 +71,12 @@ public class TodoSecurityConfig {
                     .defaultSuccessUrl("/todos")
                     .failureUrl("/login?error=true"))
         .logout(configurer -> configurer.logoutSuccessUrl("/logout-success"))
-        .httpBasic(withDefaults());
+        .httpBasic(withDefaults())
+        .anonymous(
+            configurer ->
+                configurer
+                    .principal("guest") //
+                    .authorities("ROLE_GUEST"));
 
     return http.build();
   }

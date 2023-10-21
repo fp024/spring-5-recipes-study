@@ -171,6 +171,29 @@ form 테그에 Thymeleaf 처리 속성(`th:`)을 하나라도 넣었다면, `_cs
 
 
 
+### 익명 로그인 구현하기
+
+Thymeleaf의 스프링 시큐리티 확장 테그로 로그인 사용자와 익명사용자를 구분해서 출력하게 했다.
+
+```html
+  <th:block sec:authorize="isAuthenticated()">
+    <h4 th:text="|To-dos for ${#authentication.name}|"></h4>
+  </th:block>
+  <th:block sec:authorize="isAnonymous()">
+    <h4>Anonymous User</h4>
+  </th:block>
+```
+
+* `http://localhost:8080/todos`로 접근 했을 때는 바로 익명 사용자도 접근 가능하게 처리
+
+  ```java
+                      .requestMatchers(antMatcher(HttpMethod.GET, "/todos"))
+                      .hasAnyAuthority("ROLE_GUEST", "USER", "ADMIN")
+  ```
+
+  * 그런데 Todo List라 List가 항상 일반 유저만 로그인해서 봐야하는 것이 맞긴함.
+  * 아직은 DB에 있는 모든 유저의 목록을 출력해주고 있음.😅
+
 
 
 
