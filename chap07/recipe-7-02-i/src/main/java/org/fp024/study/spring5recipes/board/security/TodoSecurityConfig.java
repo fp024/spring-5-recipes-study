@@ -52,6 +52,7 @@ public class TodoSecurityConfig {
                     antMatcher("/webjars/**"), //
                     antMatcher("/resources/**"), //
                     antMatcher("/login"), //
+                    antMatcher("/logout-success"), //
                     antMatcher("/"),
                     antMatcher("/index"),
                     antMatcher("/favicon.ico"))
@@ -68,6 +69,7 @@ public class TodoSecurityConfig {
                     .loginProcessingUrl("/login")
                     .defaultSuccessUrl("/todos")
                     .failureUrl("/login?error=true"))
+        .logout(configurer -> configurer.logoutSuccessUrl("/logout-success"))
         .httpBasic(withDefaults());
 
     return http.build();

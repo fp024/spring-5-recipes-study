@@ -149,6 +149,26 @@ Caused by: java.lang.IllegalArgumentException: The 'request','session','servletC
 
 
 
+### 로그아웃 서비스
+
+form 테그에 Thymeleaf 처리 속성(`th:`)을 하나라도 넣었다면, `_csrf Hidden` 필드를 같이 처리해주는 것 같다.
+
+```html
+        <form th:action="@{/logout}" method="post">
+          <!--/* 스프링이 csrf hidden 필드를 자동으로 붙여줬다. */-->
+          <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+          <button class="ui small red basic compact button">Logout</button>
+        </form>
+```
+
+만약 일반 다음과 같이 사용했다면 _csrf hidden 필드를 만들어주지 않음.
+
+```html
+        <form action="/logout" method="post">
+```
+
+
+
 
 
 

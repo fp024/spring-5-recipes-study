@@ -11,6 +11,19 @@
 
 <body>
 <div class="ui container">
+  <div class="ui inverted menu">
+    <a class="item" th:href="@{/todos}">To-dos</a>
+    <div class="right menu">
+      <div class="item">
+        <form th:action="@{/logout}" method="post">
+          <!--/* 스프링이 csrf hidden 필드를 자동으로 붙여줬다. */-->
+          <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+          <button class="ui small red basic compact button">Logout</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--/* 아직은 목록 페이지가 항상 로그인을 요구해서 익명인 경우가 없음. */-->
   <th:block sec:authorize="isAuthenticated()">
     <h4 th:text="|To-dos for ${#authentication.name}|"></h4>
   </th:block>

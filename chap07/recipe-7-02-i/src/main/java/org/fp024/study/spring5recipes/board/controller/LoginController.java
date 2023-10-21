@@ -8,4 +8,7 @@ public class LoginController {
 
   @GetMapping("/login")
   public void login() {}
+
+  @GetMapping("/logout-success")
+  public void logoutSuccess() {}
 }
