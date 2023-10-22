@@ -1,4 +1,4 @@
-## 레시피 7-03-ii 유저 인증하기 - DB 조회 결과에 따라 유저 인증
+## 레시피 7-03-ii 유저 인증하기 - DB 조회 결과에 따라 유저 인증 (iii 예제 포함)
 
 > 유저 인증 정보 저장소의 여려 종류를 알아본다.
 >
@@ -67,7 +67,10 @@ Caused by: java.lang.IllegalStateException: userDetailsService cannot be null. I
 
 ## 기타
 
-* ...
+### 레시피 7-03-iii 예제 포함
+
+* 이미 레거시 회원, 회원 롤 테이블이 있는 경우 그것을 연계해서 사용하도록 하는 예제
+  * legacy-schema.sql, legacy-data.sql
 
 
 

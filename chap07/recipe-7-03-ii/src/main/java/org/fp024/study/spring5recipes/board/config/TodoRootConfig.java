@@ -30,7 +30,7 @@ public class TodoRootConfig {
         .setType(EmbeddedDatabaseType.HSQL)
         .setScriptEncoding(PROJECT_ENCODING_VALUE)
         .setName("board")
-        .addScripts("classpath:/schema.sql", "classpath:/data.sql")
+        .addScripts("classpath:/legacy-schema.sql", "classpath:/legacy-data.sql")
         .build();
   }
 

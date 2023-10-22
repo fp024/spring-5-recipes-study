@@ -23,7 +23,23 @@ public class TodoSecurityConfig {
 
   @Bean
   UserDetailsService userDetailsService() {
-    return new JdbcUserDetailsManager(dataSource);
+    JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+    jdbcUserDetailsManager.setUsersByUsernameQuery(
+        """
+        SELECT username, password, 'true' AS enabled
+          FROM member
+         WHERE username = ?
+        """);
+    jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+        """
+        SELECT member.username
+             , member_role.role AS authorities
+          FROM member, member_role
+         WHERE member.username = ?
+           AND member.id = member_role.member_id
+        """);
+
+    return jdbcUserDetailsManager;
   }
 
   @Bean
