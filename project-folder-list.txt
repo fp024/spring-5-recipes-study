@@ -103,6 +103,7 @@ chap07\recipe-7-03-i
 chap07\recipe-7-03-ii
 chap07\recipe-7-03-iv
 chap07\recipe-7-03-v
+chap07\recipe-7-03-vi
 chap10
 chap10\recipe-10-01-i
 chap10\recipe-10-01-ii

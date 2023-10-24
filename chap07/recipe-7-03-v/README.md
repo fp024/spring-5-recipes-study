@@ -57,6 +57,8 @@
 userPassword: {noop}admin
 ```
 
+* 저자님이 언급하신 [LdapShaPasswordEncoder](https://github.com/spring-projects/spring-security/blob/5.8.8/crypto/src/main/java/org/springframework/security/crypto/password/LdapShaPasswordEncoder.java)는 Spring Security 5.8.8 에선 폐기된 상태이다. BCryptPasswordEncoder, ... , DelegatingPasswordEncoder 로 바꿔쓰는 것을 추천.. 암호 업그레이드를 지원하는 DelegatingPasswordEncoder 를 가장 추천함. 👍
+
 
 
 ### Java 설정
