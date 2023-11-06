@@ -57,7 +57,7 @@ public class ServiceConfiguration {
 
   private DatabasePopulator databasePopulator() {
     ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
-    databasePopulator.setContinueOnError(true);
+    databasePopulator.setContinueOnError(false);
     databasePopulator.setIgnoreFailedDrops(true);
     databasePopulator.addScript(new ClassPathResource("sql/reset_user_registration.sql"));
     return databasePopulator;
