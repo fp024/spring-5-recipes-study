@@ -52,7 +52,11 @@
 
 
 
+```java
+.access("hasAuthority('ADMIN') and localAccess()")
+```
 
+이것도 동작은 동일한데, 로컬 요청 IP를 체크하는 표현식을 WebSecurityExpressionRoot를 확장하는 별도 클래스에 정의했음.
 
 
 
@@ -61,8 +65,6 @@
 ## 기타
 
 * ...
-
-
 
 
 

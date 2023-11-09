@@ -33,9 +33,9 @@ public class TodoSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
+        .expressionHandler(new ExtendedWebSecurityExpressionHandler())
         .antMatchers(HttpMethod.DELETE, "/todos/*")
-        .access(
-            "hasAuthority('ADMIN') and (hasIpAddress('127.0.0.1') or hasIpAddress('0:0:0:0:0:0:0:1'))")
+        .access("hasAuthority('ADMIN') and localAccess()")
         //
         .and()
         .formLogin()
