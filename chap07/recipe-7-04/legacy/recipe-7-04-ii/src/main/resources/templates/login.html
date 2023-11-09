@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link type="text/css" rel="stylesheet"
+        th:href="@{/webjars/Semantic-UI/semantic.min.css}"/>
+  <style>
+    body {
+      background-color: #DADADA;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .column {
+      max-width: 450px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui header">Log-in to your account</h2>
+    <form method="POST" th:action="@{/login}" class="ui large form">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <div class="ui stacked segment">
+      <div class="field">
+        <div class="ui left icon input">
+          <i class="user icon"></i>
+          <input type="text" name="username" placeholder="E-mail address">
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui left icon input">
+          <i class="lock icon"></i>
+          <input type="password" name="password" placeholder="Password">
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui toggle checkbox">
+          <input type="checkbox" name="remember-me">
+          <label>Remember Me</label>
+        </div>
+      </div>
+      <button class="ui fluid large submit green button">Login</button>
+    </div>
+      <div
+          th:if="${!#strings.isEmpty(param.error) && param.error}"
+          class="ui error message" style="display:block;">
+        Authentication Failed<br/>
+        <th:block th:if="${session.SPRING_SECURITY_LAST_EXCEPTION != null}">
+        Reason: [[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]
+        </th:block>
+      </div>
+
+
+
+    </form>
+  </div>
+</div>
+</body>
+</html>
