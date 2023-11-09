@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>💡 레시피 7-04-iii 접근 통제 결정하기</title>
+  <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="card">
+  <div class="card-header">
+    <h2>레시피 7-04-iii 접근 통제 결정하기 : 테스트 URL</h2>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">레시피 7-04-iii 접근 통제 결정하기 - 스프링 빈을 표현식에 넣어 접근 통제 결정하기 테스트</h5>
+    <p>
+      요청자 IP가 127.0.0.1 또는 0:0:0:0:0:0:0:1이고 ADMIN 권한을 가진 유저만 Todo 삭제 가능<br>
+      내 윈도우 로컬에서는 IPv6 주소 기준으로 먼저 처리되는 듯..
+    </p>
+    <p>
+      이번에는 스프링 빈으로 요청자 IP가 로컬인지 확인하는 코드를 실행함.
+    </p>
+    <ul>
+      <li><a th:href="@{/login}">로그인 페이지</a></li>
+      <li><a th:href="@{/todos}">URL 접근 보안이 적용된 Todo 메인 페이지</a></li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>
