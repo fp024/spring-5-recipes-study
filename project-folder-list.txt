@@ -108,6 +108,7 @@ chap07\recipe-7-04\legacy\recipe-7-04-i
 chap07\recipe-7-04\legacy\recipe-7-04-ii
 chap07\recipe-7-04\legacy\recipe-7-04-iii
 chap07\recipe-7-04\current\recipe-7-04-i
+chap07\recipe-7-05-i
 chap10
 chap10\recipe-10-01-i
 chap10\recipe-10-01-ii
