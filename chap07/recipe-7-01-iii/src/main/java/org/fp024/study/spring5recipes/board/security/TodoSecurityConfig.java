@@ -48,9 +48,17 @@ public class TodoSecurityConfig {
     http.authorizeHttpRequests(
         (authz) ->
             authz
+                /*
+                .requestMatchers(
+                    "/webjars/**", //
+                    "/resources/**",
+                    "/",
+                    "/index",
+                    "/favicon.ico")
+                 */
                 .requestMatchers(
                     antMatcher("/webjars/**"), //
-                    antMatcher("/resources/**"), //
+                    antMatcher("/resources/**"),
                     antMatcher("/"),
                     antMatcher("/index"),
                     antMatcher("/favicon.ico"))
