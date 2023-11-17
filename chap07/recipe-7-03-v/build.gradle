@@ -34,8 +34,8 @@ dependencies {
   implementation "org.springframework.ldap:spring-ldap-test:${springLdapVersion}"
   implementation "commons-lang:commons-lang:${commonsLangVersion}"
 
-
   implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+  compileOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
 
   implementation "org.hibernate.validator:hibernate-validator:${hibernateValidatorVersion}"
   testRuntimeOnly "org.glassfish:javax.el:${javaxElVersion}"
@@ -48,8 +48,7 @@ dependencies {
   implementation "org.webjars:bootstrap:${bootstrapVersion}"
   implementation "org.webjars:Semantic-UI:${semanticUiVersion}"
 
-  implementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
-
+  testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
   testImplementation "org.springframework:spring-test:${springVersion}"
   testImplementation "org.springframework.security:spring-security-test:${springSecurityVersion}"
   // 테스트 환경에서 WebTestClient를 사용하려면 spring-webflux를 추가해줘야함.

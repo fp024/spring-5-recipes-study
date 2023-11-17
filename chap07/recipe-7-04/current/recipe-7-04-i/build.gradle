@@ -30,6 +30,7 @@ dependencies {
   implementation "org.springframework.security:spring-security-web:${springSecurityVersion}"
 
   implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+  compileOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
 
   implementation "org.hibernate.validator:hibernate-validator:${hibernateValidatorVersion}"
   testRuntimeOnly "org.glassfish:javax.el:${javaxElVersion}"
@@ -42,8 +43,7 @@ dependencies {
   implementation "org.webjars:bootstrap:${bootstrapVersion}"
   implementation "org.webjars:Semantic-UI:${semanticUiVersion}"
 
-  implementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
-
+  testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
   testImplementation "org.springframework:spring-test"
   testImplementation "org.springframework.security:spring-security-test:${springSecurityVersion}"
   testImplementation "org.springframework:spring-webflux"

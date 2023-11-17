@@ -17,9 +17,10 @@ dependencies {
   implementation "org.springframework:spring-webmvc:${springVersion}"
   implementation "net.sargue:java-time-jsptags:${javaTimeJspTagsVersion}"
     
-  runtimeOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"    
+  compileOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"    
   runtimeOnly "javax.servlet:jstl:${javaxJstlVersion}"
 
+  testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
   testImplementation "org.springframework:spring-test:${springVersion}"
   testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
 }

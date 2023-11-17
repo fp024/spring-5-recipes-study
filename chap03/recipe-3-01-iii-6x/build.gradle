@@ -17,9 +17,10 @@ dependencies {
   implementation "org.springframework:spring-webmvc:${springVersion_6x}"
   implementation "net.sargue:java-time-jsptags:${javaTimeJspTagsVersion_6x}"
 
-  runtimeOnly "jakarta.servlet:jakarta.servlet-api:${jakartaServletApiVersion}"
+  compileOnly "jakarta.servlet:jakarta.servlet-api:${jakartaServletApiVersion}"
   runtimeOnly "org.glassfish.web:jakarta.servlet.jsp.jstl:${jakartaServletJspJstlVersion}"
 
+  testImplementation "jakarta.servlet:jakarta.servlet-api:${jakartaServletApiVersion}"
   testImplementation "org.springframework:spring-test:${springVersion_6x}"
   testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
 }

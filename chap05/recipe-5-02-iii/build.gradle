@@ -26,10 +26,12 @@ dependencies {
   implementation "org.webjars:bootstrap:${bootstrapVersion}"
 
   implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
-  runtimeOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
+  compileOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
   runtimeOnly "javax.servlet:jstl:${javaxJstlVersion}"
   implementation "net.sargue:java-time-jsptags:${javaTimeJspTagsVersion}"
+  implementation "com.google.code.findbugs:jsr305:${findBugsJsr305Version}"
 
+  testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
   testImplementation "org.springframework:spring-webflux:${springVersion}"
   testImplementation "org.springframework:spring-test:${springVersion}"
   testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"

@@ -32,8 +32,6 @@ dependencies {
 
   implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
   implementation "org.webjars:bootstrap:${bootstrapVersion}"
-
-  implementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
   
   testImplementation "org.springframework:spring-test:${springVersion}"
   testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
