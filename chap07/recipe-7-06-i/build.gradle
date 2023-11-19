@@ -2,6 +2,7 @@ plugins {
   id "io.freefair.lombok" version "${lombokPluginVersion}"
   id 'war'
   id "org.gretty" version "${grettyVersion}"
+  id "io.spring.dependency-management" version "${springDependencyManagementPluginVersion}"
 }
 
 java {
@@ -10,17 +11,24 @@ java {
   }
 }
 
+dependencyManagement {
+  imports {
+    mavenBom "org.springframework:spring-framework-bom:${springVersion}"
+	mavenBom "org.springframework.security:spring-security-bom:${springSecurityVersion}"
+  }
+}
+
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-  implementation "org.springframework:spring-context:${springVersion}"
-  implementation "org.springframework:spring-webmvc:${springVersion}"
-  implementation "org.springframework:spring-jdbc:${springVersion}"
+  implementation 'org.springframework:spring-context'
+  implementation 'org.springframework:spring-webmvc'
+  implementation 'org.springframework:spring-jdbc'
 
   runtimeOnly "org.hsqldb:hsqldb:${hsqldbVersion}"
 
-  implementation "org.springframework.security:spring-security-config:${springSecurityVersion}"
-  implementation "org.springframework.security:spring-security-web:${springSecurityVersion}"
+  implementation 'org.springframework.security:spring-security-config'
+  implementation 'org.springframework.security:spring-security-web'
 
   implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
   compileOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
@@ -37,10 +45,10 @@ dependencies {
   implementation "org.webjars:Semantic-UI:${semanticUiVersion}"
 
   testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
-  testImplementation "org.springframework:spring-test:${springVersion}"
-  testImplementation "org.springframework.security:spring-security-test:${springSecurityVersion}"
+  testImplementation 'org.springframework:spring-test'
+  testImplementation 'org.springframework.security:spring-security-test'
   // 테스트 환경에서 WebTestClient를 사용하려면 spring-webflux를 추가해줘야함.
-  testImplementation "org.springframework:spring-webflux:${springVersion}"
+  testImplementation 'org.springframework:spring-webflux'
   testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
 }
 
