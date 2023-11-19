@@ -22,8 +22,8 @@
 #### 디펜던시 추가
 
 ```groovy
-  implementation "org.thymeleaf:thymeleaf-spring5:${thymeleafSpring5Version}" // ✨
-  implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:${thymeleafExtrasJava8timeVersion}"
+implementation "org.thymeleaf:thymeleaf-spring5:${thymeleafSpring5Version}" // ✨
+implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:${thymeleafExtrasJava8timeVersion}"
 implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5:${thymeleafSpring5Version}" // ✨
 ```
 

@@ -3,9 +3,11 @@ package org.fp024.study.spring5recipes.board.controller;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.fp024.study.spring5recipes.board.domain.Todo;
 import org.fp024.study.spring5recipes.board.service.TodoService;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/todos")
@@ -43,9 +46,12 @@ public class TodoController {
   public String newMessage(
       @ModelAttribute @Valid Todo todo, BindingResult errors, Authentication authentication) {
 
+    LOGGER.info("username: {}", SecurityContextHolder.getContext().getAuthentication().getName());
+
     if (errors.hasErrors()) {
       return "todo-create";
     }
+
     todo.setOwner(authentication.getName());
     todoService.save(todo);
     return "redirect:/todos";
