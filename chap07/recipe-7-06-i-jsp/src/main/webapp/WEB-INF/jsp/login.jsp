@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <title>Login</title>
   <link type="text/css" rel="stylesheet"
-        href="${contextPath}/webjars/Semantic-UI/semantic.min.css"/>
+        href="${contextPath}/webjars/semantic/dist/semantic.min.css"/>
   <style>
     body {
       background-color: #DADADA;

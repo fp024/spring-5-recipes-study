@@ -12,10 +12,10 @@
 
 <div class="card">
   <div class="card-header">
-    <h2>레시피 7-06-i 뷰에서 보안 처리하기 - Thymeleaf : 테스트 URL</h2>
+    <h2>레시피 7-06-i 뷰에서 보안 처리하기 - JSP : 테스트 URL</h2>
   </div>
   <div class="card-body">
-    <h5 class="card-title">레시피 7-06-i 뷰에서 보안 처리하기 - Thymeleaf</h5>
+    <h5 class="card-title">레시피 7-06-i 뷰에서 보안 처리하기 - JSP</h5>
     <ul>
       <li><a href="${contextPath}/login">로그인 페이지</a></li>
       <li><a href="${contextPath}/todos">URL 접근 보안이 적용된 Todo 메인 페이지</a></li>

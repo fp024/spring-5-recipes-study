@@ -48,7 +48,7 @@ dependencies {
 
   implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
   implementation "org.webjars:bootstrap:${bootstrapVersion}"
-  implementation "org.webjars:Semantic-UI:${semanticUiVersion}"
+  implementation "org.webjars.bowergithub.semantic-org:semantic-ui:${semanticUiVersion}"
 
   testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
   testImplementation "org.springframework:spring-test"

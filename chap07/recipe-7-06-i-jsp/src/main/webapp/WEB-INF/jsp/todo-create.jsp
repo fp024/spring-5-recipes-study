@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <title>Message </title>
   <link type="text/css" rel="stylesheet"
-        href="${contextPath}/webjars/Semantic-UI/semantic.min.css"/>
+        href="${contextPath}/webjars/semantic/dist/semantic.min.css"/>
 </head>
 
 
