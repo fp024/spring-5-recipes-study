@@ -23,18 +23,19 @@ ext {
 dependencyManagement {
   imports {
     mavenBom "org.springframework:spring-framework-bom:${springVersion}"
+    mavenBom "org.springframework.security:spring-security-bom:${springSecurityVersion}"
   }
 }
 
 dependencies {
-  implementation "org.springframework:spring-context"
-  implementation "org.springframework:spring-webmvc"
-  implementation "org.springframework:spring-jdbc"
+  implementation 'org.springframework:spring-context'
+  implementation 'org.springframework:spring-webmvc'
+  implementation 'org.springframework:spring-jdbc'
 
   runtimeOnly "org.hsqldb:hsqldb:${hsqldbVersion}"
 
-  implementation "org.springframework.security:spring-security-config:${springSecurityVersion}"
-  implementation "org.springframework.security:spring-security-web:${springSecurityVersion}"
+  implementation 'org.springframework.security:spring-security-config'
+  implementation 'org.springframework.security:spring-security-web'
 
   implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
   compileOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
@@ -51,9 +52,9 @@ dependencies {
   implementation "org.webjars.bowergithub.semantic-org:semantic-ui:${semanticUiVersion}"
 
   testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
-  testImplementation "org.springframework:spring-test"
-  testImplementation "org.springframework.security:spring-security-test:${springSecurityVersion}"
-  testImplementation "org.springframework:spring-webflux"
+  testImplementation 'org.springframework:spring-test'
+  testImplementation 'org.springframework.security:spring-security-test'
+  testImplementation 'org.springframework:spring-webflux'
   testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
 }
 

@@ -8,11 +8,6 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 @Slf4j
 public class TodoSecurityInitializer extends AbstractSecurityWebApplicationInitializer {
-
-  public TodoSecurityInitializer() {
-    super(TodoSecurityConfig.class);
-  }
-
   @Override
   protected void beforeSpringSecurityFilterChain(ServletContext servletContext) {
     LOGGER.info("### {} ###", servletContext.getServerInfo());

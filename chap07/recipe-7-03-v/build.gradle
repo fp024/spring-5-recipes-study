@@ -16,19 +16,20 @@ apply from: "../../gradle/default-settings.gradle"
 dependencyManagement {
   imports {
     mavenBom "org.springframework:spring-framework-bom:${springVersion}"
+    mavenBom "org.springframework.security:spring-security-bom:${springSecurityVersion}"
   }
 }
 
 dependencies {
-  implementation "org.springframework:spring-context"
-  implementation "org.springframework:spring-webmvc"
-  implementation "org.springframework:spring-jdbc"
+  implementation 'org.springframework:spring-context'
+  implementation 'org.springframework:spring-webmvc'
+  implementation 'org.springframework:spring-jdbc'
 
   runtimeOnly "org.hsqldb:hsqldb:${hsqldbVersion}"
 
-  implementation "org.springframework.security:spring-security-config:${springSecurityVersion}"
-  implementation "org.springframework.security:spring-security-web:${springSecurityVersion}"
-  implementation "org.springframework.security:spring-security-ldap:${springSecurityVersion}"
+  implementation 'org.springframework.security:spring-security-config'
+  implementation 'org.springframework.security:spring-security-web'
+  implementation 'org.springframework.security:spring-security-ldap'
   implementation "com.unboundid:unboundid-ldapsdk:${unboundidLdapSdkVersion}"
   // 예제 실행환경에서 embedded LDAP 서버를 실행시킬 것이므로 implementation으로 둔다.
   implementation "org.springframework.ldap:spring-ldap-test:${springLdapVersion}"
@@ -49,10 +50,9 @@ dependencies {
   implementation "org.webjars.bowergithub.semantic-org:semantic-ui:${semanticUiVersion}"
 
   testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
-  testImplementation "org.springframework:spring-test:${springVersion}"
-  testImplementation "org.springframework.security:spring-security-test:${springSecurityVersion}"
-  // 테스트 환경에서 WebTestClient를 사용하려면 spring-webflux를 추가해줘야함.
-  testImplementation "org.springframework:spring-webflux:${springVersion}"
+  testImplementation 'org.springframework:spring-test'
+  testImplementation 'org.springframework.security:spring-security-test'
+  testImplementation 'org.springframework:spring-webflux'
   testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
 }
 

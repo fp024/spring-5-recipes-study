@@ -6,11 +6,6 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 public class TodoSecurityInitializer extends AbstractSecurityWebApplicationInitializer {
-
-  public TodoSecurityInitializer() {
-    super(TodoSecurityConfig.class);
-  }
-
   @Override
   protected void beforeSpringSecurityFilterChain(ServletContext servletContext) {
     // Form 제출을 할 때, _method Hidden 폼으로 GET, POST 이외의 요청을 하기 위해서 추가 필터 설정.

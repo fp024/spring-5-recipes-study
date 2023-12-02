@@ -14,7 +14,7 @@ java {
 dependencyManagement {
   imports {
     mavenBom "org.springframework:spring-framework-bom:${springVersion}"
-	mavenBom "org.springframework.security:spring-security-bom:${springSecurityVersion}"
+    mavenBom "org.springframework.security:spring-security-bom:${springSecurityVersion}"
   }
 }
 
@@ -47,7 +47,6 @@ dependencies {
   testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
   testImplementation 'org.springframework:spring-test'
   testImplementation 'org.springframework.security:spring-security-test'
-  // 테스트 환경에서 WebTestClient를 사용하려면 spring-webflux를 추가해줘야함.
   testImplementation 'org.springframework:spring-webflux'
   testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
 }

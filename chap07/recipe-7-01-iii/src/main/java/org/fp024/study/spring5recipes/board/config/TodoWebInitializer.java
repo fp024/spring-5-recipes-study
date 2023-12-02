@@ -1,5 +1,6 @@
 package org.fp024.study.spring5recipes.board.config;
 
+import org.fp024.study.spring5recipes.board.security.TodoSecurityConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class TodoWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -10,7 +11,7 @@ public class TodoWebInitializer extends AbstractAnnotationConfigDispatcherServle
 
   @Override
   protected Class<?>[] getServletConfigClasses() {
-    return new Class<?>[] {TodoWebConfig.class};
+    return new Class<?>[] {TodoSecurityConfig.class, TodoWebConfig.class};
   }
 
   @Override
