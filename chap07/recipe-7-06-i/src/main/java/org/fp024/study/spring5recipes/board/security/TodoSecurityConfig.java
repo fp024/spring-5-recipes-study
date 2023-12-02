@@ -1,7 +1,6 @@
 package org.fp024.study.spring5recipes.board.security;
 
 import static org.springframework.security.config.Customizer.withDefaults;
-import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
@@ -41,15 +40,15 @@ public class TodoSecurityConfig {
             (authz) ->
                 authz
                     .requestMatchers(
-                        antMatcher("/webjars/**"), //
-                        antMatcher("/resources/**"), //
-                        antMatcher("/login"), //
-                        antMatcher("/logout-success"), //
-                        antMatcher("/"),
-                        antMatcher("/index"),
-                        antMatcher("/favicon.ico"))
+                        "/webjars/**", //
+                        "/resources/**", //
+                        "/login", //
+                        "/logout-success", //
+                        "/",
+                        "/index",
+                        "/favicon.ico")
                     .permitAll()
-                    .requestMatchers(antMatcher(HttpMethod.DELETE, "/todos/*"))
+                    .requestMatchers(HttpMethod.DELETE, "/todos/*")
                     .hasAuthority("ADMIN")
                     .anyRequest()
                     .authenticated())

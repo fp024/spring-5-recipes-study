@@ -6,12 +6,12 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class TodoWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
   @Override
   protected Class<?>[] getRootConfigClasses() {
-    return new Class<?>[] {TodoRootConfig.class, TodoSecurityConfig.class};
+    return new Class<?>[] {};
   }
 
   @Override
   protected Class<?>[] getServletConfigClasses() {
-    return new Class<?>[] {TodoWebConfig.class};
+    return new Class<?>[] {TodoRootConfig.class, TodoWebConfig.class, TodoSecurityConfig.class};
   }
 
   @Override

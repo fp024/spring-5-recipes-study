@@ -11,6 +11,10 @@ java {
   }
 }
 
+ext {
+  springSecurityVersion = '5.8.9-SNAPSHOT'
+}
+
 dependencyManagement {
   imports {
     mavenBom "org.springframework:spring-framework-bom:${springVersion}"
