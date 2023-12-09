@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Message </title>
+  <link type="text/css" rel="stylesheet"
+        th:href="@{/webjars/semantic/dist/semantic.min.css}"/>
+</head>
+
+<body>
+<div class="ui container">
+  <h4>New To-do</h4>
+  <form method="POST" th:object="${todo}" th:action="@{/todos}" class="ui form">
+    <fieldset>
+      <legend>To-do</legend>
+      <div class="field">
+        <label>To-do</label>
+        <input th:field="*{description}">
+        <div class="ui pointing red basic label" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+      </div>
+      <div class="field">
+        <label>Completed</label>
+        <input type="checkbox" th:field="*{completed}">
+      </div>
+      <button class="ui mini primary button">Save <i class="send icon"></i></button>
+    </fieldset>
+  </form>
+</div>
+</body>
+</html>
+
+</html>

@@ -1,0 +1,53 @@
+plugins {
+  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  id 'war'
+  id "org.gretty" version "${grettyVersion}"
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of("${javaVersion}")
+  }
+}
+
+ext {
+  springSecurityVersion = '5.8.9-SNAPSHOT'
+}
+
+apply from: "../../gradle/default-settings.gradle"
+
+dependencies {
+  implementation platform("org.springframework:spring-framework-bom:${springVersion}")
+  implementation platform("org.springframework.security:spring-security-bom:${springSecurityVersion}")
+
+  implementation 'org.springframework:spring-context'
+  implementation 'org.springframework:spring-webmvc'
+  implementation 'org.springframework:spring-jdbc'
+
+  runtimeOnly "org.hsqldb:hsqldb:${hsqldbVersion}"
+
+  implementation 'org.springframework.security:spring-security-config'
+  implementation 'org.springframework.security:spring-security-web'
+
+  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+  compileOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
+
+  implementation "org.hibernate.validator:hibernate-validator:${hibernateValidatorVersion}"
+  testRuntimeOnly "org.glassfish:javax.el:${javaxElVersion}"
+
+  implementation "org.thymeleaf:thymeleaf-spring5:${thymeleafSpring5Version}"
+  implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:${thymeleafExtrasJava8timeVersion}"
+  implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5:${thymeleafSpring5Version}"
+
+  implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
+  implementation "org.webjars:bootstrap:${bootstrapVersion}"
+  implementation "org.webjars.bowergithub.semantic-org:semantic-ui:${semanticUiVersion}"
+
+  testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
+  testImplementation 'org.springframework:spring-test'
+  testImplementation 'org.springframework.security:spring-security-test'
+  testImplementation 'org.springframework:spring-webflux'
+  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+}
+
+apply from: "../../gradle/gretty-settings.gradle"
