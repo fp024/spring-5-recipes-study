@@ -55,7 +55,7 @@ public class TodoSecurityConfig {
     http.authorizeHttpRequests(
             (authz) ->
                 authz
-                    .mvcMatchers(
+                    .requestMatchers(
                         "/webjars/**", //
                         "/resources/**", //
                         "/login", //
@@ -64,7 +64,7 @@ public class TodoSecurityConfig {
                         "/index",
                         "/favicon.ico")
                     .permitAll()
-                    .mvcMatchers(HttpMethod.DELETE, "/todos/*")
+                    .requestMatchers(HttpMethod.DELETE, "/todos/*")
                     .hasAuthority("ADMIN")
                     .anyRequest()
                     .authenticated())
