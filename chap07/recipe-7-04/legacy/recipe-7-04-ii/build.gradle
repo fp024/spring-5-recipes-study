@@ -18,6 +18,8 @@ ext {
   // springSecurityVersion = '5.4.11'
   // springSecurityVersion ='5.3.13.RELEASE'
   springSecurityVersion ='5.0.19.RELEASE'
+  // ✨ Spring은 5 버전대의 최신을 사용하면서 Security는 이전 버전을 사용하는 상태인데, 
+  //    동작에는 문제가 없어보이긴한데... 이상 있을 때, 다시 확인하자!
 }
 
 dependencyManagement {

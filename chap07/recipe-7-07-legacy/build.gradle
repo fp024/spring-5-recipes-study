@@ -2,7 +2,6 @@ plugins {
   id "io.freefair.lombok" version "${lombokPluginVersion}"
   id 'war'
   id "org.gretty" version "${grettyVersion}"
-  id "io.spring.dependency-management" version "${springDependencyManagementPluginVersion}"
 }
 
 java {
@@ -11,33 +10,36 @@ java {
   }
 }
 
-apply from: "../../../../gradle/default-settings.gradle"
-
 ext {
-  // antMatchers().access("문자열 파라미터 전달가능") 이 가능한 마지막 버전은 5.4.11
+  springSecurityVersion = '5.7.11'
   // springSecurityVersion = '5.4.11'
   // springSecurityVersion ='5.3.13.RELEASE'
-  springSecurityVersion ='5.0.19.RELEASE'
+  // springSecurityVersion ='5.0.19.RELEASE'
+
   // ✨ Spring은 5 버전대의 최신을 사용하면서 Security는 이전 버전을 사용하는 상태인데, 
   //    동작에는 문제가 없어보이긴한데... 이상 있을 때, 다시 확인하자!
 }
 
-dependencyManagement {
-  imports {
-    mavenBom "org.springframework:spring-framework-bom:${springVersion}"
-    mavenBom "org.springframework.security:spring-security-bom:${springSecurityVersion}"
-  }
-}
+
+apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
+  implementation platform("org.springframework:spring-framework-bom:${springVersion}")
+  implementation platform("org.springframework.security:spring-security-bom:${springSecurityVersion}")
+
   implementation 'org.springframework:spring-context'
   implementation 'org.springframework:spring-webmvc'
   implementation 'org.springframework:spring-jdbc'
+  implementation  'org.springframework:spring-context-support'
 
   runtimeOnly "org.hsqldb:hsqldb:${hsqldbVersion}"
+  implementation "com.zaxxer:HikariCP:${hikariCpVersion}"
 
   implementation 'org.springframework.security:spring-security-config'
   implementation 'org.springframework.security:spring-security-web'
+  implementation 'org.springframework.security:spring-security-acl'
+
+  implementation "net.sf.ehcache:ehcache:${ehcacheVersion2x}"
 
   implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
   compileOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
@@ -60,4 +62,4 @@ dependencies {
   testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
 }
 
-apply from: "../../../../gradle/gretty-settings.gradle"
+apply from: "../../gradle/gretty-settings.gradle"
