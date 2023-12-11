@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -27,6 +28,7 @@ import org.thymeleaf.templatemode.TemplateMode;
     includeFilters = {
       @Filter(classes = Controller.class),
     })
+@EnableMethodSecurity // ✨
 public class TodoWebConfig implements WebMvcConfigurer {
 
   @Override
@@ -76,7 +78,7 @@ public class TodoWebConfig implements WebMvcConfigurer {
   ThymeleafViewResolver thymeleafViewResolver() {
     final ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
     viewResolver.setTemplateEngine(thymeleafTemplateEngine());
-    // ✨ 아래 인코딩 설정이 필수였다. 이것을 설정하지 않으면 한글 처리 자체가 안됨.
+    // 아래 인코딩 설정이 필수였다. 이것을 설정하지 않으면 한글 처리 자체가 안됨.
     viewResolver.setCharacterEncoding(PROJECT_ENCODING_VALUE);
     return viewResolver;
   }

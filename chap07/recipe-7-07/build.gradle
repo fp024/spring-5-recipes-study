@@ -12,6 +12,7 @@ java {
 
 ext {
   springSecurityVersion = '5.8.9-SNAPSHOT'
+  // springSecurityVersion = '5.7.11'
 }
 
 apply from: "../../gradle/default-settings.gradle"
@@ -23,11 +24,16 @@ dependencies {
   implementation 'org.springframework:spring-context'
   implementation 'org.springframework:spring-webmvc'
   implementation 'org.springframework:spring-jdbc'
+  implementation  'org.springframework:spring-context-support'
 
   runtimeOnly "org.hsqldb:hsqldb:${hsqldbVersion}"
+  implementation "com.zaxxer:HikariCP:${hikariCpVersion}"
 
   implementation 'org.springframework.security:spring-security-config'
   implementation 'org.springframework.security:spring-security-web'
+  implementation 'org.springframework.security:spring-security-acl'
+
+  implementation "net.sf.ehcache:ehcache:${ehcacheVersion2x}"
 
   implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
   compileOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"

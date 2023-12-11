@@ -1,17 +1,21 @@
 package org.fp024.study.spring5recipes.board.config;
 
-import static org.fp024.study.spring5recipes.board.common.Constants.PROJECT_ENCODING_VALUE;
-
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import java.nio.charset.StandardCharsets;
 import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.jdbc.datasource.init.DataSourceInitializer;
+import org.springframework.jdbc.datasource.init.DatabasePopulator;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @ComponentScan(
@@ -21,21 +25,48 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
       @Filter(classes = Configuration.class),
     })
 @EnableTransactionManagement
+@PropertySource("classpath:database.properties")
 @Configuration
 public class TodoRootConfig {
+  private final Environment env;
 
-  @Bean
-  DataSource dataSource() {
-    return new EmbeddedDatabaseBuilder()
-        .setType(EmbeddedDatabaseType.HSQL)
-        .setScriptEncoding(PROJECT_ENCODING_VALUE)
-        .setName("board")
-        .addScripts("classpath:/schema.sql", "classpath:/data.sql")
-        .build();
+  public TodoRootConfig(Environment env) {
+    this.env = env;
+  }
+
+  @Bean(destroyMethod = "close")
+  HikariDataSource dataSource() {
+    HikariConfig hikariConfig = new HikariConfig();
+    hikariConfig.setDriverClassName(env.getProperty("jdbc.driver"));
+    hikariConfig.setJdbcUrl(env.getProperty("jdbc.url"));
+    hikariConfig.setUsername(env.getProperty("jdbc.username"));
+    hikariConfig.setPassword(env.getProperty("jdbc.password"));
+    return new HikariDataSource(hikariConfig);
   }
 
   @Bean
-  TransactionManager transactionManager(DataSource dataSource) {
+  DataSourceInitializer dataSourceInitializer() {
+    DataSourceInitializer initializer = new DataSourceInitializer();
+    initializer.setDataSource(dataSource());
+    initializer.setDatabasePopulator(databasePopulator());
+    return initializer;
+  }
+
+  private DatabasePopulator databasePopulator() {
+    ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
+    databasePopulator.setSqlScriptEncoding(StandardCharsets.UTF_8.name());
+    databasePopulator.setContinueOnError(false);
+    databasePopulator.addScript(new ClassPathResource("/sql/schema.sql"));
+    databasePopulator.addScripts(
+        new ClassPathResource("/sql/data.sql"),
+        // spring-security-acl 모듈에 포함된 sql 스크립트 실행
+        new ClassPathResource("/createAclSchema.sql"));
+
+    return databasePopulator;
+  }
+
+  @Bean
+  DataSourceTransactionManager transactionManager(DataSource dataSource) {
     return new DataSourceTransactionManager(dataSource);
   }
 }

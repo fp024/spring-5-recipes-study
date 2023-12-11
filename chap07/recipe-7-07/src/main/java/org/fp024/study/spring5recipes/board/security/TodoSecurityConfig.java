@@ -2,10 +2,15 @@ package org.fp024.study.spring5recipes.board.security;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+import java.util.Arrays;
+import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.access.AccessDecisionVoter;
+import org.springframework.security.access.vote.AffirmativeBased;
+import org.springframework.security.acls.AclEntryVoter;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,10 +19,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.expression.WebExpressionVoter;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(securedEnabled = true)
+@EnableMethodSecurity
 public class TodoSecurityConfig {
 
   private final DataSource dataSource;
@@ -36,12 +42,20 @@ public class TodoSecurityConfig {
     return new JdbcUserDetailsManager(dataSource);
   }
 
+  // 😈 5.8.x에서는 Deprecated, 5.7.x에서는 아님.
+  @Bean
+  public AffirmativeBased accessDecisionManager(AclEntryVoter aclEntryVoter) {
+    List<AccessDecisionVoter<?>> decisionVoters =
+        Arrays.asList(new WebExpressionVoter(), aclEntryVoter);
+    return new AffirmativeBased(decisionVoters);
+  }
+
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests(
             (authz) ->
                 authz
-                    .requestMatchers(
+                    .mvcMatchers(
                         "/webjars/**", //
                         "/resources/**", //
                         "/login", //
@@ -50,7 +64,7 @@ public class TodoSecurityConfig {
                         "/index",
                         "/favicon.ico")
                     .permitAll()
-                    .requestMatchers(HttpMethod.DELETE, "/todos/*")
+                    .mvcMatchers(HttpMethod.DELETE, "/todos/*")
                     .hasAuthority("ADMIN")
                     .anyRequest()
                     .authenticated())
