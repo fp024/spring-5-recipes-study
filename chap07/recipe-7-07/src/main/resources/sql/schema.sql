@@ -24,3 +24,9 @@ CREATE TABLE authorities
     authority VARCHAR(50) NOT NULL,
     FOREIGN KEY (username) REFERENCES users
 );
+
+/* spring-security-acl 에서 사용하는 테이블 정리 */
+DROP TABLE acl_entry IF EXISTS;
+DROP TABLE acl_object_identity IF EXISTS;
+DROP TABLE acl_class IF EXISTS;
+DROP TABLE acl_sid IF EXISTS;
