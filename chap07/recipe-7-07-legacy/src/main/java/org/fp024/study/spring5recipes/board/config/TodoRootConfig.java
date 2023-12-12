@@ -39,12 +39,11 @@ public class TodoRootConfig {
     hikariConfig.setJdbcUrl(env.getProperty("jdbc.url"));
     hikariConfig.setUsername(env.getProperty("jdbc.username"));
     hikariConfig.setPassword(env.getProperty("jdbc.password"));
-    HikariDataSource dataSource = new HikariDataSource(hikariConfig);
-    databasePopulator(dataSource);
-    return dataSource;
+    return new HikariDataSource(hikariConfig);
   }
 
-  void databasePopulator(DataSource dataSource) {
+  @Bean
+  ResourceDatabasePopulator databasePopulator() {
     ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
     databasePopulator.setSqlScriptEncoding(StandardCharsets.UTF_8.name());
     databasePopulator.setContinueOnError(false);
@@ -54,7 +53,8 @@ public class TodoRootConfig {
         new ClassPathResource("/sql/data.sql"),
         // spring-security-acl 모듈에 포함된 sql 스크립트 실행
         new ClassPathResource("/createAclSchema.sql"));
-    databasePopulator.execute(dataSource);
+
+    return databasePopulator;
   }
 
   @Bean

@@ -15,15 +15,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 class TodoInitializer {
-
   private final TodoService messageBoardService;
 
   public TodoInitializer(
-      ResourceDatabasePopulator databasePopulator,
+      TodoService messageBoardService,
       DataSource dataSource,
-      TodoService messageBoardService) {
-    databasePopulator.execute(dataSource);
+      ResourceDatabasePopulator resourceDatabasePopulator) {
     this.messageBoardService = messageBoardService;
+    resourceDatabasePopulator.execute(dataSource);
   }
 
   @PostConstruct

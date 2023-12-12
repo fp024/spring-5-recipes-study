@@ -82,7 +82,7 @@ class TodoServiceImplTests {
   void findOthersTodosById() {
     assertThatThrownBy(() -> service.findById(1L))
         .isInstanceOf(AccessDeniedException.class)
-        .hasMessage("Access Denied");
+        .hasMessage("Access is denied");
   }
 
   /*
@@ -102,6 +102,7 @@ class TodoServiceImplTests {
       authorities = {"ADMIN", "USER"})
   @Test
   void findOthersTodosByIdUseAdminAuthority() {
+
     Todo result = service.findById(1L);
     assertThat(result).hasFieldOrPropertyWithValue("id", 1L);
   }

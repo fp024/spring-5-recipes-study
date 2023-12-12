@@ -5,7 +5,6 @@ import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.acls.AclEntryVoter;
@@ -60,8 +59,6 @@ public class TodoSecurityConfig extends WebSecurityConfigurerAdapter {
             "/index",
             "/favicon.ico")
         .permitAll()
-        .mvcMatchers(HttpMethod.DELETE, "/todos/*")
-        .hasAuthority("ADMIN")
         .anyRequest()
         .authenticated()
         .and()

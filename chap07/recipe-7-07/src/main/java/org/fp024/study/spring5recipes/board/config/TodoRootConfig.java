@@ -12,8 +12,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.jdbc.datasource.init.DataSourceInitializer;
-import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -45,19 +43,13 @@ public class TodoRootConfig {
   }
 
   @Bean
-  DataSourceInitializer dataSourceInitializer() {
-    DataSourceInitializer initializer = new DataSourceInitializer();
-    initializer.setDataSource(dataSource());
-    initializer.setDatabasePopulator(databasePopulator());
-    return initializer;
-  }
-
-  private DatabasePopulator databasePopulator() {
+  ResourceDatabasePopulator databasePopulator() {
     ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
     databasePopulator.setSqlScriptEncoding(StandardCharsets.UTF_8.name());
     databasePopulator.setContinueOnError(false);
-    databasePopulator.addScript(new ClassPathResource("/sql/schema.sql"));
+    databasePopulator.setIgnoreFailedDrops(false);
     databasePopulator.addScripts(
+        new ClassPathResource("/sql/schema.sql"),
         new ClassPathResource("/sql/data.sql"),
         // spring-security-acl 모듈에 포함된 sql 스크립트 실행
         new ClassPathResource("/createAclSchema.sql"));

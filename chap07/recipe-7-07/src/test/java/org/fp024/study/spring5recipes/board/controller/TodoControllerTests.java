@@ -13,11 +13,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.fp024.study.spring5recipes.board.config.TodoRootConfig;
 import org.fp024.study.spring5recipes.board.config.TodoWebConfig;
+import org.fp024.study.spring5recipes.board.security.TodoAclConfig;
 import org.fp024.study.spring5recipes.board.security.TodoSecurityConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -26,7 +28,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 @SpringJUnitWebConfig(
-    classes = {TodoRootConfig.class, TodoWebConfig.class, TodoSecurityConfig.class})
+    classes = {
+      TodoRootConfig.class, //
+      TodoWebConfig.class,
+      TodoSecurityConfig.class,
+      TodoAclConfig.class
+    })
+@DirtiesContext
 @WithMockUser(
     value = "user00",
     authorities = {"USER"})

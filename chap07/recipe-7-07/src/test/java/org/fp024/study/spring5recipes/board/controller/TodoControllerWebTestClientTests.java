@@ -4,11 +4,13 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 
 import org.fp024.study.spring5recipes.board.config.TodoRootConfig;
 import org.fp024.study.spring5recipes.board.config.TodoWebConfig;
+import org.fp024.study.spring5recipes.board.security.TodoAclConfig;
 import org.fp024.study.spring5recipes.board.security.TodoSecurityConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.servlet.client.MockMvcWebTestClient;
@@ -19,7 +21,13 @@ import org.springframework.web.context.WebApplicationContext;
  * REST API 테스트 할 때만 사용하는 것이 좋을 것 같음.
  */
 @SpringJUnitWebConfig(
-    classes = {TodoRootConfig.class, TodoWebConfig.class, TodoSecurityConfig.class})
+    classes = {
+      TodoRootConfig.class, //
+      TodoWebConfig.class,
+      TodoSecurityConfig.class,
+      TodoAclConfig.class
+    })
+@DirtiesContext
 class TodoControllerWebTestClientTests {
 
   @Autowired private WebApplicationContext wac;

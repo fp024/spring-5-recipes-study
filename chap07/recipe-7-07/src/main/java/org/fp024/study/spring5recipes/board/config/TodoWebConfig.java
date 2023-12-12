@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -28,7 +27,6 @@ import org.thymeleaf.templatemode.TemplateMode;
     includeFilters = {
       @Filter(classes = Controller.class),
     })
-@EnableMethodSecurity // ✨
 public class TodoWebConfig implements WebMvcConfigurer {
 
   @Override

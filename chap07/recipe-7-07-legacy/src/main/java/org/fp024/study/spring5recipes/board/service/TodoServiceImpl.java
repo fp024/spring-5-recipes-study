@@ -77,8 +77,7 @@ class TodoServiceImpl implements TodoService {
   }
 
   @Override
-  @PostAuthorize(
-      "hasPermission(#id, 'org.fp024.study.spring5recipes.board.domain.Todo', 'read')") // ✨
+  @PostAuthorize("hasPermission(returnObject, 'read')") // ✨
   public Todo findById(long id) {
     return todoRepository.findOne(id);
   }

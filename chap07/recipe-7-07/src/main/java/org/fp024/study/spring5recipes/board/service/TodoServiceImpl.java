@@ -7,6 +7,7 @@ import static org.springframework.security.acls.domain.BasePermission.WRITE;
 import java.util.List;
 import org.fp024.study.spring5recipes.board.domain.Todo;
 import org.fp024.study.spring5recipes.board.repository.TodoRepository;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.acls.domain.GrantedAuthoritySid;
@@ -76,7 +77,7 @@ class TodoServiceImpl implements TodoService {
   }
 
   @Override
-  @PostFilter("hasPermission(filterObject, 'read')") // ✨
+  @PostAuthorize("hasPermission(returnObject, 'read')") // ✨
   public Todo findById(long id) {
     return todoRepository.findOne(id);
   }

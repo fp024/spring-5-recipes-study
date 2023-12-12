@@ -7,7 +7,6 @@ import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.acls.AclEntryVoter;
@@ -23,7 +22,7 @@ import org.springframework.security.web.access.expression.WebExpressionVoter;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+@EnableMethodSecurity // ✨
 public class TodoSecurityConfig {
 
   private final DataSource dataSource;
@@ -44,7 +43,7 @@ public class TodoSecurityConfig {
 
   // 😈 5.8.x에서는 Deprecated, 5.7.x에서는 아님.
   @Bean
-  public AffirmativeBased accessDecisionManager(AclEntryVoter aclEntryVoter) {
+  AffirmativeBased accessDecisionManager(AclEntryVoter aclEntryVoter) {
     List<AccessDecisionVoter<?>> decisionVoters =
         Arrays.asList(new WebExpressionVoter(), aclEntryVoter);
     return new AffirmativeBased(decisionVoters);
@@ -64,8 +63,6 @@ public class TodoSecurityConfig {
                         "/index",
                         "/favicon.ico")
                     .permitAll()
-                    .requestMatchers(HttpMethod.DELETE, "/todos/*")
-                    .hasAuthority("ADMIN")
                     .anyRequest()
                     .authenticated())
         .formLogin(

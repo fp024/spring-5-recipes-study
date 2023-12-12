@@ -65,14 +65,13 @@ Spring Security는 `5.0.19.RELEASE`, `5.7.11` 에서 확인했는데.. ACL이 �
 
     ```java
       @Override
-      @PostAuthorize(
-          "hasPermission(#id, 'org.fp024.study.spring5recipes.board.domain.Todo', 'read')") // ✨
+      @PostAuthorize("hasPermission(returnObject, 'read')") // ✨
       public Todo findById(long id) {
         return todoRepository.findOne(id);
       }
     ```
-
     
+
 
 
 

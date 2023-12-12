@@ -5,19 +5,27 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import org.fp024.study.spring5recipes.board.config.TodoRootConfig;
+import org.fp024.study.spring5recipes.board.config.TodoWebConfig;
 import org.fp024.study.spring5recipes.board.domain.Todo;
+import org.fp024.study.spring5recipes.board.security.TodoAclConfig;
 import org.fp024.study.spring5recipes.board.security.TodoSecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /*
  서비스 메서드 호출 보호가 설정되어있으므로 Mock 유저 설정이 필요하다.
 */
-@SpringJUnitConfig(classes = {TodoRootConfig.class, TodoSecurityConfig.class})
+@SpringJUnitWebConfig(
+    classes = {
+      TodoRootConfig.class, //
+      TodoWebConfig.class,
+      TodoSecurityConfig.class,
+      TodoAclConfig.class
+    })
 @WithMockUser(
     value = "user00",
     authorities = {"USER"})

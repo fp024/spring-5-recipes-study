@@ -22,11 +22,14 @@
 
 #### 라이브러리 추가
 
-* Spring Security 5.8.9 환경에서는 다음 라이브러리 추가가 필요하다.
+* 다음 라이브러리 추가가 필요하다.
 
   ```groovy
-  implementation "org.springframework.security:spring-securityacl"
+  implementation "org.springframework.security:spring-security-acl"
   ```
+  
+  * 2.0.0 버전 때부터 있던 오래전 부터 있었던 라이브러리
+    * https://mvnrepository.com/artifact/org.springframework.security/spring-security-acl
 
 
 
@@ -94,6 +97,17 @@ Todo 게시글 하나를 썼을 때...
 | 100  | true      | admin |
 
 
+
+
+
+### 다음 규칙은 이제 의미가 없지 않을까?
+
+```java
+      .requestMatchers(HttpMethod.DELETE, "/todos/*")
+      .hasAuthority("ADMIN")
+```
+
+* 이제 ACL 퍼미션으로 권한을 관리하니 이 규칙은 의미가 없으니 지워야겠다.
 
 
 
