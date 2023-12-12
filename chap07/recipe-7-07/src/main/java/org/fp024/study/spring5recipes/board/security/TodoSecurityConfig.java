@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.acls.AclEntryVoter;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -22,8 +22,7 @@ import org.springframework.security.web.access.expression.WebExpressionVoter;
 
 @Configuration
 @EnableWebSecurity
-// @EnableMethodSecurity // ✨
-@EnableGlobalMethodSecurity(prePostEnabled = true) // ✨
+@EnableMethodSecurity // ✨
 public class TodoSecurityConfig {
 
   private final DataSource dataSource;

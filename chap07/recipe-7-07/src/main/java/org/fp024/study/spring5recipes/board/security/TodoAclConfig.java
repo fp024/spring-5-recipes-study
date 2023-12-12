@@ -5,6 +5,8 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
+import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.acls.AclEntryVoter;
 import org.springframework.security.acls.AclPermissionEvaluator;
 import org.springframework.security.acls.domain.AclAuthorizationStrategy;
@@ -81,5 +83,15 @@ public class TodoAclConfig {
   @Bean
   AclPermissionEvaluator permissionEvaluator(AclService aclService) {
     return new AclPermissionEvaluator(aclService);
+  }
+
+  // ✨`https://docs.spring.io/spring-security/reference/5.8/migration/servlet/authorization.html#servlet-replace-permissionevaluator-bean-with-methodsecurityexpression-handler
+  //    @EnableMethodSecurity does not pick up a PermissionEvaluator.
+  //    아래 내용을 추가하고 나니 ACL 동작하는 모습이 보인다.
+  @Bean
+  MethodSecurityExpressionHandler expressionHandler(AclPermissionEvaluator permissionEvaluator) {
+    var expressionHandler = new DefaultMethodSecurityExpressionHandler();
+    expressionHandler.setPermissionEvaluator(permissionEvaluator);
+    return expressionHandler;
   }
 }
