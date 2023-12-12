@@ -42,6 +42,8 @@ public class TodoSecurityConfig {
   }
 
   // 😈 5.8.x에서는 Deprecated, 5.7.x에서는 아님.
+  // TODO: 전환 필요, 아직 마이그레이션 방법에 대해 물어보는 사람만 종종 있고... 구체적으로 괜찮은 답변이 없음 😅
+  //       아직 기능 자체를 삭제할(removal) 예정은 아니니 이슈로만 올려두고 천천히 생각해보자!
   @Bean
   AffirmativeBased accessDecisionManager(AclEntryVoter aclEntryVoter) {
     List<AccessDecisionVoter<?>> decisionVoters =
