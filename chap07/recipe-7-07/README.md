@@ -10,11 +10,13 @@
 
 ### 이번 레시피에서 확인해야할  내용
 
-* ⬜ ACL 서비스 설정하기
+* ✅ ACL 서비스 설정하기
   
-* ⬜ 도메인 객체에 대한 ACL 관리하기
+* ✅ 도메인 객체에 대한 ACL 관리하기
   
-* ⬜ 표현식을 이용해 접근 통제 결정하기
+* ✅ 표현식을 이용해 접근 통제 결정하기
+
+* ⬜ AffirmativeBased 사용한 부분  AuthorizationManager 사용으로 전환해보기 😅
 
 
 
@@ -76,7 +78,7 @@ Todo 게시글 하나를 썼을 때...
 
 
 
-#### ACL_ENTRY 테이블
+#### ACL_ENTRY 테이블 (아니다 이건 문제가 아닌 것 같다. 😅)
 
 * 내용이 없음... READ, WRITE, DELETE 관련해서 ROW가 입력되어야했을 것으로 예상했는데, 입력된 행이 없었음.
 
@@ -113,12 +115,61 @@ Todo 게시글 하나를 썼을 때...
 
 
 
+## AffirmativeBased 사용한 부분  AuthorizationManager 사용으로 전환해보기 😅
+
+이제 AuthorizationManager 로 대신 쓰라고 하는데...
+
+```java
+  // 😈 5.8.x에서는 Deprecated, 5.7.x에서는 아님.
+  @Bean
+  AffirmativeBased accessDecisionManager(AclEntryVoter aclEntryVoter) {
+    List<AccessDecisionVoter<?>> decisionVoters =
+        Arrays.asList(new WebExpressionVoter(), aclEntryVoter);
+    return new AffirmativeBased(decisionVoters);
+  }
+
+```
+
+
+
 
 
 
 ## 의견
 
-* 
+막히던 문제가 2가지가 있었는데 해결이 되었다.
+
+1. 개별 메서드 테스트를 하면 다 성공인데, 통합 테스트를 하면 꼭 실패하는 메서드가 있는 현상
+
+   > Todo 1번을 삭제하는 테스트에서, 삭제는 테스트 메서드 끝난후 롤백 되었으나, ACL 캐시는 그대로여서, 다음의  1번의 완료상태를 바꾸는 테스트가 권한없음으로 실패하는 현상이였던 것 같다.
+   >
+   > CacheManager를 `TransactionAwareCacheManagerProxy`로 감싸면 테스트 실패 문제가 해결되었다.
+
+   ```java
+     @Bean
+     CacheManager jCacheCacheManager() throws Exception {
+       var factoryBean = new JCacheManagerFactoryBean();
+       factoryBean.setCacheManagerUri(new ClassPathResource("ehcache.xml").getURI());
+       factoryBean.afterPropertiesSet();
+   
+       var cacheManager = new JCacheCacheManager(Objects.requireNonNull(factoryBean.getObject()));
+       return new TransactionAwareCacheManagerProxy(cacheManager); // ✨
+     }
+   ```
+
+   > **`TransactionAwareCacheManagerProxy`**
+   >
+   > “타겟 CacheManager에 대한 프록시로, Spring이 관리하는 트랜잭션과 동기화되는 트랜잭션 인식 캐시 객체를 노출합니다. 이 캐시 객체들은 `Cache.put` 연산을 Spring의 `org.springframework.transaction.support.TransactionSynchronizationManager`를 통해 동기화합니다. 실제 캐시 put 연산은 성공적인 트랜잭션의 after-commit 단계에서만 수행됩니다. 만약 활성 트랜잭션이 없다면, `Cache.put` 연산은 평소처럼 즉시 수행됩니다.”
+   >
+   > 즉, 이는 Spring 트랜잭션과 캐시 연산 사이의 동기화를 설명하고 있습니다. 트랜잭션이 활성 상태인 경우, 캐시에 데이터를 넣는 `put` 연산은 트랜잭션이 성공적으로 커밋된 후에만 수행됩니다. 반면, 트랜잭션이 활성 상태가 아닌 경우에는 `put` 연산이 즉시 수행됩니다. 이렇게 하면 트랜잭션 중에 발생할 수 있는 문제를 방지하고 데이터 일관성을 유지할 수 있습니다.
+
+   이 문제가 가장 중료했음..
+
+2. 다른 하나는 레거시 프로젝트에서 나타났던 문제인데.. 그곳에 작성 `->>`   [recipe-7-07-legacy](../recipe-7-07-legacy) 참고!!
+
+   이 문제 때문에, 여기 요즘의 프로젝트 구성에는 EhCache를 3.x로 버전업하고 JCache로 사용하도록 바꿨음.
+
+
 
 
 

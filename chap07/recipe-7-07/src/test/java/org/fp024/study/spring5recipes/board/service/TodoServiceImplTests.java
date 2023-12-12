@@ -4,22 +4,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.fp024.study.spring5recipes.board.config.TodoRootConfig;
 import org.fp024.study.spring5recipes.board.config.TodoWebConfig;
 import org.fp024.study.spring5recipes.board.domain.Todo;
 import org.fp024.study.spring5recipes.board.security.TodoAclConfig;
 import org.fp024.study.spring5recipes.board.security.TodoSecurityConfig;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 /*
  서비스 메서드 호출 보호가 설정되어있으므로 Mock 유저 설정이 필요하다.
 */
+@Slf4j
 @SpringJUnitWebConfig(
     classes = {
       TodoRootConfig.class, //
@@ -30,11 +32,9 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser(
     value = "user00",
     authorities = {"USER"})
+@DirtiesContext
 class TodoServiceImplTests {
   @Autowired private TodoService service;
-
-  @BeforeEach
-  void setUp() {}
 
   @Test
   void listTodos() {

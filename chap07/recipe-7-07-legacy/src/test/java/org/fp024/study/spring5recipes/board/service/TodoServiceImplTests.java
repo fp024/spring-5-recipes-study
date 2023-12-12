@@ -32,7 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
       TodoSecurityConfig.class,
       TodoAclConfig.class
     })
-@DirtiesContext
 @WithMockUser(
     value = "user00",
     authorities = {"USER"})

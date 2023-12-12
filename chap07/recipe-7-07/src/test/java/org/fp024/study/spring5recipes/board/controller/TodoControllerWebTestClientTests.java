@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.servlet.client.MockMvcWebTestClient;
@@ -26,6 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
       TodoSecurityConfig.class,
       TodoAclConfig.class
     })
+@DirtiesContext
 class TodoControllerWebTestClientTests {
 
   @Autowired private WebApplicationContext wac;

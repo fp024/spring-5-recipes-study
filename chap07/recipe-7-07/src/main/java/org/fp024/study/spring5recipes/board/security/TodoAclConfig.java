@@ -6,6 +6,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.jcache.JCacheCacheManager;
 import org.springframework.cache.jcache.JCacheManagerFactoryBean;
+import org.springframework.cache.transaction.TransactionAwareCacheManagerProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -46,12 +47,17 @@ public class TodoAclConfig {
         new Permission[] {BasePermission.ADMINISTRATION, BasePermission.DELETE});
   }
 
+  // ✨✨✨ 캐시가 트랜젝션내에서 실행되므로 TransactionAwareCacheManagerProxy를 반드시 사용해주자.
+  //         정상적인 흐름에서는 문제가 나타니지 않을 수 있는데, 롤백 상황에서 DB는 롤백 되었는데,
+  //         캐시는 그대로인 상태가 되는 문제가 있을 수 있음.
   @Bean
-  JCacheCacheManager jCacheCacheManager() throws Exception {
+  CacheManager jCacheCacheManager() throws Exception {
     var factoryBean = new JCacheManagerFactoryBean();
     factoryBean.setCacheManagerUri(new ClassPathResource("ehcache.xml").getURI());
     factoryBean.afterPropertiesSet();
-    return new JCacheCacheManager(Objects.requireNonNull(factoryBean.getObject()));
+
+    var cacheManager = new JCacheCacheManager(Objects.requireNonNull(factoryBean.getObject()));
+    return new TransactionAwareCacheManagerProxy(cacheManager);
   }
 
   @Bean

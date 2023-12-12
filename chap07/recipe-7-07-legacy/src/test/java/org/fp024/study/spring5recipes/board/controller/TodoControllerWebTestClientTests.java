@@ -20,7 +20,6 @@ import org.springframework.web.context.WebApplicationContext;
  * WebTestClient는 일반 웹페이지 컨트롤러 메서드 테스트하는데는 안 어울린다.
  * REST API 테스트 할 때만 사용하는 것이 좋을 것 같음.
  */
-@DirtiesContext
 @SpringJUnitWebConfig(
     classes = {
       TodoRootConfig.class, //

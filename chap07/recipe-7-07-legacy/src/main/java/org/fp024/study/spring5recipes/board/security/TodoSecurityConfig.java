@@ -21,6 +21,7 @@ import org.springframework.security.web.access.expression.WebExpressionVoter;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) // ✨
 public class TodoSecurityConfig extends WebSecurityConfigurerAdapter {
+  // 💡 5.7.x 보다 훨씬 이전 버전으로 낮춰서 테스트 해야할 때도 있어서, WebSecurityConfigurerAdapter 상속은 그냥 냅두자.
 
   private final DataSource dataSource;
 
