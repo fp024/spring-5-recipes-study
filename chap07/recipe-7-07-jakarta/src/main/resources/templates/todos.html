@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="utf-8">
+  <title>To-do List</title>
+  <link type="text/css" rel="stylesheet"
+        th:href="@{/webjars/semantic/dist/semantic.min.css}"/>
+</head>
+
+<body>
+<div class="ui container">
+  <div class="ui inverted menu">
+    <a class="item" th:href="@{/todos}">To-dos</a>
+    <div class="right menu" sec:authorize="isAuthenticated()">
+      <div class="item">
+        <form th:action="@{/logout}" method="post">
+          <button class="ui small red basic compact button">Logout</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--/* 목록 페이지가 항상 로그인을 요구해서 익명인 경우가 없음. */-->
+  <th:block sec:authorize="isAuthenticated()">
+    <h4 th:text="|To-dos for ${#authentication.name}|"></h4>
+    <!--/* 보유한 권한 목록 표시 */-->
+    <ul>
+      <li th:each="authority : ${#authentication.authorities}" th:text="${authority.authority}"></li>
+    </ul>
+  </th:block>
+
+
+  <table class="ui celled table">
+    <thead>
+    <tr>
+      <th class="three wide">Owner</th>
+      <th class="five wide">To-do</th>
+      <th class="two wide">Completed</th>
+      <th class="six wide">&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="todo :${todos}">
+      <td th:text="${todo.owner}"></td>
+      <td th:text="${todo.description}"></td>
+      <td th:text="${todo.completed}"></td>
+      <td>
+        <th:block th:if="${!todo.completed}">
+          <form th:action="@{|/todos/${todo.id}/completed|}" method="post" style="float: left;">
+            <input type="hidden" name="_method" value="PUT"/>
+            <button class="ui mini green icon button"><i class="check circle icon"></i></button>
+          </form>
+        </th:block>
+        <form th:action="@{|/todos/${todo.id}|}" method="post" style="float: left;">
+          <input type="hidden" name="_method" value="DELETE"/>
+          <button class="ui mini red icon button"><i class="remove circle icon"></i></button>
+        </form>
+      </td>
+
+    </tr>
+
+    <tr>
+      <td colspan="4">
+        <a class="ui mini icon button" th:href="@{/todos/new}">New To-do <i
+            class="add circle icon"></i></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
+

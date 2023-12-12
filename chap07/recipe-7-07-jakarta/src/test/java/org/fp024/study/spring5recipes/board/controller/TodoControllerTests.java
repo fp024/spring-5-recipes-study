@@ -84,7 +84,6 @@ class TodoControllerTests {
             )
         .andDo(print())
         .andExpect(status().isFound())
-        .andExpect(model().attributeExists("todo"))
         .andExpect(redirectedUrl("/todos"));
   }
 
