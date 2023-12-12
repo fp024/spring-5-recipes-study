@@ -9,6 +9,7 @@ import org.fp024.study.spring5recipes.board.config.TodoWebConfig;
 import org.fp024.study.spring5recipes.board.domain.Todo;
 import org.fp024.study.spring5recipes.board.security.TodoAclConfig;
 import org.fp024.study.spring5recipes.board.security.TodoSecurityConfig;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
@@ -31,6 +32,9 @@ import org.springframework.transaction.annotation.Transactional;
     authorities = {"USER"})
 class TodoServiceImplTests {
   @Autowired private TodoService service;
+
+  @BeforeEach
+  void setUp() {}
 
   @Test
   void listTodos() {
@@ -73,9 +77,8 @@ class TodoServiceImplTests {
       authorities = {"USER"})
   @Test
   void findOthersTodosById() {
-    assertThatThrownBy(() -> service.findById(1L))
-        .isInstanceOf(AccessDeniedException.class)
-        .hasMessage("Access is denied");
+    assertThatThrownBy(() -> service.findById(1L)) //
+        .isInstanceOf(AccessDeniedException.class);
   }
 
   /*

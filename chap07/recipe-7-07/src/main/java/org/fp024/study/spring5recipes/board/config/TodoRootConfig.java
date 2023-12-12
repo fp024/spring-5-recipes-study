@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
       @Filter(classes = Controller.class),
       @Filter(classes = Configuration.class),
     })
-@EnableTransactionManagement
+@EnableTransactionManagement(order = 0)
 @PropertySource("classpath:database.properties")
 @Configuration
 public class TodoRootConfig {

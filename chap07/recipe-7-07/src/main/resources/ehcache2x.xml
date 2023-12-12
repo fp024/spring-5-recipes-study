@@ -1,0 +1,21 @@
+<!-- JCache + EhCache 3.x 사용하도록 바꾼 상태이긴한데, 2.x 설정은 참고용으로 남겨둠. -->
+<ehcache>
+  <diskStore path="java.io.tmpdir"/>
+
+  <defaultCache
+    maxElementsInMemory="1000"
+    eternal="false"
+    timeToIdleSeconds="120"
+    timeToLiveSeconds="120"
+    overflowToDisk="true"
+  />
+
+  <cache name="aclCache"
+    maxElementsInMemory="1000"
+    eternal="false"
+    timeToIdleSeconds="600"
+    timeToLiveSeconds="3600"
+    overflowToDisk="true"
+  />
+
+</ehcache>

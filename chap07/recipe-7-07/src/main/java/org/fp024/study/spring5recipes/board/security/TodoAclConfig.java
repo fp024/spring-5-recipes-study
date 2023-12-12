@@ -1,10 +1,14 @@
 package org.fp024.study.spring5recipes.board.security;
 
+import java.util.Objects;
 import javax.sql.DataSource;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.jcache.JCacheCacheManager;
+import org.springframework.cache.jcache.JCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.acls.AclEntryVoter;
@@ -25,6 +29,7 @@ import org.springframework.security.acls.model.Permission;
 import org.springframework.security.acls.model.PermissionGrantingStrategy;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+@EnableCaching
 @Configuration
 public class TodoAclConfig {
   private final DataSource dataSource;
@@ -42,8 +47,11 @@ public class TodoAclConfig {
   }
 
   @Bean
-  EhCacheCacheManager ehCacheManagerFactoryBean() {
-    return new EhCacheCacheManager();
+  JCacheCacheManager jCacheCacheManager() throws Exception {
+    var factoryBean = new JCacheManagerFactoryBean();
+    factoryBean.setCacheManagerUri(new ClassPathResource("ehcache.xml").getURI());
+    factoryBean.afterPropertiesSet();
+    return new JCacheCacheManager(Objects.requireNonNull(factoryBean.getObject()));
   }
 
   @Bean
