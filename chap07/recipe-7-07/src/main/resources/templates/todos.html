@@ -52,12 +52,10 @@
             <button class="ui mini green icon button"><i class="check circle icon"></i></button>
           </form>
         </th:block>
-        <th:block sec:authorize="hasAuthority('ADMIN')">
         <form th:action="@{|/todos/${todo.id}|}" method="post" style="float: left;">
           <input type="hidden" name="_method" value="DELETE"/>
           <button class="ui mini red icon button"><i class="remove circle icon"></i></button>
         </form>
-        </th:block>
       </td>
 
     </tr>

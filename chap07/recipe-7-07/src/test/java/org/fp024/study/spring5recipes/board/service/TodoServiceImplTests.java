@@ -75,7 +75,7 @@ class TodoServiceImplTests {
   void findOthersTodosById() {
     assertThatThrownBy(() -> service.findById(1L))
         .isInstanceOf(AccessDeniedException.class)
-        .hasMessage("Access Denied");
+        .hasMessage("Access is denied");
   }
 
   /*
