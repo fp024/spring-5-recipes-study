@@ -129,6 +129,31 @@ include 'chap05:recipe-5-09'
 
 
 /* ===== Chapter 7 스프링 시큐리티 ===== */
+include 'chap07:recipe-7-01-i'
+include 'chap07:recipe-7-01-ii'
+include 'chap07:recipe-7-01-iii'
+// 'recipe-7-01-iv'는 recipe-7-01-iii 에 내용 포함.
+include 'chap07:recipe-7-02-i'
+// 'recipe-7-02-ii ~ iii'는 recipe-7-02-i 에 내용 포함.
+include 'chap07:recipe-7-03-i'
+include 'chap07:recipe-7-03-ii'
+// 'recipe-7-03-iii'는 recipe-7-03-ii 에 내용 포함.
+include 'chap07:recipe-7-03-iv'
+include 'chap07:recipe-7-03-v'
+include 'chap07:recipe-7-03-vi'
+include 'chap07:recipe-7-04:legacy:recipe-7-04-i'
+include 'chap07:recipe-7-04:legacy:recipe-7-04-ii'
+include 'chap07:recipe-7-04:legacy:recipe-7-04-iii'
+include 'chap07:recipe-7-04:current:recipe-7-04-i'
+include 'chap07:recipe-7-05-i'
+include 'chap07:recipe-7-05-ii'
+// 'recipe-7-05-iii'은 recipe-7-05-ii에 내용 포함.
+include 'chap07:recipe-7-06-i'
+include 'chap07:recipe-7-06-i-jsp'
+include 'chap07:recipe-7-07'
+include 'chap07:recipe-7-07-legacy'
+include 'chap07:recipe-7-07-jakarta'
+include 'chap07:recipe-7-08'
 
 
 
