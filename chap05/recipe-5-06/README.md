@@ -51,7 +51,7 @@
 
 
 
-### Validator의 supports가 원래 검증하려는 도메인 외에 org.springframework.web.server.session.InMemoryWebSessionStore$InMemoryWebSession를 검증하려 시도한다.
+### (✨ 해결됨 ) Validator의 supports가 원래 검증하려는 도메인 외에 org.springframework.web.server.session.InMemoryWebSessionStore$InMemoryWebSession를 검증하려 시도한다.
 
 ```java
 @Component
@@ -94,6 +94,19 @@ public class ReservationValidator implements Validator {
 * MVC환경에선는 이런 문제가 없었는데....😅 왜 그럴까?
 
   * 일단은 Reservation, WebSession 두가지에 대해 허용되게만 해둠.
+
+🔺 이 문제는 해결했다. 컨트롤러의 InitBinder 설정에 검증할 커멘드/폼 속성을 명시하지 않아서 모두 검증하려 시도해서 그랬음.
+
+```java
+  @InitBinder("reservation") // ✨ 이렇게 검증 대상 속성을 명시해주면 된다. 
+  public void initBinder(WebDataBinder binder) {
+    binder.setValidator(reservationValidator);
+  }
+```
+
+* https://github.com/fp024/spring-5-recipes-study/issues/21
+
+
 
 
 

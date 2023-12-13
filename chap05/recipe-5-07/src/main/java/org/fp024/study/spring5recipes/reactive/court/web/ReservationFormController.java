@@ -53,7 +53,7 @@ public class ReservationFormController {
     }
   }
 
-  @InitBinder
+  @InitBinder("reservation")
   public void initBinder(WebDataBinder binder) {
     binder.setValidator(reservationValidator);
   }

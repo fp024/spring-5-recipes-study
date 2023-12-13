@@ -7,23 +7,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-import org.springframework.web.server.WebSession;
 
 @Slf4j
 @Component
 public class ReservationValidator implements Validator {
   @Override
   public boolean supports(Class<?> clazz) {
-    // 일반적인 MVC 라면 여기서 Reservation 에 대한 지원만 확인하는데,
-    // org.springframework.web.server.session.InMemoryWebSessionStore$InMemoryWebSession 를 검증하려하면서
-    // 오류가 난다.
     LOGGER.info("clazz: {}", clazz);
     LOGGER.info("### supports: {}", Reservation.class.isAssignableFrom(clazz));
-
-    // 그래서 저자님은 무조건 true로 반환한 부분이 있던데..
-    // return Reservation.class.isAssignableFrom(clazz);
-    // 나는 다음 처럼 2가지 요건에 대해서만 추가해보자.
-    return Reservation.class.isAssignableFrom(clazz) || WebSession.class.isAssignableFrom(clazz);
+    return Reservation.class.isAssignableFrom(clazz);
   }
 
   @Override
