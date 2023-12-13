@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🎉 Reservation Success 🎉</title>
+  <link th:href="@{/webjars_locator/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<div class="card">
+  <div class="card-body">
+    <div class="alert alert-success" role="alert">
+      Your reservation has been made successfully.
+    </div>
+    <p><a th:href="@{/}" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">Go to Index Page</a></p>
+  </div>
+</div>
+</body>
+</html>

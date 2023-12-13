@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>💡 레시피 7-08 웹플럭스 애플리케이션에 보안 기능 추가하기</title>
+  <link th:href="@{/webjars_locator/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="card">
+  <div class="card-header">
+    <h2>레시피 7-08 웹플럭스 애플리케이션에 보안 기능 추가하기 : 테스트 URL</h2>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">레시피 7-08 웹플럭스 애플리케이션에 보안 기능 추가하기 동작 테스트</h5>
+    <p>
+      ✨ Spring 5.3.x, Spring Security 5.8.x 환경에서는 webflux Form 로그인을 지원한다.
+    </p>
+    <ul>
+      <li><a th:href="@{/welcome}">환영 페이지</a></li>
+      <li><a th:href="@{/reservationQuery}">코트 예약 조회</a></li>
+      <li><a th:href="@{/reservationForm}">코드 예약 등록</a></li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>

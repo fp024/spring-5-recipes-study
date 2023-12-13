@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reservation Form</title>
+  <link th:href="@{/webjars_locator/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <style>
+    .error {
+      color: #ff0000;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+<div class="card">
+  <div class="card-body">
+    <form method="post" th:action="@{/reservationForm}" th:object="${reservation}">
+      <div class="input-group w-75">
+
+        <div class="input-group mb-3">
+          <div class="input-group mb-1">
+            <span class="input-group-text">Court Name</span>
+            <input class="form-control" type="text" th:field="*{courtName}"/>
+          </div>
+          <div class="error" th:if="${#fields.hasErrors('courtName')}"
+               th:errors="*{courtName}"></div>
+        </div>
+
+        <div class="mb-3">
+          <div class="input-group">
+            <span class="input-group-text">Date</span>
+            <input class="form-control" type="date" th:field="*{date}"/>
+          </div>
+          <div class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+        </div>
+
+
+        <div class="input-group mb-3">
+          <div class="input-group">
+            <span class="input-group-text">Hour</span>
+            <input class="form-control" type="number" th:field="*{hour}"/>
+          </div>
+          <div class="error" th:if="${#fields.hasErrors('hour')}" th:errors="*{hour}"></div>
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group">
+            <span class="input-group-text">Player Name</span>
+            <input class="form-control" type="text" th:field="*{player.name}"/>
+          </div>
+          <div class="error" th:if="${#fields.hasErrors('player.name')}"
+               th:errors="*{player.name}"></div>
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group">
+            <span class="input-group-text">Player Phone</span>
+            <input class="form-control" type="text" th:field="*{player.phone}"/>
+          </div>
+          <div class="error" th:if="${#fields.hasErrors('player.phone')}"
+               th:errors="*{player.phone}">
+          </div>
+        </div>
+
+        <div class="input-group mb-3 w-50">
+          <div class="input-group">
+            <span class="input-group-text">Sport Type</span>
+            <select class="form-select" th:field="*{sportType}">
+              <option th:each="sportType : ${sportTypes}" th:value="${sportType.id}"
+                      th:text="${sportType.name}"/>
+            </select>
+          </div>
+          <div class="error" th:if="${#fields.hasErrors('sportType')}"
+               th:errors="*{sportType}"></div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input class="btn btn-secondary" type="submit"/>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+</body>
+</html>

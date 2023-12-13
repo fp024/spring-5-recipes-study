@@ -115,6 +115,7 @@ chap07\recipe-7-06-i-jsp
 chap07\recipe-7-07
 chap07\recipe-7-07-legacy
 chap07\recipe-7-07-jakarta
+chap07\recipe-7-08
 chap10
 chap10\recipe-10-01-i
 chap10\recipe-10-01-ii

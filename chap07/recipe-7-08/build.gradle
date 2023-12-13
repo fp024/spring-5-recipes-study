@@ -1,0 +1,61 @@
+plugins {
+  id 'application'
+  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  id 'war'
+  id "org.gretty" version "${grettyVersion}"
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of("${javaVersion}")
+  }
+}
+
+ext {
+  springVersion = "${springVersion}"
+  springSecurityVersion = '5.8.9-SNAPSHOT'
+  // springSecurityVersion = '5.8.4'
+
+  thymeleafSpringVersion = "${thymeleafSpring5Version}"
+}
+
+apply from: "../../gradle/default-settings.gradle"
+
+dependencies {
+  implementation platform("org.springframework:spring-framework-bom:${springVersion}")
+  implementation platform("org.springframework.security:spring-security-bom:${springSecurityVersion}")
+
+  implementation 'org.springframework:spring-context'
+  implementation 'org.springframework:spring-webmvc'
+  implementation 'org.springframework:spring-webflux'
+
+  implementation 'org.springframework.security:spring-security-config'
+  implementation 'org.springframework.security:spring-security-core'
+  implementation 'org.springframework.security:spring-security-web'
+
+  // https://mvnrepository.com/artifact/org.springframework.security/spring-security-webflux
+  // "spring-security-webflux"는 2017년 10월 5.0.0.M5 버전 이후에 종료된 것 같다. 메인 프로젝트에 통합 된 듯함.
+  // implementation 'org.springframework.security:spring-security-webflux'
+
+  implementation "io.projectreactor:reactor-core:${reactorCoreVersion}"
+  implementation "io.projectreactor.netty:reactor-netty:${reactorNettyVersion}"
+
+  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+
+  implementation "org.thymeleaf:thymeleaf-spring5:${thymeleafSpringVersion}"
+  implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5:${thymeleafSpringVersion}"
+  implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:${thymeleafExtrasJava8timeVersion}"
+
+  implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
+  implementation "org.webjars:bootstrap:${bootstrapVersion}"
+
+  testImplementation 'org.springframework:spring-test'
+  testImplementation 'org.springframework.security:spring-security-test'
+  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+}
+
+application {
+  mainClass = 'org.fp024.study.spring5recipes.reactive.court.ReactorNettyBootstrap'
+}
+
+apply from: "../../gradle/gretty-settings.gradle"
