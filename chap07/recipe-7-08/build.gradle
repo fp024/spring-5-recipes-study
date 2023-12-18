@@ -13,9 +13,6 @@ java {
 
 ext {
   springVersion = "${springVersion}"
-  springSecurityVersion = '5.8.9-SNAPSHOT'
-  // springSecurityVersion = '5.8.4'
-
   thymeleafSpringVersion = "${thymeleafSpring5Version}"
 }
 

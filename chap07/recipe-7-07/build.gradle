@@ -10,12 +10,6 @@ java {
   }
 }
 
-ext {
-  springSecurityVersion = '5.8.9-SNAPSHOT'
-  // springSecurityVersion = '5.8.4'
-  // springSecurityVersion = '5.7.11'
-}
-
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
