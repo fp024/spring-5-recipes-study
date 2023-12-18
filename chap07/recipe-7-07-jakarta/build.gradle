@@ -11,7 +11,7 @@ java {
 }
 
 ext {
-  springVersion = "6.0.13"
+  springVersion = "6.0.15"
   thymeleafSpringVersion = "${thymeleafSpring5Version}" // 5, 6 버전 동일
   springSecurityVersion = '6.1.6-SNAPSHOT'
   jakartaElVersion = '5.0.0-M1'
