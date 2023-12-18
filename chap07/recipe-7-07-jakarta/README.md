@@ -87,9 +87,9 @@ id가 처음부터 제대로 넘어가지 않아서 생긴 문제였음.
 
 ### -parameters로 컴파일하기 
 
-Spring Framework 6.1에서는 `LocalVariableTableParameterNameDiscoverer`를 제거합니다. 이는 `@PreAuthorize` 및 기타 메소드 보안 주석이 매개변수 이름을 처리하는 방식에 영향을 미칩니다. 예를 들어, 매개변수 이름을 사용하는 메소드 보안 주석을 사용하고 있다면:
+Spring Framework 6.1에서는 `LocalVariableTableParameterNameDiscoverer`를 제거합니다. 이는 `@PreAuthorize` 및 기타 메소드 보안 어노테이션이 매개변수 이름을 처리하는 방식에 영향을 미칩니다. 예를 들어, 매개변수 이름을 사용하는 메소드 보안 어노테이션을 사용하고 있다면, 런타임에서 매개변수 이름을 사용할 수 있도록 `-parameters`로 컴파일해야 합니다.  
 
-#### id 매개변수 이름을 사용하는 메소드 시큐리티 어노테이션 주석 
+#### id 매개변수 이름을 사용하는 메소드 보안 어노테이션
 
 ```java
 @PreAuthorize("@authz.checkPermission(#id, authentication)")
@@ -98,7 +98,7 @@ public void doSomething(Long id) {
 }
 ```
 
-런타임에서 매개변수 이름을 사용할 수 있도록 `-parameters`로 컴파일해야 합니다. 이에 대한 자세한 정보는 [Spring Framework 6.1](https://github.com/spring-projects/spring-framework/wiki/Upgrading-to-Spring-Framework-6.x#core-container)로 업그레이드하는 페이지를 참조하십시오.
+이에 대한 자세한 정보는 [Spring Framework 6.1](https://github.com/spring-projects/spring-framework/wiki/Upgrading-to-Spring-Framework-6.x#core-container)로 업그레이드하는 페이지를 참조하십시오.
 
 > 그러면 Gradle 빌드 옵션에 `-parameters`를 추가해야할 것 같다.
 
@@ -114,7 +114,7 @@ tasks.withType(JavaCompile) {
 
 이후 테스트가 성공해서 버전을 Spring 6.1.2 + Spring Seucirty 6.2.1-SNAPSHOT으로 올리기로 했다. 👍
 
-
+* 2023-12-19에 6.2.1 정식버전 나와서 테스트 했는데, 잘 동작했다.
 
 
 

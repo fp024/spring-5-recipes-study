@@ -17,7 +17,7 @@ tasks.withType(JavaCompile) {
 ext {
   springVersion = "${springVersion_6x}"
   thymeleafSpringVersion = "${thymeleafSpring5Version}" // 5, 6 버전 동일
-  springSecurityVersion = '6.2.1-SNAPSHOT'
+  springSecurityVersion = "${springSecurity_6_2_x_Version}"
   jakartaElVersion = '5.0.0-M1'
 }
 
