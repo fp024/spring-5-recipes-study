@@ -6,3 +6,4 @@ rootProject.name = 'spring-5-recipes-study-chap09'
 
 /* ===== Chapter 9 데이터 액세스 ===== */
 include 'recipe-9-00-i'
+// 'recipe-9-00-ii'는 'recipe-9-00-i'에 포함

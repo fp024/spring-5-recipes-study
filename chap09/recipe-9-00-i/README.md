@@ -90,6 +90,10 @@ Select 결과에 대해서는 `jdbc.resultsettable` Logger 설정으로 텍스�
 * [Maven Repository: org.bgee.log4jdbc-log4j2 » log4jdbc-log4j2-jdbc4.1 (mvnrepository.com)](https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1)
 * [Log4jdbc-log4j2 (brunorozendo.com)](https://log4jdbc.brunorozendo.com/)
 
+* 다른 곳.. 이건 다른 것 같은데...
+  * https://github.com/arthurblake/log4jdbc
+  * https://code.google.com/archive/p/log4jdbc/downloads
+
 
 
 ### 예제 실행
@@ -117,7 +121,55 @@ gradle clean run
 
 ## 기타
 
-* ...
+### recipe-9-00-ii의 내용
+
+이 내용을 봣을 때..  다른 부분은 다 동일하고 데이터소스 부분만 hikaricp로 바꾼 내용이라 이 프로젝트를 수정했다.
+
+* 커밋: 
+
+
+
+HikariCP를 붙이고 나서부터 실행할 때 다음 오류가 나는데....
+
+```
+05:08:45.567 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+05:08:45.750 [main] ERROR jdbc.sqltiming - 1. Connection.setNetworkTimeout(java.util.concurrent.ThreadPoolExecutor@488eb7f2[Running, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], 5000;      
+java.sql.SQLFeatureNotSupportedException: feature not supported
+        at org.hsqldb.jdbc.JDBCUtil.notSupported(Unknown Source) ~[hsqldb-2.7.2.jar:2.7.2]
+        at org.hsqldb.jdbc.JDBCConnection.setNetworkTimeout(Unknown Source) ~[hsqldb-2.7.2.jar:2.7.2]
+        at net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy.setNetworkTimeout(ConnectionSpy.java:1120) ~[log4jdbc-log4j2-jdbc4.1-1.16.jar:?]
+        at com.zaxxer.hikari.pool.PoolBase.getAndSetNetworkTimeout(PoolBase.java:529) ~[HikariCP-5.1.0.jar:?]
+        ....
+05:08:45.761 [main] INFO  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Driver does not support get/set network timeout for connections. (feature not supported)
+05:08:45.771 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@2bb7bd00
+05:08:45.773 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+
+```
+
+실행에는 문제가 없었지만...
+
+* https://www.cubrid.com/qna/3841762
+
+* https://github.com/ryenus/hsqldb/blob/b1a6ac86c0956efc47dbc728436e53e95c3f4ed9/src/org/hsqldb/jdbc/JDBCConnection.java#L3073
+* https://github.com/ryenus/hsqldb/blob/b1a6ac86c0956efc47dbc728436e53e95c3f4ed9/src/org/hsqldb/jdbc/JDBCUtil.java#L96
+
+
+
+원인은 HikariCP를 사용하게 되면서... setNetworkTimeout() 호출이 일어나게 되는데,  HSQLDB의 JDBCConnection.setNetworkTimeout() 을 호출하게 되었을 때 지원하지 않는다고 예외 던져지게 되고, 
+
+이걸 HikariCP는 오류 아니라고 판단해서 INFO로 로깅을 하는데.. log4jdbc는 ERROR 로그 레벨로 노출해서 그런 것 같다.
+
+H2 DB는 어떻게 되어있나보았는데 여기도 지원하지 않는다.
+
+* https://github.com/h2database/h2database/blob/19b770ec010a621989a980bf166a10ac10072a61/h2/src/main/org/h2/jdbc/JdbcConnection.java#L1847
+
+MySQL의 Connection/J에는 구현이 되어있음.
+
+* https://github.com/mysql/mysql-connector-j/blob/release/8.x/src/main/user-impl/java/com/mysql/cj/jdbc/ConnectionImpl.java
+
+일단 커밋을 하고 MySQL로 바꿔서 다시 확인해보자! 😅
+
+
 
 
 
