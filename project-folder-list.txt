@@ -118,6 +118,7 @@ chap07\recipe-7-07-jakarta
 chap07\recipe-7-08
 chap09
 chap09\recipe-9-00-i
+chap09\recipe-9-00-ii
 chap10
 chap10\recipe-10-01-i
 chap10\recipe-10-01-ii

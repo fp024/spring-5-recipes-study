@@ -23,7 +23,9 @@ dependencies {
   implementation 'org.springframework:spring-webmvc'
   implementation 'org.springframework:spring-jdbc'
 
-  runtimeOnly "org.hsqldb:hsqldb:${hsqldbVersion}"
+  // runtimeOnly "org.hsqldb:hsqldb:${hsqldbVersion}"
+  runtimeOnly "com.mysql:mysql-connector-j:${mysqlConnectorJVersion}"
+  implementation "com.zaxxer:HikariCP:${hikariCpVersion}"
   implementation "org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:${log4jdbcVersion}"
 
   testImplementation 'org.springframework:spring-test'

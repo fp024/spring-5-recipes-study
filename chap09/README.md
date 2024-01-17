@@ -1,6 +1,6 @@
 # Chapter 9 데이터 액세스
 
-> 이전 몇몇 장에서도 DB를 사용했었지만, 이번 9장은 DB를 본격적으로 쓴느 장인데, 어떻게 해야할까? 😅
+> 이전 몇몇 장에서도 DB를 사용했었지만, 이번 9장은 DB를 본격적으로 쓰는 장인데, 어떻게 해야할까? 😅
 
 
 
@@ -29,6 +29,25 @@
 >   
 
 
+
+### MySQL 8
+
+log4jdbc를 사용할 때, HikariCP와 HSQLDB를 사용하면, HSQLDB에서 setNetworkTimeout() 기능을 지원하지 않아 log4jdbc에서 ERROR로그가 노출된다. 
+
+그래서 MySQL을 사용해보기로 했다.
+
+```sql
+CREATE DATABASE spring_5_recipes_study_chap09 CHARACTER SET utf8mb4;
+
+CREATE USER 'springuser'@'localhost' IDENTIFIED BY 'springpass';
+CREATE USER 'springuser'@'%' IDENTIFIED BY 'springpass';
+
+GRANT ALL PRIVILEGES ON spring_5_recipes_study_chap09.* TO 'springuser'@'localhost';
+GRANT ALL PRIVILEGES ON spring_5_recipes_study_chap09.* TO 'springuser'@'%';
+-- 위와 같이하면 GRANT OPTION 빼고 모든 권한을 준다.
+```
+
+✔ MySQL을 사용하고나서 부터 ERROR 로그가 발생하지 않는 것을 확인했다.
 
 
 

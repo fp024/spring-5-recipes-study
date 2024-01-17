@@ -1,7 +1,8 @@
 package org.fp024.study.spring5recipes.vehicle.config;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import java.nio.charset.StandardCharsets;
-import java.sql.Driver;
 import javax.sql.DataSource;
 import org.fp024.study.spring5recipes.vehicle.dao.PlainJdbcVehicleDao;
 import org.fp024.study.spring5recipes.vehicle.dao.VehicleDao;
@@ -11,13 +12,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 @Configuration
 @ComponentScan("org.fp024.study.spring5recipes.vehicle")
-@PropertySource("classpath:database.properties")
+@PropertySource("classpath:database-mysql.properties")
 public class VehicleConfiguration {
 
   private final Environment env;
@@ -31,24 +31,16 @@ public class VehicleConfiguration {
     return new PlainJdbcVehicleDao(dataSource);
   }
 
-  @Bean
-  public DataSource dataSource() {
-    SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-    dataSource.setDriverClass(getDriver(env.getProperty("jdbc.driver")));
-    dataSource.setUrl(env.getProperty("jdbc.url"));
-    dataSource.setUsername(env.getProperty("jdbc.username"));
-    dataSource.setPassword(env.getProperty("jdbc.password"));
-    return dataSource;
-  }
-
-  @SuppressWarnings("unchecked")
-  private Class<? extends Driver> getDriver(String driverClassName) {
-    try {
-
-      return (Class<? extends Driver>) Class.forName(driverClassName);
-    } catch (ClassNotFoundException e) {
-      throw new RuntimeException(e);
-    }
+  @Bean(destroyMethod = "close")
+  HikariDataSource dataSource() {
+    HikariConfig hikariConfig = new HikariConfig();
+    hikariConfig.setDriverClassName(env.getProperty("jdbc.driver"));
+    hikariConfig.setJdbcUrl(env.getProperty("jdbc.url"));
+    hikariConfig.setUsername(env.getProperty("jdbc.username"));
+    hikariConfig.setPassword(env.getProperty("jdbc.password"));
+    hikariConfig.setMinimumIdle(2);
+    hikariConfig.setMaximumPoolSize(5);
+    return new HikariDataSource(hikariConfig);
   }
 
   @Bean
@@ -64,7 +56,7 @@ public class VehicleConfiguration {
     ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
     databasePopulator.setSqlScriptEncoding(StandardCharsets.UTF_8.name());
     databasePopulator.setContinueOnError(false);
-    databasePopulator.addScript(new ClassPathResource("schema.sql"));
+    databasePopulator.addScript(new ClassPathResource("sql/mysql/schema.sql"));
 
     return databasePopulator;
   }
