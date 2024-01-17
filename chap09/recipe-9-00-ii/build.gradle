@@ -20,7 +20,6 @@ apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
   implementation 'org.springframework:spring-context'
-  implementation 'org.springframework:spring-webmvc'
   implementation 'org.springframework:spring-jdbc'
 
   // runtimeOnly "org.hsqldb:hsqldb:${hsqldbVersion}"
@@ -29,7 +28,6 @@ dependencies {
   implementation "org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:${log4jdbcVersion}"
 
   testImplementation 'org.springframework:spring-test'
-  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
 }
 
 application {
