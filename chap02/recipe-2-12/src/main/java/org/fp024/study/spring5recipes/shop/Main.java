@@ -8,11 +8,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Main {
   public static void main(String[] args) throws Exception {
     try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext()) {
-      String[] profiles =
-          ((String) context.getEnvironment().getSystemProperties().get("spring.active.profiles"))
-              .split(",");
 
-      context.getEnvironment().setActiveProfiles(profiles);
+      String[] profiles = context.getEnvironment().getActiveProfiles();
 
       LOGGER.info("active profiles: {}", Arrays.toString(profiles));
       context.scan("org.fp024.study.spring5recipes.shop");

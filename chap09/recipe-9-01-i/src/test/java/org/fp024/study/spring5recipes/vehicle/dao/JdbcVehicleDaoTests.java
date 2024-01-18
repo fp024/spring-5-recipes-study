@@ -2,18 +2,16 @@ package org.fp024.study.spring5recipes.vehicle.dao;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.sun.tools.javac.Main;
 import lombok.extern.slf4j.Slf4j;
+import org.fp024.study.spring5recipes.vehicle.Main;
 import org.fp024.study.spring5recipes.vehicle.domain.Vehicle;
 import org.fp024.study.spring5recipes.vehicle.test.DBTestUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 @Slf4j
-@ActiveProfiles({"mysql", "hsqldb"})
 @SpringJUnitConfig({Main.class})
 class JdbcVehicleDaoTests {
 

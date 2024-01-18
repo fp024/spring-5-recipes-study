@@ -10,7 +10,7 @@ import org.springframework.core.env.Environment;
 @Profile("mysql")
 @Configuration
 @PropertySource("classpath:database-mysql.properties")
-public class MySqlDatabaseConfiguration {
+public class MySqlDatabaseConfiguration extends DatabaseConfiguration {
 
   @Getter(AccessLevel.PROTECTED)
   private final Environment env;

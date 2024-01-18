@@ -25,7 +25,7 @@ public class Main {
 
   public static void main(String[] args) {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
-    context.scan("org.fp024.study.spring5recipes.vehicle");
+
     context
         .getBean(Main.class) //
         .run(args);

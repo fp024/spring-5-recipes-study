@@ -7,7 +7,7 @@
   * 시스템 환경변수를 읽어서 컨텍스트에 수동으로 넣어주었음.
 
     ```java
-    String[] profiles = ((String)context.getEnvironment().getSystemProperties().get("spring.active.profiles"))
+    String[] profiles = ((String)context.getEnvironment().getSystemProperties().get("spring.profiles.active"))
                   .split(",");
     context.getEnvironment().setActiveProfiles(profiles);
     ```
@@ -35,19 +35,26 @@
   
   // 테스트 환경 프로필 설정
   test {
-      systemProperty "spring.active.profiles", "${ACTIVE_PROFILES}"
+      systemProperty "spring.profiles.active", "${ACTIVE_PROFILES}"
       //...
   }
   
   // 실행환경 프로필 설정
   application {
-      applicationDefaultJvmArgs = ["-Dspring.active.profiles=${ACTIVE_PROFILES}"]
+      applicationDefaultJvmArgs = ["-Dspring.profiles.active=${ACTIVE_PROFILES}"]
       // ...
   }
   
   ```
   
-  application 클래스에서 spring.active.profiles 를 시스템 프로퍼티로 받아와서, applicationDefaultJvmArgs 에다 설정하는 식으로 진행했다.
+  application 클래스에서 `spring.profiles.active`를 시스템 프로퍼티로 받아와서, applicationDefaultJvmArgs 에다 설정하는 식으로 진행했다.
 
 
   힘들긴 했는데, 이런식으로 변수 선언해서 코드를 구성할 수 있는 것이 좋아보인다. 😄
+
+
+
+> 😂 안된다고 했던 부분은 왠지 내가 오타를 발생시켜서 그런 것 같음.
+>
+> * 잘못됨: `spring.active.profiles`
+> * 올바름: `spring.profiles.active`

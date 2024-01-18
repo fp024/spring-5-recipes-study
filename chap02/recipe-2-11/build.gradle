@@ -4,7 +4,7 @@ plugins {
 }
 
 String getActiveProfiles() {
-  def activeProfiles = System.getProperty("spring.active.profiles")
+  def activeProfiles = System.getProperty("spring.profiles.active")
   // if (activeProfiles == null || activeProfiles.isEmpty()) {
   if (!activeProfiles?.trim()) {  // Groovy의 null or empty 체크
     logger.info("activeProfiles is null or empty: ${activeProfiles}")
@@ -35,10 +35,10 @@ dependencies {
 }
 
 test {
-  systemProperty "spring.active.profiles", "${ACTIVE_PROFILES}"
+  systemProperty "spring.profiles.active", "${ACTIVE_PROFILES}"
 }
 
 application {
-  applicationDefaultJvmArgs = ["-Dspring.active.profiles=${ACTIVE_PROFILES}"]
+  applicationDefaultJvmArgs = ["-Dspring.profiles.active=${ACTIVE_PROFILES}"]
   mainClass = 'org.fp024.study.spring5recipes.shop.Main'   
 }

@@ -32,7 +32,12 @@ Main 클래스의 main을 실행하면 되므로 다음과 같이 실행해주�
 
 ```bash
 gradle clean run
+gradle clean run -Dspring.profiles.active=hsqldb
 ```
+
+* 프로필 파라미터 옵션을 추가하지 않으면 기본이 MySQL로 실행되게 했다.
+
+
 
 #### HSQLDB 실행 
 
@@ -46,10 +51,23 @@ gradle clean run -Dspring.profiles.active=hsqldb
 
 ```
 gradle clean test
+gradle clean test -Dspring.profiles.active=mysql
 gradle clean test -Dspring.profiles.active=hsqldb
 ```
 
 일단 커밋을 먼저하고 고쳐보자!
+
+수정을 했고..
+
+> 원인을 찾아보니 뭔가 오타가 많았다.
+>
+> 프로필 설정시 다음과 같이 써야하는데, `spring.profiles.active`
+>
+> `spring.active.profiles` 이런 식으로 쓰기도 했었고, (이래서 2장에 활성 프로필 가져오는 부분을 잘못작성했었음.😂 - 이부분 같이 수정)
+>
+> 공통 설정 상속을 빼먹기도 했음...
+
+이제 잘된다. 😊👍
 
 
 

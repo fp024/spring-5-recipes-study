@@ -46,7 +46,7 @@ String getActiveProfiles() {
 final ACTIVE_PROFILES = getActiveProfiles();
 
 tasks.named('test') {
-  systemProperty "spring.active.profiles", "${ACTIVE_PROFILES}"
+  systemProperty "spring.profiles.active", "${ACTIVE_PROFILES}"
 }
 
 application {
