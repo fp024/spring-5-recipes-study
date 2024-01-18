@@ -24,6 +24,8 @@ dependencies {
 
   runtimeOnly "org.hsqldb:hsqldb:${hsqldbVersion}"
   runtimeOnly "com.mysql:mysql-connector-j:${mysqlConnectorJVersion}"
+  runtimeOnly "com.h2database:h2:${h2dbVersion}"
+
   implementation "com.zaxxer:HikariCP:${hikariCpVersion}"
   implementation "org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:${log4jdbcVersion}"
 
@@ -46,11 +48,30 @@ String getActiveProfiles() {
 final ACTIVE_PROFILES = getActiveProfiles()
 
 tasks.named('test') {
-  systemProperty "spring.profiles.active", "${ACTIVE_PROFILES}"
+  useJUnitPlatform {
+    excludeTags 'integration'
+  }
+  systemProperty "spring.profiles.active", "test,${ACTIVE_PROFILES}"
 }
+
+tasks.register('integrationTest', Test) {
+  useJUnitPlatform {
+    includeTags 'integration'
+  }
+
+  systemProperty "spring.profiles.active", "${ACTIVE_PROFILES}"
+
+  testLogging {
+    outputs.upToDateWhen { false }
+    showStandardStreams = true
+  }
+
+  testClassesDirs = sourceSets.test.output.classesDirs
+  classpath = sourceSets.test.runtimeClasspath
+}
+
 
 application {
   mainClass = 'org.fp024.study.spring5recipes.vehicle.Main'
   applicationDefaultJvmArgs = ["-Dspring.profiles.active=${ACTIVE_PROFILES}"]
-
 }

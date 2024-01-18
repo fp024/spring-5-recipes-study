@@ -58,6 +58,8 @@ H2 DB는 어떻게 되어있나보았는데 여기도 지원하지 않는다.
 
 * https://github.com/h2database/h2database/blob/19b770ec010a621989a980bf166a10ac10072a61/h2/src/main/org/h2/jdbc/JdbcConnection.java#L1847
 
+  > ✨ 그런데 여기서는 해당 메서드 구현이 비어있기 때문에 예외가 발생하지 않아, 에러로그가 나타나진 않을 것 같다. 😅
+
 MySQL의 Connection/J에는 구현이 되어있음.
 
 * https://github.com/mysql/mysql-connector-j/blob/release/8.x/src/main/user-impl/java/com/mysql/cj/jdbc/ConnectionImpl.java

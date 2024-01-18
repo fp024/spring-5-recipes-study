@@ -5,9 +5,8 @@
 
 ### 이번 레시피에서 확인해야할  내용
 
-* ✔ DAO의 insert 메서드에 JDBC Template 사용
-  
-* ⬜ `PreparedStatementCreator` 를 활용해서 insert() 수정
+* ✔ `PreparedStatementCreator` 를 활용해서 insert() 수정
+* ⬜  insert()의 JDBC Template 사용처를 람다식으로 변경
 
 
 
