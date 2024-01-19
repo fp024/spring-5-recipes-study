@@ -7,9 +7,9 @@
 
 * ✔ `PreparedStatementCreator` 를 활용해서 insert() 수정
 
-* ✔  insert()의 JDBC Template 사용처를 람다식으로 변경
+* ✔  JDBC Template 사용처를 `PreparedStatementCreator`를 사용한 람다식으로 변경
 
-* ✅  insert()의 JDBC Template 사용처를 람다식으로 변경
+* ✅  JDBC Template 사용처를 `PreparedStatementSetter`를 사용한 람다식으로 변경
 
 
 
@@ -17,6 +17,33 @@
 ## 진행
 
 ##### 레시피 9-01-iii
+
+#### JDBC Template 사용처를 `PreparedStatementSetter`를 사용한 람다식으로 변경
+
+```java
+  // 이전: PreparedStatementCreator
+  @Override
+  public void insert(Vehicle vehicle) {
+    jdbcTemplate.update(
+        conn -> {
+          PreparedStatement ps = conn.prepareStatement(INSERT_SQL);
+          prepareStatement(ps, vehicle);
+          return ps;
+        });
+  }
+```
+
+```java
+  // 변경: PreparedStatementSetter
+  @Override
+  public void insert(Vehicle vehicle) {
+    jdbcTemplate.update(INSERT_SQL, ps -> prepareStatement(ps, vehicle));
+  }
+```
+
+
+
+#### 프로젝트 구성 수정
 
 9-01-ii  에서 진행했던 통합 테스트 나누고 했던 내용이 복잡한 것 같아서, 다시 합쳤다..ㅠㅠ
 
@@ -76,16 +103,6 @@
   ```
 
 위와 같이 설정하고나서 VSCode의 기본 테스트 메뉴에서도 테스트를 정상 수행할 수 있음을 확인했다.
-
-
-
-
-
-
-
-
-
-
 
 
 

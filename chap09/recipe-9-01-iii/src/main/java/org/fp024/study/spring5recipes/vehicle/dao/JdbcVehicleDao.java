@@ -54,12 +54,7 @@ public class JdbcVehicleDao implements VehicleDao {
 
   @Override
   public void insert(Vehicle vehicle) {
-    jdbcTemplate.update(
-        conn -> {
-          PreparedStatement ps = conn.prepareStatement(INSERT_SQL);
-          prepareStatement(ps, vehicle);
-          return ps;
-        });
+    jdbcTemplate.update(INSERT_SQL, ps -> prepareStatement(ps, vehicle));
   }
 
   @Override
@@ -113,21 +108,11 @@ public class JdbcVehicleDao implements VehicleDao {
 
   @Override
   public void update(Vehicle vehicle) {
-    jdbcTemplate.update(
-        conn -> {
-          PreparedStatement ps = conn.prepareStatement(UPDATE_SQL);
-          prepareStatement(ps, vehicle);
-          return ps;
-        });
+    jdbcTemplate.update(UPDATE_SQL, ps -> prepareStatement(ps, vehicle));
   }
 
   @Override
   public void delete(Vehicle vehicle) {
-    jdbcTemplate.update(
-        conn -> {
-          PreparedStatement ps = conn.prepareStatement(DELETE_SQL);
-          ps.setString(1, vehicle.getVehicleNo());
-          return ps;
-        });
+    jdbcTemplate.update(DELETE_SQL, ps -> ps.setString(1, vehicle.getVehicleNo()));
   }
 }

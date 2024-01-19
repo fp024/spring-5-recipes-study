@@ -7,7 +7,9 @@
 
 * ✔ `PreparedStatementCreator` 를 활용해서 insert() 수정
 
-* ✅  insert()의 JDBC Template 사용처를 람다식으로 변경
+* ✅ JDBC Template 사용처를 PreparedStatementCreator를 사용한 람다식으로 변경
+
+  
 
 
 
