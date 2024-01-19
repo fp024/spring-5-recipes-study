@@ -1,6 +1,6 @@
 ## 레시피 9-01-ii JDBC 템플릿으로 DB 수정하기
 
-> 레시피 9-00-ii에서 insert 메서드에 JDBC Template 사용
+> 레시피 9-01-i에서 insert 메서드에 JDBC Template 인자로 람다식 사용
 >
 
 ### 이번 레시피에서 확인해야할  내용

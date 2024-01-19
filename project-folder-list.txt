@@ -121,6 +121,7 @@ chap09\recipe-9-00-i
 chap09\recipe-9-00-ii
 chap09\recipe-9-01-i
 chap09\recipe-9-01-ii
+chap09\recipe-9-01-iii
 chap10
 chap10\recipe-10-01-i
 chap10\recipe-10-01-ii
