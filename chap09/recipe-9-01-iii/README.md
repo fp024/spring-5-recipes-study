@@ -1,6 +1,6 @@
 ## 레시피 9-01-iii JDBC 템플릿으로 DB 수정하기 - 3
 
-> 레시피 9-01-ii에서 insert 메서드에 JDBC Template 사용
+> 레시피 9-01-ii의 JDBC Template 사용처를 `PreparedStatementSetter`를 사용한 람다식으로 변경
 >
 
 ### 이번 레시피에서 확인해야할  내용
