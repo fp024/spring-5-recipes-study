@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 import org.fp024.study.spring5recipes.vehicle.domain.Vehicle;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 public class JdbcVehicleDao implements VehicleDao {
 
@@ -63,38 +65,19 @@ public class JdbcVehicleDao implements VehicleDao {
 
   @Override
   public Vehicle findByVehicleNo(String vehicleNo) {
-
-    final var vehicle = new Vehicle();
-    // ✨: 현재 레시피의 주제
-    jdbcTemplate.query(
-        SELECT_ONE_SQL,
-        rs -> {
-          vehicle.setVehicleNo(rs.getString("vehicle_no"));
-          vehicle.setColor(rs.getString("color"));
-          vehicle.setWheel(rs.getInt("wheel"));
-          vehicle.setSeat(rs.getInt("seat"));
-        },
-        vehicleNo);
-
-    // 💡조회 결과가 없을 때, null이 반환되도록 함.
-    if (vehicle.getVehicleNo() == null) {
+    try {
+      // ✨: 레시피 주제
+      return jdbcTemplate.queryForObject(SELECT_ONE_SQL, new VehicleRowMapper(), vehicleNo);
+    } catch (EmptyResultDataAccessException e) {
+      // queryForObject는 결과가 반드시 1개 있을 것을 간주하기 때문에, 예외 처리를 해둔다.
       return null;
     }
-
-    return vehicle;
   }
 
   @Override
   public List<Vehicle> findAll() {
-    return jdbcTemplate.query(SELECT_ALL_SQL, (rs, rowNum) -> toVehicle(rs));
-  }
-
-  private Vehicle toVehicle(ResultSet rs) throws SQLException {
-    return new Vehicle(
-        rs.getString("vehicle_no"), //
-        rs.getString("color"),
-        rs.getInt("wheel"),
-        rs.getInt("seat"));
+    // ✨: 레시피 주제
+    return jdbcTemplate.query(SELECT_ALL_SQL, new VehicleRowMapper());
   }
 
   private void prepareStatement(PreparedStatement ps, Vehicle vehicle) throws SQLException {
@@ -117,5 +100,16 @@ public class JdbcVehicleDao implements VehicleDao {
   @Override
   public void delete(Vehicle vehicle) {
     jdbcTemplate.update(DELETE_SQL, vehicle.getVehicleNo());
+  }
+
+  private class VehicleRowMapper implements RowMapper<Vehicle> {
+    @Override
+    public Vehicle mapRow(ResultSet rs, int rowNum) throws SQLException {
+      return new Vehicle(
+          rs.getString("vehicle_no"), //
+          rs.getString("color"),
+          rs.getInt("wheel"),
+          rs.getInt("seat"));
+    }
   }
 }
