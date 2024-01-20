@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.List;
 import org.fp024.study.spring5recipes.vehicle.Main;
 import org.fp024.study.spring5recipes.vehicle.domain.Vehicle;
-import org.fp024.study.spring5recipes.vehicle.test.DBTestUtils;
+import org.fp024.study.spring5recipes.vehicle.util.DbResetUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +18,11 @@ class JdbcVehicleDaoTests {
 
   @Autowired private VehicleDao vehicleDao;
 
-  @Autowired private DBTestUtils dbTestUtils;
+  @Autowired private DbResetUtils dbResetUtils;
 
   @BeforeEach
   void beforeEach() {
-    dbTestUtils.resetDB();
+    dbResetUtils.resetDB();
   }
 
   @Test

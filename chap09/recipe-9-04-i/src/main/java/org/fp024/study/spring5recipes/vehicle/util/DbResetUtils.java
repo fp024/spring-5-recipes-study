@@ -1,15 +1,15 @@
-package org.fp024.study.spring5recipes.vehicle.test;
+package org.fp024.study.spring5recipes.vehicle.util;
 
 import javax.sql.DataSource;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DBTestUtils {
+public class DbResetUtils {
   private final ResourceDatabasePopulator dbPopulator;
   private final DataSource dataSource;
 
-  public DBTestUtils(ResourceDatabasePopulator dbPopulator, DataSource dataSource) {
+  public DbResetUtils(ResourceDatabasePopulator dbPopulator, DataSource dataSource) {
     this.dbPopulator = dbPopulator;
     this.dataSource = dataSource;
   }

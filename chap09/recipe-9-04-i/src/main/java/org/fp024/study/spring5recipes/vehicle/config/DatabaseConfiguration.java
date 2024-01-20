@@ -6,7 +6,6 @@ import java.nio.charset.StandardCharsets;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 abstract class DatabaseConfiguration {
@@ -23,14 +22,6 @@ abstract class DatabaseConfiguration {
     hikariConfig.setMinimumIdle(2);
     hikariConfig.setMaximumPoolSize(5);
     return new HikariDataSource(hikariConfig);
-  }
-
-  @Bean
-  DataSourceInitializer dataSourceInitializer() {
-    DataSourceInitializer initializer = new DataSourceInitializer();
-    initializer.setDataSource(dataSource());
-    initializer.setDatabasePopulator(databasePopulator());
-    return initializer;
   }
 
   @Bean
