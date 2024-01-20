@@ -1,30 +1,31 @@
 package org.fp024.study.spring5recipes.vehicle.dao;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import org.fp024.study.spring5recipes.vehicle.domain.Vehicle;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-public class JdbcVehicleDao extends JdbcDaoSupport implements VehicleDao {
+// ✨ 레시피 주제: NamedParameterJdbcDaoSupport
+public class JdbcVehicleDao extends NamedParameterJdbcDaoSupport implements VehicleDao {
 
   private static final String INSERT_SQL =
       """
       INSERT INTO vehicle (color, wheel, seat, vehicle_no)
-      VALUES (?, ?, ?, ?)
+      VALUES (:color, :wheel, :seat, :vehicleNo)
       """;
   private static final String UPDATE_SQL =
       """
       UPDATE vehicle
-         SET color = ?
-           , wheel = ?
-           , seat = ?
-       WHERE vehicle_no = ?
+         SET color = :color
+           , wheel = :wheel
+           , seat = :seat
+       WHERE vehicle_no = :vehicleNo
       """;
   private static final String SELECT_ALL_SQL =
       """
@@ -53,29 +54,41 @@ public class JdbcVehicleDao extends JdbcDaoSupport implements VehicleDao {
       """
       SELECT color
         FROM vehicle
-       WHERE vehicle_no=?
+       WHERE vehicle_no = ?
       """;
 
   private final JdbcTemplate jdbcTemplate;
 
+  private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
   public JdbcVehicleDao(JdbcTemplate jdbcTemplate) {
     setJdbcTemplate(Objects.requireNonNull(jdbcTemplate));
     this.jdbcTemplate = getJdbcTemplate();
+    this.namedParameterJdbcTemplate = getNamedParameterJdbcTemplate();
   }
 
+  // ✨ 레시피 주제
   @Override
   public void insert(Vehicle vehicle) {
-    jdbcTemplate.update(
-        INSERT_SQL,
-        vehicle.getColor(),
-        vehicle.getWheel(),
-        vehicle.getSeat(),
-        vehicle.getVehicleNo());
+    namedParameterJdbcTemplate.update(INSERT_SQL, toParameterMap(vehicle));
   }
 
+  private Map<String, Object> toParameterMap(Vehicle vehicle) {
+    return Map.of(
+        "vehicleNo", vehicle.getVehicleNo(), //
+        "color", vehicle.getColor(),
+        "wheel", vehicle.getWheel(),
+        "seat", vehicle.getSeat());
+  }
+
+  // ✨ 레시피 주제
+  @SuppressWarnings("unchecked")
   @Override
   public void insert(Collection<Vehicle> vehicles) {
-    jdbcTemplate.batchUpdate(INSERT_SQL, vehicles, vehicles.size(), this::prepareStatement);
+    List<Map<String, Object>> paramList =
+        vehicles.stream().map(this::toParameterMap).collect(Collectors.toList());
+    namedParameterJdbcTemplate.batchUpdate(
+        INSERT_SQL, paramList.toArray(new Map[paramList.size()]));
   }
 
   @Override
@@ -86,35 +99,12 @@ public class JdbcVehicleDao extends JdbcDaoSupport implements VehicleDao {
 
   @Override
   public List<Vehicle> findAll() {
-    List<Map<String, Object>> rows = jdbcTemplate.queryForList(SELECT_ALL_SQL);
-    return rows.stream()
-        .map(
-            row -> {
-              Vehicle vehicle = new Vehicle();
-              vehicle.setVehicleNo((String) row.get("vehicle_no"));
-              vehicle.setColor((String) row.get("color"));
-              vehicle.setWheel((Integer) row.get("wheel"));
-              vehicle.setSeat((Integer) row.get("seat"));
-              return vehicle;
-            })
-        .toList();
-  }
-
-  private void prepareStatement(PreparedStatement ps, Vehicle vehicle) throws SQLException {
-    ps.setString(1, vehicle.getColor());
-    ps.setInt(2, vehicle.getWheel());
-    ps.setInt(3, vehicle.getSeat());
-    ps.setString(4, vehicle.getVehicleNo());
+    return jdbcTemplate.query(SELECT_ALL_SQL, BeanPropertyRowMapper.newInstance(Vehicle.class));
   }
 
   @Override
   public void update(Vehicle vehicle) {
-    jdbcTemplate.update(
-        UPDATE_SQL,
-        vehicle.getColor(),
-        vehicle.getWheel(),
-        vehicle.getSeat(),
-        vehicle.getVehicleNo());
+    namedParameterJdbcTemplate.update(UPDATE_SQL, toParameterMap(vehicle));
   }
 
   @Override
