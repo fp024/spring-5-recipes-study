@@ -11,8 +11,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class VehicleConfiguration {
 
   @Bean
-  VehicleDao vehicleDao(DataSource dataSource) {
-    return new JdbcVehicleDao(jdbcTemplate(dataSource));
+  VehicleDao vehicleDao(JdbcTemplate jdbcTemplate) {
+    return new JdbcVehicleDao(jdbcTemplate);
   }
 
   @Bean
