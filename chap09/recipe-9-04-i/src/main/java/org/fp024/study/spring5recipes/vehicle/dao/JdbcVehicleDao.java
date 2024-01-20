@@ -87,8 +87,7 @@ public class JdbcVehicleDao extends NamedParameterJdbcDaoSupport implements Vehi
     Map<String, ?>[] paramList =
         vehicles.stream() //
             .map(this::toParameterMap)
-            .toArray(size -> new Map[vehicles.size()]);
-
+            .toArray(Map[]::new);
     namedParameterJdbcTemplate.batchUpdate(INSERT_SQL, paramList);
   }
 

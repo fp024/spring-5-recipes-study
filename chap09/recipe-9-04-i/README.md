@@ -51,6 +51,21 @@ batchUpdate() 의 경우는 수정이 NamedParameterJdbcTemplate에 맞게 수�
   }
 ```
 
+```java
+  // ✨ 레시피 주제
+  @SuppressWarnings("unchecked")
+  @Override
+  public void insert(Collection<Vehicle> vehicles) {
+    Map<String, ?>[] paramList =
+        vehicles.stream() //
+            .map(this::toParameterMap)
+            .toArray(Map[]::new); // ✨ 이렇게 해도 배열의 크기가 자동으로 정해짐.
+    namedParameterJdbcTemplate.batchUpdate(INSERT_SQL, paramList);
+  }
+```
+
+
+
 
 
 ---
