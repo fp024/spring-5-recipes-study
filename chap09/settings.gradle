@@ -17,3 +17,4 @@ include 'recipe-9-02-ii'
 include 'recipe-9-02-iii'
 include 'recipe-9-02-iv'
 // 'recipe-9-02-v' 는 만들지 않음. 앞에서 이미 진행한 내용.
+include 'recipe-9-02-vi'
