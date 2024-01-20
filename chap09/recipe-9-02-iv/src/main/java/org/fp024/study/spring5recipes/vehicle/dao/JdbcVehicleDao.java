@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import org.fp024.study.spring5recipes.vehicle.domain.Vehicle;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -76,7 +77,18 @@ public class JdbcVehicleDao implements VehicleDao {
   @Override
   public List<Vehicle> findAll() {
     // ✨ 레시피 주제
-    return jdbcTemplate.query(SELECT_ALL_SQL, BeanPropertyRowMapper.newInstance(Vehicle.class));
+    List<Map<String, Object>> rows = jdbcTemplate.queryForList(SELECT_ALL_SQL);
+    return rows.stream()
+        .map(
+            row -> {
+              Vehicle vehicle = new Vehicle();
+              vehicle.setVehicleNo((String) row.get("vehicle_no"));
+              vehicle.setColor((String) row.get("color"));
+              vehicle.setWheel((Integer) row.get("wheel"));
+              vehicle.setSeat((Integer) row.get("seat"));
+              return vehicle;
+            })
+        .toList();
   }
 
   private void prepareStatement(PreparedStatement ps, Vehicle vehicle) throws SQLException {
