@@ -56,39 +56,38 @@ public class JdbcVehicleDao extends JdbcDaoSupport implements VehicleDao {
        WHERE vehicle_no=?
       """;
 
+  private final JdbcTemplate jdbcTemplate;
+
   public JdbcVehicleDao(JdbcTemplate jdbcTemplate) {
-    setJdbcTemplate(jdbcTemplate);
+    setJdbcTemplate(Objects.requireNonNull(jdbcTemplate));
+    this.jdbcTemplate = getJdbcTemplate();
   }
 
   @Override
   public void insert(Vehicle vehicle) {
-    Objects.requireNonNull(getJdbcTemplate())
-        .update(
-            INSERT_SQL,
-            vehicle.getColor(),
-            vehicle.getWheel(),
-            vehicle.getSeat(),
-            vehicle.getVehicleNo());
+    jdbcTemplate.update(
+        INSERT_SQL,
+        vehicle.getColor(),
+        vehicle.getWheel(),
+        vehicle.getSeat(),
+        vehicle.getVehicleNo());
   }
 
   @Override
   public void insert(Collection<Vehicle> vehicles) {
-    Objects.requireNonNull(getJdbcTemplate())
-        .batchUpdate(INSERT_SQL, vehicles, vehicles.size(), this::prepareStatement);
+    jdbcTemplate.batchUpdate(INSERT_SQL, vehicles, vehicles.size(), this::prepareStatement);
   }
 
   @Override
   public Vehicle findByVehicleNo(String vehicleNo) {
-    return Objects.requireNonNull(getJdbcTemplate())
-        .queryForObject(
-            SELECT_ONE_SQL, BeanPropertyRowMapper.newInstance(Vehicle.class), vehicleNo);
+    return jdbcTemplate.queryForObject(
+        SELECT_ONE_SQL, BeanPropertyRowMapper.newInstance(Vehicle.class), vehicleNo);
   }
 
   @Override
   public List<Vehicle> findAll() {
     // ✨ 레시피 주제
-    List<Map<String, Object>> rows =
-        Objects.requireNonNull(getJdbcTemplate()).queryForList(SELECT_ALL_SQL);
+    List<Map<String, Object>> rows = jdbcTemplate.queryForList(SELECT_ALL_SQL);
     return rows.stream()
         .map(
             row -> {
@@ -111,30 +110,28 @@ public class JdbcVehicleDao extends JdbcDaoSupport implements VehicleDao {
 
   @Override
   public void update(Vehicle vehicle) {
-    Objects.requireNonNull(getJdbcTemplate())
-        .update(
-            UPDATE_SQL,
-            vehicle.getColor(),
-            vehicle.getWheel(),
-            vehicle.getSeat(),
-            vehicle.getVehicleNo());
+    jdbcTemplate.update(
+        UPDATE_SQL,
+        vehicle.getColor(),
+        vehicle.getWheel(),
+        vehicle.getSeat(),
+        vehicle.getVehicleNo());
   }
 
   @Override
   public void delete(Vehicle vehicle) {
-    Objects.requireNonNull(getJdbcTemplate()).update(DELETE_SQL, vehicle.getVehicleNo());
+    jdbcTemplate.update(DELETE_SQL, vehicle.getVehicleNo());
   }
 
   @Override
   public String getColor(String vehicleNo) {
-    return Objects.requireNonNull(getJdbcTemplate())
-        .queryForObject(SELECT_COLOR_SQL, String.class, vehicleNo);
+    return jdbcTemplate.queryForObject(SELECT_COLOR_SQL, String.class, vehicleNo);
   }
 
   // 메서드 반환 타입을 int로 두면 NPE 발생할 수 있다고 IDE 경고나와서 고침
   // 그런데 count 쿼리라서 무조건 숫자를 반환해서 문제는 없을 텐데... 😅
   @Override
   public Integer countAll() {
-    return Objects.requireNonNull(getJdbcTemplate()).queryForObject(COUNT_ALL_SQL, Integer.class);
+    return jdbcTemplate.queryForObject(COUNT_ALL_SQL, Integer.class);
   }
 }
