@@ -7,7 +7,7 @@
 
 * ✔ 조회 부분(findByVehicleNo)을 JdbcTemplate 사용해서 변경 - RowCallBackHandler를 사용해서 데이터 추출
 * ✔ RowMapper 로 데이터 추출하기 findByVehicleNo(), findAll()
-* ⬜ BeanPropertyRowMapper 사용해보기
+* ✅ BeanPropertyRowMapper 사용해보기
 
 
 
@@ -16,7 +16,7 @@
 
 ##### 레시피 9-02-iii
 
-* ...
+* `BeanPropertyRowMapper`로 변경해서 코드가 좀 더 단순해졌다.
 
 
 
