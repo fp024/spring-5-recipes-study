@@ -19,3 +19,4 @@ include 'recipe-9-02-iv'
 // 'recipe-9-02-v'는 만들지 않음. 앞에서 이미 진행한 내용.
 include 'recipe-9-02-vi'
 // 'recipe-9-03-i'는 만들지 않음, 이미 JdbcTemplate을 빈으로 사용하고 있음.
+include 'recipe-9-03-ii'
