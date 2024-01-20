@@ -19,15 +19,12 @@ public class Main {
 
   void run(String[] args) {
     LOGGER.info("commonad args:", Arrays.toString(args));
-    vehicleDao
-        .findAll()
-        .forEach(
-            vehicle -> {
-              System.out.printf("Vehicle No: %s%n", vehicle.getVehicleNo());
-              System.out.printf("Color: %s%n", vehicle.getColor());
-              System.out.printf("Wheel: %d%n", vehicle.getWheel());
-              System.out.printf("Seat: %d%n", vehicle.getSeat());
-            });
+    int count = vehicleDao.countAll();
+    System.out.printf("Vehicle Count: %d%n", count);
+
+    var vehicleNo = "TEM1001";
+    String color = vehicleDao.getColor(vehicleNo);
+    System.out.printf("Color for [%s]: %s%n", vehicleDao, color);
   }
 
   public static void main(String[] args) {

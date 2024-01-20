@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import org.fp024.study.spring5recipes.vehicle.domain.Vehicle;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -42,6 +41,19 @@ public class JdbcVehicleDao implements VehicleDao {
         FROM vehicle
        WHERE vehicle_no = ?
       """;
+
+  private static final String COUNT_ALL_SQL =
+      """
+      SELECT COUNT(*)
+        FROM vehicle
+      """;
+  private static final String SELECT_COLOR_SQL =
+      """
+      SELECT color
+        FROM vehicle
+       WHERE vehicle_no=?
+      """;
+
   private final JdbcTemplate jdbcTemplate;
 
   public JdbcVehicleDao(JdbcTemplate jdbcTemplate) {
@@ -65,13 +77,8 @@ public class JdbcVehicleDao implements VehicleDao {
 
   @Override
   public Vehicle findByVehicleNo(String vehicleNo) {
-    try {
-      return jdbcTemplate.queryForObject(
-          SELECT_ONE_SQL, BeanPropertyRowMapper.newInstance(Vehicle.class), vehicleNo);
-    } catch (EmptyResultDataAccessException e) {
-      // queryForObject는 결과가 반드시 1개 있을 것을 간주하기 때문에, 예외 처리를 해둔다.
-      return null;
-    }
+    return jdbcTemplate.queryForObject(
+        SELECT_ONE_SQL, BeanPropertyRowMapper.newInstance(Vehicle.class), vehicleNo);
   }
 
   @Override
@@ -111,5 +118,17 @@ public class JdbcVehicleDao implements VehicleDao {
   @Override
   public void delete(Vehicle vehicle) {
     jdbcTemplate.update(DELETE_SQL, vehicle.getVehicleNo());
+  }
+
+  @Override
+  public String getColor(String vehicleNo) {
+    return jdbcTemplate.queryForObject(SELECT_COLOR_SQL, String.class, vehicleNo);
+  }
+
+  // 메서드 반환 타입을 int로 두면 NPE 발생할 수 있다고 IDE 경고나와서 고침
+  // 그런데 count 쿼리라서 무조건 숫자를 반환해서 문제는 없을 텐데... 😅
+  @Override
+  public Integer countAll() {
+    return jdbcTemplate.queryForObject(COUNT_ALL_SQL, Integer.class);
   }
 }

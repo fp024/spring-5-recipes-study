@@ -1,6 +1,7 @@
 package org.fp024.study.spring5recipes.vehicle.dao;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import org.fp024.study.spring5recipes.vehicle.Main;
@@ -9,6 +10,7 @@ import org.fp024.study.spring5recipes.vehicle.test.DBTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 @SpringJUnitConfig({Main.class})
@@ -78,7 +80,20 @@ class JdbcVehicleDaoTests {
 
     vehicleDao.delete(v1001);
 
-    assertThat(vehicleDao.findByVehicleNo(v1001.getVehicleNo())) //
-        .isNull();
+    var vehicleNo = v1001.getVehicleNo();
+    assertThatThrownBy(() -> vehicleDao.findByVehicleNo(vehicleNo))
+        .isInstanceOf(EmptyResultDataAccessException.class);
+  }
+
+  @Test
+  void getColor() {
+    assertThat(vehicleDao.getColor("TEM1001")) //
+        .isEqualTo("Gray");
+  }
+
+  @Test
+  void countAll() {
+    assertThat(vehicleDao.countAll()) //
+        .isPositive();
   }
 }

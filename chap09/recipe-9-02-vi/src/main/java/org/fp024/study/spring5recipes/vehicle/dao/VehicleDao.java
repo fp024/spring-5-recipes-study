@@ -23,7 +23,7 @@ public interface VehicleDao {
     throw new IllegalStateException("Method is not implemented!");
   }
 
-  default int countAll() {
+  default Integer countAll() {
     throw new IllegalStateException("Method is not implemented!");
   }
 }
