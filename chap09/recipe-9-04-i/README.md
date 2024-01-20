@@ -36,7 +36,20 @@ batchUpdate() 의 경우는 수정이 NamedParameterJdbcTemplate에 맞게 수�
   }
 ```
 
+그런데 다음처럼 쓸 수도 있다.
 
+```java
+  @SuppressWarnings("unchecked")
+  @Override
+  public void insert(Collection<Vehicle> vehicles) {
+    Map<String, ?>[] paramList =
+        vehicles.stream() //
+            .map(this::toParameterMap)
+            .toArray(size -> new Map[vehicles.size()]);
+
+    namedParameterJdbcTemplate.batchUpdate(INSERT_SQL, paramList);
+  }
+```
 
 
 

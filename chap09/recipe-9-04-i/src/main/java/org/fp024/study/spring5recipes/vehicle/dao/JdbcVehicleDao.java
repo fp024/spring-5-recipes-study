@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import org.fp024.study.spring5recipes.vehicle.domain.Vehicle;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -85,10 +84,12 @@ public class JdbcVehicleDao extends NamedParameterJdbcDaoSupport implements Vehi
   @SuppressWarnings("unchecked")
   @Override
   public void insert(Collection<Vehicle> vehicles) {
-    List<Map<String, Object>> paramList =
-        vehicles.stream().map(this::toParameterMap).collect(Collectors.toList());
-    namedParameterJdbcTemplate.batchUpdate(
-        INSERT_SQL, paramList.toArray(new Map[paramList.size()]));
+    Map<String, ?>[] paramList =
+        vehicles.stream() //
+            .map(this::toParameterMap)
+            .toArray(size -> new Map[vehicles.size()]);
+
+    namedParameterJdbcTemplate.batchUpdate(INSERT_SQL, paramList);
   }
 
   @Override
