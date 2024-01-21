@@ -45,7 +45,10 @@
 
 ## 기타
 
-* ...
+* 다음에 진행해야할 `레시피 9-04-iv`는 코드를 보았을 때, 이미 다 진행한 내용만 있어서 예제를 만들지 않기로 했다.
+  * BeanPropertySqlParameterSource
+  * BeanPropertyRowMapper
+
 
 
 
