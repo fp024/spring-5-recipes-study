@@ -7,8 +7,10 @@ import java.util.Objects;
 import org.fp024.study.spring5recipes.vehicle.domain.Vehicle;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 // ✨ 레시피 주제: NamedParameterJdbcDaoSupport
 public class JdbcVehicleDao extends NamedParameterJdbcDaoSupport implements VehicleDao {
@@ -69,7 +71,8 @@ public class JdbcVehicleDao extends NamedParameterJdbcDaoSupport implements Vehi
   // ✨ 레시피 주제
   @Override
   public void insert(Vehicle vehicle) {
-    namedParameterJdbcTemplate.update(INSERT_SQL, toParameterMap(vehicle));
+    SqlParameterSource parameterSource = new MapSqlParameterSource(toParameterMap(vehicle));
+    namedParameterJdbcTemplate.update(INSERT_SQL, parameterSource);
   }
 
   private Map<String, Object> toParameterMap(Vehicle vehicle) {
@@ -81,14 +84,13 @@ public class JdbcVehicleDao extends NamedParameterJdbcDaoSupport implements Vehi
   }
 
   // ✨ 레시피 주제
-  @SuppressWarnings("unchecked")
   @Override
   public void insert(Collection<Vehicle> vehicles) {
-    Map<String, ?>[] paramList =
+    SqlParameterSource[] parameterSources =
         vehicles.stream() //
-            .map(this::toParameterMap)
-            .toArray(Map[]::new);
-    namedParameterJdbcTemplate.batchUpdate(INSERT_SQL, paramList);
+            .map(v -> new MapSqlParameterSource(toParameterMap(v)))
+            .toArray(SqlParameterSource[]::new);
+    namedParameterJdbcTemplate.batchUpdate(INSERT_SQL, parameterSources);
   }
 
   @Override
