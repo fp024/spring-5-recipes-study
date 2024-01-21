@@ -3,6 +3,7 @@ package org.fp024.study.spring5recipes.vehicle;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.fp024.study.spring5recipes.vehicle.dao.VehicleDao;
+import org.fp024.study.spring5recipes.vehicle.domain.Vehicle;
 import org.fp024.study.spring5recipes.vehicle.util.DbResetUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,12 +27,15 @@ public class Main {
     dbResetUtils.resetDB();
 
     LOGGER.info("commonad args:", Arrays.toString(args));
-    var count = vehicleDao.countAll();
-    System.out.printf("Vehicle Count: %d%n", count);
 
-    var vehicleNo = "TEM1001";
-    var color = vehicleDao.getColor(vehicleNo);
-    System.out.printf("Color for [%s]: %s%n", vehicleDao, color);
+    Vehicle vehicle = new Vehicle("TEM0043", "Red", 4, 4);
+    vehicleDao.insert(vehicle);
+
+    vehicle = vehicleDao.findByVehicleNo("TEM0043");
+    System.out.printf("Vehicle No: %s%n", vehicle.getVehicleNo());
+    System.out.printf("Color: %s%n", vehicle.getColor());
+    System.out.printf("Wheel: %d%n", vehicle.getWheel());
+    System.out.printf("Seat: %d%n", vehicle.getSeat());
   }
 
   public static void main(String[] args) {

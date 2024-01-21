@@ -2,17 +2,16 @@ package org.fp024.study.spring5recipes.vehicle.dao;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import org.fp024.study.spring5recipes.vehicle.domain.Vehicle;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-// ✨ 레시피 주제: NamedParameterJdbcDaoSupport
+// ✨ 레시피 주제: NamedParameterJdbcDaoSupport : BeanPropertySqlParameterSource
 public class JdbcVehicleDao extends NamedParameterJdbcDaoSupport implements VehicleDao {
 
   private static final String INSERT_SQL =
@@ -71,16 +70,7 @@ public class JdbcVehicleDao extends NamedParameterJdbcDaoSupport implements Vehi
   // ✨ 레시피 주제
   @Override
   public void insert(Vehicle vehicle) {
-    SqlParameterSource parameterSource = new MapSqlParameterSource(toParameterMap(vehicle));
-    namedParameterJdbcTemplate.update(INSERT_SQL, parameterSource);
-  }
-
-  private Map<String, Object> toParameterMap(Vehicle vehicle) {
-    return Map.of(
-        "vehicleNo", vehicle.getVehicleNo(), //
-        "color", vehicle.getColor(),
-        "wheel", vehicle.getWheel(),
-        "seat", vehicle.getSeat());
+    namedParameterJdbcTemplate.update(INSERT_SQL, new BeanPropertySqlParameterSource(vehicle));
   }
 
   // ✨ 레시피 주제
@@ -88,7 +78,7 @@ public class JdbcVehicleDao extends NamedParameterJdbcDaoSupport implements Vehi
   public void insert(Collection<Vehicle> vehicles) {
     SqlParameterSource[] parameterSources =
         vehicles.stream() //
-            .map(v -> new MapSqlParameterSource(toParameterMap(v)))
+            .map(BeanPropertySqlParameterSource::new)
             .toArray(SqlParameterSource[]::new);
     namedParameterJdbcTemplate.batchUpdate(INSERT_SQL, parameterSources);
   }
@@ -106,7 +96,7 @@ public class JdbcVehicleDao extends NamedParameterJdbcDaoSupport implements Vehi
 
   @Override
   public void update(Vehicle vehicle) {
-    namedParameterJdbcTemplate.update(UPDATE_SQL, toParameterMap(vehicle));
+    namedParameterJdbcTemplate.update(UPDATE_SQL, new BeanPropertySqlParameterSource(vehicle));
   }
 
   @Override
