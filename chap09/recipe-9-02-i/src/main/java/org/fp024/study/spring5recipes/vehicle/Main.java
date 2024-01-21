@@ -20,7 +20,7 @@ public class Main {
   }
 
   void run(String[] args) {
-    LOGGER.info("commonad args:", Arrays.toString(args));
+    LOGGER.info("commonad args: {}", Arrays.toString(args));
 
     List<Vehicle> vehicles =
         List.of(

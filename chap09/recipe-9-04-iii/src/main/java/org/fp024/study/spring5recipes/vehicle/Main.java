@@ -26,7 +26,7 @@ public class Main {
     // 실행 전에 DB 초기화
     dbResetUtils.resetDB();
 
-    LOGGER.info("commonad args:", Arrays.toString(args));
+    LOGGER.info("commonad args: {}", Arrays.toString(args));
 
     Vehicle vehicle = new Vehicle("TEM0043", "Red", 4, 4);
     vehicleDao.insert(vehicle);

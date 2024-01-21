@@ -18,7 +18,7 @@ public class Main {
   }
 
   void run(String[] args) {
-    LOGGER.info("commonad args:", Arrays.toString(args));
+    LOGGER.info("commonad args: {}", Arrays.toString(args));
     var count = vehicleDao.countAll();
     System.out.printf("Vehicle Count: %d%n", count);
 

@@ -3,6 +3,8 @@ package org.fp024.study.spring5recipes.vehicle;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.fp024.study.spring5recipes.vehicle.dao.VehicleDao;
+import org.fp024.study.spring5recipes.vehicle.domain.Vehicle;
+import org.fp024.study.spring5recipes.vehicle.util.DbResetUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,18 +15,26 @@ import org.springframework.context.annotation.Configuration;
 public class Main {
   private final VehicleDao vehicleDao;
 
-  public Main(VehicleDao vehicleDao) {
+  private final DbResetUtils dbResetUtils;
+
+  public Main(VehicleDao vehicleDao, DbResetUtils dbResetUtils) {
     this.vehicleDao = vehicleDao;
+    this.dbResetUtils = dbResetUtils;
   }
 
   void run(String[] args) {
-    LOGGER.info("commonad args: {}", Arrays.toString(args));
-    int count = vehicleDao.countAll();
-    System.out.printf("Vehicle Count: %d%n", count);
+    // 실행 전에 DB 초기화
+    dbResetUtils.resetDB();
 
-    var vehicleNo = "TEM1001";
-    String color = vehicleDao.getColor(vehicleNo);
-    System.out.printf("Color for [%s]: %s%n", vehicleDao, color);
+    LOGGER.info("commonad args: {}", Arrays.toString(args));
+
+    // ✨EX0001 자동차 번호를 가진 데이터가 이미 저장되어있음.
+    Vehicle ex0001 = vehicleDao.findByVehicleNo("EX0001");
+    LOGGER.info("Vehicle ex0001: {}", ex0001);
+
+    // ✨EX0001 자동차 번호를 다시 저장하려함.
+    Vehicle vehicle = new Vehicle("EX0001", "Green", 4, 4);
+    vehicleDao.insert(vehicle);
   }
 
   public static void main(String[] args) {
@@ -33,6 +43,9 @@ public class Main {
       context
           .getBean(Main.class) //
           .run(args);
+    } catch (Exception e) {
+      LOGGER.error("### Exception Class: {}", e.getClass());
+      throw e;
     }
   }
 }
