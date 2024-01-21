@@ -1,5 +1,6 @@
 package org.fp024.study.spring5recipes.vehicle;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.fp024.study.spring5recipes.vehicle.dao.VehicleDao;
@@ -8,6 +9,7 @@ import org.fp024.study.spring5recipes.vehicle.util.DbResetUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.DataAccessException;
 
 @Slf4j
 @ComponentScan
@@ -43,8 +45,10 @@ public class Main {
       context
           .getBean(Main.class) //
           .run(args);
-    } catch (Exception e) {
-      LOGGER.error("### Exception Class: {}", e.getClass());
+    } catch (DataAccessException e) {
+      SQLException sqle = (SQLException) e.getCause();
+      LOGGER.info("### Error code: {}", sqle.getErrorCode());
+      LOGGER.info("### SQL state: {}", sqle.getSQLState());
       throw e;
     }
   }

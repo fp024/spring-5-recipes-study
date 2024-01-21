@@ -1,4 +1,4 @@
-## 레시피 9-05-i 스프링  JDBC 프레임워크에서 예외 처리하기 - 1
+## 레시피 9-05-i 스프링  JDBC 프레임워크에서 예외 처리하기 - 1 ~ 2
 
 >  스프링  JDBC 프레임워크에서 예외 처리하기 - 1
 >
@@ -7,6 +7,8 @@
 
 * ✅ 스프링  JDBC 프레임워크에서 예외 처리하기 - ID가 중복되는 상황을 만들어 예외 확인
 
+* ✅ 스프링  JDBC 프레임워크에서 예외 처리하기 - MySQL 에러 코드 확인
+
   
 
 
@@ -14,7 +16,7 @@
 
 ## 진행
 
-##### 레시피 9-05-i
+### 레시피 9-05-i
 
 * ID가 중복되는 상황을 만들어 예외 확인
 
@@ -41,7 +43,83 @@
       }
     ```
 
+
+### 레시피 9-05-ii
+
+* MySQL 환경에서 에러 코드 확인
+
+  ```java
+      try (AnnotationConfigApplicationContext context =
+          new AnnotationConfigApplicationContext(Main.class)) {
+        context
+            .getBean(Main.class) //
+            .run(args);
+      } catch (DataAccessException e) {
+        SQLException sqle = (SQLException) e.getCause();
+        LOGGER.info("### Error code: {}", sqle.getErrorCode());
+        LOGGER.info("### SQL state: {}", sqle.getSQLState());
+        throw e;
+      }
+  ```
+
+  * MySQL (Default)
+
+    * https://github.com/spring-projects/spring-framework/blob/8c85c3166c4f9ee6b77862da2229e94162c7cc43/spring-jdbc/src/main/resources/org/springframework/jdbc/support/sql-error-codes.xml#L198
+
+    ```sh
+    gradle clean run -Dspring.profiles.active=mysql
+    ```
+
+    ```
+    02:10:32.628 [main] INFO  org.fp024.study.spring5recipes.vehicle.Main - ### Error code: 1062
+    02:10:32.628 [main] INFO  org.fp024.study.spring5recipes.vehicle.Main - ### SQL state: 23000
+    ```
+
+  * HSLDB
+
+    * https://github.com/spring-projects/spring-framework/blob/8c85c3166c4f9ee6b77862da2229e94162c7cc43/spring-jdbc/src/main/resources/org/springframework/jdbc/support/sql-error-codes.xml#L136
+
+    ```sh
+    gradle clean run -Dspring.profiles.active=hsqldb
+    ```
+
+    ```
+    02:23:49.007 [main] INFO  org.fp024.study.spring5recipes.vehicle.Main - ### Error code: -104
+    02:23:49.007 [main] INFO  org.fp024.study.spring5recipes.vehicle.Main - ### SQL state: 23505
+    ```
+
+  * H2
+
+    * https://github.com/spring-projects/spring-framework/blob/8c85c3166c4f9ee6b77862da2229e94162c7cc43/spring-jdbc/src/main/resources/org/springframework/jdbc/support/sql-error-codes.xml#L72
+
+    ```sh
+    gradle clean run -Dspring.profiles.active=h2
+    ```
+
+    ```
+    02:23:31.791 [main] INFO  org.fp024.study.spring5recipes.vehicle.Main - ### Error code: 23505
+    02:23:31.791 [main] INFO  org.fp024.study.spring5recipes.vehicle.Main - ### SQL state: 23505
+    ```
+
     
+
+  DB마다 코드 값이 다름을 확인할 수 있었다.  
+
+  이 코드 값의 정의는...
+
+  `spring-jdbc` 라이브러리의 `sql-error-codes.xml`에 정의 되어있음.
+
+  * https://github.com/spring-projects/spring-framework/blob/v5.3.31/spring-jdbc/src/main/resources/org/springframework/jdbc/support/sql-error-codes.xml
+
+  
+
+  
+
+  
+
+  
+
+
 
 
 ## 의견
