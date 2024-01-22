@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
-@Profile({"mysql", "default"})
+@Profile({"mysql", "!default"})
 @Configuration
 @PropertySource("classpath:database-mysql.properties")
 public class MySqlDatabaseConfiguration extends DatabaseConfiguration {

@@ -58,7 +58,7 @@
   <bean id="myDuplicateKeyTranslation"
     class="org.springframework.jdbc.support.CustomSQLErrorCodesTranslation">
     <property name="errorCodes">
-      <value>-104</value>
+      <value>23505</value>
     </property>
     <property name="exceptionClass">
       <value>

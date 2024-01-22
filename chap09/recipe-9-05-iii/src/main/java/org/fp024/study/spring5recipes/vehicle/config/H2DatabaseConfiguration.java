@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
-@Profile({"h2 & !default"})
+@Profile({"h2", "default"})
 @Configuration
 @PropertySource("classpath:database-h2.properties")
 public class H2DatabaseConfiguration extends DatabaseConfiguration {
