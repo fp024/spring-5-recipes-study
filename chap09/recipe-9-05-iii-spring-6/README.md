@@ -72,8 +72,8 @@ VALUES (?, ?, ?, ?)
 * https://github.com/spring-projects/spring-framework/blob/b19f98bfd24bebbeaf5a5be44363e5484a0ff370/spring-jdbc/src/main/resources/org/springframework/jdbc/support/sql-error-codes.xml#L137
 
 ```
-02:08:24.034 [main] INFO  org.fp024.study.spring5recipes.vehicle.Main - ### Error code: 1062
-02:08:24.034 [main] INFO  org.fp024.study.spring5recipes.vehicle.Main - ### SQL state: 23000
+02:29:27.281 [main] INFO  org.fp024.study.spring5recipes.vehicle.Main - ### Error code: -104
+02:29:27.281 [main] INFO  org.fp024.study.spring5recipes.vehicle.Main - ### SQL state: 23505
 Exception in thread "main" org.springframework.dao.DuplicateKeyException: PreparedStatementCallback; SQL [INSERT INTO vehicle (color, wheel, seat, vehicle_no)
 VALUES (?, ?, ?, ?)
 ...
