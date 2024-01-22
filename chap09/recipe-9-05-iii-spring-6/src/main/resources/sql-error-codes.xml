@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Default SQL error codes for well-known databases.
+  Can be overridden by definitions in a "sql-error-codes.xml" file
+  in the root of the class path.
+
+  If the Database Product Name contains characters that are invalid
+  to use in the id attribute (like a space) then we need to add a property
+  named "databaseProductName"/"databaseProductNames" that holds this value.
+  If this property is present, then it will be used instead of the id for
+  looking up the error codes based on the current database.
+	-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="H2" class="org.springframework.jdbc.support.SQLErrorCodes">
+    <property name="useSqlStateForTranslation">
+      <value>true</value>
+    </property>
+    <property name="customTranslations">
+      <list>
+        <ref bean="myDuplicateKeyTranslation" />
+      </list>
+    </property>
+  </bean>
+
+  <bean id="HSQL" name="Hsql" class="org.springframework.jdbc.support.SQLErrorCodes">
+    <property name="useSqlStateForTranslation">
+      <value>true</value>
+    </property>
+    <property name="customTranslations">
+      <list>
+        <ref bean="myDuplicateKeyTranslation" />
+      </list>
+    </property>
+  </bean>
+
+  <bean id="MySQL" class="org.springframework.jdbc.support.SQLErrorCodes">
+    <property name="useSqlStateForTranslation">
+      <value>true</value>
+    </property>
+    <property name="customTranslations">
+      <list>
+        <ref bean="myDuplicateKeyTranslation" />
+      </list>
+    </property>
+  </bean>
+
+  <!-- H2의 중복키 에러코드, 다른 DB는 에러코드를 넣어도 정상동작이 안된다. 😅 -->
+  <bean id="myDuplicateKeyTranslation"
+    class="org.springframework.jdbc.support.CustomSQLErrorCodesTranslation">
+    <property name="errorCodes">
+      <value>23505</value>
+    </property>
+    <property name="exceptionClass">
+      <value> org.fp024.study.spring5recipes.vehicle.exception.MyDuplicateKeyException </value>
+    </property>
+  </bean>
+
+</beans>

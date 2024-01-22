@@ -7,15 +7,15 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
-@Profile({"mysql & !default"})
+@Profile({"h2", "default"})
 @Configuration
-@PropertySource("classpath:database-mysql.properties")
-public class MySqlDatabaseConfiguration extends DatabaseConfiguration {
+@PropertySource("classpath:database-h2.properties")
+public class H2DatabaseConfiguration extends DatabaseConfiguration {
 
   @Getter(AccessLevel.PROTECTED)
   private final Environment env;
 
-  public MySqlDatabaseConfiguration(Environment env) {
+  public H2DatabaseConfiguration(Environment env) {
     this.env = env;
   }
 }
