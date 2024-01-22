@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "https://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<!--
+	Default SQL error codes for well-known databases.
+	Can be overridden by definitions in a "sql-error-codes.xml" file
+	in the root of the class path.
+	
+	If the Database Product Name contains characters that are invalid
+	to use in the id attribute (like a space) then we need to add a property
+	named "databaseProductName"/"databaseProductNames" that holds this value.
+	If this property is present, then it will be used instead of the id for
+	looking up the error codes based on the current database.
+
+  잘 알려진 데이터베이스의 기본 SQL 오류 코드입니다.
+  클래스 경로 루트에 있는 "sql-error-codes.xml" 파일의 정의로 재정의될 수 있습니다.
+
+  데이터베이스 제품 이름에 id 속성에 사용할 수 없는 문자(예: 공백)가 포함된 경우
+  이 값을 보유하는 "databaseProductName"/"databaseProductNames"라는 속성을 추가해야 합니다.
+  이 속성이 있으면 현재 데이터베이스를 기반으로 오류 코드를 조회하는 데 ID 대신 사용됩니다.
+	-->
+<beans>
+  <bean id="MySQL" class="org.springframework.jdbc.support.SQLErrorCodes">
+    <property name="useSqlStateForTranslation">
+      <value>true</value>
+    </property>
+    <property name="customTranslations">
+      <list>
+        <ref bean="myDuplicateKeyTranslation" />
+      </list>
+    </property>
+  </bean>
+
+  <bean id="HSQL" name="Hsql" class="org.springframework.jdbc.support.SQLErrorCodes">
+    <property name="useSqlStateForTranslation">
+      <value>true</value>
+    </property>
+    <property name="customTranslations">
+      <list>
+        <ref bean="myDuplicateKeyTranslation" />
+      </list>
+    </property>
+  </bean>
+
+  <bean id="H2" class="org.springframework.jdbc.support.SQLErrorCodes">
+    <property name="useSqlStateForTranslation">
+      <value>true</value>
+    </property>
+    <property name="customTranslations">
+      <list>
+        <ref bean="myDuplicateKeyTranslation" />
+      </list>
+    </property>
+  </bean>
+
+
+  <!-- H2의 중복키 에러코드, 다른 DB는 에러코드를 넣어도 정상동작이 안된다. 😅 -->
+  <bean id="myDuplicateKeyTranslation"
+    class="org.springframework.jdbc.support.CustomSQLErrorCodesTranslation">
+    <property name="errorCodes">
+      <value>-104</value>
+    </property>
+    <property name="exceptionClass">
+      <value>
+        org.fp024.study.spring5recipes.vehicle.exception.MyDuplicateKeyException
+      </value>
+    </property>
+  </bean>
+</beans>
