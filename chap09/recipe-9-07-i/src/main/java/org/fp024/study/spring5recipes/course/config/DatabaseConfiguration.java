@@ -1,12 +1,12 @@
 package org.fp024.study.spring5recipes.course.config;
 
 import java.util.Properties;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import org.fp024.study.spring5recipes.course.domain.Course;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.tool.schema.Action;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 abstract class DatabaseConfiguration {
 
@@ -14,34 +14,33 @@ abstract class DatabaseConfiguration {
 
   // ✨ 레시피 주제
   @Bean
-  EntityManagerFactory entityManagerFactory() {
-    return Persistence.createEntityManagerFactory("course", jpaProperties());
+  public LocalSessionFactoryBean sessionFactory() {
+    LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+    sessionFactoryBean.setHibernateProperties(hibernateProperties());
+    sessionFactoryBean.setAnnotatedClasses(Course.class);
+    return sessionFactoryBean;
   }
 
-  @Bean
-  Properties jpaProperties() {
-    Properties jpaProperties = new Properties();
+  private Properties hibernateProperties() {
+    Properties props = new Properties();
 
-    jpaProperties.setProperty(AvailableSettings.JPA_JDBC_URL, getEnv().getProperty("jdbc.url"));
-    jpaProperties.setProperty(
-        AvailableSettings.JPA_JDBC_USER, getEnv().getProperty("jdbc.username"));
-    jpaProperties.setProperty(
-        AvailableSettings.JPA_JDBC_PASSWORD, getEnv().getProperty("jdbc.password"));
-    jpaProperties.setProperty(
-        AvailableSettings.DIALECT, getEnv().getProperty("orm.hibernate.dialect"));
+    props.setProperty(AvailableSettings.URL, getEnv().getProperty("jdbc.url"));
+    props.setProperty(AvailableSettings.USER, getEnv().getProperty("jdbc.username"));
+    props.setProperty(AvailableSettings.PASS, getEnv().getProperty("jdbc.password"));
+    props.setProperty(AvailableSettings.DIALECT, getEnv().getProperty("orm.hibernate.dialect"));
 
-    jpaProperties.setProperty(AvailableSettings.SHOW_SQL, String.valueOf(false));
-    jpaProperties.setProperty(
-        AvailableSettings.HBM2DDL_AUTO, Action.CREATE.getExternalHbm2ddlName());
+    props.setProperty(AvailableSettings.SHOW_SQL, String.valueOf(false));
+    props.setProperty(AvailableSettings.FORMAT_SQL, String.valueOf(true));
+    props.setProperty(AvailableSettings.HBM2DDL_AUTO, Action.CREATE.getExternalHbm2ddlName());
 
     // ✨ HikariCP 설정
-    jpaProperties.setProperty(
+    props.setProperty(
         "hibernate.connection.provider_class",
         "org.hibernate.hikaricp.internal.HikariCPConnectionProvider");
-    jpaProperties.setProperty("hibernate.hikari.minimumIdle", String.valueOf(5));
-    jpaProperties.setProperty("hibernate.hikari.maximumPoolSize", String.valueOf(10));
-    jpaProperties.setProperty("hibernate.hikari.idleTimeout", String.valueOf(30000));
+    props.setProperty("hibernate.hikari.minimumIdle", String.valueOf(5));
+    props.setProperty("hibernate.hikari.maximumPoolSize", String.valueOf(10));
+    props.setProperty("hibernate.hikari.idleTimeout", String.valueOf(30000));
 
-    return jpaProperties;
+    return props;
   }
 }

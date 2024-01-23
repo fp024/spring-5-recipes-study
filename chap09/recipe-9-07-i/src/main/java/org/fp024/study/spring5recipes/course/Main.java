@@ -31,13 +31,12 @@ public class Main {
     System.out.println("\n### Course before persisting");
     System.out.println(course);
 
-    // ✨ Hibernate를 직접 사용한 것과는 다르게, 파라미터로 넘긴 엔티티에 ID를 설정하지 않는다.
-    Course persisted = courseDao.store(course);
+    courseDao.store(course);
 
     System.out.println("\n### Course after persisting");
-    System.out.println(persisted);
+    System.out.println(course);
 
-    Long courseId = persisted.getId();
+    Long courseId = course.getId();
     Course courseFromDb = courseDao.findById(courseId);
 
     System.out.println("\n### Course fresh from database");

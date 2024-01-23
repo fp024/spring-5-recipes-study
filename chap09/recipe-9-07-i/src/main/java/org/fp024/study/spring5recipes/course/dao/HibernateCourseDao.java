@@ -1,80 +1,69 @@
 package org.fp024.study.spring5recipes.course.dao;
 
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
 import org.fp024.study.spring5recipes.course.domain.Course;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class HibernateCourseDao implements CourseDao {
 
-  private final EntityManagerFactory entityManagerFactory;
+  private final SessionFactory sessionFactory;
 
-  public HibernateCourseDao(EntityManagerFactory entityManagerFactory) {
-    this.entityManagerFactory = entityManagerFactory;
+  public HibernateCourseDao(SessionFactory sessionFactory) {
+    this.sessionFactory = sessionFactory;
   }
 
-  @Override
   public Course store(Course course) {
-    EntityManager manager = entityManagerFactory.createEntityManager();
-    EntityTransaction tx = manager.getTransaction();
+    Session session = sessionFactory.openSession();
+    Transaction tx = session.getTransaction();
     try {
       tx.begin();
-      Course persisted = manager.merge(course);
+      session.saveOrUpdate(course);
       tx.commit();
-      return persisted;
+      return course;
     } catch (RuntimeException e) {
       tx.rollback();
       throw e;
     } finally {
-      manager.close();
+      session.close();
     }
   }
 
-  @Override
   public void delete(Long courseId) {
-    EntityManager manager = entityManagerFactory.createEntityManager();
-    EntityTransaction tx = manager.getTransaction();
+    Session session = sessionFactory.openSession();
+    Transaction tx = session.getTransaction();
     try {
       tx.begin();
-      Course course = manager.find(Course.class, courseId);
-      manager.remove(course);
+      Course course = session.get(Course.class, courseId);
+      session.delete(course);
       tx.commit();
     } catch (RuntimeException e) {
       tx.rollback();
       throw e;
     } finally {
-      manager.close();
+      session.close();
     }
   }
 
-  @Override
   public Course findById(Long courseId) {
-    EntityManager manager = entityManagerFactory.createEntityManager();
-    try {
-      return manager.find(Course.class, courseId);
-    } finally {
-      manager.close();
+    try (Session session = sessionFactory.openSession()) {
+      return session.get(Course.class, courseId);
     }
   }
 
-  @Override
   public List<Course> findAll() {
-    EntityManager manager = entityManagerFactory.createEntityManager();
-    try {
-      TypedQuery<Course> query =
-          manager.createQuery(
+    try (Session session = sessionFactory.openSession()) {
+      return session
+          .createQuery(
               """
-              SELECT course
-                FROM Course course
+              SELECT c
+                FROM Course c
               """,
-              Course.class);
-      return query.getResultList();
-    } finally {
-      manager.close();
+              Course.class)
+          .list();
     }
   }
 }

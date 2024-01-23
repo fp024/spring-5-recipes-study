@@ -31,6 +31,7 @@ abstract class DatabaseConfiguration {
         AvailableSettings.DIALECT, getEnv().getProperty("orm.hibernate.dialect"));
 
     jpaProperties.setProperty(AvailableSettings.SHOW_SQL, String.valueOf(false));
+    jpaProperties.setProperty(AvailableSettings.FORMAT_SQL, String.valueOf(true));
     jpaProperties.setProperty(
         AvailableSettings.HBM2DDL_AUTO, Action.CREATE.getExternalHbm2ddlName());
 
