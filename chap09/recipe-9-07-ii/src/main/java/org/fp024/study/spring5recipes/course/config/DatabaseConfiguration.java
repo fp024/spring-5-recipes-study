@@ -1,5 +1,7 @@
 package org.fp024.study.spring5recipes.course.config;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import java.util.Properties;
 import org.fp024.study.spring5recipes.course.domain.Course;
 import org.hibernate.cfg.AvailableSettings;
@@ -13,9 +15,23 @@ abstract class DatabaseConfiguration {
   protected abstract Environment getEnv();
 
   // ✨ 레시피 주제
+  @Bean(destroyMethod = "close")
+  HikariDataSource dataSource() {
+    HikariConfig hikariConfig = new HikariConfig();
+    hikariConfig.setDriverClassName(getEnv().getProperty("jdbc.driver"));
+    hikariConfig.setJdbcUrl(getEnv().getProperty("jdbc.url"));
+    hikariConfig.setUsername(getEnv().getProperty("jdbc.username"));
+    hikariConfig.setPassword(getEnv().getProperty("jdbc.password"));
+    hikariConfig.setMinimumIdle(2);
+    hikariConfig.setMaximumPoolSize(5);
+    return new HikariDataSource(hikariConfig);
+  }
+
+  // ✨ 레시피 주제
   @Bean
   public LocalSessionFactoryBean sessionFactory() {
     LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+    sessionFactoryBean.setDataSource(dataSource());
     sessionFactoryBean.setHibernateProperties(hibernateProperties());
     sessionFactoryBean.setAnnotatedClasses(Course.class);
     return sessionFactoryBean;
@@ -23,23 +39,11 @@ abstract class DatabaseConfiguration {
 
   private Properties hibernateProperties() {
     Properties props = new Properties();
-
-    props.setProperty(AvailableSettings.URL, getEnv().getProperty("jdbc.url"));
-    props.setProperty(AvailableSettings.USER, getEnv().getProperty("jdbc.username"));
-    props.setProperty(AvailableSettings.PASS, getEnv().getProperty("jdbc.password"));
     props.setProperty(AvailableSettings.DIALECT, getEnv().getProperty("orm.hibernate.dialect"));
 
     props.setProperty(AvailableSettings.SHOW_SQL, String.valueOf(false));
     props.setProperty(AvailableSettings.FORMAT_SQL, String.valueOf(true));
     props.setProperty(AvailableSettings.HBM2DDL_AUTO, Action.CREATE.getExternalHbm2ddlName());
-
-    // ✨ HikariCP 설정
-    props.setProperty(
-        "hibernate.connection.provider_class",
-        "org.hibernate.hikaricp.internal.HikariCPConnectionProvider");
-    props.setProperty("hibernate.hikari.minimumIdle", String.valueOf(5));
-    props.setProperty("hibernate.hikari.maximumPoolSize", String.valueOf(10));
-    props.setProperty("hibernate.hikari.idleTimeout", String.valueOf(30000));
 
     return props;
   }

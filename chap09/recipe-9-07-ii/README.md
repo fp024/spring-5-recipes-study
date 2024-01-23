@@ -6,7 +6,7 @@
 
 * ✔ 스프링에서 ORM 리소스 팩토리 구성하기 - 1 - LocalSessionFactoryBean 사용
 
-* ⬜ 스프링에서 ORM 리소스 팩토리 구성하기 - 2 - DataSource를 별도 생성해서 주입
+* ✅ 스프링에서 ORM 리소스 팩토리 구성하기 - 2 - DataSource를 별도 생성해서 주입
 
   
 
@@ -19,7 +19,11 @@
 
 데이터소스 빈을 별도로 만들어서 LocalSessionFactoryBean 에 주입해주는 식으로 처리해보자!
 
+진행하고 나서보니, 점점 원래 사용했던 설정방식과 비슷해지고 있다. 😊👍
 
+* `hibernate-hikaricp`는 이제 필요없으니 제거
+
+  
 
 
 ## 의견
