@@ -116,7 +116,7 @@ $ gradle clean run -Dspring.profiles.active=hsqldb
 $ gradle clean run -Dspring.profiles.active=h2
 ```
 
-* 설정을 전달하지 않을 경우 h2가 기본값.
+* 설정을 전달하지 않을 경우 MySQL이 기본값.
 
 
 
