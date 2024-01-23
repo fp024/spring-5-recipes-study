@@ -9,14 +9,15 @@ import org.fp024.study.spring5recipes.course.domain.Course;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class HibernateCourseDao implements CourseDao {
+public class JpaCourseDao implements CourseDao {
 
   private final EntityManagerFactory entityManagerFactory;
 
-  public HibernateCourseDao(EntityManagerFactory entityManagerFactory) {
+  public JpaCourseDao(EntityManagerFactory entityManagerFactory) {
     this.entityManagerFactory = entityManagerFactory;
   }
 
+  @Override
   public Course store(Course course) {
     EntityManager manager = entityManagerFactory.createEntityManager();
     EntityTransaction tx = manager.getTransaction();
@@ -33,6 +34,7 @@ public class HibernateCourseDao implements CourseDao {
     }
   }
 
+  @Override
   public void delete(Long courseId) {
     EntityManager manager = entityManagerFactory.createEntityManager();
     EntityTransaction tx = manager.getTransaction();
@@ -49,6 +51,7 @@ public class HibernateCourseDao implements CourseDao {
     }
   }
 
+  @Override
   public Course findById(Long courseId) {
     EntityManager manager = entityManagerFactory.createEntityManager();
     try {
@@ -58,6 +61,7 @@ public class HibernateCourseDao implements CourseDao {
     }
   }
 
+  @Override
   public List<Course> findAll() {
     EntityManager manager = entityManagerFactory.createEntityManager();
     try {

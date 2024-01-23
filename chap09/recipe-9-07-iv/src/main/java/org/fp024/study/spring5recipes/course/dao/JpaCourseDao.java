@@ -9,11 +9,11 @@ import org.fp024.study.spring5recipes.course.domain.Course;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class HibernateCourseDao implements CourseDao {
+public class JpaCourseDao implements CourseDao {
 
   private final EntityManagerFactory entityManagerFactory;
 
-  public HibernateCourseDao(EntityManagerFactory entityManagerFactory) {
+  public JpaCourseDao(EntityManagerFactory entityManagerFactory) {
     this.entityManagerFactory = entityManagerFactory;
   }
 
