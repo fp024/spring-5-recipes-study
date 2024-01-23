@@ -28,3 +28,4 @@ include 'recipe-9-05-i'
 // 'recipe-9-05-ii'는 만들지 않음, i에 SQL 에러코드 관련 내용을 포함했다.
 include 'recipe-9-05-iii'
 include 'recipe-9-05-iii-spring-6'
+include 'recipe-9-06-i'
