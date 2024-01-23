@@ -24,7 +24,7 @@ abstract class DatabaseConfiguration {
                 AvailableSettings.SHOW_SQL, String.valueOf(false)) // log4jdbc 출력과 겹쳐서 노출할 필요는 없음
             .setProperty(AvailableSettings.FORMAT_SQL, String.valueOf(true))
             .setProperty(AvailableSettings.HBM2DDL_AUTO, Action.CREATE.getExternalHbm2ddlName())
-            .addClass(Course.class);
+            .addAnnotatedClass(Course.class);
     return configuration.buildSessionFactory();
   }
 }
