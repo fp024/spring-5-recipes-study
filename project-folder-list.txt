@@ -142,6 +142,7 @@ chap09\recipe-9-06-iii
 chap09\recipe-9-07-i
 chap09\recipe-9-07-ii
 chap09\recipe-9-07-iii
+chap09\recipe-9-07-iv
 chap10
 chap10\recipe-10-01-i
 chap10\recipe-10-01-ii
