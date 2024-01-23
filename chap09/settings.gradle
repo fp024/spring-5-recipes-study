@@ -34,3 +34,5 @@ include 'recipe-9-06-iii'
 include 'recipe-9-07-i'
 include 'recipe-9-07-ii'
 include 'recipe-9-07-iii'
+include 'recipe-9-07-iv'
+// 'recipe-9-05-v'는 만들지 않음, v에 패키지 스캔 내용을 포함했다.
