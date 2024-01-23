@@ -133,7 +133,36 @@ $ gradle clean run -Dspring.profiles.active=h2
 
 * 이 예제에서는 Hibernate가 자동으로 테이블 만들어주는 모습을 보기 위해 지금까지 사용했던 DB 초기화 코드를 제외 했는데, 이후 예제에서는 Hibernate 동작을 NONE 으로 바꾸고 수동 처리해보자!
   
-  
+
+
+
+#### DTD 도메인 주소 변경 경고
+
+* 기존
+
+  ```xml
+  <!DOCTYPE hibernate-mapping
+          PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+  ```
+
+* 변경
+
+  ```xml
+  <!DOCTYPE hibernate-mapping
+          PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+  ```
+
+콘솔 로그에 나타난 경고의 가이드대로 바꾸고나서 경고가 사라졌다.
+
+
+
+
+
+
+
+
 
 
 ## 정오표
