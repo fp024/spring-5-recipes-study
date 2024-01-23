@@ -22,16 +22,25 @@ abstract class DatabaseConfiguration {
   Properties jpaProperties() {
     Properties jpaProperties = new Properties();
 
-    jpaProperties.setProperty("javax.persistence.jdbc.url", getEnv().getProperty("jdbc.url"));
-    jpaProperties.setProperty("javax.persistence.jdbc.user", getEnv().getProperty("jdbc.username"));
+    jpaProperties.setProperty(AvailableSettings.JPA_JDBC_URL, getEnv().getProperty("jdbc.url"));
     jpaProperties.setProperty(
-        "javax.persistence.jdbc.password", getEnv().getProperty("jdbc.password"));
+        AvailableSettings.JPA_JDBC_USER, getEnv().getProperty("jdbc.username"));
+    jpaProperties.setProperty(
+        AvailableSettings.JPA_JDBC_PASSWORD, getEnv().getProperty("jdbc.password"));
     jpaProperties.setProperty(
         AvailableSettings.DIALECT, getEnv().getProperty("orm.hibernate.dialect"));
 
     jpaProperties.setProperty(AvailableSettings.SHOW_SQL, String.valueOf(false));
     jpaProperties.setProperty(
         AvailableSettings.HBM2DDL_AUTO, Action.CREATE.getExternalHbm2ddlName());
+
+    // ✨ HikariCP 설정
+    jpaProperties.setProperty(
+        "hibernate.connection.provider_class",
+        "org.hibernate.hikaricp.internal.HikariCPConnectionProvider");
+    jpaProperties.setProperty("hibernate.hikari.minimumIdle", String.valueOf(5));
+    jpaProperties.setProperty("hibernate.hikari.maximumPoolSize", String.valueOf(10));
+    jpaProperties.setProperty("hibernate.hikari.idleTimeout", String.valueOf(30000));
 
     return jpaProperties;
   }
