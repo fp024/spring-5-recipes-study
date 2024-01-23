@@ -15,10 +15,11 @@ abstract class DatabaseConfiguration {
   // ✨ 레시피 주제
   @Bean
   EntityManagerFactory entityManagerFactory() {
-    return Persistence.createEntityManagerFactory("course", getJpaProperties());
+    return Persistence.createEntityManagerFactory("course", jpaProperties());
   }
 
-  private Properties getJpaProperties() {
+  @Bean
+  Properties jpaProperties() {
     Properties jpaProperties = new Properties();
 
     jpaProperties.setProperty("javax.persistence.jdbc.url", getEnv().getProperty("jdbc.url"));
