@@ -19,7 +19,7 @@ public class Main {
   }
 
   void run(String[] args) {
-    LOGGER.info("commonad args: {}", Arrays.toString(args));
+    LOGGER.info("command args: {}", Arrays.toString(args));
 
     Vehicle vehicle = new Vehicle("TEM0001", "Red", 4, 4);
     vehicleDao.insert(vehicle);

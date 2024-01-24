@@ -41,3 +41,4 @@ include 'recipe-9-08-i'
 include 'recipe-9-09-i'
 // 'recipe-9-09-ii'는 만들지 않음, i에 내용이 포함됨.
 include 'recipe-9-10'
+include 'recipe-9-11-mybatis'

@@ -25,7 +25,7 @@ public class Main {
     // 실행 전에 DB 초기화
     dbResetUtils.resetDB();
 
-    LOGGER.info("commonad args: {}", Arrays.toString(args));
+    LOGGER.info("command args: {}", Arrays.toString(args));
     var count = vehicleDao.countAll();
     System.out.printf("Vehicle Count: %d%n", count);
 

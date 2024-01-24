@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.fp024.study.spring5recipes.vehicle.mapper.VehicleMapper">
+  <sql id="vehicle_select">
+    SELECT vehicle_no, color, wheel
+    FROM vehicle
+  </sql>
+
+
+  <resultMap id="vehicleResult" type="vehicle">
+    <id column="vehicle_no" property="vehicleNo"/>
+    <result column="color" property="color"/>
+    <result column="wheel" property="wheel"/>
+    <result column="seat" property="seat"/>
+  </resultMap>
+
+
+  <insert id="insert" parameterType="vehicle">
+    INSERT INTO vehicle (vehicle_no, color, wheel, seat)
+    VALUES (#{vehicleNo}, #{color}, #{wheel}, #{seat})
+  </insert>
+
+
+  <update id="update" parameterType="vehicle">
+    UPDATE vehicle
+    SET color = #{color}
+      , wheel = #{wheel}
+      , seat  = #{seat}
+    WHERE vehicle_no = #{vehicleNo}
+  </update>
+
+
+  <delete id="delete" parameterType="vehicle">
+    DELETE
+    FROM vehicle
+    WHERE vehicle_no = #{vehicleNo}
+  </delete>
+
+
+  <select id="findByVehicleNo" parameterType="string" resultMap="vehicleResult">
+    <include refid="vehicle_select"/>
+    WHERE vehicle_no = #{vehicleNo}
+  </select>
+
+
+  <select id="findAll" resultMap="vehicleResult">
+    <include refid="vehicle_select"/>
+  </select>
+
+
+  <select id="getColor" parameterType="string" resultType="string">
+    SELECT color
+    FROM vehicle
+    WHERE vehicle_no = #{vehicleNo}
+  </select>
+
+
+  <select id="countAll" resultType="int">
+    SELECT COUNT(*)
+    FROM vehicle
+  </select>
+
+
+  <!-- MySQL, HSQLDB, H2 멀티 INSERT -->
+  <insert id="insertVehicles" parameterType="list">
+    INSERT INTO vehicle (vehicle_no, color, wheel, seat)
+    VALUES
+    <foreach item="item" collection="list" separator=",">
+      (#{item.vehicleNo},
+      #{item.color},
+      #{item.wheel},
+      #{item.seat})
+    </foreach>
+  </insert>
+</mapper>

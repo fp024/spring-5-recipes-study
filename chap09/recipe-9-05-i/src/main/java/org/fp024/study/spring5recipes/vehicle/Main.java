@@ -28,7 +28,7 @@ public class Main {
     // 실행 전에 DB 초기화
     dbResetUtils.resetDB();
 
-    LOGGER.info("commonad args: {}", Arrays.toString(args));
+    LOGGER.info("command args: {}", Arrays.toString(args));
 
     // ✨EX0001 자동차 번호를 가진 데이터가 이미 저장되어있음.
     Vehicle ex0001 = vehicleDao.findByVehicleNo("EX0001");
