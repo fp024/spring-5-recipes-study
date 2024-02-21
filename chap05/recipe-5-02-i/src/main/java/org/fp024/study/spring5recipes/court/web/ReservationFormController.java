@@ -58,5 +58,7 @@ public class ReservationFormController {
   }
 
   @GetMapping("reservationSuccess")
-  public void reservationSuccess() {}
+  public void reservationSuccess() {
+    // void 컨트롤러 메서드
+  }
 }

@@ -15,7 +15,6 @@ public class SportTypeConverter implements Converter<String, SportType> {
   @Override
   public SportType convert(String source) {
     int sportTypeId = Integer.parseInt(source);
-    SportType sportType = reservationService.getSportType(sportTypeId);
-    return sportType;
+    return reservationService.getSportType(sportTypeId);
   }
 }
