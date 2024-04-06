@@ -1,7 +1,7 @@
 plugins {
   id 'war'
-  id "org.gretty" version "${grettyVersion}"
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  alias(libs.plugins.gretty.v3)
+  alias(libs.plugins.lombok)
 }
 
 java {
@@ -13,20 +13,22 @@ java {
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-  implementation "org.springframework:spring-context:${springVersion}"
-  implementation "org.springframework:spring-webmvc:${springVersion}"
-  implementation "org.springframework:spring-websocket:${springVersion}"
+  implementation enforcedPlatform(libs.spring.bom.v5)
 
-  implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
-  implementation "org.webjars:bootstrap:${bootstrapVersion}"
-  implementation "org.webjars.bowergithub.semantic-org:semantic-ui:${semanticUiVersion}"
+  implementation "org.springframework:spring-context"
+  implementation "org.springframework:spring-webmvc"
+  implementation "org.springframework:spring-websocket"
 
-  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
-  implementation "com.google.code.findbugs:jsr305:${findBugsJsr305Version}"
+  implementation (libs.webjars.locator)
+  implementation (libs.webjars.bootstrap)
+  implementation (libs.webjars.semantic.ui)
 
-  testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
-  testImplementation "org.springframework:spring-test:${springVersion}"
-  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+  implementation (libs.javax.annotation.api)
+  implementation (libs.findbugs.jsr305)
+
+  testImplementation (libs.javax.servlet.api)
+  testImplementation "org.springframework:spring-test"
+  testImplementation (libs.hamcrest)
 }
 
 apply from: "../../gradle/gretty-settings.gradle"

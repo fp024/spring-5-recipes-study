@@ -1,8 +1,8 @@
 plugins {
   id 'application'
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  alias(libs.plugins.lombok)
   id 'war'
-  id "org.gretty" version "${grettyVersion}"
+  alias(libs.plugins.gretty.v3)
 }
 
 java {
@@ -14,27 +14,29 @@ java {
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-  implementation "org.springframework:spring-context:${springVersion}"
-  implementation "org.springframework:spring-webmvc:${springVersion}"
-  implementation "org.springframework:spring-webflux:${springVersion}"
+  implementation enforcedPlatform(libs.spring.bom.v5)
+
+  implementation "org.springframework:spring-context"
+  implementation "org.springframework:spring-webmvc"
+  implementation "org.springframework:spring-webflux"
   
-  implementation "io.projectreactor:reactor-core:${reactorCoreVersion}"
-  testImplementation "io.projectreactor:reactor-test:${reactorCoreVersion}"
-  implementation "io.projectreactor.netty:reactor-netty:${reactorNettyVersion}"
+  implementation (libs.reactor.core)
+  testImplementation (libs.reactor.test)
+  implementation (libs.reactor.netty)
 
-  implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
-  implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
+  implementation (libs.jackson.databind)
+  implementation (libs.jackson.datatype.jsr310)
 
-  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+  implementation (libs.javax.annotation.api)
 
-  implementation "org.thymeleaf:thymeleaf-spring5:${thymeleafSpring5Version}"
-  implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:${thymeleafExtrasJava8timeVersion}"
+  implementation (libs.thymeleaf.spring5)
+  implementation (libs.thymeleaf.extras.java8time)
 
-  implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
-  implementation "org.webjars:bootstrap:${bootstrapVersion}"
-  
-  testImplementation "org.springframework:spring-test:${springVersion}"
-  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+  implementation (libs.webjars.locator)
+  implementation (libs.webjars.bootstrap)
+
+  testImplementation "org.springframework:spring-test"
+  testImplementation (libs.hamcrest)
 }
 
 application {

@@ -4,6 +4,14 @@
 
 rootProject.name = 'spring-5-recipes-study-chap05'
 
+dependencyResolutionManagement {
+  versionCatalogs {
+    libs {
+      from(files("../gradle/libs.versions.toml"))
+    }
+  }
+}
+
 /* ===== Chapter 5 스프링 MVC : 비동기 처리 ===== */
 include 'recipe-5-01-i'
 // 'recipe-5-01-ii ~ iv' 는 i 예제에 포함 - 커밋 로그 참조

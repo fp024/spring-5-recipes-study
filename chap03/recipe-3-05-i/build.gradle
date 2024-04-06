@@ -1,7 +1,7 @@
 plugins {
   id 'war'
-  id "org.gretty" version "${grettyVersion}"
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  alias(libs.plugins.gretty.v3)
+  alias(libs.plugins.lombok)
 }
 
 java {
