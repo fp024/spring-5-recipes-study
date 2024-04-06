@@ -1,7 +1,7 @@
 plugins {
   id 'war'
-  id "org.gretty" version "${grettyVersion}"
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  alias(libs.plugins.gretty.v3)
+  alias(libs.plugins.lombok)
 }
 
 java {
@@ -13,29 +13,31 @@ java {
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-  implementation "org.springframework:spring-context:${springVersion}"
-  implementation "org.springframework:spring-webmvc:${springVersion}"
+  implementation enforcedPlatform(libs.spring.bom.v5)
 
-  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+  implementation "org.springframework:spring-context"
+  implementation "org.springframework:spring-webmvc"
 
-  implementation "org.springframework:spring-oxm:${springVersion}"
-  implementation "javax.xml.bind:jaxb-api:${jaxbApiVersion}"
-  implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbRuntimeVersion}"
+  implementation (libs.javax.annotation.api)
 
-  implementation "com.google.code.gson:gson:${gsonVersion}"
+  implementation "org.springframework:spring-oxm"
+  implementation (libs.javax.jaxb.api)
+  implementation (libs.javax.jaxb.runtime)
 
-  implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
-  implementation "org.webjars:bootstrap:${bootstrapVersion}"
+  implementation (libs.gson)
 
-  compileOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
-  runtimeOnly "javax.servlet:jstl:${javaxJstlVersion}"
+  implementation (libs.webjars.locator)
+  implementation (libs.webjars.bootstrap)
 
-  testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
-  testImplementation "org.springframework:spring-webflux:${springVersion}"
-  testImplementation "org.springframework:spring-test:${springVersion}"
-  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+  compileOnly (libs.javax.servlet.api)
+  runtimeOnly (libs.javax.jstl)
 
-  testRuntimeOnly "com.jayway.jsonpath:json-path:${jsonPathVersion}"
+  testImplementation (libs.javax.servlet.api)
+  testImplementation "org.springframework:spring-webflux"
+  testImplementation "org.springframework:spring-test"
+  testImplementation (libs.hamcrest)
+
+  testRuntimeOnly (libs.json.path)
 }
 
 apply from: "../../gradle/gretty-settings.gradle"

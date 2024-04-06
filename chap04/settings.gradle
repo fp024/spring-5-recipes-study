@@ -4,6 +4,14 @@
 
 rootProject.name = 'spring-5-recipes-study-chap04'
 
+dependencyResolutionManagement {
+  versionCatalogs {
+    libs {
+      from(files("../gradle/libs.versions.toml"))
+    }
+  }
+}
+
 /* ===== Chapter 4 스프링 REST ===== */
 include 'recipe-4-01-i'
 include 'recipe-4-01-ii'

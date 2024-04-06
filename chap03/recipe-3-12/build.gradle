@@ -27,7 +27,7 @@ dependencies {
   implementation (libs.itextpdf)
 
   implementation (libs.webjars.locator)
-  implementation (libs.bootstrap)
+  implementation (libs.webjars.bootstrap)
 
   compileOnly (libs.javax.servlet.api)
   runtimeOnly (libs.javax.jstl)

@@ -1,7 +1,7 @@
 plugins {
   id 'war'
-  id "org.gretty" version "${grettyVersion}"
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  alias(libs.plugins.gretty.v3)
+  alias(libs.plugins.lombok)
 }
 
 java {
@@ -13,24 +13,26 @@ java {
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-  implementation "org.springframework:spring-context:${springVersion}"
-  implementation "org.springframework:spring-webmvc:${springVersion}"
+  implementation enforcedPlatform(libs.spring.bom.v5)
+
+  implementation "org.springframework:spring-context"
+  implementation "org.springframework:spring-webmvc"
   
-  implementation "com.rometools:rome:${romeVersion}"
+  implementation (libs.rome)
 
-  implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
+  implementation (libs.jackson.databind)
 
-  implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
-  implementation "org.webjars:bootstrap:${bootstrapVersion}"
+  implementation (libs.webjars.locator)
+  implementation (libs.webjars.bootstrap)
 
-  compileOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
-  runtimeOnly "javax.servlet:jstl:${javaxJstlVersion}"
+  compileOnly (libs.javax.servlet.api)
+  runtimeOnly (libs.javax.jstl)
 
-  testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
-  testImplementation "org.springframework:spring-test:${springVersion}"
-  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+  testImplementation (libs.javax.servlet.api)
+  testImplementation "org.springframework:spring-test"
+  testImplementation (libs.hamcrest)
 
-  testRuntimeOnly "com.jayway.jsonpath:json-path:${jsonPathVersion}"
+  testRuntimeOnly (libs.json.path)
 }
 
 apply from: "../../gradle/gretty-settings.gradle"

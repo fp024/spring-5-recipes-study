@@ -20,7 +20,7 @@ javax-validation-api = "2.0.1.Final"
 javax-servlet-api = "4.0.1"
 javax-jstl = "1.2"
 javax-jaxb-api = "2.3.1"
-jaxb-runtime = "2.3.1"
+javax-jaxb-runtime = "2.3.1"
 javax-java-time-jsptags = "1.1.4"
 
 # 2.0.2 버전으로 업그레이드를 하면 jakarta.servlet.jsp.jstl.core.Config 클래스를 못찾는 문제가 있다. 
@@ -142,13 +142,13 @@ thymeleaf-extras-java8time = "3.0.4.RELEASE"
 # https://mvnrepository.com/artifact/org.webjars/webjars-locator
 webjars-locator = "0.52"
 # https://mvnrepository.com/artifact/org.webjars/jquery
-jquery = "3.7.1"
+webjars-jquery = "3.7.1"
 # https://mvnrepository.com/artifact/org.webjars/bootstrap
-bootstrap = "5.3.3"
+webjars-bootstrap = "5.3.3"
 # https://central.sonatype.com/artifact/org.webjars.bowergithub.semantic-org/semantic-ui
-semantic-ui = "2.5.0"
+webjars-semantic-ui = "2.5.0"
 # https://mvnrepository.com/artifact/org.webjars.npm/webstomp-client
-webstomp-client = "1.2.6"
+webjars-webstomp-client = "1.2.6"
 
 
 ### Cache ###
@@ -179,7 +179,7 @@ javax-validation-api = { module = "javax.validation:validation-api", version.ref
 javax-servlet-api = { module = "javax.servlet:javax.servlet-api", version.ref = "javax-servlet-api"}
 javax-jstl = { module = "javax.servlet:jstl", version.ref = "javax-jstl"}
 javax-jaxb-api = { module = "javax.xml.bind:jaxb-api", version.ref = "javax-jaxb-api"}
-jaxb-runtime = { module = "org.glassfish.jaxb:jaxb-runtime", version.ref = "jaxb-runtime" }
+javax-jaxb-runtime = { module = "org.glassfish.jaxb:jaxb-runtime", version.ref = "javax-jaxb-runtime" }
 javax-java-time-jsptags = { module = "net.sargue:java-time-jsptags", version.ref = "javax-java-time-jsptags"}
 jakarta-java-time-jsptags = { module = "net.sargue:java-time-jsptags", version.ref = "jakarta-java-time-jsptags"}
 jakarta-servlet-api = { module = "jakarta.servlet:jakarta.servlet-api", version.ref = "jakarta-servlet-api" }
@@ -267,10 +267,10 @@ thymeleaf-extras-java8time = { module = "org.thymeleaf.extras:thymeleaf-extras-j
 
 
 webjars-locator = { module = "org.webjars:webjars-locator", version.ref = "webjars-locator" }
-jquery = { module = "org.webjars:jquery", version.ref = "jquery" }
-bootstrap = { module = "org.webjars:bootstrap", version.ref = "bootstrap" }
-semantic-ui = { module = "org.webjars.bowergithub.semantic-org:semantic-ui", version.ref = "semantic-ui" }
-webstomp-client = { module = "org.webjars.npm:webstomp-client", version.ref = "webstomp-client" }
+webjars-jquery = { module = "org.webjars:jquery", version.ref = "webjars-jquery" }
+webjars-bootstrap = { module = "org.webjars:bootstrap", version.ref = "webjars-bootstrap" }
+webjars-semantic-ui = { module = "org.webjars.bowergithub.semantic-org:semantic-ui", version.ref = "webjars-semantic-ui" }
+webjars-webstomp-client = { module = "org.webjars.npm:webstomp-client", version.ref = "webjars-webstomp-client" }
 
 
 ehcache = { module = "org.ehcache:ehcache", version.ref = "ehcache" }
