@@ -4,6 +4,15 @@
 
 rootProject.name = 'spring-5-recipes-study-chap02'
 
+
+dependencyResolutionManagement {
+  versionCatalogs {
+    libs {
+      from(files("../gradle/libs.versions.toml"))
+    }
+  }
+}
+
 /* ===== Chapter 2 스프링 코어 ===== */
 include 'recipe-2-01-i'
 include 'recipe-2-01-ii'

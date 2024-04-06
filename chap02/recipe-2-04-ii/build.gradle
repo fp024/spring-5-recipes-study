@@ -1,6 +1,6 @@
 plugins {
   id 'application'
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  alias(libs.plugins.lombok)
 }
 
 java {
@@ -12,14 +12,13 @@ java {
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
-  // spring-context 5.1.x에는 inject 디펜던시가 Optional로 있었다. 이후 버전에는 따로 안보임.
-  implementation 'javax.inject:javax.inject:1'
-  implementation "org.springframework:spring-context:${springVersion}"
-  implementation "org.aspectj:aspectjweaver:${aspectjVersion}"
+  implementation enforcedPlatform(libs.spring.bom.v5)
 
-  testImplementation "org.springframework:spring-test:${springVersion}"
-  testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
+  implementation (libs.javax.annotation.api)
+  // spring-context 5.1.x에는 inject 디펜던시가 Optional로 있었다. 이후 버전에는 따로 안보임.
+  implementation (libs.javax.inject)
+  implementation "org.springframework:spring-context"
+  implementation (libs.aspectjweaver)
 }
 
 application {

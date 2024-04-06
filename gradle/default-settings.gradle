@@ -9,11 +9,11 @@ repositories {
 
 dependencies {
   // 2.20.0 부터는 log4j-slf4j2-impl가 끌고와서 log4j-core선언이 명시적으로 필요하진 않지만, 넣어두자.
-  implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
-  implementation "org.apache.logging.log4j:log4j-slf4j2-impl:${log4jVersion}"
-  testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+  implementation (libs.log4j.core)
+  implementation (libs.log4j.slf4j2.impl)
+  testImplementation (libs.junit.jupiter)
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-  testImplementation "org.assertj:assertj-core:${assertJVersion}"
+  testImplementation (libs.assertj.core)
 }
 
 tasks.named('test') {

@@ -1,6 +1,6 @@
 plugins {
   id 'application'
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  alias(libs.plugins.lombok)
 }
 
 java {
@@ -12,21 +12,17 @@ java {
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-  implementation "org.springframework:spring-context:${springVersion}"
+  implementation enforcedPlatform(libs.spring.bom.v5)
 
-  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+  implementation (libs.javax.annotation.api)
+  implementation "org.springframework:spring-context"
 
-  implementation "org.aspectj:aspectjweaver:${aspectjVersion}"
-    
-  // Spring AOP로 사용하면 AspectJ의 어노테이션만 사용하기 때문에 rt가 aspectjrt가 디펜던시에 없어도 잘 동작함.
-  // aspectjweaver가 rt의 클래스를 포함함
+  // ✨ Spring AOP로 사용하면 AspectJ의 어노테이션만 사용하기 때문에 aspectjrt가 디펜던시에 없어도 잘 동작함.
+  //   aspectjweaver가 aspectjrt가의 클래스를 포함함
   //   The AspectJ weaver applies aspects to Java classes. 
   //   It can be used as a Java agent in order to apply load-time weaving (LTW) during class-loading
   //   and also contains the AspectJ runtime classes.
-  // implementation "org.aspectj:aspectjrt:${aspectjVersion}"
-
-  testImplementation "org.springframework:spring-test:${springVersion}"
-  testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
+  implementation (libs.aspectjweaver)
 }
 
 application {

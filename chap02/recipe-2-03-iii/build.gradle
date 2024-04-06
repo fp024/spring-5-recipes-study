@@ -1,6 +1,6 @@
 plugins {
   id 'application'
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  alias(libs.plugins.lombok)
 }
 
 java {
@@ -13,11 +13,9 @@ apply from: "../../gradle/default-settings.gradle"
 
 
 dependencies {
-  implementation "org.springframework:spring-context:${springVersion}"
-  implementation "org.aspectj:aspectjweaver:${aspectjVersion}"
-
-  testImplementation "org.springframework:spring-test:${springVersion}"
-  testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
+  implementation enforcedPlatform(libs.spring.bom.v5)
+  implementation "org.springframework:spring-context"
+  implementation (libs.aspectjweaver)
 }
 
 application {

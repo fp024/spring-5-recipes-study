@@ -1,7 +1,7 @@
 plugins {
   id 'application'
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
-  id "io.freefair.aspectj.post-compile-weaving" version "${postCompileWeavingVersion}"
+  alias(libs.plugins.lombok)
+  alias(libs.plugins.post.compile.weaving)
 }
 
 java {
@@ -13,20 +13,22 @@ java {
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-  implementation "org.springframework:spring-context:${springVersion}"
+  implementation enforcedPlatform(libs.spring.bom.v5)
 
-  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+  implementation (libs.javax.annotation.api)
+  implementation "org.springframework:spring-context"
 
-  implementation "org.aspectj:aspectjweaver:${aspectjVersion}"    
+  implementation (libs.aspectjweaver)
   
+
   // Gralde 빌드시 경고가 발생하는데, post-compile-weaving 플러그인이 aspectjrt.jar가 클래스 패스에 없기만 하면 저런 오류를 노출하는 것 같음.
   //   [warning] couldn't find aspectjrt.jar on classpath, checked: ... 
   //   TODO: 나중에 플러그인 제작자분께 질문을 올려보자!
   //   https://github.com/freefair/gradle-plugins/discussions/categories/q-a
-  implementation "org.aspectj:aspectjrt:${aspectjVersion}"    
-
-  testImplementation "org.springframework:spring-test:${springVersion}"
-  testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
+  // 다시 확인해봤을 때는... 다음과 같은 경고인데...
+  //   aspectjrt를 명시하지 않으면 이전버전을 찾는 것인지 잘모르겠다. 하여튼 의존성 추가를 해주면 경고가 사라짐.
+  //   [warning] bad version number found in {USER_HOME}\.gradle\caches\modules-2\files-2.1\...\aspectjrt-1.9.21.2.jar expected 1.9.22 found 1.9.21.2
+  implementation (libs.aspectjrt)
 }
 
 application {

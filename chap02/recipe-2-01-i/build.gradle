@@ -1,6 +1,6 @@
 plugins {
   id 'application'
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  alias(libs.plugins.lombok)
 }
 
 java {
@@ -12,7 +12,8 @@ java {
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-  implementation "org.springframework:spring-context:${springVersion}"
+  implementation enforcedPlatform(libs.spring.bom.v5)
+  implementation "org.springframework:spring-context"
 }
 
 application {

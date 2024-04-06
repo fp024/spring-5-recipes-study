@@ -12,7 +12,10 @@ java {
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-  implementation enforcedPlatform(libs.spring.bom.v5)
+  // @Required 어노테이션이 실제로 동작해야되기 때문에, Spring 버전을 5.0.20.RELEASE 까지 다운그레이드 할 수 밖에 없었다.
+  implementation enforcedPlatform(libs.spring.bom.v5.book)
+
+  implementation (libs.javax.annotation.api)
   implementation "org.springframework:spring-context"
   implementation (libs.aspectjweaver)
 }
