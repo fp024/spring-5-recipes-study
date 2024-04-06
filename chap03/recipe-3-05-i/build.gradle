@@ -13,16 +13,18 @@ java {
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-  implementation "org.springframework:spring-context:${springVersion}"
-  implementation "org.springframework:spring-webmvc:${springVersion}"
-  implementation "net.sargue:java-time-jsptags:${javaTimeJspTagsVersion}"
+  implementation enforcedPlatform(libs.spring.bom.v5)
 
-  compileOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
-  runtimeOnly "javax.servlet:jstl:${javaxJstlVersion}"
+  implementation "org.springframework:spring-context"
+  implementation "org.springframework:spring-webmvc"
+  implementation (libs.javax.java.time.jsptags)
 
-  testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
-  testImplementation "org.springframework:spring-test:${springVersion}"
-  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+  compileOnly (libs.javax.servlet.api)
+  runtimeOnly (libs.javax.jstl)
+
+  testImplementation (libs.javax.servlet.api)
+  testImplementation "org.springframework:spring-test"
+  testImplementation (libs.hamcrest)
 }
 
 apply from: "../../gradle/gretty-settings.gradle"

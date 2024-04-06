@@ -23,7 +23,10 @@ javax-jaxb-api = "2.3.1"
 jaxb-runtime = "2.3.1"
 javax-java-time-jsptags = "1.1.4"
 
-jakarta-java-time-jsptags = "2.0.2"
+# 2.0.2 버전으로 업그레이드를 하면 jakarta.servlet.jsp.jstl.core.Config 클래스를 못찾는 문제가 있다. 
+# TODO: 관련해서 개발자분께 물어보자!
+jakarta-java-time-jsptags = "2.0.0"
+
 jakarta-servlet-api = "6.0.0"
 jakarta-jstl-api = "3.0.0"
 
@@ -181,7 +184,7 @@ javax-java-time-jsptags = { module = "net.sargue:java-time-jsptags", version.ref
 jakarta-java-time-jsptags = { module = "net.sargue:java-time-jsptags", version.ref = "jakarta-java-time-jsptags"}
 jakarta-servlet-api = { module = "jakarta.servlet:jakarta.servlet-api", version.ref = "jakarta-servlet-api" }
 jakarta-jstl-api = { module = "jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api", version.ref = "jakarta-jstl-api" }
-jakarta-jstl = { module = "org.glassfish.web:jakarta.servlet.jsp.jstl", version = "jakarta-jstl" }
+jakarta-jstl = { module = "org.glassfish.web:jakarta.servlet.jsp.jstl", version.ref = "jakarta-jstl" }
 jakarta-annotation-api = { module = "jakarta.annotation:jakarta.annotation-api", version.ref = "jakarta-annotation-api" }
 
 
@@ -230,6 +233,7 @@ jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", ver
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 
 apache-poi = { module = "org.apache.poi:poi", version.ref = "apache-poi" }
+apache-poi-ooxml = { module = "org.apache.poi:poi-ooxml", version.ref = "apache-poi" }
 
 itextpdf = { module = "com.itextpdf:itextpdf", version.ref = "itextpdf" }
 

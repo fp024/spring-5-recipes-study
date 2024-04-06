@@ -1,7 +1,7 @@
 plugins {
   id 'war'
-  id "org.gretty" version "${grettyVersion_6x}"
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  alias(libs.plugins.gretty)
+  alias(libs.plugins.lombok)
 }
 
 java {
@@ -13,21 +13,18 @@ java {
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-  implementation "org.springframework:spring-context:${springVersion_6x}"
-  implementation "org.springframework:spring-webmvc:${springVersion_6x}"
-  implementation "net.sargue:java-time-jsptags:${javaTimeJspTagsVersion_6x}"
+  implementation enforcedPlatform(libs.spring.bom)
 
-  compileOnly "jakarta.servlet:jakarta.servlet-api:${jakartaServletApiVersion}"
-  runtimeOnly "org.glassfish.web:jakarta.servlet.jsp.jstl:${jakartaServletJspJstlVersion}"
+  implementation "org.springframework:spring-context"
+  implementation "org.springframework:spring-webmvc"
+  implementation (libs.jakarta.java.time.jsptags)
 
-  testImplementation "jakarta.servlet:jakarta.servlet-api:${jakartaServletApiVersion}"
-  testImplementation "org.springframework:spring-test:${springVersion_6x}"
-  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+  compileOnly (libs.jakarta.servlet.api)
+  runtimeOnly (libs.jakarta.jstl)
+
+  testImplementation (libs.jakarta.servlet.api)
+  testImplementation "org.springframework:spring-test"
+  testImplementation (libs.hamcrest)
 }
 
-apply from: "../../gradle/gretty-settings.gradle"
-
-// Spring 6은 Tomcat 10.1 이상 버전을 사용해야한다.
-gretty {  
-  servletContainer = "tomcat10"
-}
+apply from: "../../gradle/gretty-jakarta-settings.gradle"
