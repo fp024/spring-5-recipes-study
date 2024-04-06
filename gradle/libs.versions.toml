@@ -174,7 +174,7 @@ javax-annotation-api = { module = "javax.annotation:javax.annotation-api", versi
 javax-inject = { module = "javax.inject:javax.inject", version.ref = "javax-inject" }
 javax-validation-api = { module = "javax.validation:validation-api", version.ref = "javax-validation-api"}
 javax-servlet-api = { module = "javax.servlet:javax.servlet-api", version.ref = "javax-servlet-api"}
-javax-jstl = { module = "javax.servlet.jsp.jstl:jstl", version.ref = "javax-jstl"}
+javax-jstl = { module = "javax.servlet:jstl", version.ref = "javax-jstl"}
 javax-jaxb-api = { module = "javax.xml.bind:jaxb-api", version.ref = "javax-jaxb-api"}
 jaxb-runtime = { module = "org.glassfish.jaxb:jaxb-runtime", version.ref = "jaxb-runtime" }
 javax-java-time-jsptags = { module = "net.sargue:java-time-jsptags", version.ref = "javax-java-time-jsptags"}
@@ -289,6 +289,6 @@ post-compile-weaving = { id = "io.freefair.aspectj.post-compile-weaving", versio
 
 spring-dependency-managenent = { id = "io.spring.dependency-management", version.ref = "spring-dependency-managenent-plugin"}
 
-gretty-v3 = { id = "org.gretty:gretty", version.ref = "gretty-v3" }
-gretty = { id = "org.gretty:gretty", version.ref = "gretty" }
+gretty-v3 = { id = "org.gretty", version.ref = "gretty-v3" }
+gretty = { id = "org.gretty", version.ref = "gretty" }
 
