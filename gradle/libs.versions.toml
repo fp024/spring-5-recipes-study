@@ -213,8 +213,10 @@ ojdbc8 = { module = "com.oracle.database.jdbc:ojdbc8", version.ref = "ojdbc8" }
 h2 = { module = "com.h2database:h2", version.ref = "h2" }
 hikaricp = { module = "com.zaxxer:HikariCP", version.ref = "hikaricp" }
 
-# TODO: Hibernate도 5, 6 버전을 혼용해서 쓸 때 애매한 부분이 있긴함. 
+ 
 hibernate-entitymanager-v5 = { module = "org.hibernate:hibernate-entitymanager", version.ref = "hibernate-v5" }
+hibernate-core-v5 = { module = "org.hibernate:hibernate-core", version.ref = "hibernate-v5" }
+hibernate-hikaricp-v5 = { module = "org.hibernate:hibernate-hikaricp", version.ref = "hibernate-v5" }
 
 spring-data-jpa-v2 = { module = "org.springframework.data:spring-data-jpa", version.ref = "spring-data-v2" }
 
@@ -281,7 +283,7 @@ ehcache = { module = "org.ehcache:ehcache", version.ref = "ehcache" }
 ehcache-v2 = { module = "net.sf.ehcache:ehcache", version.ref = "ehcache-v2" }
 javax-cache-api = { module = "javax.cache:cache-api", version.ref = "javax-cache-api" }
 
-log4jdbc = { module = "org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1", version.ref = "log4jdbc" }
+log4jdbc-log4j2-jdbc4 = { module = "org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1", version.ref = "log4jdbc" }
 
 mybatis = { module = "org.mybatis:mybatis", version.ref = "mybatis" }
 mybatis-spring-v2 = { module = "org.mybatis:mybatis-spring", version.ref = "mybatis-spring-v2" }

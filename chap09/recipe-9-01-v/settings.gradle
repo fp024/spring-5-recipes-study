@@ -3,3 +3,11 @@
  ******************************/
 
 rootProject.name = 'recipe-9-01-v'
+
+dependencyResolutionManagement {
+  versionCatalogs {
+    libs {
+      from(files("../../gradle/libs.versions.toml"))
+    }
+  }
+}
