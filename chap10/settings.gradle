@@ -4,6 +4,14 @@
 
 rootProject.name = 'spring-5-recipes-study-chap10'
 
+dependencyResolutionManagement {
+  versionCatalogs {
+    libs {
+      from(files("../gradle/libs.versions.toml"))
+    }
+  }
+}
+
 /* ===== Chapter 10 스프링 트랜잭션 관리 ===== */
 
 include 'recipe-10-01-i'

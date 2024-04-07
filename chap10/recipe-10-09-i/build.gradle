@@ -1,6 +1,6 @@
 plugins {
   id 'application'
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  alias(libs.plugins.lombok)
 }
 
 java {
@@ -12,16 +12,15 @@ java {
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-  implementation "org.springframework:spring-context:${springVersion}"
-  implementation "org.springframework:spring-jdbc:${springVersion}"
+  implementation enforcedPlatform(libs.spring.bom.v5)
 
-  implementation "org.hsqldb:hsqldb:${hsqldbVersion}"
-  implementation "com.zaxxer:HikariCP:${hikariCpVersion}"
+  implementation 'org.springframework:spring-context'
+  implementation 'org.springframework:spring-jdbc'
 
-  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+  runtimeOnly (libs.hsqldb)  
+  implementation (libs.hikaricp)
 
-  testImplementation "org.springframework:spring-test:${springVersion}"
-  testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
+  implementation (libs.javax.annotation.api)
 }
 
 application {
