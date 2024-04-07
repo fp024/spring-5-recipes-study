@@ -1,8 +1,7 @@
 plugins {
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  alias(libs.plugins.lombok)
   id 'war'
-  id "org.gretty" version "${grettyVersion}"
-  id "io.spring.dependency-management" version "${springDependencyManagementPluginVersion}"
+  alias(libs.plugins.gretty.v3)
 }
 
 java {
@@ -11,44 +10,40 @@ java {
   }
 }
 
-dependencyManagement {
-  imports {
-    mavenBom "org.springframework:spring-framework-bom:${springVersion}"
-    mavenBom "org.springframework.security:spring-security-bom:${springSecurityVersion}"
-  }
-}
-
 apply from: "../../gradle/default-settings.gradle"
 
-dependencies {
+dependencies {  
+  implementation enforcedPlatform(libs.spring.bom.v5)
+  implementation enforcedPlatform(libs.spring.security.bom.v5)
+
   implementation 'org.springframework:spring-context'
   implementation 'org.springframework:spring-webmvc'
   implementation 'org.springframework:spring-jdbc'
 
-  runtimeOnly "org.hsqldb:hsqldb:${hsqldbVersion}"
+  runtimeOnly (libs.hsqldb)
 
   implementation 'org.springframework.security:spring-security-config'
   implementation 'org.springframework.security:spring-security-web'
   implementation 'org.springframework.security:spring-security-taglibs'
 
-  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+  implementation (libs.javax.annotation.api)
 
-  implementation "org.hibernate.validator:hibernate-validator:${hibernateValidatorVersion}"
-  testRuntimeOnly "org.glassfish:javax.el:${javaxElVersion}"
+  implementation (libs.hibernate.validator.v6)
+  testRuntimeOnly (libs.javax.el)
 
-  implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
-  implementation "org.webjars:bootstrap:${bootstrapVersion}"
-  implementation "org.webjars.bowergithub.semantic-org:semantic-ui:${semanticUiVersion}"
+  compileOnly (libs.javax.servlet.api)
+  runtimeOnly (libs.javax.jstl)
+  implementation (libs.javax.java.time.jsptags)
 
-  compileOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
-  runtimeOnly "javax.servlet:jstl:${javaxJstlVersion}"
-  implementation "net.sargue:java-time-jsptags:${javaTimeJspTagsVersion}"
+  implementation (libs.webjars.locator)
+  implementation (libs.webjars.bootstrap)
+  implementation (libs.webjars.semantic.ui)
 
-  testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
+  testImplementation (libs.javax.servlet.api)
   testImplementation 'org.springframework:spring-test'
   testImplementation 'org.springframework.security:spring-security-test'
   testImplementation 'org.springframework:spring-webflux'
-  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+  testImplementation (libs.hamcrest)
 }
 
 apply from: "../../gradle/gretty-settings.gradle"

@@ -1,8 +1,8 @@
 plugins {
   id 'application'
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  alias(libs.plugins.lombok)
   id 'war'
-  id "org.gretty" version "${grettyVersion}"
+  alias(libs.plugins.gretty.v3)
 }
 
 java {
@@ -11,16 +11,11 @@ java {
   }
 }
 
-ext {
-  springVersion = "${springVersion}"
-  thymeleafSpringVersion = "${thymeleafSpring5Version}"
-}
-
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
-  implementation platform("org.springframework:spring-framework-bom:${springVersion}")
-  implementation platform("org.springframework.security:spring-security-bom:${springSecurityVersion}")
+  implementation enforcedPlatform(libs.spring.bom.v5)
+  implementation enforcedPlatform(libs.spring.security.bom.v5)
 
   implementation 'org.springframework:spring-context'
   implementation 'org.springframework:spring-webmvc'
@@ -34,21 +29,21 @@ dependencies {
   // "spring-security-webflux"는 2017년 10월 5.0.0.M5 버전 이후에 종료된 것 같다. 메인 프로젝트에 통합 된 듯함.
   // implementation 'org.springframework.security:spring-security-webflux'
 
-  implementation "io.projectreactor:reactor-core:${reactorCoreVersion}"
-  implementation "io.projectreactor.netty:reactor-netty:${reactorNettyVersion}"
+  implementation (libs.reactor.core)
+  implementation (libs.reactor.netty)
 
-  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+  implementation (libs.javax.annotation.api)
 
-  implementation "org.thymeleaf:thymeleaf-spring5:${thymeleafSpringVersion}"
-  implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5:${thymeleafSpringVersion}"
-  implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:${thymeleafExtrasJava8timeVersion}"
+  implementation (libs.thymeleaf.spring5)
+  implementation (libs.thymeleaf.extras.java8time)
+  implementation (libs.thymeleaf.extras.springsecurity5)
 
-  implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
-  implementation "org.webjars:bootstrap:${bootstrapVersion}"
+  implementation (libs.webjars.locator)
+  implementation (libs.webjars.bootstrap)
 
   testImplementation 'org.springframework:spring-test'
   testImplementation 'org.springframework.security:spring-security-test'
-  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+  testImplementation (libs.hamcrest)
 }
 
 application {

@@ -1,8 +1,7 @@
 plugins {
-  id "io.freefair.lombok" version "${lombokPluginVersion}"
+  alias(libs.plugins.lombok)
   id 'war'
-  id "org.gretty" version "${grettyVersion}"
-  id "io.spring.dependency-management" version "${springDependencyManagementPluginVersion}"
+  alias(libs.plugins.gretty.v3)
 }
 
 java {
@@ -11,39 +10,35 @@ java {
   }
 }
 
-dependencyManagement {
-  imports {
-    mavenBom "org.springframework:spring-framework-bom:${springVersion}"
-  }
-}
-
 apply from: "../../gradle/default-settings.gradle"
 
 dependencies {
+  implementation enforcedPlatform(libs.spring.bom.v5)
+
   implementation 'org.springframework:spring-context'
   implementation 'org.springframework:spring-webmvc'
   implementation 'org.springframework:spring-jdbc'
 
-  runtimeOnly "org.hsqldb:hsqldb:${hsqldbVersion}"
+  runtimeOnly (libs.hsqldb)
 
-  implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
-  compileOnly "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
+  implementation (libs.javax.annotation.api)
+  compileOnly (libs.javax.servlet.api)
 
-  implementation "org.hibernate.validator:hibernate-validator:${hibernateValidatorVersion}"
-  testRuntimeOnly "org.glassfish:javax.el:${javaxElVersion}"
+  implementation (libs.hibernate.validator.v6)
+  testRuntimeOnly (libs.javax.el)
 
-  implementation "org.thymeleaf:thymeleaf-spring5:${thymeleafSpring5Version}"
-  implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:${thymeleafExtrasJava8timeVersion}"
+  implementation (libs.thymeleaf.spring5)
+  implementation (libs.thymeleaf.extras.java8time)
 
-  implementation "org.webjars:webjars-locator:${webjarsLocatorVersion}"
-  implementation "org.webjars:bootstrap:${bootstrapVersion}"
-  implementation "org.webjars.bowergithub.semantic-org:semantic-ui:${semanticUiVersion}"
+  implementation (libs.webjars.locator)
+  implementation (libs.webjars.bootstrap)
+  implementation (libs.webjars.semantic.ui)
 
-  testImplementation "javax.servlet:javax.servlet-api:${javaxServletApiVersion}"
+  testImplementation (libs.javax.servlet.api)
   testImplementation 'org.springframework:spring-test'
   // 테스트 환경에서 WebTestClient를 사용하려면 spring-webflux를 추가해줘야함.
   testImplementation 'org.springframework:spring-webflux'
-  testImplementation "org.hamcrest:hamcrest:${hamcrestVersion}"
+  testImplementation (libs.hamcrest)
 }
 
 apply from: "../../gradle/gretty-settings.gradle"

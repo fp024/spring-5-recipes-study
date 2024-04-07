@@ -134,6 +134,7 @@ findbugs-jsr305 = "3.0.2"
 ### Thymeleaf ###
 # https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
 thymeleaf-spring5 = "3.1.2.RELEASE"
+thymeleaf-spring6 = "3.1.2.RELEASE"
 # https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-java8time
 thymeleaf-extras-java8time = "3.0.4.RELEASE"
 
@@ -193,8 +194,8 @@ jakarta-annotation-api = { module = "jakarta.annotation:jakarta.annotation-api",
 spring-bom-v5-book = { module = "org.springframework:spring-framework-bom", version.ref = "spring-v5-book"}
 spring-bom-v5 = { module = "org.springframework:spring-framework-bom", version.ref = "spring-v5"}
 spring-bom = { module = "org.springframework:spring-framework-bom", version.ref = "spring"}
-spring-security-bom-v5 = { module = "org.springframework.security:spring-security-bom", version.ref = "spring-v5"}
-spring-security-bom = { module = "org.springframework.security:spring-security-bom", version.ref = "spring"}
+spring-security-bom-v5 = { module = "org.springframework.security:spring-security-bom", version.ref = "spring-security-v5"}
+spring-security-bom = { module = "org.springframework.security:spring-security-bom", version.ref = "spring-security"}
 
 aspectjweaver = { module = "org.aspectj:aspectjweaver", version.ref = "aspectj"}
 aspectjrt = { module = "org.aspectj:aspectjrt", version.ref = "aspectj"}
@@ -263,9 +264,11 @@ jakarta-el = { module = "org.glassfish:jakarta.el", version.ref = "jakarta-el" }
 findbugs-jsr305 = { module = "com.google.code.findbugs:jsr305", version.ref = "findbugs-jsr305" }
 
 thymeleaf-spring5 = { module = "org.thymeleaf:thymeleaf-spring5", version.ref = "thymeleaf-spring5" }
+thymeleaf-spring6 = { module = "org.thymeleaf:thymeleaf-spring6", version.ref = "thymeleaf-spring6" }
 
 thymeleaf-extras-java8time = { module = "org.thymeleaf.extras:thymeleaf-extras-java8time", version.ref = "thymeleaf-extras-java8time" }
-
+thymeleaf-extras-springsecurity5 = { module = "org.thymeleaf.extras:thymeleaf-extras-springsecurity5", version.ref = "thymeleaf-spring5" }
+thymeleaf-extras-springsecurity6 = { module = "org.thymeleaf.extras:thymeleaf-extras-springsecurity6", version.ref = "thymeleaf-spring6" }
 
 webjars-locator = { module = "org.webjars:webjars-locator", version.ref = "webjars-locator" }
 webjars-jquery = { module = "org.webjars:jquery", version.ref = "webjars-jquery" }
