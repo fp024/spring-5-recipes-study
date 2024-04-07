@@ -23,15 +23,10 @@ javax-jaxb-api = "2.3.1"
 javax-jaxb-runtime = "2.3.1"
 javax-java-time-jsptags = "1.1.4"
 
-# 2.0.2 버전으로 업그레이드를 하면 jakarta.servlet.jsp.jstl.core.Config 클래스를 못찾는 문제가 있다. 
-# TODO: 관련해서 개발자분께 물어보자!
-jakarta-java-time-jsptags = "2.0.0"
+jakarta-java-time-jsptags = "2.0.2"
 
 jakarta-servlet-api = "6.0.0"
 jakarta-jstl-api = "3.0.0"
-
-# https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl
-jakarta-jstl = "3.0.1"
 
 jakarta-annotation-api = "2.1.1"
 
@@ -188,8 +183,10 @@ javax-jaxb-runtime = { module = "org.glassfish.jaxb:jaxb-runtime", version.ref =
 javax-java-time-jsptags = { module = "net.sargue:java-time-jsptags", version.ref = "javax-java-time-jsptags"}
 jakarta-java-time-jsptags = { module = "net.sargue:java-time-jsptags", version.ref = "jakarta-java-time-jsptags"}
 jakarta-servlet-api = { module = "jakarta.servlet:jakarta.servlet-api", version.ref = "jakarta-servlet-api" }
+
+# java-time-jsptags의 2.0.2 버전 이후 버전과 함께 사용할 때.. 다음만 같이 추가해주면 된다.
 jakarta-jstl-api = { module = "jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api", version.ref = "jakarta-jstl-api" }
-jakarta-jstl = { module = "org.glassfish.web:jakarta.servlet.jsp.jstl", version.ref = "jakarta-jstl" }
+
 jakarta-annotation-api = { module = "jakarta.annotation:jakarta.annotation-api", version.ref = "jakarta-annotation-api" }
 
 

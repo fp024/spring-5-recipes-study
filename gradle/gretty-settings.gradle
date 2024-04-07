@@ -22,4 +22,7 @@ gretty {
   // Debug: https://gretty-gradle-plugin.github.io/gretty-doc/Debugger-support.html
   //debugPort = 5005
   //debugSuspend = true
+  
+  // https://akhikhl.github.io/gretty-doc/Gretty-configuration.html
+  redeployMode = "restart"
 }

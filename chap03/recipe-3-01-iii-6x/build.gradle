@@ -20,7 +20,7 @@ dependencies {
   implementation (libs.jakarta.java.time.jsptags)
 
   compileOnly (libs.jakarta.servlet.api)
-  runtimeOnly (libs.jakarta.jstl)
+  runtimeOnly (libs.jakarta.jstl.api)
 
   testImplementation (libs.jakarta.servlet.api)
   testImplementation "org.springframework:spring-test"
