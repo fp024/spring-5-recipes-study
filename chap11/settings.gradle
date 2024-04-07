@@ -4,6 +4,14 @@
 
 rootProject.name = 'spring-5-recipes-study-chap11'
 
+dependencyResolutionManagement {
+  versionCatalogs {
+    libs {
+      from(files("../gradle/libs.versions.toml"))
+    }
+  }
+}
+
 /* ===== Chapter 11 스프링 배치 ===== */
 
 include 'recipe-11-01-i'

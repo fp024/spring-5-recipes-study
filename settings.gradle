@@ -162,6 +162,43 @@ include 'chap07:recipe-7-08'
 
 
 /* ===== Chapter 9 데이터 액세스 ===== */
+include 'chap09:recipe-9-00-i'
+include 'chap09:recipe-9-00-ii'
+include 'chap09:recipe-9-01-i'
+include 'chap09:recipe-9-01-ii'
+include 'chap09:recipe-9-01-iii'
+include 'chap09:recipe-9-01-iv'
+include 'chap09:recipe-9-01-v'
+include 'chap09:recipe-9-02-i'
+include 'chap09:recipe-9-02-ii'
+include 'chap09:recipe-9-02-iii'
+include 'chap09:recipe-9-02-iv'
+// 'recipe-9-02-v'는 만들지 않음. 앞에서 이미 진행한 내용.
+include 'chap09:recipe-9-02-vi'
+// 'recipe-9-03-i'는 만들지 않음, 이미 JdbcTemplate을 빈으로 사용하고 있음.
+include 'chap09:recipe-9-03-ii'
+include 'chap09:recipe-9-04-i'
+include 'chap09:recipe-9-04-ii'
+include 'chap09:recipe-9-04-iii'
+// 'recipe-9-03-iv'는 만들지 않음, 이전 예제에서 모두 진행한 내용만 있음.
+include 'chap09:recipe-9-05-i'
+// 'recipe-9-05-ii'는 만들지 않음, i에 SQL 에러코드 관련 내용을 포함했다.
+include 'chap09:recipe-9-05-iii'
+include 'chap09:recipe-9-05-iii-spring-6'
+include 'chap09:recipe-9-06-i'
+include 'chap09:recipe-9-06-ii'
+include 'chap09:recipe-9-06-iii'
+include 'chap09:recipe-9-07-i'
+include 'chap09:recipe-9-07-ii'
+include 'chap09:recipe-9-07-iii'
+include 'chap09:recipe-9-07-iv'
+// 'recipe-9-05-v'는 만들지 않음, v에 패키지 스캔 내용을 포함했다.
+include 'chap09:recipe-9-08-i'
+// 'recipe-9-08-ii ~ iii'는 만들지 않음, i와 의미있는 차이가 없다.
+include 'chap09:recipe-9-09-i'
+// 'recipe-9-09-ii'는 만들지 않음, i에 내용이 포함됨.
+include 'chap09:recipe-9-10'
+include 'chap09:recipe-9-11-mybatis'
 
 
 
