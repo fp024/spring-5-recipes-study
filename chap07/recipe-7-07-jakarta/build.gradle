@@ -39,7 +39,7 @@ dependencies {
   compileOnly (libs.jakarta.servlet.api)
 
   implementation (libs.hibernate.validator)
-  testRuntimeOnly (libs.jakarta.el)
+  testRuntimeOnly (libs.expressly)
 
   implementation (libs.thymeleaf.spring6)
   implementation (libs.thymeleaf.extras.java8time)
