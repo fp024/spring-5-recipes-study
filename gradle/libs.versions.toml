@@ -34,12 +34,12 @@ jakarta-annotation-api = "2.1.1"
 spring-v5-book = "5.0.20.RELEASE"
 
 # Spring 5.x 의 마지막 버전
-spring-v5 = "5.3.33"
+spring-v5 = "5.3.34"
 
 # Spring 최신 버전
-spring = "6.1.5"
-spring-security-v5 = "5.8.11"
-spring-security = "6.2.3"
+spring = "6.1.6"
+spring-security-v5 = "5.8.12"
+spring-security = "6.2.4"
 
 aspectj = "1.9.22"
 log4j = "2.23.1"
@@ -93,10 +93,10 @@ rome = "2.1.0"
 
 # 비동기 처리 : reactor, netty, Spring 5에 맞는 버전으로 설정
 # https://mvnrepository.com/artifact/io.projectreactor/reactor-core
-reactor-core = "3.4.36"
+reactor-core = "3.4.37"
 
 # https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty
-reactor-netty = "1.0.43"
+reactor-netty = "1.0.44"
 
 junit = "5.10.2"
 mockito = "5.11.0"
