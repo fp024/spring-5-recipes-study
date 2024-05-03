@@ -134,9 +134,6 @@ findbugs-jsr305 = "3.0.2"
 # https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
 thymeleaf-spring5 = "3.1.2.RELEASE"
 thymeleaf-spring6 = "3.1.2.RELEASE"
-# https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-java8time
-thymeleaf-extras-java8time = "3.0.4.RELEASE"
-
 
 ### WebJars ###
 # https://mvnrepository.com/artifact/org.webjars/webjars-locator
@@ -270,7 +267,6 @@ findbugs-jsr305 = { module = "com.google.code.findbugs:jsr305", version.ref = "f
 thymeleaf-spring5 = { module = "org.thymeleaf:thymeleaf-spring5", version.ref = "thymeleaf-spring5" }
 thymeleaf-spring6 = { module = "org.thymeleaf:thymeleaf-spring6", version.ref = "thymeleaf-spring6" }
 
-thymeleaf-extras-java8time = { module = "org.thymeleaf.extras:thymeleaf-extras-java8time", version.ref = "thymeleaf-extras-java8time" }
 thymeleaf-extras-springsecurity5 = { module = "org.thymeleaf.extras:thymeleaf-extras-springsecurity5", version.ref = "thymeleaf-spring5" }
 thymeleaf-extras-springsecurity6 = { module = "org.thymeleaf.extras:thymeleaf-extras-springsecurity6", version.ref = "thymeleaf-spring6" }
 

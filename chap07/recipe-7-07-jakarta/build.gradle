@@ -42,7 +42,6 @@ dependencies {
   testRuntimeOnly (libs.expressly)
 
   implementation (libs.thymeleaf.spring6)
-  implementation (libs.thymeleaf.extras.java8time)
   implementation (libs.thymeleaf.extras.springsecurity6)
   
 

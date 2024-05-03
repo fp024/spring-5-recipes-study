@@ -42,7 +42,6 @@ dependencies {
   testRuntimeOnly (libs.javax.el)
 
   implementation (libs.thymeleaf.spring5)
-  implementation (libs.thymeleaf.extras.java8time)
   implementation (libs.thymeleaf.extras.springsecurity5)
 
   implementation (libs.webjars.locator)

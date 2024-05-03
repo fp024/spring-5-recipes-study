@@ -13,7 +13,6 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 import org.springframework.web.reactive.config.ResourceHandlerRegistry;
 import org.springframework.web.reactive.config.ViewResolverRegistry;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
-import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.ISpringWebFluxTemplateEngine;
 import org.thymeleaf.spring5.SpringWebFluxTemplateEngine;
@@ -45,7 +44,6 @@ public class WebFluxConfiguration implements WebFluxConfigurer {
   @Bean
   ISpringWebFluxTemplateEngine thymeleafTemplateEngine() {
     var templateEngine = new SpringWebFluxTemplateEngine();
-    templateEngine.addDialect(new Java8TimeDialect());
     templateEngine.addDialect(new SpringSecurityDialect());
     templateEngine.setTemplateResolver(thymeleafTemplateResolver());
     return templateEngine;

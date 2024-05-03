@@ -16,7 +16,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
@@ -68,7 +67,6 @@ public class TodoWebConfig implements WebMvcConfigurer {
   SpringTemplateEngine thymeleafTemplateEngine() {
 
     final SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-    templateEngine.addDialect(new Java8TimeDialect());
     templateEngine.addDialect(new SpringSecurityDialect());
     templateEngine.setTemplateResolver(thymeleafTemplateResolver());
     return templateEngine;
