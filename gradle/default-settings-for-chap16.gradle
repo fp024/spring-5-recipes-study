@@ -1,0 +1,25 @@
+/* 
+  16장을 위한 스터디 프로젝트 기본 설정 
+  
+  JUnit, TestNG를 분기해야할 수 있어서 관련 내용은 하위 빌드 설정으로 옮긴다.
+*/
+
+[compileJava, compileTestJava]*.options*.encoding = "${projectEncoding}"
+
+repositories {
+  mavenCentral()
+  maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+  implementation (libs.log4j.core)
+  implementation (libs.log4j.slf4j2.impl)
+  testImplementation (libs.assertj.core)
+}
+
+tasks.named('test') {
+  testLogging {
+    outputs.upToDateWhen { false }
+    showStandardStreams = true
+  }
+}

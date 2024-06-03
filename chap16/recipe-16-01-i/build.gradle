@@ -1,0 +1,17 @@
+plugins {
+  id 'java'
+  alias(libs.plugins.lombok)
+}
+
+apply from: "../../gradle/default-settings-for-chap16.gradle"
+
+dependencies {
+  testImplementation (libs.junit.jupiter)
+  testImplementation (libs.junit.vintage.engine)
+  // vintage-engine이 디펜던시에 걸려있으면 JUnit 4도 같이 끌어오므로, 따로 정의할 필요가 없다.
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+  useJUnitPlatform()
+}

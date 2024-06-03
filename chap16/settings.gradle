@@ -1,0 +1,17 @@
+/*******************************
+ * 스프링 5 레시피 스터디 16장 *
+ *******************************/
+
+rootProject.name = 'spring-5-recipes-study-chap16'
+
+dependencyResolutionManagement {
+  versionCatalogs {
+    libs {
+      from(files("../gradle/libs.versions.toml"))
+    }
+  }
+}
+
+/* ===== Chapter 16 스프링 테스트 ===== */
+
+include 'recipe-16-01-i'

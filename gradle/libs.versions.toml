@@ -102,6 +102,8 @@ reactor-core = "3.4.38"
 reactor-netty = "1.0.45"
 
 junit = "5.10.2"
+testng = "7.10.2"
+
 mockito = "5.12.0"
 
 hamcrest = "2.2"
@@ -251,6 +253,10 @@ reactor-netty = { module = "io.projectreactor.netty:reactor-netty", version.ref 
 
 
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+junit-vintage-engine = { module = "org.junit.vintage:junit-vintage-engine", version.ref = "junit" }
+
+testng = { module = "org.testng:testng", version.ref = "testng" }
+
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 hamcrest = { module = "org.hamcrest:hamcrest", version.ref = "hamcrest" }
 
