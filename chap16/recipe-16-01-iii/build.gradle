@@ -1,0 +1,14 @@
+plugins {
+  id 'java'
+  alias(libs.plugins.lombok)
+}
+
+apply from: "../../gradle/default-settings-for-chap16.gradle"
+
+dependencies {
+  testImplementation (libs.testng)
+}
+
+tasks.named('test') {
+  useTestNG()
+}
