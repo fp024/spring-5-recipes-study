@@ -1,17 +1,17 @@
 package org.fp024.study.spring5recipes.bank;
 
-import static org.junit.Assert.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 @Slf4j
-public class SimpleInterestCalculatorJUnit4Tests {
+public class SimpleInterestCalculatorTestNGTests {
 
   private InterestCalculator interestCalculator;
 
-  @Before
+  @BeforeMethod
   public void init() {
     interestCalculator = new SimpleInterestCalculator();
     interestCalculator.setRate(0.05);
@@ -21,10 +21,10 @@ public class SimpleInterestCalculatorJUnit4Tests {
   public void calculate() {
     LOGGER.info("### calculate() ###");
     double interest = interestCalculator.calculate(10000, 2);
-    assertEquals(1000.0, interest, 0);
+    assertEquals(interest, 1000.0, 0);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void illegalCalculate() {
     LOGGER.info("### illegalCalculate() ###");
     interestCalculator.calculate(-10000, 2);
