@@ -1,0 +1,18 @@
+plugins {
+  id 'java'
+  alias(libs.plugins.lombok)
+}
+
+apply from: "../../gradle/default-settings-for-chap16.gradle"
+
+dependencies {
+  testImplementation (libs.junit.jupiter)
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+  testImplementation (libs.mockito.core)
+  testImplementation (libs.mockito.junit.jupiter)
+}
+
+tasks.named('test') {
+  useJUnitPlatform()
+}
