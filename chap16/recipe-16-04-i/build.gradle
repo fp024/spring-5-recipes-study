@@ -1,0 +1,25 @@
+plugins {
+  id 'java'
+  alias(libs.plugins.lombok)
+}
+
+apply from: "../../gradle/default-settings-for-chap16.gradle"
+
+dependencies {
+  implementation enforcedPlatform(libs.spring.bom.v5)
+
+  implementation 'org.springframework:spring-context'
+  implementation 'org.springframework:spring-webmvc'
+
+  testImplementation (libs.junit.jupiter)
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+  testImplementation 'org.springframework:spring-test'
+
+  testImplementation (libs.mockito.core)
+  testImplementation (libs.mockito.junit.jupiter)
+}
+
+tasks.named('test') {
+  useJUnitPlatform()
+}

@@ -1,0 +1,13 @@
+/*******************************
+ * 스프링 5 레시피 스터디 16장 *
+ *******************************/
+
+rootProject.name = 'recipe-16-04-i'
+
+dependencyResolutionManagement {
+  versionCatalogs {
+    libs {
+      from(files("../../gradle/libs.versions.toml"))
+    }
+  }
+}
