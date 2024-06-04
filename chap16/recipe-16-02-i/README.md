@@ -14,15 +14,6 @@
 
 ## 진행
 
-* ...
-
-
-
-
-
-
-## 의견
-
 * 저자님께서 JUnit 4의 `assertEquals(expected, actual)`메서드의 파라미터 값을 반대로 쓰신 경우가 많음 😅 그런데 이게 TestNG였다면 `assertEquals(actual, expected)`이여서 쓰신 것이 맞긴함...😅 TestNG를 주로 사용하시는 분이였나봄.
 
 * 저자님께서 Account에 `private` 생성자를 만들어두셨는데... 
@@ -34,15 +25,20 @@
   }
   ```
 
-  적어도 protected로 사용하시는 것이 나을 것 같다. 그런데, JPA를 사용하는 예제는 아님? 😅
+  적어도 protected로 사용하시는 것이 나을 것 같다. 그런데, JPA를 사용하는 예제는 아니였음. 😅
 
   HashMap을 이용한 in-memory 리파지토리를 구현해두신거 JPA 코드로 바꾸려다 말았다..😅😅
 
-
-
 * 검증 코드는 JUnit 5 + assertj의 assertThat()으로 바꿨다.
 
-  
+
+
+
+## 의견
+
+* ...
+
+
 
 
 ---
