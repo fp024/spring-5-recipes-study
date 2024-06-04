@@ -6,9 +6,9 @@
 
 ### 이번 레시피에서 확인해야할  내용
 
-* ✅ **16-04-i**: JUnit에서 테스트 컨텍스트 프레임워크 가져오기 - 
+* ✅ **16-04-i**: JUnit에서 테스트 컨텍스트 프레임워크 가져오기 - ApplicationContextAware
 
-* ✖️ **16-04-i**: JUnit에서 테스트 컨텍스트 프레임워크 가져오기 - 
+* ✖️ **16-04-ii**: JUnit에서 테스트 컨텍스트 프레임워크 가져오기 - AbstractJUnit4SpringContextTests
 
 * ⬜ ...
 

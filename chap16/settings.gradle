@@ -24,3 +24,4 @@ include 'recipe-16-02-iv'
 include 'recipe-16-03-i'
 include 'recipe-16-04-i'
 // include 'recipe-16-04-ii' // 💡 AbstractJUnit4SpringContextTests를 상속해서 컨텍스트를 불러오는 테스트는 현시점에서는 하지 않아도 될 것 같다.
+include 'recipe-16-04-iii'

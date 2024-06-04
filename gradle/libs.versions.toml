@@ -105,6 +105,7 @@ junit = "5.10.2"
 testng = "7.10.2"
 
 mockito = "5.12.0"
+mockito-testng = "0.5.2"
 
 hamcrest = "2.2"
 assertj = "3.26.0"
@@ -259,6 +260,8 @@ testng = { module = "org.testng:testng", version.ref = "testng" }
 
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockito" }
+mockito-testng = { module = "org.mockito:mockito-testng", version.ref = "mockito-testng" }
+
 hamcrest = { module = "org.hamcrest:hamcrest", version.ref = "hamcrest" }
 
 assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
