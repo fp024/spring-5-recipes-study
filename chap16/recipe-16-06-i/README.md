@@ -6,6 +6,8 @@
 
 * ✅ **16-06-i**: JUnit에서 테스트 컨텍스트 프레임워크의 트랜젝션 관리하기
 
+* ✖️ **16-06-ii**: JUnit에서 테스트 컨텍스트 프레임워크의 트랜젝션 관리하기 - AbstractTransactionalJUnit4SpringContextTests
+
 * ⬜ ...
 
   
@@ -59,6 +61,12 @@ class AccountServiceJUnitContextTests {
 ```
 
 
+
+
+
+### 16-06-ii 예제는 넘어감
+
+* 16-06-i와 메인 로직이 동일하고, 테스트에서 `AbstractTransactionalJUnit4SpringContextTests`로만 사용하는 예제이다. 넘어가자!
 
 
 
