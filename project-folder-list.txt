@@ -194,3 +194,4 @@ chap16\recipe-16-02-iv
 chap16\recipe-16-03-i
 chap16\recipe-16-04-i
 chap16\recipe-16-04-iii
+chap16\recipe-16-06-i
