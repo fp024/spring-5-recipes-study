@@ -3,26 +3,31 @@ package org.fp024.study.spring5recipes.bank.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
 
+import java.util.Arrays;
+import lombok.extern.slf4j.Slf4j;
 import org.fp024.study.spring5recipes.bank.config.BankConfiguration;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.junit.jupiter.EnabledIf;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-@SpringJUnitConfig(classes = BankConfiguration.class)
-@Transactional
+@Slf4j
+@ContextConfiguration(classes = BankConfiguration.class)
 @Sql(scripts = {"classpath:/bank.sql"})
-@EnabledIf("#{systemProperties['spring.profiles.active'].contains('default')}")
-class AccountServiceJUnitContextTests {
+@ActiveProfiles("default")
+class AccountServiceTestNGContextTests extends AbstractTransactionalTestNGSpringContextTests {
 
   private static final String TEST_ACCOUNT_NO = "1234";
 
   @Autowired private AccountService accountService;
 
-  @BeforeEach
+  @Autowired private ApplicationContext applicationContext;
+
+  @BeforeMethod
   public void init() {
     accountService.createAccount(TEST_ACCOUNT_NO);
     accountService.deposit(TEST_ACCOUNT_NO, 100);
@@ -30,6 +35,10 @@ class AccountServiceJUnitContextTests {
 
   @Test
   void deposit() {
+    LOGGER.info(
+        "### Current Profile: {} ###",
+        Arrays.toString(applicationContext.getEnvironment().getActiveProfiles()));
+    LOGGER.info("### deposit() ### ");
     accountService.deposit(TEST_ACCOUNT_NO, 50);
     assertThat(accountService.getBalance(TEST_ACCOUNT_NO)) //
         .isCloseTo(150, within(0.0));
@@ -37,6 +46,7 @@ class AccountServiceJUnitContextTests {
 
   @Test
   void withDraw() {
+    LOGGER.info("### withDraw() ### ");
     accountService.withdraw(TEST_ACCOUNT_NO, 50);
     assertThat(accountService.getBalance(TEST_ACCOUNT_NO)) //
         .isCloseTo(50, within(0.0));

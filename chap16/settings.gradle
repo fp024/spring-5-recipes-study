@@ -28,3 +28,4 @@ include 'recipe-16-04-iii'
 // include 'recipe-16-05-i ~ iii' // 💡 레시피 16-5는 전체를 넘어가도 되겠다. @Autowired를 사용하기로한 예제인데, 이미 이전 예제에서 getBean()사용하기 싫어서 미리 바꿨음... 😅
 include 'recipe-16-06-i'
 // include 'recipe-16-06-ii' // @ 16-06-ii는 넘어가자! recipe-16-06-i의 예제에서 테스트를 AbstractTransactionalJUnit4SpringContextTests로 사용해보는 예제이다.
+include 'recipe-16-06-iii'
