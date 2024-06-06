@@ -2,17 +2,12 @@
  * 스프링 5 레시피 스터디 Appendix B *
  *************************************/
 
-rootProject.name = 'spring-5-recipes-study-appendix-b'
+rootProject.name = 'recipe-b-01-ii'
 
 dependencyResolutionManagement {
   versionCatalogs {
     libs {
-      from(files("../gradle/libs.versions.toml"))
+      from(files("../../gradle/libs.versions.toml"))
     }
   }
 }
-
-/* ===== Appendix B 캐싱 ===== */
-
-include 'recipe-b-01-i'
-include 'recipe-b-01-ii'
