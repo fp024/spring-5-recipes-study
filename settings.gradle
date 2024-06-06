@@ -267,7 +267,26 @@ include 'chap11:recipe-11-09'
 
 /* ===== Chapter 16 스프링 테스트 ===== */
 
-
+include 'chap16:recipe-16-01-i'
+include 'chap16:recipe-16-01-ii'
+include 'chap16:recipe-16-01-iii'
+include 'chap16:recipe-16-02-i'
+include 'chap16:recipe-16-02-ii'
+include 'chap16:recipe-16-02-iii'
+include 'chap16:recipe-16-02-iv'
+include 'chap16:recipe-16-03-i'
+include 'chap16:recipe-16-04-i'
+// include 'chap16:recipe-16-04-ii' // 💡 AbstractJUnit4SpringContextTests를 상속해서 컨텍스트를 불러오는 테스트는 현시점에서는 하지 않아도 될 것 같다.
+include 'chap16:recipe-16-04-iii'
+// include 'chap16:recipe-16-05-i ~ iii' // 💡 레시피 16-5는 전체를 넘어가도 되겠다. @Autowired를 사용하기로한 예제인데, 이미 이전 예제에서 getBean()사용하기 싫어서 미리 바꿨음... 😅
+include 'chap16:recipe-16-06-i'
+// include 'chap16:recipe-16-06-ii' // 💡 16-06-ii는 넘어가자! recipe-16-06-i의 예제에서 테스트를 AbstractTransactionalJUnit4SpringContextTests로 사용해보는 예제이다.
+include 'chap16:recipe-16-06-iii'
+// include 'chap16:recipe-16-07-i ~ ii' // 💡 레시피 16-7도 넘어감. AbstractTransactional[JUnit4|TestNG]SpringContextTests가 자체적으로 JdbcTemplate을 생성하는데, 그것을 사용해 테스트 할 수 있다는 것을 보여주는 예제. 중요한 내용이 아니고 중복될 수 있는 내용이라 넘어간다.
+include 'chap16:recipe-16-08-i'
+// include 'chap16:recipe-16-08-ii' // 💡 레시피 16-08-ii 넘어감 recipe-16-08-i에서 AbstractTransactionalJUnit4SpringContextTests를 상속하는 내용으로 바꾼 예제
+include 'chap16:recipe-16-09-i'
+include 'chap16:recipe-16-10-i'
 
 
 

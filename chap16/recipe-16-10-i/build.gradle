@@ -11,14 +11,21 @@ dependencies {
   implementation 'org.springframework:spring-context'
   implementation 'org.springframework:spring-webmvc'
 
+  implementation (libs.jackson.databind)
+
+  compileOnly (libs.javax.servlet.api)
+  testImplementation (libs.javax.servlet.api)
+
+  testImplementation (libs.junit.jupiter)
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
   testImplementation 'org.springframework:spring-test'
 
-  testImplementation (libs.testng)
   testImplementation (libs.mockito.core)
-  testImplementation (libs.mockito.testng)
+  testImplementation (libs.mockito.junit.jupiter)
   testImplementation (libs.hamcrest)
 }
 
 tasks.named('test') {
-  useTestNG()
+  useJUnitPlatform()
 }
