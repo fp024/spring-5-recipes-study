@@ -20,7 +20,13 @@
 
 이번에는 진짜 스프링으로 Ehcache 구성하는 예제
 
+* 디펜던시 추가
 
+  ```groovy
+  implementation 'org.springframework:spring-context-support'
+  ```
+
+  
 
 
 ## 의견
