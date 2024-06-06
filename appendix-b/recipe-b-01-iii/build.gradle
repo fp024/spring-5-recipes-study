@@ -10,9 +10,13 @@ java {
 }
 
 dependencies {
+  implementation enforcedPlatform(libs.spring.bom.v5)
+
+  implementation 'org.springframework:spring-context'
+
   implementation (libs.ehcache.v2)
 
-  testImplementation (libs.awaitility)
+  testImplementation 'org.springframework:spring-test'
 }
 
 apply from: "../../gradle/default-settings.gradle"
