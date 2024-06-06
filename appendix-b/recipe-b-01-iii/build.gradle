@@ -22,5 +22,5 @@ dependencies {
 apply from: "../../gradle/default-settings.gradle"
 
 application {
-  mainClass = 'org.fp024.study.spring5recipes.caching.Main'
+  mainClass = 'org.fp024.study.spring5recipes.caching.App'
 }
