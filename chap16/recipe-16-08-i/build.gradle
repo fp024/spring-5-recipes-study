@@ -1,0 +1,44 @@
+plugins {
+  id 'java'
+  alias(libs.plugins.lombok)
+}
+
+apply from: "../../gradle/default-settings-for-chap16.gradle"
+
+dependencies {
+  implementation enforcedPlatform(libs.spring.bom.v5)
+
+  implementation 'org.springframework:spring-context'
+  implementation 'org.springframework:spring-webmvc'
+  implementation 'org.springframework:spring-jdbc'
+
+  runtimeOnly (libs.h2)
+
+  testImplementation (libs.junit.jupiter)
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+  testImplementation 'org.springframework:spring-test'
+
+  testImplementation (libs.mockito.core)
+  testImplementation (libs.mockito.junit.jupiter)
+}
+
+String getActiveProfiles() {
+  final defaultProfile = 'default'
+  def activeProfiles = System.getProperty("spring.profiles.active")
+  if (!activeProfiles?.trim()) {
+    logger.quiet("activeProfiles is null or empty: ${activeProfiles}")
+    logger.quiet("It runs with the default profile: ${defaultProfile}")
+    return defaultProfile
+  } else {
+    logger.quiet("activeProfiles: ${activeProfiles}")
+    return "${activeProfiles}"
+  }
+}
+
+final ACTIVE_PROFILES = getActiveProfiles()
+
+tasks.named('test') {
+  useJUnitPlatform()
+  systemProperty "spring.profiles.active", "${ACTIVE_PROFILES}"
+}

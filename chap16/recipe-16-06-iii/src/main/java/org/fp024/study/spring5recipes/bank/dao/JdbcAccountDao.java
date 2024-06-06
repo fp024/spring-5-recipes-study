@@ -2,6 +2,7 @@ package org.fp024.study.spring5recipes.bank.dao;
 
 import org.fp024.study.spring5recipes.bank.domain.Account;
 import org.fp024.study.spring5recipes.bank.exception.AccountNotFoundException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class JdbcAccountDao implements AccountDao {
@@ -29,10 +30,11 @@ public class JdbcAccountDao implements AccountDao {
 
   public Account findAccount(String accountNo) {
     String sql = "SELECT BALANCE FROM ACCOUNT WHERE ACCOUNT_NO = ?";
-    Double balance = jdbcTemplate.queryForObject(sql, Double.class, accountNo);
-    if (balance == null) {
+    try {
+      Double balance = jdbcTemplate.queryForObject(sql, Double.class, accountNo);
+      return new Account(accountNo, balance);
+    } catch (EmptyResultDataAccessException e) {
       throw new AccountNotFoundException();
     }
-    return new Account(accountNo, balance);
   }
 }
