@@ -8,7 +8,6 @@
 
   <Loggers>
     <Logger name="org.fp024.study.spring5recipes" level="debug" />
-
     <Logger name="org.springframework.cache" level="debug" />
 
     <Root level="info">

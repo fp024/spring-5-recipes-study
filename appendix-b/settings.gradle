@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 include 'recipe-b-01-i'
 include 'recipe-b-01-ii'
 include 'recipe-b-01-iii'
+include 'recipe-b-01-iv'
