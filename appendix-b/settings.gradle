@@ -1,0 +1,17 @@
+/*************************************
+ * 스프링 5 레시피 스터디 Appendix B *
+ *************************************/
+
+rootProject.name = 'spring-5-recipes-study-appendix-b'
+
+dependencyResolutionManagement {
+  versionCatalogs {
+    libs {
+      from(files("../gradle/libs.versions.toml"))
+    }
+  }
+}
+
+/* ===== Appendix B 캐싱 ===== */
+
+include 'recipe-b-01-i'

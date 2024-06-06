@@ -1,0 +1,16 @@
+plugins {
+  id 'application'
+  alias(libs.plugins.lombok)
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of("${javaVersion}")
+  }
+}
+
+apply from: "../../gradle/default-settings.gradle"
+
+application {
+  mainClass = 'org.fp024.study.spring5recipes.caching.Main'
+}

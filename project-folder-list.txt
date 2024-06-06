@@ -199,3 +199,5 @@ chap16\recipe-16-06-iii
 chap16\recipe-16-08-i
 chap16\recipe-16-09-i
 chap16\recipe-16-10-i
+appendix-b
+appendix-b\recipe-b-01-i
