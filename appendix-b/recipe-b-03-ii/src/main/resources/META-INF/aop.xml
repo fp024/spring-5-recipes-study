@@ -1,0 +1,3 @@
+<aspectj>
+  <weaver options="-warn:none -Xlint:ignore" />
+</aspectj>

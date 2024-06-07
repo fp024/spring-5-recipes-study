@@ -10,17 +10,17 @@ java {
 }
 
 dependencies {
-  implementation enforcedPlatform(libs.spring.bom.v5.snapshot)
+  implementation enforcedPlatform(libs.spring.bom.v5)
 
   implementation 'org.springframework:spring-context'
   implementation 'org.springframework:spring-context-support'
 
   implementation 'org.springframework:spring-aspects'
-  implementation 'org.springframework:spring-tx'
 
-  runtimeOnly 'org.springframework:spring-instrument'
+  // implementation 'org.springframework:spring-instrument'
+  runtimeOnly(libs.aspectjweaver)
 
-  implementation (libs.ehcache.v2)
+  implementation(libs.ehcache.v2)
 
   testImplementation 'org.springframework:spring-test'
 }
@@ -28,27 +28,27 @@ dependencies {
 apply from: "../../gradle/default-settings.gradle"
 
 
-String springInstrumentPath() {
+String aspectjweaverPath() {
   return sourceSets.getByName("main").runtimeClasspath.find {
-    cls -> return cls.getName().contains("spring-instrument")
+    cls -> return cls.getName().contains("aspectjweaver")
   }
 }
 
-final loadTimeWeaverPath = springInstrumentPath()
+final loadTimeWeaverPath = aspectjweaverPath()
 
 test {
-  jvmArgs = 
-    [
-      "--add-opens=java.base/java.lang=ALL-UNNAMED",
-      "-javaagent:${loadTimeWeaverPath}"
-    ]
+  jvmArgs =
+      [
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-javaagent:${loadTimeWeaverPath}"
+      ]
 }
 
 application {
-  applicationDefaultJvmArgs = 
-    [
-      "--add-opens=java.base/java.lang=ALL-UNNAMED",
-      "-javaagent:${loadTimeWeaverPath}"
-    ]
+  applicationDefaultJvmArgs =
+      [
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-javaagent:${loadTimeWeaverPath}"
+      ]
   mainClass = 'org.fp024.study.spring5recipes.caching.App'
 }

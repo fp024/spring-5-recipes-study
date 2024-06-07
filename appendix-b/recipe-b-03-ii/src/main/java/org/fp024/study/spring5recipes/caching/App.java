@@ -12,7 +12,7 @@ import org.springframework.context.annotation.EnableLoadTimeWeaving.AspectJWeavi
 import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
 
 @Configuration
-@EnableLoadTimeWeaving
+// @EnableLoadTimeWeaving // 💡 캐싱이 동작하지 않는다.
 @EnableCaching(mode = AdviceMode.ASPECTJ)
 @ComponentScan
 public class App {
