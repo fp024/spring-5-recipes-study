@@ -209,3 +209,4 @@ appendix-b\recipe-b-02-ii
 appendix-b\recipe-b-03-i
 appendix-b\recipe-b-03-ii
 appendix-b\recipe-b-03-ii-loadtime-weaving
+appendix-b\recipe-b-04-i
