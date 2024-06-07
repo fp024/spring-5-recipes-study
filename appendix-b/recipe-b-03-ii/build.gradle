@@ -1,0 +1,54 @@
+plugins {
+  id 'application'
+  alias(libs.plugins.lombok)
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of("${javaVersion}")
+  }
+}
+
+dependencies {
+  implementation enforcedPlatform(libs.spring.bom.v5.snapshot)
+
+  implementation 'org.springframework:spring-context'
+  implementation 'org.springframework:spring-context-support'
+
+  implementation 'org.springframework:spring-aspects'
+  implementation 'org.springframework:spring-tx'
+
+  runtimeOnly 'org.springframework:spring-instrument'
+
+  implementation (libs.ehcache.v2)
+
+  testImplementation 'org.springframework:spring-test'
+}
+
+apply from: "../../gradle/default-settings.gradle"
+
+
+String springInstrumentPath() {
+  return sourceSets.getByName("main").runtimeClasspath.find {
+    cls -> return cls.getName().contains("spring-instrument")
+  }
+}
+
+final loadTimeWeaverPath = springInstrumentPath()
+
+test {
+  jvmArgs = 
+    [
+      "--add-opens=java.base/java.lang=ALL-UNNAMED",
+      "-javaagent:${loadTimeWeaverPath}"
+    ]
+}
+
+application {
+  applicationDefaultJvmArgs = 
+    [
+      "--add-opens=java.base/java.lang=ALL-UNNAMED",
+      "-javaagent:${loadTimeWeaverPath}"
+    ]
+  mainClass = 'org.fp024.study.spring5recipes.caching.App'
+}
