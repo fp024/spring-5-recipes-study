@@ -1,0 +1,30 @@
+plugins {
+  id 'application'
+  alias(libs.plugins.lombok)
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of("${javaVersion}")
+  }
+}
+
+dependencies {
+  implementation enforcedPlatform(libs.spring.bom.v5)
+
+  implementation 'org.springframework:spring-context'
+  implementation 'org.springframework:spring-context-support'
+  implementation 'org.springframework:spring-jdbc'
+  
+  implementation (libs.ehcache.v2)
+
+  implementation (libs.h2)  // 💡EmbeddedDatabaseBuilder를 통해 사용할 때는 implementation이 되야한다.
+
+  testImplementation 'org.springframework:spring-test'
+}
+
+apply from: "../../gradle/default-settings.gradle"
+
+application {
+  mainClass = 'org.fp024.study.spring5recipes.caching.App'
+}
