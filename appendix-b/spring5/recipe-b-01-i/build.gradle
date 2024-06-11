@@ -9,13 +9,7 @@ java {
   }
 }
 
-dependencies {
-  implementation (libs.ehcache.v2)
-
-  testImplementation (libs.awaitility)
-}
-
-apply from: "../../gradle/default-settings.gradle"
+apply from: "../../../gradle/default-settings.gradle"
 
 application {
   mainClass = 'org.fp024.study.spring5recipes.caching.Main'

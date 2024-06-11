@@ -20,7 +20,7 @@ dependencies {
   testImplementation 'org.springframework:spring-test'
 }
 
-apply from: "../../gradle/default-settings.gradle"
+apply from: "../../../gradle/default-settings.gradle"
 
 application {
   mainClass = 'org.fp024.study.spring5recipes.caching.App'

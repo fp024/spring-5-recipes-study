@@ -7,7 +7,7 @@ rootProject.name = 'spring-5-recipes-study-appendix-b'
 dependencyResolutionManagement {
   versionCatalogs {
     libs {
-      from(files("../gradle/libs.versions.toml"))
+      from(files("../../gradle/libs.versions.toml"))
     }
   }
 }
