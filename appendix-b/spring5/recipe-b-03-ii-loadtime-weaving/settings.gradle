@@ -7,7 +7,7 @@ rootProject.name = 'recipe-b-03-ii-loadtime-weaving'
 dependencyResolutionManagement {
   versionCatalogs {
     libs {
-      from(files("../../gradle/libs.versions.toml"))
+      from(files("../../../../gradle/libs.versions.toml"))
     }
   }
 }

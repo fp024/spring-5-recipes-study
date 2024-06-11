@@ -7,7 +7,7 @@ rootProject.name = 'recipe-b-05-ii-v'
 dependencyResolutionManagement {
   versionCatalogs {
     libs {
-      from(files("../../gradle/libs.versions.toml"))
+      from(files("../../../gradle/libs.versions.toml"))
     }
   }
 }
