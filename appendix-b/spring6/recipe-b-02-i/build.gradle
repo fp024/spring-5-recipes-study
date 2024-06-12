@@ -1,0 +1,25 @@
+plugins {
+  id 'application'
+  alias(libs.plugins.lombok)
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of("${javaVersion}")
+  }
+}
+
+dependencies {
+  implementation enforcedPlatform(libs.spring.bom)
+
+  implementation 'org.springframework:spring-context'
+  implementation 'org.springframework:spring-context-support'
+
+  testImplementation 'org.springframework:spring-test'
+}
+
+apply from: "../../../gradle/default-settings.gradle"
+
+application {
+  mainClass = 'org.fp024.study.spring5recipes.caching.App'
+}
