@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Objects;
 import org.fp024.study.spring5recipes.caching.CalculationService;
 import org.fp024.study.spring5recipes.caching.PlainCachingCalculationService;
-import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.jcache.JCacheCacheManager;
 import org.springframework.cache.jcache.JCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -13,9 +13,13 @@ import org.springframework.core.io.ClassPathResource;
 
 @Configuration
 public class CalculationConfiguration {
+  @Bean
+  CacheManager cacheManager() {
+    return new JCacheCacheManager(Objects.requireNonNull(jCacheManagerFactoryBean().getObject()));
+  }
 
   @Bean
-  JCacheManagerFactoryBean cacheManager() {
+  JCacheManagerFactoryBean jCacheManagerFactoryBean() {
     try {
       JCacheManagerFactoryBean factory = new JCacheManagerFactoryBean();
       factory.setCacheManagerUri(new ClassPathResource("ehcache.xml").getURI());
@@ -26,14 +30,7 @@ public class CalculationConfiguration {
   }
 
   @Bean
-  Cache calculationsCache() {
-    JCacheCacheManager jCacheCacheManager =
-        new JCacheCacheManager(Objects.requireNonNull(cacheManager().getObject()));
-    return jCacheCacheManager.getCache("calculations");
-  }
-
-  @Bean
   CalculationService calculationService() {
-    return new PlainCachingCalculationService(calculationsCache());
+    return new PlainCachingCalculationService(cacheManager().getCache("calculations"));
   }
 }

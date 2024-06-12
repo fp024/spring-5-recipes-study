@@ -14,12 +14,13 @@ public class CacheExpiry implements ExpiryPolicy<String, BigDecimal> {
   }
 
   @Override
-  public Duration getExpiryForAccess(String key, Supplier value) {
+  public Duration getExpiryForAccess(String key, Supplier<? extends BigDecimal> value) {
     return Duration.of(600, ChronoUnit.SECONDS);
   }
 
   @Override
-  public Duration getExpiryForUpdate(String key, Supplier oldValue, BigDecimal newValue) {
+  public Duration getExpiryForUpdate(
+      String key, Supplier<? extends BigDecimal> oldValue, BigDecimal newValue) {
     return Duration.of(600, ChronoUnit.SECONDS);
   }
 }
