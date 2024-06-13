@@ -3,7 +3,7 @@ package org.fp024.study.spring5recipes.caching.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import lombok.extern.slf4j.Slf4j;
-import org.fp024.study.spring5recipes.caching.config.CustomerConfiguration;
+import org.fp024.study.spring5recipes.caching.App;
 import org.fp024.study.spring5recipes.caching.domain.Customer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -17,7 +17,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 @Slf4j
-@SpringJUnitConfig(classes = CustomerConfiguration.class)
+@SpringJUnitConfig(classes = App.class)
 @DirtiesContext
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(Lifecycle.PER_CLASS)

@@ -214,3 +214,17 @@ appendix-b\spring5\recipe-b-05-i
 appendix-b\spring5\recipe-b-05-ii-v
 appendix-b\spring5\recipe-b-06-i
 appendix-b\spring5\recipe-b-07-i
+appendix-b\spring6
+appendix-b\spring6\recipe-b-01-ii
+appendix-b\spring6\recipe-b-01-iii
+appendix-b\spring6\recipe-b-01-iv
+appendix-b\spring6\recipe-b-02-i
+appendix-b\spring6\recipe-b-02-ii
+appendix-b\spring6\recipe-b-03-i
+appendix-b\spring6\recipe-b-03-ii
+appendix-b\spring6\recipe-b-03-ii-loadtime-weaving
+appendix-b\spring6\recipe-b-04-i
+appendix-b\spring6\recipe-b-05-i
+appendix-b\spring6\recipe-b-05-ii-v
+appendix-b\spring6\recipe-b-06-i
+appendix-b\spring6\recipe-b-07-i

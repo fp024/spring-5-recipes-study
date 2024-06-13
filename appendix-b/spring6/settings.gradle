@@ -1,0 +1,30 @@
+/*************************************************************
+ * 스프링 5 레시피 스터디 Appendix B : Spring 6 + Ehache 3.x *
+ *************************************************************/
+
+rootProject.name = 'spring-5-recipes-study-appendix-b'
+
+dependencyResolutionManagement {
+  versionCatalogs {
+    libs {
+      from(files("../../gradle/libs.versions.toml"))
+    }
+  }
+}
+
+/* ===== Appendix B 캐싱 ===== */
+
+// include 'recipe-b-01-i' // Spring 5 와 동일, Spring과 Ehcache를 사용하지 않음.
+include 'recipe-b-01-ii'
+include 'recipe-b-01-iii'
+include 'recipe-b-01-iv'
+include 'recipe-b-02-i'
+include 'recipe-b-02-ii'
+include 'recipe-b-03-i'
+include 'recipe-b-03-ii'
+include 'recipe-b-03-ii-loadtime-weaving'
+include 'recipe-b-04-i'
+include 'recipe-b-05-i'
+include 'recipe-b-05-ii-v' // 💡 ii ~ v 예제들이 너무 잘게 나눠진 느낌이라 한 프로젝트로 보자!
+include 'recipe-b-06-i'
+include 'recipe-b-07-i'

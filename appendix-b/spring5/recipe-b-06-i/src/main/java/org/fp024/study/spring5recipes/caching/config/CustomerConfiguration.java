@@ -1,8 +1,6 @@
 package org.fp024.study.spring5recipes.caching.config;
 
 import javax.sql.DataSource;
-import org.fp024.study.spring5recipes.caching.repository.CustomerRepository;
-import org.fp024.study.spring5recipes.caching.repository.JdbcCustomerRepository;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
@@ -31,11 +29,6 @@ public class CustomerConfiguration {
     EhCacheManagerFactoryBean factory = new EhCacheManagerFactoryBean();
     factory.setConfigLocation(new ClassPathResource("ehcache.xml"));
     return factory;
-  }
-
-  @Bean
-  CustomerRepository customerRepository(DataSource dataSource) {
-    return new JdbcCustomerRepository(dataSource);
   }
 
   @Bean

@@ -298,7 +298,7 @@ include 'chap16:recipe-16-10-i'
 
 
 
-/* ===== Appendix B 캐싱 ===== */
+/* ===== Appendix B 캐싱 : Spring 5 + Ehcache 2.x ===== */
 
 include 'appendix-b:spring5:recipe-b-01-i'
 include 'appendix-b:spring5:recipe-b-01-ii'
@@ -314,3 +314,21 @@ include 'appendix-b:spring5:recipe-b-05-i'
 include 'appendix-b:spring5:recipe-b-05-ii-v' // 💡 ii ~ v 예제들이 너무 잘게 나눠진 느낌이라 한 프로젝트로 보자!
 include 'appendix-b:spring5:recipe-b-06-i'
 include 'appendix-b:spring5:recipe-b-07-i'
+
+
+/* ===== Appendix B 캐싱 : Spring 6 + Ehcache 3.x ===== */
+
+include 'appendix-b:spring6:recipe-b-01-ii'
+include 'appendix-b:spring6:recipe-b-01-iii'
+include 'appendix-b:spring6:recipe-b-01-iv'
+include 'appendix-b:spring6:recipe-b-02-i'
+include 'appendix-b:spring6:recipe-b-02-ii'
+include 'appendix-b:spring6:recipe-b-03-i'
+include 'appendix-b:spring6:recipe-b-03-ii'
+include 'appendix-b:spring6:recipe-b-03-ii-loadtime-weaving'
+include 'appendix-b:spring6:recipe-b-04-i'
+include 'appendix-b:spring6:recipe-b-05-i'
+include 'appendix-b:spring6:recipe-b-05-ii-v'
+include 'appendix-b:spring6:recipe-b-06-i'
+include 'appendix-b:spring6:recipe-b-07-i'
+
