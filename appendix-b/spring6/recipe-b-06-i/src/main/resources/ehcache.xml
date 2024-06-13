@@ -1,0 +1,86 @@
+<config
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='http://www.ehcache.org/v3'
+    xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core.xsd">
+
+  <cache-template name="defaultsCache">
+    <expiry>
+      <ttl>120</ttl>
+    </expiry>
+    <resources>
+      <!--
+        💡 DEPRECATED: The use of memory units (such as 'B', 'kB' or 'MB') for heap resources is deprecated and will be removed in a future version.
+           heap 엘리먼트 자체가 폐기 되는 것이 아니고, B, kB 또는 MB 등의 메모리 단위가 폐기 된다고함.
+           entries로 사용하는 것은 문제가 없음.
+       -->
+      <heap unit="entries">1000</heap>
+    </resources>
+  </cache-template>
+  <cache alias="customers" uses-template="defaultsCache">    
+    <!--
+      💡캐시 대상 메서드가 null을 반환하는 경우 Spring에서 NullValue라는 것을 캐시에 넣는데,
+         ehcache 사용자 값 타입 지정시 캐스팅 오류가 난다. 
+         이련 경우는 value-type을 Object로 설정하는 것이 나을 것 같다. (기본값이 Object이다.)
+      <value-type>org.fp024.study.spring5recipes.caching.domain.Customer</value-type> 
+    -->    
+    <expiry>
+      <class>org.fp024.study.spring5recipes.caching.config.ehcache.CacheExpiry</class>
+    </expiry>
+    <resources>
+      <heap unit="entries">100</heap>
+    </resources>
+  </cache>
+</config>
+    <!--
+    <ehcache>
+      <diskStore path="java.io.tmpdir" />
+
+      <defaultCache
+        maxElementsInMemory="1000"
+        eternal="false"
+        timeToIdleSeconds="120"
+        timeToLiveSeconds="120"
+        overflowToDisk="true"
+      />
+
+      <cache name="calculations"
+        maxElementsInMemory="100"
+        eternal="false"
+        timeToIdleSeconds="600"
+        timeToLiveSeconds="3600"
+        overflowToDisk="true"
+      />
+
+    </ehcache>
+    -->
+
+    <!--
+      💡 overflowToDisk 항목이 없어짐, 계층형 모델로 바뀜.
+         * https://groups.google.com/g/ehcache-users/c/FFHHhRW5hdg
+         * https://stackoverflow.com/questions/23307282/read-cache-data-from-file-system-or-diskpath/23358936#23358936
+
+          Ehcache 3에서는 계층적인 저장 모델을 사용하며,
+          모든 데이터는 항상 가장 낮은 계층에 존재합니다.
+          따라서 Ehcache 3에서는 디스크에 먼저 데이터를 저장하고,
+          자주 접근되는 데이터는 힙으로 올라옵니다.
+          heap unit="entries" 설정은 힙에 올라올 수 있는 객체의 최대 수를 지정합니다.
+          이는 캐시에 저장될 수 있는 키-값 쌍의 최대 개수를 설정하는 것입니다.
+    -->
+
+    <!--
+      💡timeToIdleSeconds 항목도 제거됨.
+
+        timeToLiveSeconds:
+          캐시 항목이 캐시에 저장된 후부터 만료되기까지의 최대 시간(초)을 지정합니다.
+          이 시간이 지나면 캐시 항목은 만료되고 캐시에서 더 이상 반환되지 않습니다.
+        timeToIdleSeconds:
+          캐시 항목이 마지막으로 접근된 후부터 만료되기까지의 최대 시간(초)을 지정합니다.
+          캐시 항목이 이 시간 동안 접근되지 않으면 만료되고 캐시에서 더 이상 반환되지 않습니다.
+
+
+      timeToIdleSeconds 같은 경우는 클래스를 확장해서 추가했다.
+        * https://groups.google.com/g/ehcache-users/c/Jo3iIxI3hd8/m/jYMjGr9BBAAJ
+
+        ExpiryPolicy 클래스를 확장해서, 비슷하게 구현해야했다.
+        * org.fp024.study.spring5recipes.caching.ehcache.CacheExpiry
+    -->
