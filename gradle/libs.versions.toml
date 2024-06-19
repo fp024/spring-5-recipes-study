@@ -8,7 +8,7 @@ post-compile-weaving-plugin = "8.6"
 # https://docs.spring.io/dependency-management-plugin/docs/current/reference/html/
 spring-dependency-managenent-plugin = "1.1.5"
 
-gretty-v3 = "3.1.3"
+gretty-v3 = "3.1.4"
 gretty = "4.1.4"
 
 
@@ -34,15 +34,15 @@ jakarta-annotation-api = "2.1.1"
 spring-v5-book = "5.0.20.RELEASE"
 
 # Spring 5.x 의 마지막 버전
-spring-v5 = "5.3.36"
+spring-v5 = "5.3.37"
 
 # Spring 5.x 의 마지막 스냅샷 버전
-spring-v5-snapshot = "5.3.37-SNAPSHOT"
+spring-v5-snapshot = "5.3.38-SNAPSHOT"
 
 # Spring 최신 버전
-spring = "6.1.8"
-spring-security-v5 = "5.8.12"
-spring-security = "6.3.0"
+spring = "6.1.9"
+spring-security-v5 = "5.8.13"
+spring-security = "6.3.1"
 
 aspectj = "1.9.22.1"
 log4j = "2.23.1"
@@ -59,7 +59,7 @@ hikaricp = "5.1.0"
 hibernate-v5 = "5.6.15.Final"
 
 spring-data-v2 = "2.7.18"
-spring-data = "3.3.0"
+spring-data = "3.3.1"
 
 modelmapper = "3.2.0"
 
@@ -90,17 +90,17 @@ apache-poi = "5.2.5"
 # 그래도 아래 소스를 최신 버전을 사용할 수 있게 수정하는 것이 어렵진 않아서 아래 소스 기반으로 CustomAbstractPdfView 라는 것을 만들었다.
 # * https://github.com/spring-projects/spring-framework/blob/5.3.x/spring-webmvc/src/main/java/org/springframework/web/servlet/view/document/AbstractPdfView.java
 # https://mvnrepository.com/artifact/com.itextpdf/itextpdf
-itextpdf = "5.5.13.3"
+itextpdf = "5.5.13.4"
 
 # https://mvnrepository.com/artifact/com.rometools/rome
 rome = "2.1.0"
 
 # 비동기 처리 : reactor, netty, Spring 5에 맞는 버전으로 설정
 # https://mvnrepository.com/artifact/io.projectreactor/reactor-core
-reactor-core = "3.4.38"
+reactor-core = "3.4.39"
 
 # https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty
-reactor-netty = "1.0.45"
+reactor-netty = "1.0.46"
 
 junit = "5.10.2"
 testng = "7.10.2"
