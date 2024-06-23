@@ -2,6 +2,7 @@ package org.fp024.study.spring5recipes.board.repository;
 
 import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Objects;
 import javax.sql.DataSource;
 import org.fp024.study.spring5recipes.board.domain.Todo;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -55,7 +56,7 @@ class JdbcTodoRepository implements TodoRepository {
           },
           keyHolder);
 
-      todo.setId(keyHolder.getKey().longValue());
+      todo.setId(Objects.requireNonNull(keyHolder.getKey()).longValue());
     } else {
       final String sql = "UPDATE todo SET owner=?, description=?, completed=? WHERE id=?";
       this.jdbc.update(

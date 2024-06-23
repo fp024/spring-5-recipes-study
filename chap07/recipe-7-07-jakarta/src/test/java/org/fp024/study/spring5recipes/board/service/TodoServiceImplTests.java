@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
 import org.fp024.study.spring5recipes.board.config.TodoRootConfig;
 import org.fp024.study.spring5recipes.board.config.TodoWebConfig;
 import org.fp024.study.spring5recipes.board.domain.Todo;
@@ -20,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 /*
  서비스 메서드 호출 보호가 설정되어있으므로 Mock 유저 설정이 필요하다.
 */
-@Slf4j
 @SpringJUnitWebConfig(
     classes = {
       TodoRootConfig.class, //
@@ -94,6 +92,9 @@ class TodoServiceImplTests {
   @WithMockUser(
       value = "admin",
       authorities = {"ADMIN", "USER"})
+  // findOwnTodosById()와 구현이 같다고 SonarLint 경고가 발생해서 무시처리.
+  // @WithMockUser의 값에 차이를 준 것을 인식을 못하나보다. 😂
+  @SuppressWarnings("squid:S4144")
   @Test
   void findOthersTodosByIdUseAdminAuthority() {
     Todo result = service.findById(1L);
