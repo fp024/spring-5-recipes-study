@@ -173,7 +173,7 @@ Exception in thread "main" org.springframework.expression.spel.SpelEvaluationExc
 
 
 
-테스트 클래스가 1개 모를 수 있는데, 여러개일 때...  위의 오류가 발생할 수 있는데,
+테스트 클래스가 1개라면 모를 수 있는데, 여러개일 라면...  위의 오류가 발생할 수 있었다...
 
 * https://stackoverflow.com/questions/10013288/another-unnamed-cachemanager-already-exists-in-the-same-vm-ehcache-2-5
 * 나는 캐시 메니저가 초기화되는 모든 테스트 클래스에 `@DirtiesContext`를 붙였다. 2번 권고 사항을 따른 것 같음.
