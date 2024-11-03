@@ -2,7 +2,7 @@
 @ECHO OFF
 
 for /F "delims=" %%a in (project-folder-list.txt) do (
-  copy gradle.properties %%a
+  copy gradle_properties_for_sub_project.properties %%a\gradle.properties
 
   xcopy /S /Y gradle\wrapper\ %%a\gradle\wrapper\
   copy gradlew.bat %%a
