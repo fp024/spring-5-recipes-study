@@ -48,7 +48,7 @@ class ReservationFormControllerTests {
   void setupForm() throws Exception {
     mockMvc
         .perform(
-            get("/reservationForm/") //
+            get("/reservationForm") //
                 .queryParam("language", "en")
                 .session(httpSession)) //
         .andExpect(status().isOk())
@@ -71,7 +71,7 @@ class ReservationFormControllerTests {
     MvcResult mvcResult =
         mockMvc
             .perform(
-                post("/reservationForm/") //
+                post("/reservationForm") //
                     .param("courtName", "Tennis #1")
                     .param("date", "2008-01-14")
                     .param("hour", "15")
@@ -104,7 +104,7 @@ class ReservationFormControllerTests {
     MvcResult mvcResult =
         mockMvc
             .perform(
-                post("/reservationForm/") //
+                post("/reservationForm") //
                     .param("courtName", "Tennis #1")
                     .param("date", "2008-01-14")
                     .param("hour", "16")
@@ -134,7 +134,7 @@ class ReservationFormControllerTests {
     MvcResult mvcResult =
         mockMvc
             .perform(
-                post("/reservationForm/") //
+                post("/reservationForm") //
                     // .param("courtName", "") // 코트 이름 검증 실패
                     .param("date", "2008-01-14")
                     .param("hour", "16")

@@ -41,7 +41,7 @@ class ReservationQueryControllerTests {
   @Test
   void testSetupForm() throws Exception {
     mockMvc
-        .perform(get("/reservationQuery/?language=en")) //
+        .perform(get("/reservationQuery?language=en")) //
         .andExpect(status().isOk())
         .andExpect(view().name("reservationQuery"))
         .andExpect(cookie().value("language", "en"))
@@ -55,7 +55,7 @@ class ReservationQueryControllerTests {
     MvcResult mvcResult =
         mockMvc
             .perform(
-                post("/reservationQuery/") //
+                post("/reservationQuery") //
                     .param("courtName", "Tennis #1"))
             .andDo(print())
             .andExpect(status().isOk())
@@ -77,7 +77,7 @@ class ReservationQueryControllerTests {
     MvcResult mvcResult =
         mockMvc
             .perform(
-                get("/reservationQuery/") //
+                get("/reservationQuery") //
                     .queryParam("courtName", "Tennis #1")) //
             .andDo(print())
             .andExpect(status().isOk())

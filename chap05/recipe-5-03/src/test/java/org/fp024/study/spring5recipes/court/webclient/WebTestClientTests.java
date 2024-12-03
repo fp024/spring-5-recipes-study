@@ -14,7 +14,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @Slf4j
 @SpringJUnitWebConfig(classes = {CourtConfiguration.class})
-public class WebTestClientTests {
+class WebTestClientTests {
   @Autowired WebApplicationContext wac;
 
   WebTestClient client;
@@ -43,7 +43,7 @@ public class WebTestClientTests {
         .uri(
             uriBuilder ->
                 uriBuilder
-                    .path("/reservationQuery/") //
+                    .path("/reservationQuery") //
                     .queryParam("courtName", "Tennis #1")
                     .build())
         .accept(MediaType.TEXT_EVENT_STREAM)
