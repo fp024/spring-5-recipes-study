@@ -42,7 +42,7 @@ class WelcomeControllerTest {
   void testWelcomeRedirect() throws Exception {
     mockMvc
         .perform(get("/welcomeRedirect?language=en")) //
-        .andExpect(status().isOk()) // 테스트에서는 302 응답일 줄 알았는데... 200이다.
+        .andExpect(status().isFound())
         .andExpect(view().name("welcomeRedirect"))
         .andExpect(cookie().value("language", "en"))
         .andDo(print());
