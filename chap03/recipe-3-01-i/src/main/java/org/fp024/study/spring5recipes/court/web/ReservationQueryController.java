@@ -23,7 +23,7 @@ public class ReservationQueryController {
   public void setupForm() {}
 
   @PostMapping
-  public String sumbitForm(@RequestParam("courtName") String courtName, Model model) {
+  public String submitForm(@RequestParam("courtName") String courtName, Model model) {
 
     List<Reservation> reservations = Collections.emptyList();
 

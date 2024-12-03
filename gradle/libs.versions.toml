@@ -2,9 +2,9 @@
 [versions]
 ##### plguins versions #####
 # https://plugins.gradle.org/plugin/io.freefair.lombok
-lombok-plugin = "8.10.2"
+lombok-plugin = "8.11"
 # https://plugins.gradle.org/plugin/io.freefair.aspectj.post-compile-weaving
-post-compile-weaving-plugin = "8.10.2"
+post-compile-weaving-plugin = "8.11"
 # https://docs.spring.io/dependency-management-plugin/docs/current/reference/html/
 spring-dependency-managenent-plugin = "1.1.6"
 
@@ -40,26 +40,26 @@ spring-v5 = "5.3.39"
 spring-v5-snapshot = "5.3.39-SNAPSHOT"
 
 # Spring 최신 버전
-spring = "6.1.14"
-spring-security-v5 = "5.8.15"
-spring-security = "6.3.4"
+spring = "6.2.0"
+spring-security-v5 = "5.8.16"
+spring-security = "6.4.1"
 
 aspectj = "1.9.22.1"
-log4j = "2.24.1"
+log4j = "2.24.2"
 
-hsqldb = "2.7.3"
+hsqldb = "2.7.4"
 mysql-connector-j = "8.0.33"
-ojdbc11 = "23.5.0.24.07"
+ojdbc11 = "23.6.0.24.10"
 ojdbc8 = "18.3.0.0"
 h2 = "2.3.232"
-hikaricp = "5.1.0"
+hikaricp = "6.2.1"
 
 
 
 hibernate-v5 = "5.6.15.Final"
 
 spring-data-v2 = "2.7.18"
-spring-data = "3.3.5"
+spring-data = "3.4.0"
 
 modelmapper = "3.2.1"
 
@@ -75,8 +75,8 @@ unboundid-ldapsdk = "7.0.1"
 # commons-lang을 spring-ldap-test에서 사용함, 버전을 유지할 것!
 commons-lang = "2.6"
 
-jackson = "2.18.1"
-jackson-databind = "2.18.1"
+jackson = "2.18.2"
+jackson-databind = "2.18.2"
 
 gson = "2.11.0"
 
@@ -114,7 +114,7 @@ assertj = "3.26.3"
 awaitility = "4.2.2"
 
 json-path = "2.9.0"
-json-unit = "3.5.0"
+json-unit = "4.1.0"
 
 # 6.2에도 javax 패키지가 있어서 그것을 사용해도됨 (jakarta, java 둘다 있음.), 6.0.x 버전은 EoL 상태
 # hibernateValidatorVersion=6.0.23.Final
@@ -171,7 +171,7 @@ javax-cache-api = "1.1.1"
 log4jdbc = "1.16"
 
 # https://mvnrepository.com/artifact/org.mybatis/mybatis
-mybatis = "3.5.16"
+mybatis = "3.5.17"
 
 # https://mvnrepository.com/artifact/org.mybatis/mybatis-spring
 mybatis-spring-v2 = "2.1.2"
