@@ -47,7 +47,7 @@ class PeriodicReservationControllerTests {
   void reservationCourtForm_setup() throws Exception {
     mockMvc
         .perform(
-            get("/periodicReservationForm/") //
+            get("/periodicReservationForm") //
                 .session(httpSession)) //
         .andExpect(status().isOk())
         .andExpect(view().name("reservationCourtForm"))
@@ -68,7 +68,7 @@ class PeriodicReservationControllerTests {
 
     mockMvc
         .perform(
-            post("/periodicReservationForm/") //
+            post("/periodicReservationForm") //
                 .param("_cancel", "Previous")
                 .param("_page", "1")
                 .session(httpSession)) //
@@ -91,7 +91,7 @@ class PeriodicReservationControllerTests {
 
     mockMvc
         .perform(
-            post("/periodicReservationForm/") //
+            post("/periodicReservationForm") //
                 .param("_target1", "Next")
                 .param("_page", "0")
                 .session(httpSession)) //
@@ -118,7 +118,7 @@ class PeriodicReservationControllerTests {
 
     mockMvc
         .perform(
-            post("/periodicReservationForm/") //
+            post("/periodicReservationForm") //
                 .param("_target2", "Next")
                 .param("_page", "1")
                 .session(httpSession)) //
@@ -146,7 +146,7 @@ class PeriodicReservationControllerTests {
 
     mockMvc
         .perform(
-            post("/periodicReservationForm/") //
+            post("/periodicReservationForm") //
                 .param("_finish", "Next")
                 .param("_page", "2")
                 .session(httpSession)) //

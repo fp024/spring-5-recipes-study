@@ -18,7 +18,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
         .addInterceptor(measurementInterceptor())
         // TODO: 리다이렉트 뷰 컨트롤러 설정을 하면 ?handlingTime=0 파라미터가 남아서 인터셉터 적용 경로에서 제거.
         //  왜 그런진 잘 모르겠다. 😅
-        .addPathPatterns("/reservationForm/", "/reservationForm")
+        .addPathPatterns("/reservationForm", "/reservationQuery", "/welcome")
         // .excludePathPatterns("/", "/favicon.ico", "/index.html", "/resources/*")
         .order(Ordered.HIGHEST_PRECEDENCE);
     registry
