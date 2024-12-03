@@ -34,6 +34,6 @@ public class ExtensionInterceptor implements HandlerInterceptor {
       response.setHeader("Content-Disposition", "attachment; filename=" + reportName);
     }
 
-    LOGGER.info("### reponse header: {}", response.getHeader("Content-Disposition"));
+    LOGGER.info("### response header: {}", response.getHeader("Content-Disposition"));
   }
 }

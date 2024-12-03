@@ -14,39 +14,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.context.WebApplicationContext;
 
 @SpringJUnitWebConfig(classes = {CourtConfiguration.class})
 class WelcomeControllerTest {
   private MockMvc mockMvc;
 
-  @Autowired private MeasurementInterceptor measurementInterceptor;
-
-  @Autowired private LocaleChangeInterceptor localeChangeInterceptor;
-
-  @Autowired private LocaleResolver localeResolver;
+  @Autowired private WebApplicationContext appContext;
 
   @BeforeEach
   void setUp() {
-    this.mockMvc =
-        MockMvcBuilders.standaloneSetup(new WelcomeController())
-            .addInterceptors(measurementInterceptor, localeChangeInterceptor)
-            .setLocaleResolver(localeResolver)
-            .build();
+    this.mockMvc = MockMvcBuilders.webAppContextSetup(appContext).build();
   }
 
   @Test
   void testWelcome() throws Exception {
-    // 테스트 환경에서 /welcome으로 요청하면 다음 예외가 발생한다. (서버를 실행시켜서 요청할 때는 문제가 없음.)
-    // javax.servlet.ServletException: Circular view path [welcome]: would dispatch back to the
-    // current handler URL [/welcome] again.
-    // 1. get 요청 주소와 view 반환 이름을 다르게 하거나
-    // 2. Thymeleaf를 사용하면 되긴하는데...
-    // 일단 테스트 할 때만 /를 끝에 하나 더 붙여보자..
-
     mockMvc
-        .perform(get("/welcome/?language=ko")) //
+        .perform(get("/welcome?language=ko")) //
         .andExpect(status().isOk())
         .andExpect(model().attributeExists("today", "handlingTime"))
         .andExpect(view().name("welcome"))
@@ -57,7 +41,7 @@ class WelcomeControllerTest {
   @Test
   void testWelcomeRedirect() throws Exception {
     mockMvc
-        .perform(get("/welcomeRedirect/?language=en")) //
+        .perform(get("/welcomeRedirect?language=en")) //
         .andExpect(status().isOk()) // 테스트에서는 302 응답일 줄 알았는데... 200이다.
         .andExpect(view().name("welcomeRedirect"))
         .andExpect(cookie().value("language", "en"))

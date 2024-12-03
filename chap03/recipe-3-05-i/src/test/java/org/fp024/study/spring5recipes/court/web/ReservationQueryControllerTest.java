@@ -12,44 +12,29 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.fp024.study.spring5recipes.court.config.CourtConfiguration;
 import org.fp024.study.spring5recipes.court.config.I18NConfiguration;
-import org.fp024.study.spring5recipes.court.service.ReservationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.context.WebApplicationContext;
 
 @SpringJUnitWebConfig(classes = {CourtConfiguration.class, I18NConfiguration.class})
 class ReservationQueryControllerTest {
   private MockMvc mockMvc;
 
-  @Autowired private ReservationService reservationService;
-
-  @Autowired private MeasurementInterceptor measurementInterceptor;
-
-  @Autowired private LocaleChangeInterceptor localeChangeInterceptor;
-
-  @Autowired private ExtensionInterceptor extensionInterceptor;
-
-  @Autowired private LocaleResolver localeResolver;
+  @Autowired private WebApplicationContext appContext;
 
   @BeforeEach
   void setUp() {
-    this.mockMvc =
-        MockMvcBuilders.standaloneSetup(new ReservationQueryController(reservationService))
-            .addInterceptors(measurementInterceptor, localeChangeInterceptor)
-            .addMappedInterceptors(new String[] {"/reservationSummary*"}, extensionInterceptor)
-            .setLocaleResolver(localeResolver)
-            .build();
+    this.mockMvc = MockMvcBuilders.webAppContextSetup(appContext).build();
   }
 
   @Test
   void testSetupForm() throws Exception {
     mockMvc
-        .perform(get("/reservationQuery/?language=en")) //
+        .perform(get("/reservationQuery?language=en")) //
         .andExpect(status().isOk())
         .andExpect(model().attributeExists("handlingTime"))
         .andExpect(view().name("reservationQuery"))
@@ -61,7 +46,7 @@ class ReservationQueryControllerTest {
   void testSubmitForm() throws Exception {
     mockMvc
         .perform(
-            post("/reservationQuery/") //
+            post("/reservationQuery") //
                 .param("courtName", "Tennis #1"))
         .andExpect(status().isOk())
         .andExpect(model().attributeExists("reservations", "handlingTime"))
