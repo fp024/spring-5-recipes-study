@@ -40,16 +40,16 @@ spring-v5 = "5.3.39"
 spring-v5-snapshot = "5.3.39-SNAPSHOT"
 
 # Spring 최신 버전
-spring = "6.2.5"
+spring = "6.2.6"
 spring-security-v5 = "5.8.16"
-spring-security = "6.4.4"
+spring-security = "6.4.5"
 
-aspectj = "1.9.23"
+aspectj = "1.9.24"
 log4j = "2.24.3"
 
 hsqldb = "2.7.4"
 mysql-connector-j = "8.0.33"
-ojdbc11 = "23.7.0.25.01"
+ojdbc11 = "23.8.0.25.04"
 ojdbc8 = "18.3.0.0"
 h2 = "2.3.232"
 hikaricp = "6.3.0"
@@ -59,14 +59,14 @@ hikaricp = "6.3.0"
 hibernate-v5 = "5.6.15.Final"
 
 spring-data-v2 = "2.7.18"
-spring-data = "3.4.4"
+spring-data = "3.4.5"
 
-modelmapper = "3.2.2"
+modelmapper = "3.2.3"
 
 spring-batch-v4 = "4.3.10"
 
-# Spring 5 기반 버전 = https://mvnrepository.com/artifact/org.springframework.ldap/spring-ldap-test/2.4.1
-spring-ldap = "2.4.1"
+# Spring 5 기반 버전 = https://mvnrepository.com/artifact/org.springframework.ldap/spring-ldap-test/2.4.4
+spring-ldap = "2.4.4"
 
 # UnboundID LDAP SDK For Java는 최신을 써도 괜찮은 것 같다.
 # https://mvnrepository.com/artifact/com.unboundid/unboundid-ldapsdk
@@ -75,10 +75,10 @@ unboundid-ldapsdk = "7.0.2"
 # commons-lang을 spring-ldap-test에서 사용함, 버전을 유지할 것!
 commons-lang = "2.6"
 
-jackson = "2.18.3"
-jackson-databind = "2.18.3"
+jackson = "2.19.0"
+jackson-databind = "2.19.0"
 
-gson = "2.12.1"
+gson = "2.13.1"
 
 # https://mvnrepository.com/artifact/org.apache.poi/poi
 apache-poi = "5.4.1"
@@ -102,7 +102,7 @@ reactor-core = "3.4.41"
 # https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty
 reactor-netty = "1.0.48"
 
-junit = "5.12.1"
+junit = "5.12.2"
 testng = "7.11.0"
 
 mockito = "5.17.0"
@@ -150,7 +150,7 @@ webjars-locator = "0.52"
 # https://mvnrepository.com/artifact/org.webjars/jquery
 webjars-jquery = "3.7.1"
 # https://mvnrepository.com/artifact/org.webjars/bootstrap
-webjars-bootstrap = "5.3.3"
+webjars-bootstrap = "5.3.5"
 # https://central.sonatype.com/artifact/org.webjars.bowergithub.semantic-org/semantic-ui
 webjars-semantic-ui = "2.5.0"
 # https://mvnrepository.com/artifact/org.webjars.npm/webstomp-client
@@ -185,7 +185,7 @@ mybatis-dynamic-sql = "1.5.2"
 # Spring Data Redis 2.7.18에 선택적 디펜던시 된 버전의 같은 메이저 버전 기준 최신 버전으로 사용
 jedis-v3 = "3.10.0"
 # Spring Data Redis 3.3.0에 선택적 디펜던시 된 버전의 같은 메이저 버전 기준 최신 버전으로 사용
-jedis = "5.1.5"
+jedis = "5.2.0"
 
 
 #########################################################################################################

@@ -16,5 +16,6 @@ bin
 # IntelliJ
 .idea
 
-
+# 로깅 파일
+*.log
 
