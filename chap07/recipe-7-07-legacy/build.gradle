@@ -11,7 +11,7 @@ java {
 }
 
 ext {
-  springSecurityVersion = '5.7.11'
+  springSecurityVersion = '5.7.14'
   // springSecurityVersion = '5.4.11'
   // springSecurityVersion ='5.3.13.RELEASE'
   // springSecurityVersion ='5.0.19.RELEASE'
