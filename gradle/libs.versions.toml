@@ -40,9 +40,9 @@ spring-v5 = "5.3.39"
 spring-v5-snapshot = "5.3.39-SNAPSHOT"
 
 # Spring 최신 버전
-spring = "6.2.6"
+spring = "6.2.7"
 spring-security-v5 = "5.8.16"
-spring-security = "6.4.5"
+spring-security = "6.5.0"
 
 aspectj = "1.9.24"
 log4j = "2.24.3"
@@ -59,7 +59,7 @@ hikaricp = "6.3.0"
 hibernate-v5 = "5.6.15.Final"
 
 spring-data-v2 = "2.7.18"
-spring-data = "3.4.5"
+spring-data = "3.5.0"
 
 modelmapper = "3.2.3"
 
@@ -105,7 +105,7 @@ reactor-netty = "1.0.48"
 junit = "5.12.2"
 testng = "7.11.0"
 
-mockito = "5.17.0"
+mockito = "5.18.0"
 mockito-testng = "0.5.2"
 
 hamcrest = "3.0"
@@ -114,12 +114,12 @@ assertj = "3.27.3"
 awaitility = "4.3.0"
 
 json-path = "2.9.0"
-json-unit = "4.1.0"
+json-unit = "4.1.1"
 
 # 6.2에도 javax 패키지가 있어서 그것을 사용해도됨 (jakarta, java 둘다 있음.), 6.0.x 버전은 EoL 상태
 # hibernateValidatorVersion=6.0.23.Final
 hibernate-validator-v6 = "6.2.5.Final"
-hibernate-validator = "8.0.2.Final"
+hibernate-validator = "9.0.0.Final"
 
 
 # 테스트 환경에서 JSR-303 어노테이션을 테스트 하기위해서는 javax(jakarta) EL 구현 라이브러리가 testRuntimeOnly에 있어야한다.
@@ -131,9 +131,9 @@ javax-el = "3.0.1-b12"
 # https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html_single/#validator-gettingstarted-uel
 # jakartaElVersion은 Hibernate-Validator를 6.2.x로 사용하는 동안은 버전을 올리지 않는다.
 jakarta-el = "3.0.4"
-# Hibernate-Validator를 8.x로 사용할 때는 jakarta.el 대신에 expressly를 테스트 환경에서 사용하자!
-# https://docs.jboss.org/hibernate/validator/8.0/reference/en-US/html_single/#validator-gettingstarted-uel
-expressly = "5.0.0"
+# Hibernate-Validator를 9.x로 사용할 때는 jakarta.el 대신에 expressly를 테스트 환경에서 사용하자!
+# https://docs.jboss.org/hibernate/validator/9.0/reference/en-US/html_single/#validator-gettingstarted-uel
+expressly = "6.0.0"
 
 
 # https://mvnrepository.com/artifact/com.google.code.findbugs/jsr305
@@ -184,8 +184,8 @@ mybatis-dynamic-sql = "1.5.2"
 # https://mvnrepository.com/artifact/redis.clients/jedis
 # Spring Data Redis 2.7.18에 선택적 디펜던시 된 버전의 같은 메이저 버전 기준 최신 버전으로 사용
 jedis-v3 = "3.10.0"
-# Spring Data Redis 3.3.0에 선택적 디펜던시 된 버전의 같은 메이저 버전 기준 최신 버전으로 사용
-jedis = "5.2.0"
+# Spring Data Redis 3.5.0에 선택적 디펜던시 된 버전의 같은 메이저 버전 기준 최신 버전으로 사용
+jedis = "6.0.0"
 
 
 #########################################################################################################
